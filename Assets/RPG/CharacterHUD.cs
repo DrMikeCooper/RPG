@@ -110,8 +110,9 @@ namespace RPG
                 name = s.name;
                 icons[name] = ike;
                 ike.name = name;
+                ike.GetComponent<Image>().color = s.color;
 
-                Transform counter = ike.transform.FindChild("Counter");
+                Transform counter = ike.transform.Find("Counter");
                 if (counter)
                 {
                     Text text = counter.GetComponent<Text>();

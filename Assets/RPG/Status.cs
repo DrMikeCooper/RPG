@@ -9,6 +9,7 @@ namespace RPG
         public float duration;
         public string name;
         public int count = 0;
+        public Color color;
 
         public void End()
         {

@@ -8,9 +8,10 @@ namespace RPG
         public float modifier;
         Stat stat = null;
 
+
         public Buff() { }
-        Buff(string n, float f, float d) { name = n;  modifier = f; duration = d; }
-        public Buff(Buff b) { modifier = b.modifier; name = b.name; duration = b.duration; count = b.count; }
+        Buff(string n, float f, float d, Color c) { name = n;  modifier = f; duration = d;  color = c; }
+        public Buff(Buff b) { modifier = b.modifier; name = b.name; duration = b.duration; count = b.count; color = b.color; }
 
         public override void Apply(Character ch)
         {
@@ -30,17 +31,17 @@ namespace RPG
 
         public static Buff GetResBuff(Attack.DamageType dt, float f, float d)
         {
-            return new Buff(Attack.GetResistanceStat(dt), f, d);
+            return new Buff(Attack.GetResistanceStat(dt), f, d, Color.cyan);
         }
 
         public static Buff GetRegenBuff(float f, float d)
         {
-            return new Buff(Character.HealthRegen, f, d);
+            return new Buff(Character.HealthRegen, f, d, Color.red);
         }
 
         public static Buff GetEnergiseBuff(float f, float d)
         {
-            return new Buff(Character.EnergyRegen, f, d);
+            return new Buff(Character.EnergyRegen, f, d, Color.blue);
         }
     }
 }
