@@ -69,8 +69,19 @@ namespace RPG
                 icon = iconChild.gameObject;
                 icon.SetActive(false);
             }
+
             if (character)
                 character.onStatusChanged.AddListener(UpdateIcons);
+        }
+
+        public void SetCharacter(Character ch)
+        {
+            if (character)
+                character.onStatusChanged.RemoveListener(UpdateIcons);
+            character = ch;
+            if (character)
+                character.onStatusChanged.AddListener(UpdateIcons);
+            UpdateIcons();
         }
 
         // Update is called once per frame
@@ -83,7 +94,7 @@ namespace RPG
             }
         }
 
-        void UpdateIcons()
+        public void UpdateIcons()
         {
             if (icon == null)
                 return;

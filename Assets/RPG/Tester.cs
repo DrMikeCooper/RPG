@@ -6,14 +6,18 @@ namespace RPG
     public class Tester : MonoBehaviour {
 
         Character character;
+        TabTarget targetter;
 
         // Use this for initialization
         void Start() {
             character = GetComponent<Character>();
+            targetter = GetComponent<TabTarget>();
         }
 
         // Update is called once per frame
         void Update() {
+
+            character = targetter.GetTarget();
 
             // apply fire or crushing damage
             if (Input.GetKeyDown(KeyCode.Y))
