@@ -44,6 +44,8 @@ namespace RPG
 
             health = maxHealth;
             energy = maxEnergy;
+
+            RPGSettings.instance.SetupCharacter(this);
         }
 
         // Update is called once per frame
