@@ -9,7 +9,7 @@ namespace RPG
     {
 
         public ParticleSystem[] particles;
-        public Image[] images;
+        public Sprite[] images;
         static BuffFactory instance;
 
         // describes the particles, icon and ingame effect used by a particular buff
@@ -29,8 +29,8 @@ namespace RPG
                 status = s;
 
                 // find the named icon
-                foreach (Image i in BuffFactory.instance.images)
-                    if (i.gameObject.name == iname)
+                foreach (Sprite i in BuffFactory.instance.images)
+                    if (i.name == iname)
                         icon = i;
 
                 color = col;
@@ -38,7 +38,7 @@ namespace RPG
 
             public ParticleSystem particles;
             public Status status;
-            public Image icon;
+            public Sprite icon;
             public Color color;
         }
 
@@ -48,14 +48,15 @@ namespace RPG
         {
             instance = this;
 
-            Add("Bubbles", new BuffSettings(Buff.GetEnergiseBuff(5, 10), "sparkles", "Icon", Color.blue));
-            Add("Regen", new BuffSettings(Buff.GetRegenBuff(5, 10), "sparkles", "Icon", Color.red));
-            Add("Armour", new BuffSettings(Buff.GetResBuff(Attack.DamageType.Crushing, 5, 10), "sparkles", "Icon", Color.white));
+            Add("Bubbles", new BuffSettings(Buff.GetEnergiseBuff(5, 10), "sparkles", "ButtonAcceleratorOverSprite", Color.blue));
+            Add("Regen", new BuffSettings(Buff.GetRegenBuff(5, 10), "sparkles", "ButtonArrowUpSprite", Color.red));
+            Add("Armour", new BuffSettings(Buff.GetResBuff(Attack.DamageType.Crushing, 5, 10), "ring", "ButtonBrakeOverSprite", Color.yellow));
         }
 
         void Add(string name, BuffSettings setting)
         {
             setting.status.name = name;
+            setting.status.color = setting.color;
             settings[name] = setting;
         }
 
@@ -69,7 +70,7 @@ namespace RPG
             return instance.settings[name].particles;
         }
 
-        public static Image GetIcon(string name)
+        public static Sprite GetIcon(string name)
         {
             return instance.settings[name].icon;
         }

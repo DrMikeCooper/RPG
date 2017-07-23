@@ -113,7 +113,7 @@ namespace RPG
 
                 // copy the colour and image from global settings
                 ike.GetComponent<Image>().color = BuffFactory.GetColor(s.name);
-                ike.GetComponent<Image>().sprite = BuffFactory.GetIcon(s.name).sprite;
+                ike.GetComponent<Image>().sprite = BuffFactory.GetIcon(s.name);
 
                 Transform counter = ike.transform.Find("Counter");
                 if (counter)
