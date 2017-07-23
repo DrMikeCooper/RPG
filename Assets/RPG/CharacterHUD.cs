@@ -103,7 +103,7 @@ namespace RPG
                 Status s = pair.Value;
                 GameObject ike = Instantiate(icon);
                 ike.SetActive(true);
-                ike.transform.parent = transform;
+                ike.transform.SetParent(transform);
                 RectTransform rect = ike.GetComponent<RectTransform>();
                 rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
                 offsetX += 18; //todo
