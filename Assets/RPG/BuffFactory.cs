@@ -50,7 +50,7 @@ namespace RPG
 
             Add("Bubbles", new BuffSettings(Buff.GetEnergiseBuff(5, 10), "sparkles", "ButtonAcceleratorOverSprite", Color.blue));
             Add("Regen", new BuffSettings(Buff.GetRegenBuff(5, 10), "sparkles", "ButtonArrowUpSprite", Color.red));
-            Add("Armour", new BuffSettings(Buff.GetResBuff(Attack.DamageType.Crushing, 5, 10), "ring", "ButtonBrakeOverSprite", Color.yellow));
+            Add("Armour", new BuffSettings(Buff.GetResBuff(Attack.DamageType.Crushing, 100, 10), "ring", "ButtonBrakeOverSprite", Color.yellow));
         }
 
         void Add(string name, BuffSettings setting)
