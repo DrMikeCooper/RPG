@@ -7,17 +7,17 @@ namespace RPG
     {
         public float modifier;
         Stat stat = null;
-
+        string statName;
 
         public Buff() { }
-        Buff(string n, float f, float d, Color c) { name = n;  modifier = f; duration = d;  color = c; }
-        public Buff(Buff b) { modifier = b.modifier; name = b.name; duration = b.duration; count = b.count; color = b.color; }
+        Buff(string n, string sn, float f, float d, Color c) { name = n; statName = sn; modifier = f; duration = d;  color = c; }
+        public Buff(Buff b) { modifier = b.modifier; name = b.name; statName = b.statName;  duration = b.duration; count = b.count; color = b.color; }
 
         public override void Apply(Character ch)
         {
             if (stat == null)
             {
-                stat = ch.stats[name];
+                stat = ch.stats[statName];
                 if (stat == null)
                     End();
             }
@@ -29,19 +29,19 @@ namespace RPG
             return new Buff(this);
         }
 
-        public static Buff GetResBuff(Attack.DamageType dt, float f, float d)
+        public static Buff GetResBuff(Attack.DamageType dt, float f, float d, string name = "")
         {
-            return new Buff(Attack.GetResistanceStat(dt), f, d, Color.cyan);
+            return new Buff(name, Attack.GetResistanceStat(dt), f, d, Color.cyan);
         }
 
-        public static Buff GetRegenBuff(float f, float d)
+        public static Buff GetRegenBuff(float f, float d, string name = "")
         {
-            return new Buff(Character.HealthRegen, f, d, Color.red);
+            return new Buff(name, Character.HealthRegen, f, d, Color.red);
         }
 
-        public static Buff GetEnergiseBuff(float f, float d)
+        public static Buff GetEnergiseBuff(float f, float d, string name = "")
         {
-            return new Buff(Character.EnergyRegen, f, d, Color.blue);
+            return new Buff(name, Character.EnergyRegen, f, d, Color.blue);
         }
     }
 }

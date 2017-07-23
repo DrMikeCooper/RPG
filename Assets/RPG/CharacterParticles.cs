@@ -7,7 +7,6 @@ namespace RPG
     public class CharacterParticles : MonoBehaviour
     {
         Character character;
-        public ParticleSystem particles;
 
         Dictionary<string, ParticleSystem> systems = new Dictionary<string, ParticleSystem>();
 
@@ -35,9 +34,11 @@ namespace RPG
                 if (systems.ContainsKey(pair.Key) == false)
                 {
                     Status s = pair.Value;
+                    ParticleSystem particles = BuffFactory.GetParticles(s.name);
                     GameObject obj = Instantiate(particles.gameObject);
                     ParticleSystem system = obj.GetComponent<ParticleSystem>();
                     obj.transform.parent = transform;
+                    obj.name = "Particles_" + pair.Key;
                     system.startColor = s.color; // figure this out...
                     systems[pair.Key] = system;
                 }

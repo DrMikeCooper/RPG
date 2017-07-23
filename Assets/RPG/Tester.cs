@@ -23,14 +23,14 @@ namespace RPG
 
             // apply crushing damage resistance buff
             if (Input.GetKeyDown(KeyCode.I))
-                character.ApplyStatus(Buff.GetResBuff(Attack.DamageType.Crushing, 100, 5));
+                character.ApplyStatus("Armour");
 
             // apply fire resistance debuff
 
             if (Input.GetKeyDown(KeyCode.O))
-                character.ApplyStatus(Buff.GetEnergiseBuff(5, 5));
+                character.ApplyStatus("Bubbles");
             if (Input.GetKeyDown(KeyCode.L))
-                character.ApplyStatus(Buff.GetRegenBuff(5, 5));
+                character.ApplyStatus("Regen");
 
             if (Input.GetKeyDown(KeyCode.P))
                 character.UseEnergy(50);
