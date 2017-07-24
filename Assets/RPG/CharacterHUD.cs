@@ -70,6 +70,7 @@ namespace RPG
                 icon.SetActive(false);
             }
 
+            gameObject.SetActive(character != null);
             if (character)
                 character.onStatusChanged.AddListener(UpdateIcons);
         }
@@ -80,7 +81,11 @@ namespace RPG
                 character.onStatusChanged.RemoveListener(UpdateIcons);
             character = ch;
             if (character)
+            {
                 character.onStatusChanged.AddListener(UpdateIcons);
+            }
+
+            gameObject.SetActive(character != null);
             UpdateIcons();
         }
 
@@ -108,29 +113,32 @@ namespace RPG
 
             float offsetX = 0;
 
-            Vector3 iconLocalPosition = icon.GetComponent<RectTransform>().localPosition;
-            foreach (KeyValuePair<string,Status> pair in character.groupedEffects)
+            if (character != null)
             {
-                Status s = pair.Value;
-                GameObject ike = Instantiate(icon);
-                ike.SetActive(true);
-                ike.transform.SetParent(transform);
-                RectTransform rect = ike.GetComponent<RectTransform>();
-                rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
-                offsetX += 18; //todo
-                name = s.name;
-                icons[name] = ike;
-                ike.name = name;
-
-                // copy the colour and image from global settings
-                ike.GetComponent<Image>().color = BuffFactory.GetColor(s.name);
-                ike.GetComponent<Image>().sprite = BuffFactory.GetIcon(s.name);
-
-                Transform counter = ike.transform.Find("Counter");
-                if (counter)
+                Vector3 iconLocalPosition = icon.GetComponent<RectTransform>().localPosition;
+                foreach (KeyValuePair<string, Status> pair in character.groupedEffects)
                 {
-                    Text text = counter.GetComponent<Text>();
-                    text.text = "" + s.count;
+                    Status s = pair.Value;
+                    GameObject ike = Instantiate(icon);
+                    ike.SetActive(true);
+                    ike.transform.SetParent(transform);
+                    RectTransform rect = ike.GetComponent<RectTransform>();
+                    rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
+                    offsetX += 18; //todo
+                    name = s.name;
+                    icons[name] = ike;
+                    ike.name = name;
+
+                    // copy the colour and image from global settings
+                    ike.GetComponent<Image>().color = BuffFactory.GetColor(s.name);
+                    ike.GetComponent<Image>().sprite = BuffFactory.GetIcon(s.name);
+
+                    Transform counter = ike.transform.Find("Counter");
+                    if (counter)
+                    {
+                        Text text = counter.GetComponent<Text>();
+                        text.text = "" + s.count;
+                    }
                 }
             }
         }
