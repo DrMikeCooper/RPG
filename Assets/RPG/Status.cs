@@ -8,7 +8,7 @@ namespace RPG
         public float duration;
         public ParticleSystem particles;
         public Sprite icon;
-        public Color color = Color.white;
+        public RPGSettings.ColorCode color;
 
         [HideInInspector]
         public float timer = 0;

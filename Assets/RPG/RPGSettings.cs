@@ -37,6 +37,32 @@ namespace RPG
             HealthRegen,
         }
 
+
+        public enum ColorCode
+        {
+            Health,
+            Mana,
+            Crushing, 
+            Piercing,
+            Fire,
+            Cold,
+            Energy,
+            Negative,
+            Psionic,
+            Magic,
+            Physical,
+            Elemental,
+            Paranormal,
+            End
+        };
+
+        public Color[] colors = new Color[(int)ColorCode.End];
+
+        public Color GetColor(ColorCode cc)
+        {
+            return colors[(int)cc];
+        }
+    
         // Use this for initialization
         void Awake()
         {
