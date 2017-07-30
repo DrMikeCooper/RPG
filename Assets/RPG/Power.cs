@@ -62,6 +62,15 @@ namespace RPG
             return target;
         }
 
+        protected void Apply(Character target)
+        {
+            float damage = Random.Range(minDamage, maxDamage);
+            if (damage != 0)
+                target.ApplyDamage(damage, type);
+            foreach (Status s in effects)
+                target.ApplyStatus(s);
+        }
+
         public abstract void OnActivate(Character caster);
 
     }

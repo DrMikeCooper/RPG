@@ -20,11 +20,7 @@ namespace RPG
             if (target)
             {
                 caster.UsePower(this);
-                float damage = Random.Range(minDamage, maxDamage);
-                if (damage != 0)
-                    target.ApplyDamage(damage, type);
-                foreach (Status s in effects)
-                    target.ApplyStatus(s);
+                Apply(target);
             }
         }
     }
