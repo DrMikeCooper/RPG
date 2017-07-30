@@ -9,6 +9,6 @@ namespace RPG
 
         public float energyCost;
         public float range;
-        Attack.DamageType damageType;
+        RPGSettings.DamageType damageType;
     }
 }

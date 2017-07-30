@@ -6,8 +6,36 @@ namespace RPG
 {
     public class RPGSettings : MonoBehaviour
     {
+        [Tooltip("Standard HUD to display over the head of every character in the scene")]
         public GameObject overheadHUD;
-        public static RPGSettings instance;
+
+        [HideInInspector]
+        public static RPGSettings instance; // singleton accessor
+
+        public enum DamageType
+        {
+            Crushing = 1,
+            Piercing = 2,
+            Fire = 4,
+            Cold = 8,
+            Energy = 16,
+            Negative = 32,
+            Psionic = 64,
+            Magic = 128,
+            Physical = Crushing | Piercing,
+            Elemental = Fire | Cold | Energy,
+            Paranormal = Negative | Psionic | Magic,
+            All = Physical | Elemental | Paranormal
+        };
+
+        public enum StatName
+        {
+            Res,
+            Dam,
+            Def, // this is the last composite one, check Buff.Apply to see how its used
+            EnergyRegen,
+            HealthRegen,
+        }
 
         // Use this for initialization
         void Awake()
@@ -23,5 +51,27 @@ namespace RPG
             hud.transform.SetParent(transform);
             hud.GetComponent<CharacterHUD>().character = character;
         }
+
+        // Utility functions for damage types
+        public static bool IsComposite(DamageType dt)
+        {
+            return (dt == DamageType.All) || (dt == DamageType.Physical) || (dt == DamageType.Paranormal) || (dt == DamageType.Elemental);
+        }
+
+        // if an attack gets set a composite type, return an appropriate damage type for it.
+        static DamageType GetDamageType(DamageType dt)
+        {
+            if (dt == DamageType.All || dt == DamageType.Physical)
+                return DamageType.Crushing;
+            if (dt == DamageType.Elemental)
+                return DamageType.Fire;
+            if (dt == DamageType.Paranormal)
+                return DamageType.Magic;
+            return dt;
+        }
+
+        public static string GetResistanceStat(DamageType dt) { return dt.ToString() + StatName.Res.ToString(); }
+        public static string GetDefenceStat(DamageType dt) { return dt.ToString() + StatName.Def.ToString(); }
+        public static string GetDamageStat(DamageType dt) { return dt.ToString() + StatName.Dam.ToString(); }
     }
 }

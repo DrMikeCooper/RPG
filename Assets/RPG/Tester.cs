@@ -31,9 +31,9 @@ namespace RPG
 
             // apply fire or crushing damage
             if (Input.GetKeyDown(KeyCode.Y))
-                character.ApplyDamage(10, Attack.DamageType.Crushing);
+                character.ApplyDamage(10, RPGSettings.DamageType.Crushing);
             if (Input.GetKeyDown(KeyCode.U))
-                character.ApplyDamage(10, Attack.DamageType.Fire);
+                character.ApplyDamage(10, RPGSettings.DamageType.Fire);
             if (Input.GetKeyDown(KeyCode.P))
                 character.UseEnergy(50);
 

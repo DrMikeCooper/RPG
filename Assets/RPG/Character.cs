@@ -21,15 +21,6 @@ namespace RPG
 
         public Dictionary<string, Stat> stats;
 
-        public enum StatName
-        {
-            Res,
-            Dam,
-            Def, // this is the last composite one, check Buff.Apply to see how its used
-            EnergyRegen,
-            HealthRegen,
-        }
-
         // Use this for initialization
         void Start()
         {
@@ -40,13 +31,13 @@ namespace RPG
 
             for (int i=0; i<8; i++)
             {
-                stats[Attack.GetResistanceStat((Attack.DamageType)(1 << i))] = new Stat();
-                stats[Attack.GetDamageStat((Attack.DamageType)(1 << i))] = new Stat();
+                stats[RPGSettings.GetResistanceStat((RPGSettings.DamageType)(1 << i))] = new Stat();
+                stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
             // health and energy regeneration multipliers
-            stats[StatName.HealthRegen.ToString()] = new Stat();
-            stats[StatName.EnergyRegen.ToString()] = new Stat(5);
+            stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
+            stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
 
             health = maxHealth;
             energy = maxEnergy;
@@ -78,10 +69,10 @@ namespace RPG
                 statusEffects.Remove(d);
 
             // update health and energy over time
-            energy += stats[StatName.EnergyRegen.ToString()].currentValue * Time.deltaTime;
+            energy += stats[RPGSettings.StatName.EnergyRegen.ToString()].currentValue * Time.deltaTime;
             if (energy > maxEnergy)
                 energy = maxEnergy;
-            health += stats[StatName.HealthRegen.ToString()].currentValue * Time.deltaTime;
+            health += stats[RPGSettings.StatName.HealthRegen.ToString()].currentValue * Time.deltaTime;
             if (health > maxHealth)
                 health = maxHealth;
 
@@ -117,10 +108,10 @@ namespace RPG
             onStatusChanged.Invoke();
         }
 
-        public void ApplyDamage(float damage, Attack.DamageType dt)
+        public void ApplyDamage(float damage, RPGSettings.DamageType dt)
         {
             // apply damage resistance
-            damage *= 100.0f / (100.0f + stats[Attack.GetResistanceStat(dt)].currentValue);
+            damage *= 100.0f / (100.0f + stats[RPGSettings.GetResistanceStat(dt)].currentValue);
 
             health -= damage;
             if (health < 0)

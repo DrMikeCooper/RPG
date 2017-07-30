@@ -7,14 +7,14 @@ namespace RPG
     public class Buff : Status
     {
         public float modifier;
-        public Character.StatName stat = Character.StatName.Res;
-        public Attack.DamageType damageType;
+        public RPGSettings.StatName stat = RPGSettings.StatName.Res;
+        public RPGSettings.DamageType damageType;
          
         public override void Apply(Character ch)
         {
             // all stats up to Res require an additional damage type modifier which may be composite
             // all stats after are single use and used as-is
-            int dt = (stat <= Character.StatName.Res) ? (int)damageType : 0;
+            int dt = (stat <= RPGSettings.StatName.Res) ? (int)damageType : 0;
 
             if (dt != 0) // composite buff eg Physical Resistance, All Resistance
             {
@@ -23,7 +23,7 @@ namespace RPG
                     int subType = 1 << i;
                     if ((dt & subType) != 0)
                     {
-                        string sn = ((Attack.DamageType)subType).ToString() + stat.ToString();
+                        string sn = ((RPGSettings.DamageType)subType).ToString() + stat.ToString();
                         ch.stats[sn].addModifier(modifier);
                     }
                 }
