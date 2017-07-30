@@ -20,11 +20,16 @@ namespace RPG
         public RPGSettings.DamageType type;
         public TargetType targetType;
 
+        public Sprite icon;
+        public Color color;
+
+        // TODO animation for the power
+
         public float minDamage;
         public float maxDamage;
         public Status[] effects;
 
-        protected bool CanUse(Character caster)
+        public bool CanUse(Character caster)
         {
             if (caster.energy < energyCost)
                 return false;
@@ -32,7 +37,7 @@ namespace RPG
             return true;
         }
 
-        protected Character GetTarget(Character caster)
+        public Character GetTarget(Character caster)
         {
             Character target = null;
             if (targetType != TargetType.Enemies)

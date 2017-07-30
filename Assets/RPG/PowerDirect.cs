@@ -15,12 +15,12 @@ namespace RPG
             if (!CanUse(caster))
                 return;
 
-            caster.energy -= energyCost;
-
             Character target = GetTarget(caster);
 
             if (target)
             {
+                caster.energy -= energyCost;
+
                 float damage = Random.Range(minDamage, maxDamage);
                 if (damage != 0)
                     target.ApplyDamage(damage, type);
