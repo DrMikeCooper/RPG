@@ -21,8 +21,14 @@ namespace RPG
 
         public Dictionary<string, Stat> stats;
 
-        public const string EnergyRegen = "EnergyRegen";
-        public const string HealthRegen = "HealthRegen";
+        public enum StatName
+        {
+            Res,
+            Dam,
+            Def,
+            EnergyRegen,
+            HealthRegen,
+        }
 
         // Use this for initialization
         void Start()
@@ -39,8 +45,8 @@ namespace RPG
             }
 
             // health and energy regeneration multipliers
-            stats[HealthRegen] = new Stat();
-            stats[EnergyRegen] = new Stat(5);
+            stats[StatName.HealthRegen.ToString()] = new Stat();
+            stats[StatName.EnergyRegen.ToString()] = new Stat(5);
 
             health = maxHealth;
             energy = maxEnergy;
@@ -72,10 +78,10 @@ namespace RPG
                 statusEffects.Remove(d);
 
             // update health and energy over time
-            energy += stats[EnergyRegen].currentValue * Time.deltaTime;
+            energy += stats[StatName.EnergyRegen.ToString()].currentValue * Time.deltaTime;
             if (energy > maxEnergy)
                 energy = maxEnergy;
-            health += stats[HealthRegen].currentValue * Time.deltaTime;
+            health += stats[StatName.HealthRegen.ToString()].currentValue * Time.deltaTime;
             if (health > maxHealth)
                 health = maxHealth;
 

@@ -7,7 +7,7 @@ namespace RPG
     public class Buff : Status
     {
         public float modifier;
-        public string statName;
+        public Character.StatName stat = Character.StatName.Res;
         public Attack.DamageType damageType;
 
         public Buff() { }
@@ -24,17 +24,17 @@ namespace RPG
                     int subType = 1 << i;
                     if ((dt & subType) != 0)
                     {
-                        string sn = ((Attack.DamageType)subType).ToString() + statName;
+                        string sn = ((Attack.DamageType)subType).ToString() + stat.ToString();
                         ch.stats[sn].addModifier(modifier);
                     }
                 }
             }
             else // other buffs with single stat references
             {
-                Stat stat = ch.stats[statName];
-                if (stat == null)
+                Stat st = ch.stats[stat.ToString()];
+                if (st == null)
                     End();
-                stat.addModifier(modifier);
+                st.addModifier(modifier);
             }
         }
     }

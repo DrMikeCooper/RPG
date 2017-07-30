@@ -39,8 +39,9 @@ namespace RPG
             return dt;
         }
 
-        public static string GetResistanceStat(DamageType dt) { return dt.ToString() + "Res"; }
-        public static string GetDamageStat(DamageType dt) { return dt.ToString() + "Dam"; }
+        public static string GetResistanceStat(DamageType dt) { return dt.ToString() + Character.StatName.Res.ToString(); }
+        public static string GetDefenceStat(DamageType dt) { return dt.ToString() + Character.StatName.Def.ToString(); }
+        public static string GetDamageStat(DamageType dt) { return dt.ToString() + Character.StatName.Dam.ToString(); }
 
         public float damageMin, damageMax;
         public DamageType damageType;
