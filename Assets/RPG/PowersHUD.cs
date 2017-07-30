@@ -29,6 +29,11 @@ namespace RPG
                 rt.position = iconRect.position + 48 * i * Vector3.right;
                 icons[i] = obj.GetComponent<Image>();
                 icons[i].sprite = character.powers[i].icon;
+                if (character.powers[i].coolDown > 0)
+                {
+                    icons[i].type = Image.Type.Filled;
+                    icons[i].fillMethod = Image.FillMethod.Radial360;
+                }
             }
         }
 
@@ -37,12 +42,13 @@ namespace RPG
         {
             for (int i = 0; i < character.powers.Length; i++)
             {
-                icons[i].color = character.powers[i].color;
-                if (!character.powers[i].CanUse(character) || character.powers[i].GetTarget(character) == null)
+                Power p = character.powers[i];
+                icons[i].color = p.color;
+                if (!p.CanUse(character) || p.GetTarget(character) == null)
                 {
                     icons[i].color *= 0.5f;
-                }
-
+               }
+                icons[i].fillAmount = character.GetCoolDownFactor(i);
             }
         }
     }

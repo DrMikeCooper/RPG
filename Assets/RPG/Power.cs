@@ -31,6 +31,9 @@ namespace RPG
 
         public bool CanUse(Character caster)
         {
+            if (caster.GetCoolDown(this) > 0)
+                return false;
+
             if (caster.energy < energyCost)
                 return false;
 

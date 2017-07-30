@@ -13,6 +13,9 @@ namespace RPG
         public float health;
         public float energy;
         public Power[] powers;
+        [HideInInspector]
+        public float[] coolDowns;
+        Dictionary<Power, int> powerIndexes = new Dictionary<Power, int>();
 
         [HideInInspector]
         public List<Status> statusEffects;
@@ -52,6 +55,14 @@ namespace RPG
             energy = maxEnergy;
 
             RPGSettings.instance.SetupCharacter(this);
+
+            // time remaining till each power can be used
+            coolDowns = new float[powers.Length];
+
+            for (int i = 0; i < powers.Length; i++)
+            {
+                powerIndexes[powers[i]] = i;
+            }
         }
 
         // Update is called once per frame
@@ -85,6 +96,32 @@ namespace RPG
             if (health > maxHealth)
                 health = maxHealth;
 
+            for (int i = 0; i < coolDowns.Length; i++)
+            {
+                if (coolDowns[i] > 0)
+                {
+                    coolDowns[i] -= Time.deltaTime;
+                    if (coolDowns[i] < 0)
+                        coolDowns[i] = 0;
+                }
+            }
+        }
+
+        // returns 1 for fully recharged, 0 for just used
+        public float GetCoolDownFactor(int i)
+        {
+            return 1.0f - (coolDowns[i] / powers[i].coolDown);
+        }
+
+        public float GetCoolDown(Power p)
+        {
+            return coolDowns[powerIndexes[p]];
+        }
+
+        public void UsePower(Power p)
+        {
+            energy -= p.energyCost;
+            coolDowns[powerIndexes[p]] = p.coolDown;
         }
 
         void ProcessStatus()
