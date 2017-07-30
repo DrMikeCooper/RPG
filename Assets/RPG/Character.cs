@@ -12,14 +12,23 @@ namespace RPG
         public float maxEnergy = 100;
         public float health;
         public float energy;
+        public Power[] powers;
 
+        [HideInInspector]
         public List<Status> statusEffects;
+        [HideInInspector]
         public Dictionary<string, Status> groupedEffects;
 
+        [HideInInspector]
         public bool statusDirty;
+        [HideInInspector]
         public UnityEvent onStatusChanged = new UnityEvent();
 
+        [HideInInspector]
         public Dictionary<string, Stat> stats;
+
+        [HideInInspector]
+        public Character target; // who is this character targetting (can be null or yourself)?
 
         // Use this for initialization
         void Start()

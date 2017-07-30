@@ -10,12 +10,14 @@ namespace RPG
         public CharacterHUD hud;
         int index = -1;
         public GameObject reticle;
+        Character user;
 
         // Use this for initialization
         void Start()
         {
             targets = GameObject.FindObjectsOfType<Character>();
             reticle.SetActive(false);
+            user = GetComponent<Character>();
         }
 
         // Update is called once per frame
@@ -49,6 +51,7 @@ namespace RPG
                     reticle.SetActive(index != -1);
                 }
             }
+            user.target = GetTarget();
         }
 
         public Character GetTarget()
