@@ -21,7 +21,7 @@ namespace RPG
         public TargetType targetType;
 
         public Sprite icon;
-        public Color color;
+        public Color color = Color.white;
 
         // TODO animation for the power
 
