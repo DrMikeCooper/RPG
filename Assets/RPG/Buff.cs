@@ -9,14 +9,13 @@ namespace RPG
         public float modifier;
         public Character.StatName stat = Character.StatName.Res;
         public Attack.DamageType damageType;
-
-        public Buff() { }
-        //Buff(string n, string sn, float f, float d, Color c, Attack.DamageType dt = 0) { name = n; statName = sn; modifier = f; duration = d;  color = c; damageType = (int)dt; }
-        //public Buff(Buff b) { modifier = b.modifier; name = b.name; statName = b.statName;  duration = b.duration; count = b.count; color = b.color; damageType = b.damageType; }
-
+         
         public override void Apply(Character ch)
         {
-            int dt = (int)damageType;
+            // all stats up to Res require an additional damage type modifier which may be composite
+            // all stats after are single use and used as-is
+            int dt = (stat <= Character.StatName.Res) ? (int)damageType : 0;
+
             if (dt != 0) // composite buff eg Physical Resistance, All Resistance
             {
                 for (int i = 0; i <= 7; i++)
