@@ -46,8 +46,10 @@ namespace RPG
                 icons[i].color = p.color;
                 if (!p.CanUse(character) || p.GetTarget(character) == null)
                 {
-                    icons[i].color *= 0.5f;
-               }
+                    Color col = icons[i].color;
+                    col *= 0.5f; col.a = 1;
+                    icons[i].color = col;
+                }
                 icons[i].fillAmount = character.GetCoolDownFactor(i);
             }
         }
