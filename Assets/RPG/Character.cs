@@ -123,10 +123,9 @@ namespace RPG
             }
         }
 
-        public void ApplyStatus(string sn)
+        public void ApplyStatus(Status s)
         {
-            Status s = BuffFactory.GetStatusEffect(sn);
-            Status status = s.Clone();
+            Status status = Instantiate(s) as Status;
             statusEffects.Add(status);
             statusDirty = true;
         }

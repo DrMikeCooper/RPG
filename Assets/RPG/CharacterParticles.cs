@@ -34,7 +34,7 @@ namespace RPG
                 if (systems.ContainsKey(pair.Key) == false)
                 {
                     Status s = pair.Value;
-                    ParticleSystem particles = BuffFactory.GetParticles(s.name);
+                    ParticleSystem particles = s.particles;
                     GameObject obj = Instantiate(particles.gameObject);
                     ParticleSystem system = obj.GetComponent<ParticleSystem>();
                     obj.transform.parent = transform;

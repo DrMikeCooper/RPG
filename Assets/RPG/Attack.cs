@@ -44,7 +44,7 @@ namespace RPG
 
         public float damageMin, damageMax;
         public DamageType damageType;
-        public string[] effects;
+        public Status[] effects;
         public float energyCost;
         public float coolDown;
         public float timer;
@@ -57,7 +57,7 @@ namespace RPG
             target.ApplyDamage(damage, damageType);
 
             // apply any status effects 
-            foreach(string s in effects)
+            foreach(Status s in effects)
             {
                 target.ApplyStatus(s);
             }

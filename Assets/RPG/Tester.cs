@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace RPG
 {
@@ -8,6 +9,15 @@ namespace RPG
         Character character;
         TabTarget targetter;
 
+        [Serializable]
+        public struct TestItem
+        {
+            public KeyCode key;
+            public Status status;
+        }
+
+        public TestItem[] tests;
+    
         // Use this for initialization
         void Start() {
             character = GetComponent<Character>();
@@ -24,20 +34,14 @@ namespace RPG
                 character.ApplyDamage(10, Attack.DamageType.Crushing);
             if (Input.GetKeyDown(KeyCode.U))
                 character.ApplyDamage(10, Attack.DamageType.Fire);
-
-            // apply crushing damage resistance buff
-            if (Input.GetKeyDown(KeyCode.I))
-                character.ApplyStatus("Armour");
-
-            // apply fire resistance debuff
-
-            if (Input.GetKeyDown(KeyCode.O))
-                character.ApplyStatus("Bubbles");
-            if (Input.GetKeyDown(KeyCode.L))
-                character.ApplyStatus("Regen");
-
             if (Input.GetKeyDown(KeyCode.P))
                 character.UseEnergy(50);
+
+            for (int i = 0; i < tests.Length; i++)
+            {
+                if (Input.GetKeyDown(tests[i].key))
+                    character.ApplyStatus(tests[i].status);
+            }
         }
     }
 }

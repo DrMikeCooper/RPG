@@ -3,13 +3,17 @@ using System.Collections;
 
 namespace RPG
 {
-    public abstract class Status
+    public abstract class Status : ScriptableObject
     {
-        public float timer = 0;
         public float duration;
-        public string name;
-        public int count = 0;
+        public ParticleSystem particles;
+        public Sprite icon;
         public Color color;
+
+        [HideInInspector]
+        public float timer = 0;
+        [HideInInspector]
+        public int count = 0;
 
         public void End()
         {
@@ -21,7 +25,6 @@ namespace RPG
             return timer >= duration;
         }
 
-        public abstract Status Clone();
         public abstract void Apply(Character ch);
     }
 }
