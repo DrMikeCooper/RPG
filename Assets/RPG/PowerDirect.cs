@@ -19,7 +19,7 @@ namespace RPG
 
             if (target)
             {
-                caster.UsePower(this);
+                UsePower(caster);
                 Apply(target);
             }
         }

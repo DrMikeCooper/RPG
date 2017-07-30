@@ -23,6 +23,9 @@ namespace RPG
         public Sprite icon;
         public RPGSettings.ColorCode color;
 
+        public ParticleSystem userParticles;
+        public ParticleSystem targetParticles;
+
         // TODO animation for the power
 
         public float minDamage;
@@ -62,6 +65,13 @@ namespace RPG
             return target;
         }
 
+        protected void UsePower(Character caster)
+        {
+            caster.UsePower(this);
+            AddParticles(userParticles, caster);
+        }
+
+        // apply this power to a particular target
         protected void Apply(Character target)
         {
             float damage = Random.Range(minDamage, maxDamage);
@@ -69,6 +79,23 @@ namespace RPG
                 target.ApplyDamage(damage, type);
             foreach (Status s in effects)
                 target.ApplyStatus(s);
+
+            // particles on target
+            AddParticles(targetParticles, target);
+        }
+
+        public void AddParticles(ParticleSystem ps, Character ch)
+        {
+            // particles on target
+            if (ps != null)
+            {
+                GameObject go = Instantiate(ps.gameObject);
+                go.transform.parent = ch.transform;
+                go.transform.position = ch.transform.position;
+                // make sure there's a lifespan on the particle effect
+                if (go.GetComponent<LifeSpan>() == null)
+                    go.AddComponent<LifeSpan>().lifespan = 5;
+            }
         }
 
         public abstract void OnActivate(Character caster);

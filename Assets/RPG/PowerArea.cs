@@ -25,7 +25,7 @@ namespace RPG
                 return;
 
             // energy and cooldowns
-            caster.UsePower(this);
+            UsePower(caster);
 
             // check all other characters within the radius
             foreach (Character ch in getAll())
