@@ -34,8 +34,8 @@ namespace RPG
 
             for (int i=0; i<8; i++)
             {
-                stats[Attack.GetResistanceStat((Attack.DamageType)i)] = new Stat();
-                stats[Attack.GetDamageStat((Attack.DamageType)i)] = new Stat();
+                stats[Attack.GetResistanceStat((Attack.DamageType)(1 << i))] = new Stat();
+                stats[Attack.GetDamageStat((Attack.DamageType)(1 << i))] = new Stat();
             }
 
             // health and energy regeneration multipliers
