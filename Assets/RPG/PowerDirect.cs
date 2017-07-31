@@ -8,6 +8,9 @@ namespace RPG
     [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerDirect", order = 1)]
     public class PowerDirect : Power
     {
+        public Material beamMaterial;
+        public float beamWidth = 0.5f;
+
         // useable on a single target with no to-hit roll
         public override void OnActivate(Character caster)
         {
@@ -21,6 +24,8 @@ namespace RPG
             {
                 UsePower(caster);
                 Apply(target);
+                if (beamMaterial)
+                    caster.beam.Activate(caster.transform, target.transform, 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
             }
         }
     }

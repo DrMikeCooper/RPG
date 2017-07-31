@@ -103,7 +103,7 @@ namespace RPG
                 if (go.GetComponent<LifeSpan>() == null)
                     go.AddComponent<LifeSpan>().lifespan = 5;
                 if (colorParticles)
-                    go.GetComponent<ParticleSystem>().startColor = RPGSettings.instance.GetColor(color);
+                    go.GetComponent<ParticleSystem>().startColor = RPGSettings.GetColor(color);
             }
         }
 

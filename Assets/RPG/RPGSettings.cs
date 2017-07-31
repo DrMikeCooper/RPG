@@ -61,9 +61,9 @@ namespace RPG
 
         public Color[] colors = new Color[(int)ColorCode.End];
 
-        public Color GetColor(ColorCode cc)
+        public static Color GetColor(ColorCode cc)
         {
-            return colors[(int)cc];
+            return instance.colors[(int)cc];
         }
     
         // Use this for initialization

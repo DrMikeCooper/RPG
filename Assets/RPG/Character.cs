@@ -18,6 +18,9 @@ namespace RPG
         public Power[] powers;
 
         [HideInInspector]
+        public BeamRenderer beam;
+
+        [HideInInspector]
         public float[] coolDowns;
         Dictionary<Power, int> powerIndexes = new Dictionary<Power, int>();
 
@@ -78,6 +81,11 @@ namespace RPG
             if (tpc)
                 baseJumpPower = tpc.m_JumpPower;
 
+            Transform beamChild = transform.Find("Beam");
+            if (beamChild)
+            {
+                beam = beamChild.GetComponent<BeamRenderer>();
+            }
         }
 
         // Update is called once per frame

@@ -43,7 +43,7 @@ namespace RPG
             for (int i = 0; i < character.powers.Length; i++)
             {
                 Power p = character.powers[i];
-                icons[i].color = RPGSettings.instance.GetColor(p.color);
+                icons[i].color = RPGSettings.GetColor(p.color);
                 if (!p.CanUse(character) || p.GetTarget(character) == null)
                 {
                     Color col = icons[i].color;

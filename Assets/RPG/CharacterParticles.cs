@@ -42,7 +42,7 @@ namespace RPG
                         obj.transform.parent = transform;
                         obj.transform.localPosition = Vector3.zero;
                         obj.name = "Particles_" + pair.Key;
-                        system.startColor = RPGSettings.instance.GetColor(s.color); // figure this out...
+                        system.startColor = RPGSettings.GetColor(s.color); // figure this out...
                         systems[pair.Key] = system;
                     }
                 }
