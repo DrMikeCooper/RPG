@@ -59,6 +59,7 @@ namespace RPG
             stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
             stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
             stats[RPGSettings.StatName.Speed.ToString()] = new Stat();
+            stats[RPGSettings.StatName.Recharge.ToString()] = new Stat();
 
             health = maxHealth;
             energy = maxEnergy;
@@ -110,11 +111,12 @@ namespace RPG
             if (health > maxHealth)
                 health = maxHealth;
 
+            // update cooldowns
             for (int i = 0; i < coolDowns.Length; i++)
             {
                 if (coolDowns[i] > 0)
                 {
-                    coolDowns[i] -= Time.deltaTime;
+                    coolDowns[i] -= Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
                     if (coolDowns[i] < 0)
                         coolDowns[i] = 0;
                 }
@@ -167,11 +169,16 @@ namespace RPG
 
             if (tpc)
             {
-                tpc.m_JumpPower = baseJumpPower * GetFactor(stats[RPGSettings.StatName.Jump.ToString()].currentValue);
-                tpc.m_MoveSpeedMultiplier = GetFactor(stats[RPGSettings.StatName.Jump.ToString()].currentValue);
+                tpc.m_JumpPower = baseJumpPower * GetFactor(RPGSettings.StatName.Jump);
+                tpc.m_MoveSpeedMultiplier = GetFactor(RPGSettings.StatName.Speed);
 
             }
             onStatusChanged.Invoke();
+        }
+
+        public float GetFactor(RPGSettings.StatName stat)
+        {
+            return GetFactor(stats[stat.ToString()].currentValue);
         }
 
         public float GetFactor(float val)

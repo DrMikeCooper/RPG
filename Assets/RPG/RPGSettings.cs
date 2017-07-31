@@ -37,6 +37,7 @@ namespace RPG
             HealthRegen,
             Speed,
             Jump,
+            Recharge,
         }
 
 
