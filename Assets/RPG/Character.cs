@@ -13,6 +13,8 @@ namespace RPG
         public float maxEnergy = 100;
         public float health;
         public float energy;
+        public Sprite portrait;
+        public string characterName;
         public Power[] powers;
 
         [HideInInspector]

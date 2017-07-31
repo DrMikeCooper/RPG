@@ -48,6 +48,8 @@ namespace RPG
 
         // the icon template set up in the editor
         GameObject icon;
+        Text characterName;
+        Image portrait;
 
         // current icons
         Dictionary<string, GameObject> icons = new Dictionary<string, GameObject>();
@@ -60,6 +62,10 @@ namespace RPG
             {
                 healthBar.Init(child);
                 energyBar.Init(child);
+                if (child.name == "Name")
+                    characterName = child.GetComponent<Text>();
+                if (child.name == "Portrait")
+                    portrait = child.GetComponent<Image>();
             }
 
             // find a cloneable icon for status effects, and disable it
@@ -87,6 +93,12 @@ namespace RPG
 
             gameObject.SetActive(character != null);
             UpdateIcons();
+
+            if (portrait)
+                portrait.sprite = character.portrait;
+            if (characterName)
+                characterName.text = character.characterName;
+                
         }
 
         // Update is called once per frame
