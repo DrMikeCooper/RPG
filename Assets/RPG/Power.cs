@@ -17,12 +17,14 @@ namespace RPG
 
         public float energyCost;
         public float coolDown;
+        public float range;
         public RPGSettings.DamageType type;
         public TargetType targetType;
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
 
+        public bool colorParticles = false;
         public ParticleSystem userParticles;
         public ParticleSystem targetParticles;
 
@@ -38,6 +40,9 @@ namespace RPG
                 return false;
 
             if (caster.energy < energyCost)
+                return false;
+
+            if (range > 0 && targetParticles != null && Vector3.Distance(caster.transform.position, targetParticles.transform.position) > range)
                 return false;
 
             return true;
@@ -95,6 +100,8 @@ namespace RPG
                 // make sure there's a lifespan on the particle effect
                 if (go.GetComponent<LifeSpan>() == null)
                     go.AddComponent<LifeSpan>().lifespan = 5;
+                if (colorParticles)
+                    go.GetComponent<ParticleSystem>().startColor = RPGSettings.instance.GetColor(color);
             }
         }
 
