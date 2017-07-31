@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace RPG
 {
@@ -13,6 +14,7 @@ namespace RPG
         public float health;
         public float energy;
         public Power[] powers;
+
         [HideInInspector]
         public float[] coolDowns;
         Dictionary<Power, int> powerIndexes = new Dictionary<Power, int>();
@@ -33,6 +35,9 @@ namespace RPG
         [HideInInspector]
         public Character target; // who is this character targetting (can be null or yourself)?
 
+        ThirdPersonCharacter tpc;
+        float baseJumpPower;
+
         // Use this for initialization
         void Start()
         {
@@ -50,6 +55,8 @@ namespace RPG
             // health and energy regeneration multipliers
             stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
             stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
+            stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
+            stats[RPGSettings.StatName.Speed.ToString()] = new Stat();
 
             health = maxHealth;
             energy = maxEnergy;
@@ -63,6 +70,11 @@ namespace RPG
             {
                 powerIndexes[powers[i]] = i;
             }
+
+            tpc = GetComponent<ThirdPersonCharacter>();
+            if (tpc)
+                baseJumpPower = tpc.m_JumpPower;
+
         }
 
         // Update is called once per frame
@@ -151,8 +163,29 @@ namespace RPG
 
             statusDirty = false;
 
+            if (tpc)
+            {
+                tpc.m_JumpPower = baseJumpPower * GetFactor(stats[RPGSettings.StatName.Jump.ToString()].currentValue);
+                tpc.m_MoveSpeedMultiplier = GetFactor(stats[RPGSettings.StatName.Jump.ToString()].currentValue);
+
+            }
             onStatusChanged.Invoke();
         }
+
+        public float GetFactor(float val)
+        {
+            if (val >= 0)
+            {
+                // buffs - 100 = double, 200 = triple etc. +N%
+                return (100.0f + val) / 100.0f;
+            }
+            else
+            {
+                // debuffs - -100 = halved, -200 = 1/3 etc
+                return (100.0f) / (100.0f - val);
+            }
+        }
+
 
         public void ApplyDamage(float damage, RPGSettings.DamageType dt)
         {

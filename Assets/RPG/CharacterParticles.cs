@@ -35,18 +35,21 @@ namespace RPG
                 {
                     Status s = pair.Value;
                     ParticleSystem particles = s.particles;
-                    GameObject obj = Instantiate(particles.gameObject);
-                    ParticleSystem system = obj.GetComponent<ParticleSystem>();
-                    obj.transform.parent = transform;
-                    obj.transform.localPosition = Vector3.zero;
-                    obj.name = "Particles_" + pair.Key;
-                    system.startColor = RPGSettings.instance.GetColor(s.color); // figure this out...
-                    systems[pair.Key] = system;
+                    if (particles)
+                    {
+                        GameObject obj = Instantiate(particles.gameObject);
+                        ParticleSystem system = obj.GetComponent<ParticleSystem>();
+                        obj.transform.parent = transform;
+                        obj.transform.localPosition = Vector3.zero;
+                        obj.name = "Particles_" + pair.Key;
+                        system.startColor = RPGSettings.instance.GetColor(s.color); // figure this out...
+                        systems[pair.Key] = system;
+                    }
                 }
                 else
                 {
                     ParticleSystem system = systems[pair.Key];
-                    if (system.isStopped)
+                    if (system && system.isStopped)
                         system.Play();
                 }
                
