@@ -148,6 +148,7 @@ namespace RPG
                     Transform counter = ike.transform.Find("Counter");
                     if (counter)
                     {
+                        counter.gameObject.SetActive(s.count > 1);
                         Text text = counter.GetComponent<Text>();
                         text.text = "" + s.count;
                     }

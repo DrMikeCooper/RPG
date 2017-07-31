@@ -74,6 +74,8 @@ namespace RPG
         {
             caster.UsePower(this);
             AddParticles(userParticles, caster);
+            if (targetType!= TargetType.SelfOnly && caster.target && caster.target != caster)
+                caster.transform.LookAt(caster.target.transform.position);
         }
 
         // apply this power to a particular target

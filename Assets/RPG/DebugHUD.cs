@@ -17,13 +17,24 @@ namespace RPG
 
         // Update is called once per frame
         void Update() {
-            string txt = "";
-            foreach (KeyValuePair<string, Stat> pair in ch.stats)
+            if (Input.GetKeyDown(KeyCode.RightShift))
+                text.enabled = !text.enabled;
+
+            if (text.enabled)
             {
-                Stat s = pair.Value;
-                txt += pair.Key + ":" + s.currentValue + "\n";
+                Character ch0 = ch;
+                if (ch.target != null)
+                    ch = ch0.target;
+
+                string txt = "";
+                foreach (KeyValuePair<string, Stat> pair in ch0.stats)
+                {
+                    Stat s = pair.Value;
+                    txt += pair.Key + ":" + s.currentValue + "\n";
+                }
+                text.text = txt;
             }
-            text.text = txt;
+            
         }
     }
 }
