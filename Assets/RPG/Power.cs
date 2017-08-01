@@ -67,15 +67,18 @@ namespace RPG
                 target = caster;
                 if (targetType == TargetType.AlliesOnly)
                     target = null;
-                if ((targetType == TargetType.SelfAndAllies || targetType == TargetType.All) && caster.target != null) // TODO check alignment
+                if ((targetType == TargetType.SelfAndAllies || targetType == TargetType.All) && caster.target != null) 
                 {
                     target = caster.target;
+                    if (targetType == TargetType.SelfAndAllies && target && caster.team != target.team)
+                        target = null;
                 }
             }
             else
             {
-                // TODO - check alignment
                 target = caster.target;
+                if (target && target.team == caster.team)
+                    target = null;
             }
 
             return target;

@@ -15,6 +15,7 @@ namespace RPG
         public float energy;
         public Sprite portrait;
         public string characterName;
+        public int team = 2;
         public Power[] powers;
 
         public enum BodyPart

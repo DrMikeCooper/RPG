@@ -89,16 +89,14 @@ namespace RPG
             if (character)
             {
                 character.onStatusChanged.AddListener(UpdateIcons);
+                if (portrait)
+                    portrait.sprite = character.portrait;
+                if (characterName)
+                    characterName.text = character.characterName;
             }
 
             gameObject.SetActive(character != null);
             UpdateIcons();
-
-            if (portrait)
-                portrait.sprite = character.portrait;
-            if (characterName)
-                characterName.text = character.characterName;
-                
         }
 
         // Update is called once per frame
