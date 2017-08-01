@@ -15,6 +15,14 @@ namespace RPG
             All
         };
 
+        public enum Animations
+        {
+            KickLeft,
+            KickRight,
+            PunchLeft,
+            PunchRight
+        };
+    
         public float energyCost;
         public float coolDown;
         public float range;
@@ -24,6 +32,7 @@ namespace RPG
         public Sprite icon;
         public RPGSettings.ColorCode color;
 
+        public Animations animation = Animations.PunchRight;
         public bool colorParticles = false;
         public ParticleSystem userParticles;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
@@ -74,6 +83,10 @@ namespace RPG
 
         protected void UsePower(Character caster)
         {
+            Animator animator = caster.GetComponent<Animator>();
+            animator.Play(animation.ToString());
+            
+
             caster.UsePower(this);
             AddParticles(userParticles, caster, userBodyPart);
             if (targetType!= TargetType.SelfOnly && caster.target && caster.target != caster)
