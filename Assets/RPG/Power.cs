@@ -26,7 +26,9 @@ namespace RPG
 
         public bool colorParticles = false;
         public ParticleSystem userParticles;
+        public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
         public ParticleSystem targetParticles;
+        public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         // TODO animation for the power
 
@@ -73,7 +75,7 @@ namespace RPG
         protected void UsePower(Character caster)
         {
             caster.UsePower(this);
-            AddParticles(userParticles, caster);
+            AddParticles(userParticles, caster, userBodyPart);
             if (targetType!= TargetType.SelfOnly && caster.target && caster.target != caster)
                 caster.transform.LookAt(caster.target.transform.position);
         }
@@ -88,17 +90,17 @@ namespace RPG
                 target.ApplyStatus(s);
 
             // particles on target
-            AddParticles(targetParticles, target);
+            AddParticles(targetParticles, target, targetBodyPart);
         }
 
-        public void AddParticles(ParticleSystem ps, Character ch)
+        public void AddParticles(ParticleSystem ps, Character ch, Character.BodyPart bodyPart)
         {
             // particles on target
             if (ps != null)
             {
                 GameObject go = Instantiate(ps.gameObject);
-                go.transform.parent = ch.transform;
-                go.transform.position = ch.transform.position;
+                go.transform.parent = ch.GetBodyPart(bodyPart);
+                go.transform.localPosition = Vector3.zero;
                 // make sure there's a lifespan on the particle effect
                 if (go.GetComponent<LifeSpan>() == null)
                     go.AddComponent<LifeSpan>().lifespan = 5;

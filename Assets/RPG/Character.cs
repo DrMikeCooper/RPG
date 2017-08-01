@@ -17,6 +17,20 @@ namespace RPG
         public string characterName;
         public Power[] powers;
 
+        public enum BodyPart
+        {
+            Root,
+            Head,
+            Chest,
+            LeftHand,
+            RightHand
+        }
+
+        public Transform head;
+        public Transform chest;
+        public Transform leftHand;
+        public Transform rightHand;
+
         [HideInInspector]
         public BeamRenderer beam;
 
@@ -235,5 +249,17 @@ namespace RPG
 
         public float GetHealthPct() { return health / maxHealth; }
         public float GetEnergyPct() { return energy / maxEnergy; }
+
+        public Transform GetBodyPart(BodyPart part)
+        {
+            switch (part)
+            {
+                case BodyPart.Head: return head; 
+                case BodyPart.Chest: return chest; 
+                case BodyPart.LeftHand: return leftHand;
+                case BodyPart.RightHand: return rightHand;
+                default: return transform;
+            }
+        }
     }
 }

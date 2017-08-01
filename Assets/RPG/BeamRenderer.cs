@@ -34,15 +34,15 @@ public class BeamRenderer : MonoBehaviour {
             timer -= Time.deltaTime;
             if (timer < 0)
                 lineRenderer.enabled = false;
+
+            // fade out at last 0.2 secs
+            Color col = lineRenderer.startColor;
+            col.a = timer * 5.0f;
+            lineRenderer.startColor = lineRenderer.endColor = col;
+
+            pts[0] = source.position;
+            pts[1] = target.position;
+            lineRenderer.SetPositions(pts);
         }
-
-        // fade out at last 0.2 secs
-        Color col = lineRenderer.startColor;
-        col.a = timer * 5.0f;
-        lineRenderer.startColor = lineRenderer.endColor = col;
-
-        pts[0] = source.position + 1.5f*Vector3.up;
-        pts[1] = target.position + 1.5f*Vector3.up;
-        lineRenderer.SetPositions(pts);
 	}
 }

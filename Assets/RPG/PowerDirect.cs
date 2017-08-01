@@ -25,7 +25,7 @@ namespace RPG
                 UsePower(caster);
                 Apply(target);
                 if (beamMaterial)
-                    caster.beam.Activate(caster.transform, target.transform, 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
+                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
             }
         }
     }
