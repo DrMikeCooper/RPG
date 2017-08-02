@@ -9,9 +9,10 @@ public class BeamRenderer : MonoBehaviour {
     Transform target;
     float timer;
     Vector3[] pts = new Vector3[2];
-    
-	// Use this for initialization
-	void Start () {
+    public float uvSpeed = 1.0f;
+
+    // Use this for initialization
+    void Start () {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
 	}
@@ -23,8 +24,14 @@ public class BeamRenderer : MonoBehaviour {
         source = src;
         target = tgt;
         lineRenderer.material = mat;
+        
         lineRenderer.startColor = lineRenderer.endColor = col;
         lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
+
+        // set UV titling to match distance
+        float distance = Vector3.Distance(src.position, tgt.position);
+        lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2*distance, 1));
+
     }
 
 	// Update is called once per frame
@@ -34,6 +41,8 @@ public class BeamRenderer : MonoBehaviour {
             timer -= Time.deltaTime;
             if (timer < 0)
                 lineRenderer.enabled = false;
+
+            lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer*uvSpeed, 0));
 
             // fade out at last 0.2 secs
             Color col = lineRenderer.startColor;

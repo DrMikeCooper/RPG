@@ -10,6 +10,7 @@ namespace RPG
     {
         public Material beamMaterial;
         public float beamWidth = 0.5f;
+        public float beamUVSpeed = 1.0f;
 
         // useable on a single target with no to-hit roll
         public override void OnActivate(Character caster)
@@ -25,7 +26,10 @@ namespace RPG
                 UsePower(caster);
                 Apply(target);
                 if (beamMaterial)
+                {
                     caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
+                    caster.beam.uvSpeed = beamUVSpeed;
+                }
             }
         }
     }
