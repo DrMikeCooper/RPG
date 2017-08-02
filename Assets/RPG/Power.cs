@@ -98,7 +98,7 @@ namespace RPG
         }
 
         // apply this power to a particular target
-        protected void Apply(Character target)
+        public void Apply(Character target)
         {
             float damage = Random.Range(minDamage, maxDamage);
             if (damage != 0)

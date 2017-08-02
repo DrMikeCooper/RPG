@@ -59,6 +59,8 @@ namespace RPG
             End
         };
 
+        public GameObject projectile;
+
         public Color[] colors = new Color[(int)ColorCode.End];
 
         public static Color GetColor(ColorCode cc)
