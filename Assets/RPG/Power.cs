@@ -44,6 +44,7 @@ namespace RPG
         public float minDamage;
         public float maxDamage;
         public Status[] effects;
+        public float statusDuration = 10;
 
         public bool CanUse(Character caster)
         {
@@ -103,7 +104,7 @@ namespace RPG
             if (damage != 0)
                 target.ApplyDamage(damage, type);
             foreach (Status s in effects)
-                target.ApplyStatus(s);
+                target.ApplyStatus(s, statusDuration);
 
             // particles on target
             AddParticles(targetParticles, target, targetBodyPart);

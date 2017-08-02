@@ -5,8 +5,10 @@ namespace RPG
 {
     public abstract class Status : ScriptableObject
     {
+        [HideInInspector]
         public float duration;
         public ParticleSystem particles;
+        public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
         public RPGSettings.ColorCode color;
 

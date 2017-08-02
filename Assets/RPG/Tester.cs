@@ -40,7 +40,7 @@ namespace RPG
             for (int i = 0; i < tests.Length; i++)
             {
                 if (Input.GetKeyDown(tests[i].key))
-                    character.ApplyStatus(tests[i].status);
+                    character.ApplyStatus(tests[i].status, 20);
             }
         }
     }

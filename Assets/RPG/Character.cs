@@ -231,9 +231,10 @@ namespace RPG
             }
         }
 
-        public void ApplyStatus(Status s)
+        public void ApplyStatus(Status s, float duration)
         {
             Status status = Instantiate(s) as Status;
+            status.duration = duration; // TODO modify with debuff resistance?
             statusEffects.Add(status);
             statusDirty = true;
         }

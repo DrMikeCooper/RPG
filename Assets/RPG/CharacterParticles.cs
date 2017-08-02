@@ -39,7 +39,7 @@ namespace RPG
                     {
                         GameObject obj = Instantiate(particles.gameObject);
                         ParticleSystem system = obj.GetComponent<ParticleSystem>();
-                        obj.transform.parent = transform;
+                        obj.transform.parent = character.GetBodyPart(s.bodyPart);
                         obj.transform.localPosition = Vector3.zero;
                         obj.name = "Particles_" + pair.Key;
                         system.startColor = RPGSettings.GetColor(s.color); // figure this out...
