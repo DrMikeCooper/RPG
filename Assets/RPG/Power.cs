@@ -93,8 +93,11 @@ namespace RPG
 
             caster.UsePower(this);
             AddParticles(userParticles, caster, userBodyPart);
-            if (targetType!= TargetType.SelfOnly && caster.target && caster.target != caster)
+            if (targetType != TargetType.SelfOnly && caster.target && caster.target != caster)
+            {
                 caster.transform.LookAt(caster.target.transform.position);
+                caster.transform.eulerAngles = new Vector3(0, caster.transform.eulerAngles.y, 0);
+            }
         }
 
         // apply this power to a particular target
