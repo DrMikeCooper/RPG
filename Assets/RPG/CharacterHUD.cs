@@ -129,26 +129,29 @@ namespace RPG
                 foreach (KeyValuePair<string, Status> pair in character.groupedEffects)
                 {
                     Status s = pair.Value;
-                    GameObject ike = Instantiate(icon);
-                    ike.SetActive(true);
-                    ike.transform.SetParent(transform);
-                    RectTransform rect = ike.GetComponent<RectTransform>();
-                    rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
-                    offsetX += 18; //todo
-                    name = s.name;
-                    icons[name] = ike;
-                    ike.name = name;
-
-                    // copy the colour and image from global settings
-                    ike.GetComponent<Image>().color = RPGSettings.GetColor(s.color);
-                    ike.GetComponent<Image>().sprite = s.icon;
-
-                    Transform counter = ike.transform.Find("Counter");
-                    if (counter)
+                    if (s.icon != null)
                     {
-                        counter.gameObject.SetActive(s.count > 1);
-                        Text text = counter.GetComponent<Text>();
-                        text.text = "" + s.count;
+                        GameObject ike = Instantiate(icon);
+                        ike.SetActive(true);
+                        ike.transform.SetParent(transform);
+                        RectTransform rect = ike.GetComponent<RectTransform>();
+                        rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
+                        offsetX += 18; //todo
+                        name = s.name;
+                        icons[name] = ike;
+                        ike.name = name;
+
+                        // copy the colour and image from global settings
+                        ike.GetComponent<Image>().color = RPGSettings.GetColor(s.color);
+                        ike.GetComponent<Image>().sprite = s.icon;
+
+                        Transform counter = ike.transform.Find("Counter");
+                        if (counter)
+                        {
+                            counter.gameObject.SetActive(s.count > 1);
+                            Text text = counter.GetComponent<Text>();
+                            text.text = "" + s.count;
+                        }
                     }
                 }
             }

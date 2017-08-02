@@ -24,13 +24,17 @@ namespace RPG
             Head,
             Chest,
             LeftHand,
-            RightHand
+            RightHand,
+            LeftFoot,
+            RightFoot
         }
 
         public Transform head;
         public Transform chest;
         public Transform leftHand;
         public Transform rightHand;
+        public Transform leftFoot;
+        public Transform rightFoot;
 
         [HideInInspector]
         public BeamRenderer beam;
@@ -260,6 +264,8 @@ namespace RPG
                 case BodyPart.Chest: return chest; 
                 case BodyPart.LeftHand: return leftHand;
                 case BodyPart.RightHand: return rightHand;
+                case BodyPart.LeftFoot: return leftFoot;
+                case BodyPart.RightFoot: return rightFoot;
                 default: return transform;
             }
         }
