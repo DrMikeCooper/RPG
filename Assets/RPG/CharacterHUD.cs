@@ -137,7 +137,6 @@ namespace RPG
                         RectTransform rect = ike.GetComponent<RectTransform>();
                         rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
                         offsetX += 18; //todo
-                        name = s.name;
                         icons[name] = ike;
                         ike.name = name;
 

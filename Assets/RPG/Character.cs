@@ -9,6 +9,9 @@ namespace RPG
     // class representing a character, with health, and status effects applied to them
     public class Character : MonoBehaviour
     {
+        public Vector3 rootPos;
+        public Vector3 headPos;
+
         public float maxHealth = 100;
         public float maxEnergy = 100;
         public float health;
@@ -148,6 +151,9 @@ namespace RPG
                         coolDowns[i] = 0;
                 }
             }
+
+            rootPos = GetBodyPart(BodyPart.Root).position;
+            headPos = GetBodyPart(BodyPart.Head).position;
         }
 
         // returns 1 for fully recharged, 0 for just used
@@ -245,6 +251,7 @@ namespace RPG
         public void ApplyStatus(Status s, float duration)
         {
             Status status = Instantiate(s) as Status;
+            status.name = s.name;
             status.duration = duration; // TODO modify with debuff resistance?
             statusEffects.Add(status);
             statusDirty = true;
