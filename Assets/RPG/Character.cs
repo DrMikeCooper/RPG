@@ -226,9 +226,16 @@ namespace RPG
         public void ApplyDamage(float damage, RPGSettings.DamageType dt)
         {
             // apply damage resistance
-            damage *= 100.0f / (100.0f + stats[RPGSettings.GetResistanceStat(dt)].currentValue);
+            damage *= GetFactor(-stats[RPGSettings.GetResistanceStat(dt)].currentValue);
 
             health -= damage;
+
+            NumberFloater numbers = RPGSettings.instance.GetNumberFloater();
+            if (numbers)
+            {
+                numbers.Activate(GetBodyPart(BodyPart.Head), damage);
+            }
+
             if (health < 0)
             {
                 // die!

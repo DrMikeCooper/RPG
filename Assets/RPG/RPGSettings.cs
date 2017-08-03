@@ -12,6 +12,8 @@ namespace RPG
         [HideInInspector]
         public static RPGSettings instance; // singleton accessor
 
+        public ObjectPool numbersPool;
+
         public enum DamageType
         {
             Crushing = 1,
@@ -100,6 +102,15 @@ namespace RPG
                 return DamageType.Magic;
             return dt;
         }
+
+        public NumberFloater GetNumberFloater()
+        {
+            GameObject go = numbersPool.GetObject();
+            if (go)
+                return go.GetComponent<NumberFloater>();
+            return null;
+        }
+
 
         public static string GetResistanceStat(DamageType dt) { return dt.ToString() + StatName.Res.ToString(); }
         public static string GetDefenceStat(DamageType dt) { return dt.ToString() + StatName.Def.ToString(); }

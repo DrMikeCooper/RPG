@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6d2cb461bdf9af8489ce957c9c1cb05c
+timeCreated: 1501757054
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Chickweed Titling
+  fontNames:
+  - Chickweed Titling
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
