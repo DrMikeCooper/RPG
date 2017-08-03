@@ -24,6 +24,7 @@ namespace RPG
             gameObject.SetActive(true);
             timer = 0;
             transform.position = t.position;
+            Debug.Log("NumberFloater @" + t.position.ToString());
             if (amount > 0)
             {
                 textMesh.text = "" + (int)(amount);
@@ -40,7 +41,6 @@ namespace RPG
         void Update()
         {
             timer += Time.deltaTime;
-            Debug.Log(Time.deltaTime);
             transform.position += Vector3.up * Time.deltaTime * 3;
             float alpha = 3.0f - timer;
             if (alpha < 1)

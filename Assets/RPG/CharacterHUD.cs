@@ -137,8 +137,8 @@ namespace RPG
                         RectTransform rect = ike.GetComponent<RectTransform>();
                         rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
                         offsetX += 18; //todo
-                        icons[name] = ike;
-                        ike.name = name;
+                        icons[s.name] = ike;
+                        ike.name = s.name;
 
                         // copy the colour and image from global settings
                         ike.GetComponent<Image>().color = RPGSettings.GetColor(s.color);
