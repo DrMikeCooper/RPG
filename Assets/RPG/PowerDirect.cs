@@ -32,5 +32,48 @@ namespace RPG
                 }
             }
         }
+
+        public override float Evaluate(NPCPowers npc)
+        {
+            Character caster = npc.character;
+
+            npcTarget = null;
+            float bestEval = 0;
+            foreach (Character ch in getAll())
+            {
+                if (ch != caster && ch.team != caster.team)
+                {
+                    float eval = 1; // TODO
+                    if (eval > bestEval)
+                    {
+                        bestEval = eval;
+                        npcTarget = ch;
+                    }
+                }
+            }
+
+            return bestEval;
+        }
+
+
+        public override void UpdateAction(NPCPowers npc)
+        {
+            Character caster = npc.character;
+            Character target = npc.target;
+            caster.target = target;
+
+            float distance = Vector3.Distance(caster.transform.position, target.transform.position);
+            if (distance > range)
+            {
+                npc.MoveTo(target.transform);
+                npc.timer = 1;
+            }
+            else
+            {
+                npc.MoveTo(caster.transform);
+                OnActivate(caster);
+                npc.timer = 3; // TODO
+            }
+        }
     }
 }

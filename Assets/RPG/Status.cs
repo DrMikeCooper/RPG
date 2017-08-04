@@ -29,6 +29,6 @@ namespace RPG
 
         public abstract void Apply(Character ch);
         public virtual bool isImmediate() { return false; } // true if the status applies instantly
-        public virtual void Update(Character ch) {}
+        public virtual void UpdateStatus(Character ch) {}
     }
 }

@@ -9,15 +9,6 @@ namespace RPG
     {
         public float radius;
 
-        // utility stuff for storing all characters. TODO Review this.
-        static Character[] allCharacters;
-        static Character[] getAll()
-        {
-            if (allCharacters == null)
-                allCharacters = FindObjectsOfType<Character>();
-            return allCharacters;
-        }
-
         public override void OnActivate(Character caster)
         {
             // check standard cooldown, energy cost etc

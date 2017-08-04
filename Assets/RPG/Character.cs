@@ -143,7 +143,7 @@ namespace RPG
                     deathRow.Add(status);
                     statusDirty = true;
                 }
-                status.Update(this);
+                status.UpdateStatus(this);
             }
             foreach (Status d in deathRow)
                 statusEffects.Remove(d);

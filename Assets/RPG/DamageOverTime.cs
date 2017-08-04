@@ -19,7 +19,7 @@ namespace RPG
         {
         }
 
-        public override void Update(Character ch)
+        public override void UpdateStatus(Character ch)
         {
             if (timer > nextTick)
             {

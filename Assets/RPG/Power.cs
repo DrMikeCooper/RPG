@@ -54,7 +54,7 @@ namespace RPG
             if (caster.energy < energyCost)
                 return false;
 
-            if (range > 0 && targetParticles != null && Vector3.Distance(caster.transform.position, targetParticles.transform.position) > range)
+            if (range > 0 && caster.target != null && Vector3.Distance(caster.transform.position, caster.target.transform.position) > range)
                 return false;
 
             return true;
@@ -131,5 +131,22 @@ namespace RPG
 
         public abstract void OnActivate(Character caster);
 
+        // utility stuff for storing all characters. TODO Review this.
+        static Character[] allCharacters;
+        protected static Character[] getAll()
+        {
+            if (allCharacters == null)
+                allCharacters = FindObjectsOfType<Character>();
+            return allCharacters;
+        }
+
+        [HideInInspector]
+        public Character npcTarget;
+
+        // AI Action functions
+        public virtual float Evaluate(NPCPowers npc) { return 0; }
+        public virtual void Enter(NPCPowers npc) { }
+        public virtual void Exit(NPCPowers npc) { }
+        public virtual void UpdateAction(NPCPowers npc) { }
     }
 }
