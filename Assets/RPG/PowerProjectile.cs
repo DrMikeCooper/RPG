@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerProjectile", menuName = "RPG/PowerProjectile", order = 1)]
+    [CreateAssetMenu(fileName = "PowerProjectile", menuName = "RPG/PowerProjectile", order = 2)]
     public class PowerProjectile : Power
     {
         public float speed = 1;

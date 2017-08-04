@@ -113,6 +113,21 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            // update dictionary for dynamic power swapping
+            for (int i = 0; i < powers.Length; i++)
+            {
+                powerIndexes[powers[i]] = i;
+            }
+
+            // resize coolDowns array while preserving dat if we add a power at runtime
+            if (coolDowns.Length < powers.Length)
+            {
+                float[] cds = new float[powers.Length];
+                for (int i = 0; i < coolDowns.Length; i++)
+                    cds[i] = coolDowns[i];
+                coolDowns = cds;
+            }
+
             // update out stats if we've lost/gained a status effect
             if (statusDirty)
                 ProcessStatus();
@@ -250,11 +265,20 @@ namespace RPG
 
         public void ApplyStatus(Status s, float duration)
         {
-            Status status = Instantiate(s) as Status;
-            status.name = s.name;
-            status.duration = duration; // TODO modify with debuff resistance?
-            statusEffects.Add(status);
-            statusDirty = true;
+            if (s.isImmediate() == false)
+            {
+                // status with a duration - add to chracter's queue
+                Status status = Instantiate(s) as Status;
+                status.name = s.name;
+                status.duration = duration; // TODO modify with debuff resistance?
+                statusEffects.Add(status);
+                statusDirty = true;
+            }
+            else
+            {
+                // apply immediately once
+                s.Apply(this);
+            }
         }
 
         public void UseEnergy(float e)

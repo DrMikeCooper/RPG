@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerDirect", order = 1)]
+    [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerDirect", order = 2)]
     public class PowerDirect : Power
     {
         public Material beamMaterial;

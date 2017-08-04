@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerArea", order = 1)]
+    [CreateAssetMenu(fileName = "PowerArea", menuName = "RPG/PowerArea", order = 2)]
     public class PowerArea : Power
     {
         public float radius;
@@ -27,10 +27,15 @@ namespace RPG
             // energy and cooldowns
             UsePower(caster);
 
+            Explode(caster.transform, caster);
+        }
+
+        public void Explode(Transform centre, Character caster)
+        {
             // check all other characters within the radius
             foreach (Character ch in getAll())
             {
-                if (ch != caster && Vector3.Distance(ch.transform.position, caster.transform.position) < radius)
+                if (ch != caster && Vector3.Distance(ch.transform.position, centre.position) < radius)
                 {
                     Apply(ch);
                 }
