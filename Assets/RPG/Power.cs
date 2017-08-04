@@ -39,8 +39,6 @@ namespace RPG
         public ParticleSystem targetParticles;
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
-        // TODO animation for the power
-
         public float minDamage;
         public float maxDamage;
         public Status[] effects;
@@ -121,6 +119,7 @@ namespace RPG
                 GameObject go = Instantiate(ps.gameObject);
                 go.transform.parent = ch.GetBodyPart(bodyPart);
                 go.transform.localPosition = Vector3.zero;
+                go.gameObject.name = ps.gameObject.name;
                 // make sure there's a lifespan on the particle effect
                 if (go.GetComponent<LifeSpan>() == null)
                     go.AddComponent<LifeSpan>().lifespan = 5;
@@ -138,6 +137,29 @@ namespace RPG
             if (allCharacters == null)
                 allCharacters = FindObjectsOfType<Character>();
             return allCharacters;
+        }
+
+        // how many seconds will it take us to kill this character?
+        protected float timeToDeath(Character caster, Character target)
+        {
+            float recharge = 3;
+            float time = 0;
+            float speed = 5;
+
+            // time to get in range
+            float distance = Vector3.Distance(caster.transform.position, target.transform.position);
+            if (distance > range)
+                time += distance / speed;
+
+            // plaus time to kill
+            if (maxDamage > 0)
+            {
+                time += target.health * recharge / ((minDamage + maxDamage) * 0.5f);
+            }
+            else
+                time += 10.0f; // assume non-damage powers do something better else?
+
+            return time;
         }
 
         [HideInInspector]

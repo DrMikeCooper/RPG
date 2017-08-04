@@ -7,7 +7,6 @@ namespace RPG
     public class TabTarget : MonoBehaviour
     {
         Character[] targets;
-        public CharacterHUD hud;
         int index = -1;
         public GameObject reticle;
         Character user;
@@ -28,7 +27,6 @@ namespace RPG
                 index++;
                 if (index >= targets.Length)
                     index = 0;
-                hud.SetCharacter(GetTarget());
                 reticle.SetActive(true);
             }
 
@@ -47,7 +45,6 @@ namespace RPG
                 {
                     Character ch = info.collider.GetComponent<Character>();
                     index = GetIndex(ch);
-                    hud.SetCharacter(ch);
                     reticle.SetActive(index != -1);
                 }
             }

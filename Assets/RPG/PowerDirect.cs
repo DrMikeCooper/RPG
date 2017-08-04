@@ -43,7 +43,7 @@ namespace RPG
             {
                 if (ch != caster && ch.team != caster.team)
                 {
-                    float eval = 1; // TODO
+                    float eval = 100.0f / timeToDeath(caster, ch);
                     if (eval > bestEval)
                     {
                         bestEval = eval;
@@ -55,7 +55,6 @@ namespace RPG
             return bestEval;
         }
 
-
         public override void UpdateAction(NPCPowers npc)
         {
             Character caster = npc.character;
@@ -66,7 +65,7 @@ namespace RPG
             if (distance > range)
             {
                 npc.MoveTo(target.transform);
-                npc.timer = 1;
+                npc.timer = 0.5f;
             }
             else
             {

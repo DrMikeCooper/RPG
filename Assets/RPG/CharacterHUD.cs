@@ -11,6 +11,7 @@ namespace RPG
     {
         // the character this displays info for
         public Character character;
+        public CharacterHUD myTarget;
 
         // inner class that represents any kind of meter
         class Bar
@@ -106,6 +107,12 @@ namespace RPG
             {
                 healthBar.Update(character.GetHealthPct());
                 energyBar.Update(character.GetEnergyPct());
+            }
+            if (myTarget != null)
+            {
+                Character tgt = character == null ? null : character.target;
+                if (myTarget.character != tgt)
+                    myTarget.SetCharacter(tgt);
             }
         }
 
