@@ -24,11 +24,13 @@ namespace RPG
             Negative = 32,
             Psionic = 64,
             Magic = 128,
-            Physical = Crushing | Piercing,
+            Toxic = 256,
+            Physical = Crushing | Piercing | Toxic,
             Elemental = Fire | Cold | Energy,
             Paranormal = Negative | Psionic | Magic,
             All = Physical | Elemental | Paranormal
         };
+        public const int BasicDamageTypesCount = 9; 
 
         public enum StatName
         {
@@ -58,12 +60,12 @@ namespace RPG
             Physical,
             Elemental,
             Paranormal,
-            End
+            Custom
         };
 
         public GameObject projectile;
 
-        public Color[] colors = new Color[(int)ColorCode.End];
+        public Color[] colors = new Color[(int)ColorCode.Custom];
 
         public static Color GetColor(ColorCode cc)
         {

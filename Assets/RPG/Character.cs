@@ -73,7 +73,7 @@ namespace RPG
             statusEffects = new List<Status>();
             groupedEffects = new Dictionary<string, Status>();
 
-            for (int i=0; i<8; i++)
+            for (int i=0; i<RPGSettings.BasicDamageTypesCount; i++)
             {
                 stats[RPGSettings.GetResistanceStat((RPGSettings.DamageType)(1 << i))] = new Stat();
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
@@ -141,9 +141,9 @@ namespace RPG
                 if (status.isEnded())
                 {
                     deathRow.Add(status);
-                   
                     statusDirty = true;
                 }
+                status.Update(this);
             }
             foreach (Status d in deathRow)
                 statusEffects.Remove(d);
