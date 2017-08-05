@@ -13,40 +13,6 @@ namespace RPG
         public Character character;
         public CharacterHUD myTarget;
 
-        // inner class that represents any kind of meter
-        class Bar
-        {
-            RectTransform meter;
-            Rect initialRect;
-            string name;
-
-            public Bar(string n) { name = n; }
-
-            public void Init(RectTransform child)
-            {
-                if (child.name == name)
-                {
-                    meter = child;
-                    initialRect = meter.rect;
-                }
-            }
-
-            public void Update(float pct)
-            {
-                if (meter)
-                {
-                    meter.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pct * initialRect.width);
-                    Vector3 pos = meter.localPosition;
-                    pos.x = 0.5f * (pct-1.0f) * initialRect.width;
-                    meter.localPosition = pos;
-                }
-            }
-        };
-    
-        // sub-components to manipulate
-        Bar healthBar = new Bar("HealthBar");
-        Bar energyBar = new Bar("EnergyBar");
-
         // the icon template set up in the editor
         GameObject icon;
         Text characterName;
@@ -61,8 +27,6 @@ namespace RPG
             RectTransform[] children = GetComponentsInChildren<RectTransform>();
             foreach (RectTransform child in children)
             {
-                healthBar.Init(child);
-                energyBar.Init(child);
                 if (child.name == "Name")
                     characterName = child.GetComponent<Text>();
                 if (child.name == "Portrait")
@@ -103,11 +67,6 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            if (character != null)
-            {
-                healthBar.Update(character.GetHealthPct());
-                energyBar.Update(character.GetEnergyPct());
-            }
             if (myTarget != null)
             {
                 Character tgt = character == null ? null : character.target;

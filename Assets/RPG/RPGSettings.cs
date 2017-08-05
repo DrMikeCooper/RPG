@@ -37,13 +37,13 @@ namespace RPG
             Res,
             Dam,
             Def, // this is the last composite one, check Buff.Apply to see how its used
-            Health,
-            Energy,
             EnergyRegen,
             HealthRegen,
             Speed,
             Jump,
             Recharge,
+            Health,
+            Energy,
         }
 
 

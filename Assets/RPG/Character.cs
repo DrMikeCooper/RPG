@@ -14,17 +14,21 @@ namespace RPG
 
         public float maxHealth = 100;
         public float maxEnergy = 100;
+
+        Stat healthStat;
+        Stat energyStat;
+
         public float health
         {
             get
             {
                 //Some other code
-                return stats[RPGSettings.StatName.Health.ToString()].baseValue;
+                return healthStat.baseValue;
             }
             set
             {
                 //Some other code
-                stats[RPGSettings.StatName.Health.ToString()].baseValue = value;
+                healthStat.baseValue = healthStat.currentValue = value;
             }
         }
         public float energy
@@ -32,12 +36,12 @@ namespace RPG
             get
             {
                 //Some other code
-                return stats[RPGSettings.StatName.Energy.ToString()].baseValue;
+                return energyStat.baseValue;
             }
             set
             {
                 //Some other code
-                stats[RPGSettings.StatName.Energy.ToString()].baseValue = value;
+                energyStat.baseValue = energyStat.currentValue = value;
             }
         }
         public Sprite portrait;
@@ -103,8 +107,8 @@ namespace RPG
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
-            stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth);
-            stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy);
+            healthStat = stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth);
+            energyStat = stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy);
             stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
             stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
             stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
