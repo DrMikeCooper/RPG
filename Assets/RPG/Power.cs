@@ -50,6 +50,7 @@ namespace RPG
 
         public Animations animation = Animations.PunchRight;
         public bool colorParticles = false;
+
         public ParticleSystem userParticles;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
         public ParticleSystem targetParticles;
@@ -151,11 +152,16 @@ namespace RPG
 
         public void AddParticles(ParticleSystem ps, Character ch, Character.BodyPart bodyPart)
         {
+            AddParticles(ps, ch.GetBodyPart(bodyPart));
+        }
+
+        public void AddParticles(ParticleSystem ps, Transform t)
+        {
             // particles on target
             if (ps != null)
             {
                 GameObject go = Instantiate(ps.gameObject);
-                go.transform.parent = ch.GetBodyPart(bodyPart);
+                go.transform.parent = t;
                 go.transform.localPosition = Vector3.zero;
                 go.gameObject.name = ps.gameObject.name;
                 // make sure there's a lifespan on the particle effect
