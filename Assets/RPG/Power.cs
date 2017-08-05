@@ -265,6 +265,16 @@ namespace RPG
                     caster.energy -= energyCost * Time.deltaTime;
                     if (caster.energy == 0)
                         OnEnd(caster);
+                    if (timer >= nextTick)
+                    {
+                        nextTick += tick;
+                        foreach (Status s in effects)
+                        {
+                            Explosion ex = s as Explosion;
+                            if (ex)
+                                ex.Apply(caster);
+                        }
+                    }
                     break;
             }
         }
@@ -290,7 +300,8 @@ namespace RPG
                 case Mode.Block:
                     if (blockParticles)
                         Destroy(blockParticles);
-                        //blockParticles.AddComponent<LifeSpanFader>();
+                    //blockParticles.AddComponent<LifeSpanFader>();
+                    blockParticles = null;
                     caster.statusDirty = true;
                     break;
             }

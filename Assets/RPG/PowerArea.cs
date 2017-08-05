@@ -20,7 +20,7 @@ namespace RPG
         public void Explode(Transform centre, Character caster)
         {
             AddParticles(explodeParticles == null ? userParticles : explodeParticles, centre);
-            float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+            float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
             // check all other characters within the radius
             foreach (Character ch in getAll())
             {

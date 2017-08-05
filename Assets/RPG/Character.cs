@@ -252,16 +252,20 @@ namespace RPG
             {
                 foreach (Status status in activePower.effects)
                 {
-                    // reset all stats to their base values
-                    status.Apply(this);
-                    if (groupedEffects.ContainsKey(status.name))
+                    Buff buff = status as Buff;
+                    if (buff)
                     {
-                        groupedEffects[status.name].count++;
-                    }
-                    else
-                    {
-                        groupedEffects[status.name] = status;
-                        groupedEffects[status.name].count = 1;
+                        // reset all stats to their base values
+                        status.Apply(this);
+                        if (groupedEffects.ContainsKey(status.name))
+                        {
+                            groupedEffects[status.name].count++;
+                        }
+                        else
+                        {
+                            groupedEffects[status.name] = status;
+                            groupedEffects[status.name].count = 1;
+                        }
                     }
                 }
 
