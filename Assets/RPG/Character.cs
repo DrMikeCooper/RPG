@@ -14,8 +14,32 @@ namespace RPG
 
         public float maxHealth = 100;
         public float maxEnergy = 100;
-        public float health;
-        public float energy;
+        public float health
+        {
+            get
+            {
+                //Some other code
+                return stats[RPGSettings.StatName.Health.ToString()].baseValue;
+            }
+            set
+            {
+                //Some other code
+                stats[RPGSettings.StatName.Health.ToString()].baseValue = value;
+            }
+        }
+        public float energy
+        {
+            get
+            {
+                //Some other code
+                return stats[RPGSettings.StatName.Energy.ToString()].baseValue;
+            }
+            set
+            {
+                //Some other code
+                stats[RPGSettings.StatName.Energy.ToString()].baseValue = value;
+            }
+        }
         public Sprite portrait;
         public string characterName;
         public int team = 2;
@@ -79,15 +103,13 @@ namespace RPG
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
-            // health and energy regeneration multipliers
+            stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth);
+            stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy);
             stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
             stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
             stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
             stats[RPGSettings.StatName.Speed.ToString()] = new Stat();
             stats[RPGSettings.StatName.Recharge.ToString()] = new Stat();
-
-            health = maxHealth;
-            energy = maxEnergy;
 
             RPGSettings.instance.SetupCharacter(this);
 
