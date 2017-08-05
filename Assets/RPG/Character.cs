@@ -28,7 +28,7 @@ namespace RPG
             set
             {
                 //Some other code
-                healthStat.baseValue = healthStat.currentValue = value;
+                healthStat.baseValue = healthStat.currentValue = Mathf.Clamp(value, 0, maxHealth);
             }
         }
         public float energy
@@ -41,13 +41,15 @@ namespace RPG
             set
             {
                 //Some other code
-                energyStat.baseValue = energyStat.currentValue = value;
+                energyStat.baseValue = energyStat.currentValue = Mathf.Clamp(value, 0, maxEnergy);
             }
         }
         public Sprite portrait;
         public string characterName;
         public int team = 2;
         public Power[] powers;
+        [HideInInspector]
+        public Power activePower;
 
         public enum BodyPart
         {
@@ -107,13 +109,17 @@ namespace RPG
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
-            healthStat = stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth);
-            energyStat = stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy);
+            stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
+            stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy, false);
             stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
             stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
             stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
             stats[RPGSettings.StatName.Speed.ToString()] = new Stat();
             stats[RPGSettings.StatName.Recharge.ToString()] = new Stat();
+            stats[RPGSettings.StatName.Charge.ToString()] = new Stat(0, false);
+
+            healthStat = stats[RPGSettings.StatName.Health.ToString()];
+            energyStat = stats[RPGSettings.StatName.Energy.ToString()];
 
             RPGSettings.instance.SetupCharacter(this);
 
@@ -217,7 +223,8 @@ namespace RPG
         void ProcessStatus()
         {
             foreach (KeyValuePair<string,Stat> s in stats)
-                s.Value.modifier = 0;
+                if (s.Value.isBuff)
+                    s.Value.modifier = 0;
 
             groupedEffects.Clear();
 

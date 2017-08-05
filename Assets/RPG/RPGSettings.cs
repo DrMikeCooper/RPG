@@ -44,6 +44,7 @@ namespace RPG
             Recharge,
             Health,
             Energy,
+            Charge,
         }
 
 

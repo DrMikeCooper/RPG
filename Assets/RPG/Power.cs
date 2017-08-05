@@ -15,6 +15,14 @@ namespace RPG
             All
         };
 
+        public enum Mode
+        {
+            Instant,
+            Charge,
+            Maintain,
+            Block
+        };
+    
         public enum Animations
         {
             KickLeft,
@@ -28,6 +36,10 @@ namespace RPG
         public float range;
         public RPGSettings.DamageType type;
         public TargetType targetType;
+        public Mode mode = Mode.Instant;
+        [Tooltip("How long the power lasts if its a charge or maintain")]
+        public float duration;
+        float timer;
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
@@ -125,6 +137,75 @@ namespace RPG
                     go.AddComponent<LifeSpan>().lifespan = 5;
                 if (colorParticles)
                     go.GetComponent<ParticleSystem>().startColor = RPGSettings.GetColor(color);
+            }
+        }
+
+        public void OnStart(Character caster)
+        {
+            caster.activePower = this;
+            switch (mode)
+            {
+                case Mode.Instant:
+                    break;
+                case Mode.Charge:
+                    break;
+                case Mode.Maintain:
+                    break;
+                case Mode.Block:
+                    break;
+            }
+            timer = 0;
+        }
+
+        public void OnUpdate(Character caster)
+        {
+            timer += Time.deltaTime;
+            switch (mode)
+            {
+                case Mode.Instant:
+                    break;
+                case Mode.Charge:
+                    {
+                        float charge = (100.0f * timer) / duration;
+                        if (charge > 100)
+                        {
+                            charge = 100;
+                        }
+                        caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
+                        if (charge >= 100)
+                            OnEnd(caster);
+                        break;
+                    }
+                case Mode.Maintain:
+                    {
+                        float charge = 100.0f * (1.0f - (timer / duration));
+                        caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
+                        OnActivate(caster);
+                        break;
+                    }
+                case Mode.Block:
+                    break;
+            }
+        }
+
+        public void OnEnd(Character caster)
+        {
+            caster.activePower = null;
+
+            switch (mode)
+            {
+                case Mode.Instant:
+                    OnActivate(caster);
+                    break;
+                case Mode.Charge:
+                    OnActivate(caster);
+                    caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
+                    break;
+                case Mode.Maintain:
+                    caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
+                    break;
+                case Mode.Block:
+                    break;
             }
         }
 

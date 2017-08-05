@@ -20,9 +20,15 @@ namespace RPG
             KeyCode key = KeyCode.Alpha1;
             foreach (Power p in character.powers)
             {
-                if (Input.GetKeyDown(key))
-                    p.OnActivate(character);
+                if (Input.GetKeyDown(key) && character.activePower == null)
+                    p.OnStart(character);
+                if (Input.GetKeyUp(key) && character.activePower == p)
+                    p.OnEnd(character);
                 key++;
+            }
+            if (character.activePower)
+            {
+                character.activePower.OnUpdate(character);
             }
         }
     }

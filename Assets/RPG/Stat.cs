@@ -6,7 +6,7 @@ namespace RPG
     public class Stat
     {
         public Stat() { }
-        public Stat(float val) { baseValue = val; }
+        public Stat(float val, bool buff = true) { baseValue = val; isBuff = buff; }
 
         // base value derived from the character and their gear
         public float baseValue = 0;
@@ -14,6 +14,8 @@ namespace RPG
         public float modifier = 0;
         // the current calculated value based on the modifier
         public float currentValue = 0;
+
+        public bool isBuff = true;
 
         public void addModifier(float delta)
         {
