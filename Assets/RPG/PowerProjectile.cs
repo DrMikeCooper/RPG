@@ -11,13 +11,6 @@ namespace RPG
         public ParticleSystem projectileParticles;
         public override void OnActivate(Character caster)
         {
-            // check standard cooldown, energy cost etc
-            if (!CanUse(caster))
-                return;
-
-            // energy and cooldowns
-            UsePower(caster);
-
             // spawn a projectile and set it going in the right direction
             GameObject go = Instantiate(RPGSettings.instance.projectile);
             go.transform.position = caster.GetBodyPart(userBodyPart).position;

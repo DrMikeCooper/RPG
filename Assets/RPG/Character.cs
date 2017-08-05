@@ -51,6 +51,8 @@ namespace RPG
         [HideInInspector]
         public Power activePower;
 
+        Animator animator;
+
         public enum BodyPart
         {
             Root,
@@ -140,6 +142,8 @@ namespace RPG
             {
                 beam = beamChild.GetComponent<BeamRenderer>();
             }
+
+            animator = GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -216,7 +220,6 @@ namespace RPG
 
         public void UsePower(Power p)
         {
-            energy -= p.energyCost;
             coolDowns[powerIndexes[p]] = p.coolDown;
         }
 
@@ -339,6 +342,18 @@ namespace RPG
                 case BodyPart.RightFoot: return rightFoot;
                 default: return transform;
             }
+        }
+
+        // Animation functions
+        public void PlayAnim(string name)
+        {
+            animator.Play(name);
+            ReleaseAnim(false);
+        }
+
+        public void ReleaseAnim(bool release)
+        {
+            animator.SetBool("release", release);
         }
     }
 }

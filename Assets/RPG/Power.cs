@@ -37,9 +37,13 @@ namespace RPG
         public RPGSettings.DamageType type;
         public TargetType targetType;
         public Mode mode = Mode.Instant;
-        [Tooltip("How long the power lasts if its a charge or maintain")]
+        [Tooltip("How long the power lasts if its a Charge or Maintain")]
         public float duration;
+        [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
+        public float extraEnergyCost;
         float timer;
+        float nextTick;
+        float tick = 0.5f; // expose this later?
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
@@ -95,14 +99,13 @@ namespace RPG
             return target;
         }
 
-        protected void UsePower(Character caster)
+        protected void StartPower(Character caster)
         {
-            Animator animator = caster.GetComponent<Animator>();
-            animator.Play(animation.ToString());
-            
-
-            caster.UsePower(this);
+            caster.PlayAnim(animation.ToString());
+            caster.energy -= energyCost;
             AddParticles(userParticles, caster, userBodyPart);
+
+            // turn to look at target but stay horizontal
             if (targetType != TargetType.SelfOnly && caster.target && caster.target != caster)
             {
                 caster.transform.LookAt(caster.target.transform.position);
@@ -110,10 +113,33 @@ namespace RPG
             }
         }
 
-        // apply this power to a particular target
-        public void Apply(Character target)
+        protected void EndPower(Character caster)
         {
-            float damage = Random.Range(minDamage, maxDamage);
+            caster.activePower = null;
+            caster.ReleaseAnim(true);
+
+            // start the cool down
+            caster.UsePower(this);
+        }
+
+        // apply this power to a particular target
+        // charge varies from 0 to 1
+        public void Apply(Character target, float charge)
+        {
+            // how does the damage get factored in?
+            float damage;
+            switch (mode)
+            {
+                case Mode.Charge:
+                    damage = minDamage + charge * (maxDamage - minDamage);
+                    break;
+                case Mode.Maintain:
+                    damage = minDamage + (1 - charge) * (maxDamage - minDamage);
+                    break;
+                default:
+                    damage = Random.Range(minDamage, maxDamage);
+                    break;
+            }
             if (damage != 0)
                 target.ApplyDamage(damage, type);
             foreach (Status s in effects)
@@ -142,7 +168,11 @@ namespace RPG
 
         public void OnStart(Character caster)
         {
+            if (CanUse(caster) == false)
+                return;
+
             caster.activePower = this;
+            StartPower(caster);
             switch (mode)
             {
                 case Mode.Instant:
@@ -150,6 +180,7 @@ namespace RPG
                 case Mode.Charge:
                     break;
                 case Mode.Maintain:
+                    nextTick = 0;
                     break;
                 case Mode.Block:
                     break;
@@ -172,15 +203,42 @@ namespace RPG
                             charge = 100;
                         }
                         caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
+                        // if we charge to full, finish
                         if (charge >= 100)
+                        {
+                            OnEnd(caster);
+                            return;
+                        }
+
+                        // subtract energy for the charge and discharge if we run out
+                        float deltaEnergy = Time.deltaTime * extraEnergyCost / duration;
+                        caster.energy -= deltaEnergy;
+                        if (caster.energy == 0)
                             OnEnd(caster);
                         break;
                     }
                 case Mode.Maintain:
                     {
                         float charge = 100.0f * (1.0f - (timer / duration));
+                        if (charge <= 0)
+                        {
+                            OnEnd(caster);
+                            return;
+                        }
                         caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
-                        OnActivate(caster);
+
+                        // activate the power effect every tick
+                        if (timer > nextTick)
+                        {
+                            nextTick += tick;
+                            OnActivate(caster);
+
+                            // subtract energy for the charge and discharge if we run out
+                            float deltaEnergy = extraEnergyCost * tick/(duration);
+                            caster.energy -= deltaEnergy;
+                            if (caster.energy == 0)
+                                OnEnd(caster);
+                        }
                         break;
                     }
                 case Mode.Block:
@@ -190,7 +248,7 @@ namespace RPG
 
         public void OnEnd(Character caster)
         {
-            caster.activePower = null;
+            EndPower(caster);
 
             switch (mode)
             {
@@ -207,6 +265,7 @@ namespace RPG
                 case Mode.Block:
                     break;
             }
+
         }
 
         public abstract void OnActivate(Character caster);

@@ -22,18 +22,22 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            if (index > -1)
+            {
+                GameObject target = GetTarget().gameObject;
+                reticle.transform.position = target.transform.position;
+            }
+
+            // no changing targets while a power is active
+            if (user.activePower)
+                return;
+
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 index++;
                 if (index >= targets.Length)
                     index = 0;
                 reticle.SetActive(true);
-            }
-
-            if (index > -1)
-            {
-                GameObject target = GetTarget().gameObject;
-                reticle.transform.position = target.transform.position;
             }
 
             // left mouse clicks select a character

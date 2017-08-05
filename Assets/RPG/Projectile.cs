@@ -12,6 +12,7 @@ namespace RPG
         Vector3 startPos;
 
         float range;
+        float charge;
 
         // Use this for initialization
         public void Init(Power p, Character c, Vector3 v)
@@ -20,6 +21,7 @@ namespace RPG
             parentPower = p;
             caster = c;
             velocity = v;
+            charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
         }
 
         // Update is called once per frame
@@ -42,8 +44,7 @@ namespace RPG
                     pos.y = 0;
                     ch.transform.position = pos;
 
-
-                    parentPower.Apply(ch);
+                    parentPower.Apply(ch, charge);
                 }
                 Destroy(gameObject);
             }
