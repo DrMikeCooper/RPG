@@ -43,7 +43,9 @@ namespace RPG
         public float extraEnergyCost;
         float timer;
         float nextTick;
-        float tick = 0.5f; // expose this later?
+        [Tooltip("Interval at which the power ticks, used for Maintains")]
+        public float tick = 0.5f; // expose this later?
+        GameObject blockParticles;
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
@@ -165,8 +167,21 @@ namespace RPG
                 go.transform.localPosition = Vector3.zero;
                 go.gameObject.name = ps.gameObject.name;
                 // make sure there's a lifespan on the particle effect
-                if (go.GetComponent<LifeSpan>() == null)
-                    go.AddComponent<LifeSpan>().lifespan = 5;
+                if (mode == Mode.Block && ps == userParticles)
+                {
+                    // turn off any auto destruct
+                    LifeSpan lifespan = go.GetComponent<LifeSpan>();
+                    if (lifespan)
+                        lifespan.enabled = false;
+                    // and store the particle system for autoremoval later
+                    blockParticles = go;
+                }
+                else
+                {
+                    // make sure the particles self-destruct after a while
+                    if (go.GetComponent<LifeSpan>() == null)
+                        go.AddComponent<LifeSpan>().lifespan = 5;
+                }
                 if (colorParticles)
                     go.GetComponent<ParticleSystem>().startColor = RPGSettings.GetColor(color);
             }
@@ -178,19 +193,16 @@ namespace RPG
                 return;
 
             caster.activePower = this;
-            StartPower(caster);
-            switch (mode)
+            if (mode != Mode.Instant)
+                StartPower(caster);
+            nextTick = 0;
+
+            if (mode == Mode.Block)
             {
-                case Mode.Instant:
-                    break;
-                case Mode.Charge:
-                    break;
-                case Mode.Maintain:
-                    nextTick = 0;
-                    break;
-                case Mode.Block:
-                    break;
+                caster.statusDirty = true;
+                caster.ReleaseAnim(true);
             }
+
             timer = 0;
         }
 
@@ -226,15 +238,11 @@ namespace RPG
                 case Mode.Maintain:
                     {
                         float charge = 100.0f * (1.0f - (timer / duration));
-                        if (charge <= 0)
-                        {
-                            OnEnd(caster);
-                            return;
-                        }
+                        
                         caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
 
                         // activate the power effect every tick
-                        if (timer > nextTick)
+                        if (timer >= nextTick)
                         {
                             nextTick += tick;
                             OnActivate(caster);
@@ -245,17 +253,28 @@ namespace RPG
                             if (caster.energy == 0)
                                 OnEnd(caster);
                         }
+                        if (charge <= 0)
+                        {
+                            OnEnd(caster);
+                            return;
+                        }
+
                         break;
                     }
                 case Mode.Block:
+                    caster.energy -= energyCost * Time.deltaTime;
+                    if (caster.energy == 0)
+                        OnEnd(caster);
                     break;
             }
         }
 
         public void OnEnd(Character caster)
         {
-            EndPower(caster);
+            if (mode == Mode.Instant)
+                StartPower(caster);
 
+            EndPower(caster);
             switch (mode)
             {
                 case Mode.Instant:
@@ -269,9 +288,13 @@ namespace RPG
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Block:
+                    if (blockParticles)
+                        Destroy(blockParticles);
+                        //blockParticles.AddComponent<LifeSpanFader>();
+                    caster.statusDirty = true;
                     break;
             }
-
+ 
         }
 
         public abstract void OnActivate(Character caster);

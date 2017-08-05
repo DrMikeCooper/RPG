@@ -231,6 +231,7 @@ namespace RPG
 
             groupedEffects.Clear();
 
+            // apply all timed buffs sitting on the character
             foreach (Status status in statusEffects)
             {
                 // reset all stats to their base values
@@ -244,6 +245,26 @@ namespace RPG
                     groupedEffects[status.name] = status;
                     groupedEffects[status.name].count = 1;
                 }
+            }
+
+            // apply the buffs from a block power directly
+            if (activePower && activePower.mode == Power.Mode.Block)
+            {
+                foreach (Status status in activePower.effects)
+                {
+                    // reset all stats to their base values
+                    status.Apply(this);
+                    if (groupedEffects.ContainsKey(status.name))
+                    {
+                        groupedEffects[status.name].count++;
+                    }
+                    else
+                    {
+                        groupedEffects[status.name] = status;
+                        groupedEffects[status.name].count = 1;
+                    }
+                }
+
             }
 
             foreach (KeyValuePair<string, Stat> s in stats)
