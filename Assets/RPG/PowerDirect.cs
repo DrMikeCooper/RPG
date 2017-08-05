@@ -61,7 +61,7 @@ namespace RPG
             Character target = npc.target;
             caster.target = target;
 
-            float distance = Vector3.Distance(caster.transform.position, target.transform.position);
+            float distance = target ? Vector3.Distance(caster.transform.position, target.transform.position) : 100000;
             if (distance > range)
             {
                 npc.MoveTo(target.transform);
