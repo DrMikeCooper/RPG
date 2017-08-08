@@ -18,6 +18,8 @@ namespace RPG
         Stat healthStat;
         Stat energyStat;
 
+        const float baseEnergyRegen = 100.0f / 20.0f; // 10 seconds to recover all energy
+        const float baseHealthRegen = 100.0f / 120.0f; // 2 minute to heal back to full health
         public float health
         {
             get
@@ -111,14 +113,27 @@ namespace RPG
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
-            stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
-            stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy, false);
-            stats[RPGSettings.StatName.HealthRegen.ToString()] = new Stat();
-            stats[RPGSettings.StatName.EnergyRegen.ToString()] = new Stat(5);
-            stats[RPGSettings.StatName.Jump.ToString()] = new Stat();
-            stats[RPGSettings.StatName.Speed.ToString()] = new Stat();
-            stats[RPGSettings.StatName.Recharge.ToString()] = new Stat();
-            stats[RPGSettings.StatName.Charge.ToString()] = new Stat(0, false);
+            for (RPGSettings.StatName i = RPGSettings.StatName.EnergyRegen; i <= RPGSettings.StatName.Stun; i++)
+            {
+                float value = 0;
+                bool isBuff = true;
+                switch (i)
+                {
+                    case RPGSettings.StatName.Health:
+                        value = maxHealth;
+                        isBuff = false;
+                        break;
+                    case RPGSettings.StatName.Energy:
+                        value = maxEnergy;
+                        isBuff = false;
+                        break;
+                    case RPGSettings.StatName.Charge:
+                        isBuff = false;
+                        break;
+                }
+            
+                stats[i.ToString()] = new Stat(value, isBuff);
+            }
 
             healthStat = stats[RPGSettings.StatName.Health.ToString()];
             energyStat = stats[RPGSettings.StatName.Energy.ToString()];
@@ -185,10 +200,10 @@ namespace RPG
                 statusEffects.Remove(d);
 
             // update health and energy over time
-            energy += stats[RPGSettings.StatName.EnergyRegen.ToString()].currentValue * Time.deltaTime;
+            energy += baseEnergyRegen * GetFactor(RPGSettings.StatName.EnergyRegen) * Time.deltaTime;
             if (energy > maxEnergy)
                 energy = maxEnergy;
-            health += stats[RPGSettings.StatName.HealthRegen.ToString()].currentValue * Time.deltaTime;
+            health += baseHealthRegen * GetFactor(RPGSettings.StatName.HealthRegen) * Time.deltaTime;
             if (health > maxHealth)
                 health = maxHealth;
 
@@ -281,6 +296,12 @@ namespace RPG
                 tpc.m_JumpPower = baseJumpPower * GetFactor(RPGSettings.StatName.Jump);
                 tpc.m_MoveSpeedMultiplier = GetFactor(RPGSettings.StatName.Speed);
 
+                // being stunned allows you to move at half speed
+                if (stats[RPGSettings.StatName.Stun.ToString()].currentValue > 0)
+                    tpc.m_MoveSpeedMultiplier *= 0.2f;
+                if (isRooted())
+                    tpc.m_MoveSpeedMultiplier = 0;
+
             }
             onStatusChanged.Invoke();
         }
@@ -367,6 +388,24 @@ namespace RPG
                 case BodyPart.RightFoot: return rightFoot;
                 default: return transform;
             }
+        }
+
+        // stun and hold stop you from using powers
+        public bool isHeld()
+        {
+            return stats[RPGSettings.StatName.Hold.ToString()].getCurrentValue() > 0 || stats[RPGSettings.StatName.Stun.ToString()].getCurrentValue() > 0;
+        }
+
+        // holds and roots prevent the character from moving
+        public bool isRooted()
+        {
+            return stats[RPGSettings.StatName.Hold.ToString()].getCurrentValue() > 0 || stats[RPGSettings.StatName.Root.ToString()].getCurrentValue() > 0;
+        }
+
+        public void FaceTarget()
+        {
+            transform.LookAt(target.transform.position);
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
 
         // Animation functions

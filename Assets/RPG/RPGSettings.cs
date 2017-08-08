@@ -45,6 +45,9 @@ namespace RPG
             Health,
             Energy,
             Charge,
+            Root, 
+            Hold,
+            Stun,
         }
 
 

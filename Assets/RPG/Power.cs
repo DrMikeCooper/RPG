@@ -65,6 +65,9 @@ namespace RPG
 
         public bool CanUse(Character caster)
         {
+            if (caster.isHeld())
+                return false;
+
             if (caster.GetCoolDown(this) > 0)
                 return false;
 
@@ -108,11 +111,15 @@ namespace RPG
             caster.energy -= energyCost;
             AddParticles(userParticles, caster, userBodyPart);
 
+            FaceTarget(caster);
+        }
+
+        protected void FaceTarget(Character caster)
+        {
             // turn to look at target but stay horizontal
             if (targetType != TargetType.SelfOnly && caster.target && caster.target != caster)
             {
-                caster.transform.LookAt(caster.target.transform.position);
-                caster.transform.eulerAngles = new Vector3(0, caster.transform.eulerAngles.y, 0);
+                caster.FaceTarget();
             }
         }
 
@@ -233,6 +240,9 @@ namespace RPG
                         caster.energy -= deltaEnergy;
                         if (caster.energy == 0)
                             OnEnd(caster);
+                        if (caster.isHeld())
+                            OnEnd(caster);
+                        FaceTarget(caster);
                         break;
                     }
                 case Mode.Maintain:
@@ -258,7 +268,9 @@ namespace RPG
                             OnEnd(caster);
                             return;
                         }
-
+                        if (caster.isHeld())
+                            OnEnd(caster, true);
+                        FaceTarget(caster);
                         break;
                     }
                 case Mode.Block:
@@ -279,7 +291,7 @@ namespace RPG
             }
         }
 
-        public void OnEnd(Character caster)
+        public void OnEnd(Character caster, bool interrupted = false)
         {
             if (mode == Mode.Instant)
                 StartPower(caster);
@@ -291,7 +303,8 @@ namespace RPG
                     OnActivate(caster);
                     break;
                 case Mode.Charge:
-                    OnActivate(caster);
+                    if (!interrupted)
+                        OnActivate(caster);
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Maintain:
