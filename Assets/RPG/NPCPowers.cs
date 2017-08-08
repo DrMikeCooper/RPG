@@ -31,7 +31,7 @@ namespace RPG
 
             // find the best action each frame (TODO - not every frame?)
             Power best = GetBestAction();
-            target = best.npcTarget;
+            target = best ? best.npcTarget : null;
 
             // if it’s different from what we were doing, switch the FSM
             if (best != currentPower)
@@ -51,6 +51,9 @@ namespace RPG
         // checks all our available actions and evaluates each one, getting the best
         Power GetBestAction()
         {
+            if (character.isHeld())
+                return null;
+
             Power action = null;
             float bestValue = 0;
 
