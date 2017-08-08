@@ -153,6 +153,13 @@ namespace RPG
                 baseJumpPower = tpc.m_JumpPower;
 
             Transform beamChild = transform.Find("Beam");
+            if (beamChild == null)
+            {
+                GameObject go = Instantiate(RPGSettings.instance.beam);
+                beamChild = go.transform;
+                beamChild.parent = transform;
+                beamChild.localPosition = Vector3.zero;
+            }
             if (beamChild)
             {
                 beam = beamChild.GetComponent<BeamRenderer>();

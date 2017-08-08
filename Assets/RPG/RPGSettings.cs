@@ -70,6 +70,7 @@ namespace RPG
         };
 
         public GameObject projectile;
+        public GameObject beam;
 
         public Color[] colors = new Color[(int)ColorCode.Custom];
 
