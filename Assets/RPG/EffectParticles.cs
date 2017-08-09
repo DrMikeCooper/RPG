@@ -15,7 +15,15 @@ namespace RPG
             go.transform.parent = t;
             go.transform.localPosition = Vector3.zero;
             go.gameObject.name = particles.gameObject.name;
-            go.GetComponent<ParticleSystem>().startColor = RPGSettings.GetColor(color);
+
+            ParticleSystem ps = go.GetComponent<ParticleSystem>();
+            if (ps)
+                ps.startColor = RPGSettings.GetColor(color);
+
+            TrailRenderer tr = go.GetComponent<TrailRenderer>();
+            if (tr)
+                tr.material.color = RPGSettings.GetColor(color);
+
             if (autoStop)
                 Destroy(go, lifespan);
             return go;
