@@ -23,8 +23,15 @@ namespace RPG
             {
                 if (character.groupedEffects.ContainsKey(pair.Key) == false)
                 {
-                    // todo - use end somehow?
-                    Destroy(pair.Value);
+                    // turn on the fader to deactivate it
+                    LifeSpanFader fader = pair.Value.GetComponent<LifeSpanFader>();
+                    if (!fader)
+                        Debug.Log("Missing fader!");
+                    if (fader && !fader.enabled)
+                    {
+                        fader.lifespan = 1;
+                        fader.enabled = true;
+                    }
                 }
             }
 
@@ -34,7 +41,15 @@ namespace RPG
                 if (systems.ContainsKey(pair.Key) == false)
                 {
                     Status s = pair.Value;
-                    systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color);
+                    systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color, false);
+                }
+                else
+                {
+                    LifeSpanFader fader = systems[pair.Key].GetComponent<LifeSpanFader>();
+                    if (!fader)
+                        Debug.Log("Missing fader!");
+                    else
+                        fader.Restart();
                 }
             }
         }

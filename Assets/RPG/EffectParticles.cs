@@ -8,6 +8,7 @@ namespace RPG
     public class EffectParticles : VisualEffect
     {
         public ParticleSystem particles; // reference to the prefab set up in editor
+        LifeSpanFader fader;
 
         public override GameObject Begin(Transform t, RPGSettings.ColorCode color, bool autoStop = true)
         {
@@ -16,22 +17,30 @@ namespace RPG
             go.transform.localPosition = Vector3.zero;
             go.gameObject.name = particles.gameObject.name;
 
+            // set color of particle systems
             ParticleSystem ps = go.GetComponent<ParticleSystem>();
             if (ps)
                 ps.startColor = RPGSettings.GetColor(color);
 
-            TrailRenderer tr = go.GetComponent<TrailRenderer>();
-            if (tr)
-                tr.material.color = RPGSettings.GetColor(color);
+            // deals with trailrenderers and meshrenderers
+            Renderer r = go.GetComponent<Renderer>();
+            if (r)
+                r.material.color = RPGSettings.GetColor(color);
 
-            if (autoStop)
-                Destroy(go, lifespan);
+            fader = go.GetComponent<LifeSpanFader>();
+            if (fader == null)
+                fader = go.AddComponent<LifeSpanFader>();
+
+            fader.enabled = autoStop;
+            fader.lifespan = lifespan;
+            fader.autoDestroy = autoStop;
+
             return go;
         }
 
         public override void End(GameObject go)
         {
-            Destroy(go);
+            fader.enabled = true;
         }
     }
 
