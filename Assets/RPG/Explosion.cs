@@ -12,7 +12,13 @@ namespace RPG
 
         public override void Apply(Character ch)
         {
-            explosion.AddParticles(explosion.userParticles, ch, explosion.userBodyPart);
+            if (!explosion)
+            {
+                Debug.Log("Explosion " + name + "has no PowerArea");
+                return;
+            }
+            if (explosion.userFX)
+                explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.color);
             explosion.Explode(ch.transform, null);
         }
 

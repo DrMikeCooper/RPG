@@ -8,7 +8,7 @@ namespace RPG
     {
         Character character;
 
-        Dictionary<string, ParticleSystem> systems = new Dictionary<string, ParticleSystem>();
+        Dictionary<string, GameObject> systems = new Dictionary<string, GameObject>();
 
         // Use this for initialization
         void Start()
@@ -19,12 +19,12 @@ namespace RPG
 
         void UpdateParticles()
         {
-            foreach (KeyValuePair<string,ParticleSystem> pair in systems)
+            foreach (KeyValuePair<string,GameObject> pair in systems)
             {
                 if (character.groupedEffects.ContainsKey(pair.Key) == false)
                 {
-                    pair.Value.Stop();
-                    // todo, delayed turn off after 2 seconds?
+                    // todo - use end somehow?
+                    Destroy(pair.Value);
                 }
             }
 
@@ -34,27 +34,8 @@ namespace RPG
                 if (systems.ContainsKey(pair.Key) == false)
                 {
                     Status s = pair.Value;
-                    ParticleSystem particles = s.particles;
-                    if (particles)
-                    {
-                        GameObject obj = Instantiate(particles.gameObject);
-                        ParticleSystem system = obj.GetComponent<ParticleSystem>();
-                        obj.transform.parent = character.GetBodyPart(s.bodyPart);
-                        obj.transform.localPosition = Vector3.zero;
-                        obj.name = "Particles_" + pair.Key;
-                        system.startColor = RPGSettings.GetColor(s.color); // figure this out...
-                        systems[pair.Key] = system;
-                    }
+                    systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color);
                 }
-                else
-                {
-                    ParticleSystem system = systems[pair.Key];
-                    if (system && system.isStopped)
-                        system.Play();
-                }
-               
-
-                
             }
         }
     }

@@ -45,17 +45,16 @@ namespace RPG
         float nextTick;
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f; // expose this later?
-        GameObject blockParticles;
+        GameObject blockObject;
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
 
         public Animations animation = Animations.PunchRight;
-        public bool colorParticles = false;
 
-        public ParticleSystem userParticles;
+        public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
-        public ParticleSystem targetParticles;
+        public VisualEffect targetFX;
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         public float minDamage;
@@ -109,7 +108,15 @@ namespace RPG
         {
             caster.PlayAnim(animation.ToString());
             caster.energy -= energyCost;
-            AddParticles(userParticles, caster, userBodyPart);
+            if (userFX)
+            {
+                if (mode == Mode.Block)
+                {
+                    blockObject = userFX.Begin(caster.GetBodyPart(userBodyPart), color, false);
+                 }
+                else
+                    userFX.Begin(caster.GetBodyPart(userBodyPart), color);
+            }
 
             FaceTarget(caster);
         }
@@ -156,42 +163,8 @@ namespace RPG
                 target.ApplyStatus(s, statusDuration);
 
             // particles on target
-            AddParticles(targetParticles, target, targetBodyPart);
-        }
-
-        public void AddParticles(ParticleSystem ps, Character ch, Character.BodyPart bodyPart)
-        {
-            AddParticles(ps, ch.GetBodyPart(bodyPart));
-        }
-
-        public void AddParticles(ParticleSystem ps, Transform t)
-        {
-            // particles on target
-            if (ps != null)
-            {
-                GameObject go = Instantiate(ps.gameObject);
-                go.transform.parent = t;
-                go.transform.localPosition = Vector3.zero;
-                go.gameObject.name = ps.gameObject.name;
-                // make sure there's a lifespan on the particle effect
-                if (mode == Mode.Block && ps == userParticles)
-                {
-                    // turn off any auto destruct
-                    LifeSpan lifespan = go.GetComponent<LifeSpan>();
-                    if (lifespan)
-                        lifespan.enabled = false;
-                    // and store the particle system for autoremoval later
-                    blockParticles = go;
-                }
-                else
-                {
-                    // make sure the particles self-destruct after a while
-                    if (go.GetComponent<LifeSpan>() == null)
-                        go.AddComponent<LifeSpan>().lifespan = 5;
-                }
-                if (colorParticles)
-                    go.GetComponent<ParticleSystem>().startColor = RPGSettings.GetColor(color);
-            }
+            if (targetFX)
+                targetFX.Begin(target.GetBodyPart(targetBodyPart), color);
         }
 
         public void OnStart(Character caster)
@@ -311,10 +284,9 @@ namespace RPG
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Block:
-                    if (blockParticles)
-                        Destroy(blockParticles);
-                    //blockParticles.AddComponent<LifeSpanFader>();
-                    blockParticles = null;
+                    if (blockObject)
+                        userFX.End(blockObject);
+                    blockObject = null;
                     caster.statusDirty = true;
                     break;
             }
