@@ -8,7 +8,8 @@ namespace RPG
     {
         ParticleSystem particles;
         Renderer rend;
-        Color color;
+        [HideInInspector]
+        public Color color;
         [HideInInspector]
         public bool autoDestroy;
 
@@ -20,16 +21,18 @@ namespace RPG
         void Start()
         {
             particles = GetComponent<ParticleSystem>();
-            rend = GetComponent<TrailRenderer>();
+            rend = GetComponent<Renderer>();
             timer = lifespan;
         }
 
         // used for persistent particles to restart them
         public void Restart()
         {
-            particles.Play();
+            gameObject.SetActive(true);
+            if (particles)
+                particles.Play();
             if (rend)
-                rend.material.color = color;
+                rend.material.SetColor("_TintColor", color);
             enabled = false;
         }
 
@@ -45,10 +48,15 @@ namespace RPG
                 Color col = color;
                 col.a = timer;
                 if (rend)
-                    rend.material.color = col;
+                    rend.material.SetColor("_TintColor", col);
             }
-            if (timer < 0 && autoDestroy)
-                Destroy(gameObject);
+            if (timer < 0)
+            {
+                if (autoDestroy)
+                    Destroy(gameObject);
+                else
+                    gameObject.SetActive(false);
+            }
         }
     }
 }
