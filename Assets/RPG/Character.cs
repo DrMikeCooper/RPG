@@ -55,6 +55,12 @@ namespace RPG
 
         Animator animator;
 
+        // used for charges and maintains
+        [HideInInspector]
+        public float timer;
+        [HideInInspector]
+        public float nextTick;
+
         public enum BodyPart
         {
             Root,

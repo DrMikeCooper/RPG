@@ -41,11 +41,9 @@ namespace RPG
         public float duration;
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
         public float extraEnergyCost;
-        float timer;
-        float nextTick;
+
         [Tooltip("Interval at which the power ticks, used for Maintains")]
-        public float tick = 0.5f; // expose this later?
-        GameObject blockObject;
+        public float tick = 0.5f; 
 
         public Sprite icon;
         public RPGSettings.ColorCode color;
@@ -115,12 +113,7 @@ namespace RPG
             caster.energy -= energyCost;
             if (userFX)
             {
-                if (mode == Mode.Block)
-                {
-                    blockObject = userFX.Begin(caster.GetBodyPart(userBodyPart), color, false);
-                 }
-                else
-                    userFX.Begin(caster.GetBodyPart(userBodyPart), color);
+                userFX.Begin(caster.GetBodyPart(userBodyPart), color);
             }
 
             FaceTarget(caster);
@@ -180,7 +173,7 @@ namespace RPG
             caster.activePower = this;
             if (mode != Mode.Instant)
                 StartPower(caster);
-            nextTick = 0;
+            caster.nextTick = 0;
 
             if (mode == Mode.Block)
             {
@@ -188,12 +181,12 @@ namespace RPG
                 caster.ReleaseAnim(true);
             }
 
-            timer = 0;
+            caster.timer = 0;
         }
 
         public void OnUpdate(Character caster)
         {
-            timer += Time.deltaTime;
+            caster.timer += Time.deltaTime;
 
             // special code once a lunge is triggered
             if (lunge)
@@ -211,7 +204,7 @@ namespace RPG
                     break;
                 case Mode.Charge:
                     {
-                        float charge = (100.0f * timer) / duration;
+                        float charge = (100.0f * caster.timer) / duration;
                         if (charge > 100)
                         {
                             charge = 100;
@@ -236,14 +229,14 @@ namespace RPG
                     }
                 case Mode.Maintain:
                     {
-                        float charge = 100.0f * (1.0f - (timer / duration));
+                        float charge = 100.0f * (1.0f - (caster.timer / duration));
                         
                         caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = charge;
 
                         // activate the power effect every tick
-                        if (timer >= nextTick)
+                        if (caster.timer >= caster.nextTick)
                         {
-                            nextTick += tick;
+                            caster.nextTick += tick;
                             OnActivate(caster);
 
                             // subtract energy for the charge and discharge if we run out
@@ -266,9 +259,9 @@ namespace RPG
                     caster.energy -= energyCost * Time.deltaTime;
                     if (caster.energy == 0)
                         OnEnd(caster);
-                    if (timer >= nextTick)
+                    if (caster.timer >= caster.nextTick)
                     {
-                        nextTick += tick;
+                        caster.nextTick += tick;
                         foreach (Status s in effects)
                         {
                             Explosion ex = s as Explosion;
@@ -307,9 +300,6 @@ namespace RPG
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Block:
-                    if (blockObject)
-                        userFX.End(blockObject);
-                    blockObject = null;
                     caster.statusDirty = true;
                     break;
             }

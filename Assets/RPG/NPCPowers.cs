@@ -23,6 +23,9 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            if (character.activePower)
+                character.activePower.OnUpdate(character);
+
             if (timer > 0)
             {
                 timer -= Time.deltaTime;

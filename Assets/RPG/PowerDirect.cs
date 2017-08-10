@@ -66,8 +66,13 @@ namespace RPG
             else
             {
                 npc.MoveTo(caster.transform);
-                OnActivate(caster);
-                npc.timer = 3; // TODO
+                OnStart(caster);
+
+                // instant powers release the key immediately. Others, we let energy or duration end it.
+                if (mode == Mode.Instant)
+                    OnEnd(caster);
+
+                npc.timer = 3 + duration;
             }
         }
     }
