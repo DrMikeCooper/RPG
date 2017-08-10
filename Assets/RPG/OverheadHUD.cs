@@ -19,8 +19,9 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            Vector3 targetPos = target.position + 2 * Vector3.up;
-            rect.position = Camera.main.WorldToScreenPoint(targetPos);
+            Vector3 targetPos = target.position + 2.5f * Vector3.up;
+            rect.position = targetPos;
+            transform.forward = Camera.main.transform.forward;
         }
     }
 }
