@@ -198,12 +198,12 @@ namespace RPG
             // special code once a lunge is triggered
             if (lunge)
             {
+                FaceTarget(caster);
                 caster.transform.position = Vector3.MoveTowards(caster.transform.position, caster.target.transform.position, closeToTargetSpeed*Time.deltaTime);
                 if (Vector3.Distance(caster.transform.position, caster.target.transform.position) <= 1)
                     OnEnd(caster);
                 return;
             }
-
 
             switch (mode)
             {
