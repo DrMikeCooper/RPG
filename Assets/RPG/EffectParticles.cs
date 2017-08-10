@@ -17,12 +17,7 @@ namespace RPG
             go.transform.localPosition = prefab.transform.position;
             go.gameObject.name = prefab.name;
 
-            // set color of particle systems
-            ParticleSystem ps = go.GetComponent<ParticleSystem>();
-            if (ps)
-                ps.startColor = RPGSettings.GetColor(color);
-
-            // deals with trailrenderers and meshrenderers
+            // deals with trail renderers, mesh renderers and particle renderers if they use the Particles shaders (and not the mobile ones)
             Renderer r = go.GetComponent<Renderer>();
             if (r)
                 r.material.SetColor("_TintColor", RPGSettings.GetColor(color));

@@ -12,7 +12,8 @@ public class BeamRenderer : MonoBehaviour {
     public float uvSpeed = 1.0f;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = false;
 	}
@@ -31,11 +32,11 @@ public class BeamRenderer : MonoBehaviour {
         // set UV titling to match distance
         float distance = Vector3.Distance(src.position, tgt.position);
         lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2*distance, 1));
-
     }
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (timer > 0)
         {
             timer -= Time.deltaTime;

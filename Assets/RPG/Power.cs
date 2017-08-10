@@ -20,7 +20,7 @@ namespace RPG
             Instant,
             Charge,
             Maintain,
-            Block
+            Block,
         };
     
         public enum Animations
@@ -61,6 +61,11 @@ namespace RPG
         public float maxDamage;
         public Status[] effects;
         public float statusDuration = 10;
+
+        // true of we run to the target in order to get within 1 unit before activating
+        public float closeToTargetSpeed = 0;
+
+        bool lunge = false;
 
         public bool CanUse(Character caster)
         {
@@ -189,6 +194,17 @@ namespace RPG
         public void OnUpdate(Character caster)
         {
             timer += Time.deltaTime;
+
+            // special code once a lunge is triggered
+            if (lunge)
+            {
+                caster.transform.position = Vector3.MoveTowards(caster.transform.position, caster.target.transform.position, closeToTargetSpeed*Time.deltaTime);
+                if (Vector3.Distance(caster.transform.position, caster.target.transform.position) <= 1)
+                    OnEnd(caster);
+                return;
+            }
+
+
             switch (mode)
             {
                 case Mode.Instant:
@@ -267,7 +283,14 @@ namespace RPG
         public void OnEnd(Character caster, bool interrupted = false)
         {
             if (mode == Mode.Instant)
+            {
                 StartPower(caster);
+                if (closeToTargetSpeed > 0 && Vector3.Distance(caster.transform.position, caster.target.transform.position) > 1)
+                {
+                    lunge = true;
+                    return;
+                }
+            }
 
             EndPower(caster);
             switch (mode)
@@ -290,7 +313,6 @@ namespace RPG
                     caster.statusDirty = true;
                     break;
             }
- 
         }
 
         public abstract void OnActivate(Character caster);
