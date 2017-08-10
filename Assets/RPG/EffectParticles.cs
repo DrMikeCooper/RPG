@@ -14,7 +14,7 @@ namespace RPG
         {
             GameObject go = Instantiate(prefab);
             go.transform.parent = t;
-            go.transform.localPosition = Vector3.zero;
+            go.transform.localPosition = prefab.transform.position;
             go.gameObject.name = prefab.name;
 
             // set color of particle systems
