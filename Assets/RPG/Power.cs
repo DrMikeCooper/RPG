@@ -316,6 +316,73 @@ namespace RPG
             return allCharacters;
         }
 
+        
+
+        [HideInInspector]
+        public Character npcTarget;
+
+        // AI Action functions
+        public virtual float Evaluate(AIBrain brain, AINode.AICondition condition) { return 0; }
+        public virtual void Enter(AIBrain brain) { }
+        public virtual void Exit(AIBrain brain) { }
+        public virtual void UpdateAction(AIBrain brain) { }
+
+        // AI Utility functions
+        protected void OnUpdateRanged(AIBrain brain)
+        {
+            Character caster = brain.character;
+            Character target = brain.target;
+            caster.target = target;
+
+            float distance = target ? Vector3.Distance(caster.transform.position, target.transform.position) : 100000;
+            if (distance > range)
+            {
+                brain.MoveTo(target.transform);
+                brain.countDown = 0.5f;
+            }
+            else
+            {
+                OnDoPower(brain);
+            }
+        }
+
+        protected void OnDoPower(AIBrain brain)
+        {
+            Character caster = brain.character;
+
+            brain.MoveTo(caster.transform);
+            OnStart(caster);
+
+            // instant powers release the key immediately. Others, we let energy or duration end it.
+            if (mode == Mode.Instant)
+                OnEnd(caster);
+        }
+
+        public float EvaluateRanged(AIBrain brain, AINode.AICondition condition)
+        {
+            Character caster = brain.character;
+
+            npcTarget = null;
+            float bestEval = 0;
+            foreach (Character ch in getAll())
+            {
+                if (ch != caster && ch.team != caster.team && AINode.IsCondition(condition, ch, this))
+                {
+                    float eval = 100.0f / timeToDeath(caster, ch);
+
+                    // TODO - factor in collateral and splash damage
+
+                    if (eval > bestEval)
+                    {
+                        bestEval = eval;
+                        npcTarget = ch;
+                    }
+                }
+            }
+
+            return bestEval;
+        }
+
         // how many seconds will it take us to kill this character?
         protected float timeToDeath(Character caster, Character target)
         {
@@ -328,7 +395,7 @@ namespace RPG
             if (distance > range)
                 time += distance / speed;
 
-            // plaus time to kill
+            // plus time to kill
             if (maxDamage > 0)
             {
                 time += target.health * recharge / ((minDamage + maxDamage) * 0.5f);
@@ -338,14 +405,5 @@ namespace RPG
 
             return time;
         }
-
-        [HideInInspector]
-        public Character npcTarget;
-
-        // AI Action functions
-        public virtual float Evaluate(NPCPowers npc) { return 0; }
-        public virtual void Enter(NPCPowers npc) { }
-        public virtual void Exit(NPCPowers npc) { }
-        public virtual void UpdateAction(NPCPowers npc) { }
     }
 }

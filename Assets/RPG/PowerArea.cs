@@ -31,5 +31,31 @@ namespace RPG
                 }
             }
         }
+
+        public override void UpdateAction(AIBrain brain)
+        {
+            // activate the power now, our evaluate has told us its a good idea!
+            OnDoPower(brain);
+        }
+
+        public override float Evaluate(AIBrain brain, AINode.AICondition condition)
+        {
+            return GetSplashDamage(brain.character) * 0.5f *(maxDamage + minDamage);
+        }
+
+        // AI Utility
+        float GetSplashDamage(Character caster)
+        {
+            float total = 0;
+            foreach (Character ch in getAll())
+            {
+                if (Vector3.Distance(caster.transform.position, ch.transform.position) < radius)
+                    if (ch != caster && ch.team != caster.team)
+                        total += 1.0f;
+                    else
+                        total -= 1.0f;
+            }
+            return total;
+        }
     }
 }

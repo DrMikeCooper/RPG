@@ -25,12 +25,14 @@ namespace RPG
             Psionic = 64,
             Magic = 128,
             Toxic = 256,
+            Healing = 512,
             Physical = Crushing | Piercing | Toxic,
             Elemental = Fire | Cold | Energy,
             Paranormal = Negative | Psionic | Magic,
             All = Physical | Elemental | Paranormal
         };
-        public const int BasicDamageTypesCount = 9; 
+        // count of the number of non-compound entries above
+        public const int BasicDamageTypesCount = 10; 
 
         public enum StatName
         {

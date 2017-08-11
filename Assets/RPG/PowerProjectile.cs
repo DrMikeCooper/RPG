@@ -22,8 +22,16 @@ namespace RPG
             GameObject pgo = Instantiate(projectileParticles.gameObject);
             pgo.transform.parent = go.transform;
             pgo.transform.localPosition = Vector3.zero;
+        }
 
+        public override float Evaluate(AIBrain brain, AINode.AICondition condition)
+        {
+            return EvaluateRanged(brain, condition);
+        }
 
+        public override void UpdateAction(AIBrain brain)
+        {
+            OnUpdateRanged(brain);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace RPG
         public Character target; // gets set by the Evaluate routines
         UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
 
+        public AINode rootAI;
         // Use this for initialization
         void Start()
         {
@@ -23,7 +24,7 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            if (character.activePower)
+         /*   if (character.activePower)
                 character.activePower.OnUpdate(character);
 
             if (timer > 0)
@@ -48,21 +49,21 @@ namespace RPG
 
             // update the current action
             if (currentPower)
-                currentPower.UpdateAction(this);
+                currentPower.UpdateAction(this);*/
         }
 
         // checks all our available actions and evaluates each one, getting the best
         Power GetBestAction()
         {
-            if (character.isHeld())
+            //if (character.isHeld())
                 return null;
 
-            Power action = null;
+            /*Power action = null;
             float bestValue = 0;
 
             foreach (Power a in character.powers)
             {
-                float value = a.Evaluate(this);
+                float value = 0;// a.Evaluate(this);
                 if (action == null || value > bestValue)
                 {
                     action = a;
@@ -70,7 +71,7 @@ namespace RPG
                 }
             }
 
-            return action;
+            return action;*/
         }
 
         public void MoveTo(Transform pos)

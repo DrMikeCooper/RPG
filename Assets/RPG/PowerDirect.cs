@@ -29,51 +29,14 @@ namespace RPG
             }
         }
 
-        public override float Evaluate(NPCPowers npc)
+        public override float Evaluate(AIBrain brain, AINode.AICondition condition)
         {
-            Character caster = npc.character;
-
-            npcTarget = null;
-            float bestEval = 0;
-            foreach (Character ch in getAll())
-            {
-                if (ch != caster && ch.team != caster.team)
-                {
-                    float eval = 100.0f / timeToDeath(caster, ch);
-                    if (eval > bestEval)
-                    {
-                        bestEval = eval;
-                        npcTarget = ch;
-                    }
-                }
-            }
-
-            return bestEval;
+            return EvaluateRanged(brain, condition);
         }
 
-        public override void UpdateAction(NPCPowers npc)
+        public override void UpdateAction(AIBrain brain)
         {
-            Character caster = npc.character;
-            Character target = npc.target;
-            caster.target = target;
-
-            float distance = target ? Vector3.Distance(caster.transform.position, target.transform.position) : 100000;
-            if (distance > range)
-            {
-                npc.MoveTo(target.transform);
-                npc.timer = 0.5f;
-            }
-            else
-            {
-                npc.MoveTo(caster.transform);
-                OnStart(caster);
-
-                // instant powers release the key immediately. Others, we let energy or duration end it.
-                if (mode == Mode.Instant)
-                    OnEnd(caster);
-
-                npc.timer = 3 + duration;
-            }
+            OnUpdateRanged(brain);
         }
     }
 }
