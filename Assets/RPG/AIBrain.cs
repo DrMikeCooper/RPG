@@ -56,7 +56,7 @@ namespace RPG
             if (character.activePower)
                 character.activePower.OnUpdate(character);
 
-            if (closingRange > 0 && character.target != null && Vector3.Distance(character.transform.position, character.target.transform.position) < closingRange)
+            if (closingRange > 0 && Power.WithinRange(character, closingRange, true)) 
                 countDown = 0;
         }
 
@@ -71,17 +71,18 @@ namespace RPG
             {
                 if (ch.team != character.team && enemies.Contains(ch) == false)
                 {
-                    Ray ray = new Ray(character.head.position, (ch.head.position - character.head.position).normalized);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 1000))
+                    if (character.CanSee(ch))
                     {
-                        if (hit.collider.gameObject == ch.gameObject)
-                        {
-                            enemies.Add(ch);
-                        }
+                        enemies.Add(ch);
                     }
                 }
             }
+        }
+
+        public void MakeAwareOf(Character ch)
+        {
+            if (ch.team != character.team && enemies.Contains(ch) == false)
+                enemies.Add(ch);
         }
     }
 }

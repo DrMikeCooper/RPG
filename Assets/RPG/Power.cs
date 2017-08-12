@@ -34,6 +34,7 @@ namespace RPG
         public float energyCost;
         public float coolDown;
         public float range;
+        public bool lineOfSight = true;
         public RPGSettings.DamageType type;
         public TargetType targetType;
         public Mode mode = Mode.Instant;
@@ -76,8 +77,26 @@ namespace RPG
             if (caster.energy < energyCost)
                 return false;
 
-            if (range > 0 && caster.target != null && Vector3.Distance(caster.transform.position, caster.target.transform.position) > range)
-                return false;
+            return targetType != TargetType.SelfOnly && WithinRange(caster);
+        }
+
+        public bool WithinRange(Character caster)
+        {
+            return Power.WithinRange(caster, range, lineOfSight);
+        }
+
+        public static bool WithinRange(Character caster, float range, bool lineOfSight)
+        {
+            if (caster.target != null && caster.target!=caster)
+            {
+                // just too far away as the crow flies
+                if (range > 0 && Vector3.Distance(caster.transform.position, caster.target.transform.position) > range)
+                    return false;
+
+                // can't see the target and LoS required
+                if (lineOfSight && caster.CanSee(caster.target) == false)
+                    return false;
+            }
 
             return true;
         }
@@ -337,8 +356,7 @@ namespace RPG
             if (target == null)
                 return;
 
-            float distance = target ? Vector3.Distance(caster.transform.position, target.transform.position) : 100000;
-            if (distance > range)
+            if (!WithinRange(caster))
             {
                 brain.MoveTo(target.transform);
                 brain.countDown = 1.0f;
@@ -394,7 +412,7 @@ namespace RPG
             float time = 0;
             float speed = 5;
 
-            // time to get in range
+            // time to get in range TODO pathfind?
             float distance = Vector3.Distance(caster.transform.position, target.transform.position);
             if (distance > range)
                 time += distance / speed;

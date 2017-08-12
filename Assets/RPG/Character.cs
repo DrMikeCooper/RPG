@@ -61,6 +61,8 @@ namespace RPG
         [HideInInspector]
         public float nextTick;
 
+        AIBrain brain;
+
         public enum BodyPart
         {
             Root,
@@ -172,6 +174,7 @@ namespace RPG
             }
 
             animator = GetComponent<Animator>();
+            brain = GetComponent<AIBrain>();
         }
 
         // Update is called once per frame
@@ -431,6 +434,35 @@ namespace RPG
         public void ReleaseAnim(bool release)
         {
             animator.SetBool("release", release);
+        }
+
+        public void MakeAwareOf(Character caster)
+        {
+            if (brain && caster)
+                brain.MakeAwareOf(caster);
+        }
+
+        public bool CanSee(Character target)
+        {
+            Vector3 headPos = transform.position;
+            headPos.y = chest.position.y;
+            Vector3 targetHeadPos = target.transform.position;
+            targetHeadPos.y = target.chest.position.y;
+
+            float dist = (targetHeadPos - headPos).magnitude;
+            Ray ray = new Ray(headPos, (targetHeadPos - headPos)/dist);
+            RaycastHit[] hits = Physics.RaycastAll(ray, dist+1.0f);
+            GameObject first = null;
+            float bestDistance = dist + 2.0f;
+            foreach(RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject != gameObject && hit.distance < bestDistance)
+                {
+                    bestDistance = hit.distance;
+                    first = hit.collider.gameObject;
+                }
+            }
+            return first == target.gameObject;
         }
     }
 }

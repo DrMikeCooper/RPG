@@ -21,6 +21,7 @@ namespace RPG
             {
                 float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
                 Apply(target, charge);
+                target.MakeAwareOf(caster);
                 if (beamMaterial)
                 {
                     caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
