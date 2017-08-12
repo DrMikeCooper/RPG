@@ -34,12 +34,18 @@ namespace RPG
 
         void OnTriggerEnter(Collider col)
         {
+            Prop prop = col.gameObject.GetComponent<Prop>();
+            if (prop)
+            {
+                prop.ApplyDamage(6);
+            }
+
             Character ch = col.gameObject.GetComponent<Character>();
             if (ch != caster)
             {
                 if (ch)
                 {
-                    // bullshit correction because the cooridnates are coming out wierd here
+                    // bullshit correction because the coordinates are coming out wierd here
                     Vector3 pos  = ch.transform.position;
                     pos.y = 0;
                     ch.transform.position = pos;
