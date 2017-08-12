@@ -63,6 +63,10 @@ namespace RPG
 
         AIBrain brain;
 
+        // used by the tab targetter
+        [HideInInspector]
+        public float xScreen;
+
         public enum BodyPart
         {
             Root,

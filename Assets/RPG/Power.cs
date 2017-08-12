@@ -77,7 +77,7 @@ namespace RPG
             if (caster.energy < energyCost)
                 return false;
 
-            return targetType != TargetType.SelfOnly && WithinRange(caster);
+            return targetType == TargetType.SelfOnly || WithinRange(caster);
         }
 
         public bool WithinRange(Character caster)

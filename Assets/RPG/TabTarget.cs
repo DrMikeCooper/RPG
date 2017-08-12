@@ -6,15 +6,12 @@ namespace RPG
 {
     public class TabTarget : MonoBehaviour
     {
-        Character[] targets;
-        int index = -1;
         public GameObject reticle;
         Character user;
 
         // Use this for initialization
         void Start()
         {
-            targets = GameObject.FindObjectsOfType<Character>();
             reticle.SetActive(false);
             user = GetComponent<Character>();
         }
@@ -22,10 +19,9 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            if (index > -1)
+            if (user.target)
             {
-                GameObject target = GetTarget().gameObject;
-                reticle.transform.position = target.transform.position;
+                reticle.transform.position = user.target.transform.position;
             }
 
             // no changing targets while a power is active
@@ -34,40 +30,62 @@ namespace RPG
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                index++;
-                if (index >= targets.Length)
-                    index = 0;
+                List<Character> targets = new List<Character>();
+
+                foreach (Character ch in PowerArea.getAll())
+                {
+                    // left shift-TAB toggles between allies, normla TAB through enemies
+                    bool valid = Input.GetKey(KeyCode.LeftShift) ?
+                        (ch != user && ch.team == user.team)
+                        : (ch.team != user.team);
+                    if (valid)
+                    {
+                        Vector3 clipPos = Camera.main.WorldToViewportPoint(ch.transform.position);
+                        if (clipPos.z > 0 && clipPos.x >= 0 && clipPos.x <= 1 && clipPos.y >= 0 && clipPos.y <= 1)
+                        {
+                            targets.Add(ch);
+                            ch.xScreen = clipPos.x;
+                        }
+                    }
+                }
+
+                // sort from left to right
+                targets.Sort(delegate (Character a, Character b) {
+                    return a.xScreen.CompareTo(b.xScreen);
+                });
+
+                int selected = -1;
+                for (int i = 0; i < targets.Count; i++)
+                {
+                    if (targets[i] == user.target)
+                        selected = i;
+                }
+
+                //move to the next one with wraparound
+                selected++;
+                if (selected >= targets.Count)
+                    selected = 0;
+
+                user.target = targets[selected];
                 reticle.SetActive(true);
             }
 
-            // left mouse clicks select a character
+            // left mouse clicks select a character (or none)
             if (Input.GetMouseButtonDown(0))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit info;
                 if (Physics.Raycast(ray, out info))
                 {
-                    Character ch = info.collider.GetComponent<Character>();
-                    index = GetIndex(ch);
-                    reticle.SetActive(index != -1);
+                    user.target = info.collider.GetComponent<Character>();
+                    reticle.SetActive(user.target != null);
                 }
             }
-            user.target = GetTarget();
         }
 
         public Character GetTarget()
         {
-            if (index < 0)
-                return null;
-            return targets[index];
-        }
-
-        int GetIndex(Character ch)
-        {
-            for (int i = 0; i < targets.Length; i++)
-                if (ch == targets[i])
-                    return i;
-            return -1;
+            return user.target;
         }
     }
 }
