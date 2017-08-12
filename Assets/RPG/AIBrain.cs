@@ -20,6 +20,11 @@ namespace RPG
         [HideInInspector]
         public Character target; // gets set by the Evaluate routines
         public float closingRange; // true if we're currently moving about
+
+        float checkCounter = 0;
+        public List<Character> enemies = new List<Character>(); // array of enemies that we are aware of
+        const float checkFrequency = 1.0f;
+
         // Use this for initialization
         void Start()
         {
@@ -30,6 +35,13 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            checkCounter -= Time.deltaTime;
+            if (checkCounter <= 0)
+            {
+                UpdateEnemies();
+                checkCounter = checkFrequency;
+            }
+
             if (countDown > 0)
             {
                 countDown -= Time.deltaTime;
@@ -51,6 +63,25 @@ namespace RPG
         public void MoveTo(Transform pos)
         {
             ai.target = pos;
+        }
+
+        public void UpdateEnemies()
+        {
+            foreach (Character ch in Power.getAll())
+            {
+                if (ch.team != character.team && enemies.Contains(ch) == false)
+                {
+                    Ray ray = new Ray(character.head.position, (ch.head.position - character.head.position).normalized);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 1000))
+                    {
+                        if (hit.collider.gameObject == ch.gameObject)
+                        {
+                            enemies.Add(ch);
+                        }
+                    }
+                }
+            }
         }
     }
 }

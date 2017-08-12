@@ -309,7 +309,7 @@ namespace RPG
 
         // utility stuff for storing all characters. TODO Review this.
         static Character[] allCharacters;
-        protected static Character[] getAll()
+        public static Character[] getAll()
         {
             if (allCharacters == null)
                 allCharacters = FindObjectsOfType<Character>();
@@ -333,6 +333,9 @@ namespace RPG
             Character caster = brain.character;
             Character target = brain.target;
             caster.target = target;
+
+            if (target == null)
+                return;
 
             float distance = target ? Vector3.Distance(caster.transform.position, target.transform.position) : 100000;
             if (distance > range)
@@ -365,7 +368,7 @@ namespace RPG
 
             npcTarget = null;
             float bestEval = 0;
-            foreach (Character ch in getAll())
+            foreach (Character ch in brain.enemies)
             {
                 if (ch != caster && ch.team != caster.team && AINode.IsCondition(condition, ch, this))
                 {

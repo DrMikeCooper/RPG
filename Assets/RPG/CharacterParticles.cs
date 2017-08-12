@@ -41,7 +41,8 @@ namespace RPG
                 if (systems.ContainsKey(pair.Key) == false)
                 {
                     Status s = pair.Value;
-                    systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color, false);
+                    if (s.fx)
+                        systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color, false);
                 }
                 else
                 {
