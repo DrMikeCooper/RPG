@@ -19,7 +19,7 @@ namespace RPG
         public float countDown;
         [HideInInspector]
         public Character target; // gets set by the Evaluate routines
-
+        public float closingRange; // true if we're currently moving about
         // Use this for initialization
         void Start()
         {
@@ -36,12 +36,16 @@ namespace RPG
             }
             else
             {
+                closingRange = 0;
                 AINode node = rootNode.Execute(this);
                 countDown = node.duration;
             }
 
             if (character.activePower)
                 character.activePower.OnUpdate(character);
+
+            if (closingRange > 0 && character.target != null && Vector3.Distance(character.transform.position, character.target.transform.position) < closingRange)
+                countDown = 0;
         }
 
         public void MoveTo(Transform pos)

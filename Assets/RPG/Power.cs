@@ -338,7 +338,8 @@ namespace RPG
             if (distance > range)
             {
                 brain.MoveTo(target.transform);
-                brain.countDown = 0.5f;
+                brain.countDown = 1.0f;
+                brain.closingRange = range;
             }
             else
             {
