@@ -50,7 +50,7 @@ namespace RPG
                     col *= 0.5f; col.a = 1;
                     icons[i].color = col;
                 }
-                icons[i].fillAmount = character.GetCoolDownFactor(i);
+                icons[i].fillAmount = character.GetCoolDownFactor(character.powers[i]);
             }
         }
     }

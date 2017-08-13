@@ -42,6 +42,7 @@ namespace RPG
         public float duration;
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
         public float extraEnergyCost;
+        public bool interruptable = false;
 
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f; 

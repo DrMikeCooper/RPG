@@ -89,8 +89,7 @@ namespace RPG
         public BeamRenderer beam;
 
         [HideInInspector]
-        public float[] coolDowns;
-        Dictionary<Power, int> powerIndexes = new Dictionary<Power, int>();
+        Dictionary<Power, float> coolDowns = new Dictionary<Power, float>();
 
         [HideInInspector]
         public List<Status> statusEffects;
@@ -152,14 +151,6 @@ namespace RPG
 
             RPGSettings.instance.SetupCharacter(this);
 
-            // time remaining till each power can be used
-            coolDowns = new float[powers.Length];
-
-            for (int i = 0; i < powers.Length; i++)
-            {
-                powerIndexes[powers[i]] = i;
-            }
-
             tpc = GetComponent<ThirdPersonCharacter>();
             if (tpc)
                 baseJumpPower = tpc.m_JumpPower;
@@ -184,21 +175,6 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            // update dictionary for dynamic power swapping
-            for (int i = 0; i < powers.Length; i++)
-            {
-                powerIndexes[powers[i]] = i;
-            }
-
-            // resize coolDowns array while preserving dat if we add a power at runtime
-            if (coolDowns.Length < powers.Length)
-            {
-                float[] cds = new float[powers.Length];
-                for (int i = 0; i < coolDowns.Length; i++)
-                    cds[i] = coolDowns[i];
-                coolDowns = cds;
-            }
-
             // update out stats if we've lost/gained a status effect
             if (statusDirty)
                 ProcessStatus();
@@ -228,13 +204,13 @@ namespace RPG
                 health = maxHealth;
 
             // update cooldowns
-            for (int i = 0; i < coolDowns.Length; i++)
+            foreach(Power p in coolDowns.Keys)
             {
-                if (coolDowns[i] > 0)
+                if (coolDowns[p] > 0)
                 {
-                    coolDowns[i] -= Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
-                    if (coolDowns[i] < 0)
-                        coolDowns[i] = 0;
+                    coolDowns[p] -= Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
+                    if (coolDowns[p] < 0)
+                        coolDowns[p] = 0;
                 }
             }
 
@@ -243,19 +219,21 @@ namespace RPG
         }
 
         // returns 1 for fully recharged, 0 for just used
-        public float GetCoolDownFactor(int i)
+        public float GetCoolDownFactor(Power p)
         {
-            return 1.0f - (coolDowns[i] / powers[i].coolDown);
+            return 1.0f - (GetCoolDown(p) / p.coolDown);
         }
 
         public float GetCoolDown(Power p)
         {
-            return coolDowns[powerIndexes[p]];
+            if (!coolDowns.ContainsKey(p))
+                coolDowns[p] = 0;
+            return coolDowns[p];
         }
 
         public void UsePower(Power p)
         {
-            coolDowns[powerIndexes[p]] = p.coolDown;
+            coolDowns[p] = p.coolDown;
         }
 
         void ProcessStatus()
@@ -357,6 +335,12 @@ namespace RPG
             if (numbers)
             {
                 numbers.Activate(GetBodyPart(BodyPart.Head), damage);
+            }
+
+            // interrupt any ongoing maintains/charges with damage
+            if (activePower && activePower.interruptable)
+            {
+                activePower.OnEnd(this, true);
             }
 
             if (health < 0)
