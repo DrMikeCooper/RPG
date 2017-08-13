@@ -28,7 +28,8 @@ namespace RPG
             KickLeft,
             KickRight,
             PunchLeft,
-            PunchRight
+            PunchRight,
+            None
         };
     
         public float energyCost;
@@ -51,6 +52,7 @@ namespace RPG
         public RPGSettings.ColorCode color;
 
         public Animations animation = Animations.PunchRight;
+        public Animations releaseAnimation = Animations.None;
 
         public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
@@ -305,6 +307,9 @@ namespace RPG
                 }
             }
 
+            if (releaseAnimation != Animations.None)
+                caster.PlayAnim(releaseAnimation.ToString());
+
             EndPower(caster);
             switch (mode)
             {
@@ -313,7 +318,9 @@ namespace RPG
                     break;
                 case Mode.Charge:
                     if (!interrupted)
+                    {
                         OnActivate(caster);
+                    }
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Maintain:

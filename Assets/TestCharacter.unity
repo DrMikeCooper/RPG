@@ -375,6 +375,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: powers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4136002470040052, guid: a750a8410977f304f812206a67148f0f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.3918977
@@ -407,6 +412,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: powers.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f89c70dbc2ce0a429cd5386269b6a26,
+        type: 2}
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: powers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 53eabf627a5efea458f8a4dce1d20c44,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750a8410977f304f812206a67148f0f, type: 2}
   m_IsPrefabParent: 0
@@ -1487,7 +1504,7 @@ MonoBehaviour:
   team: 1
   powers:
   - {fileID: 11400000, guid: 53eabf627a5efea458f8a4dce1d20c44, type: 2}
-  - {fileID: 11400000, guid: df178de0e2e56034890e88993125f578, type: 2}
+  - {fileID: 11400000, guid: ed86d217b37328645a943816ee492a1e, type: 2}
   - {fileID: 11400000, guid: 8f6f99ff67b089b4d87d254d4a4311cb, type: 2}
   - {fileID: 11400000, guid: 0b90d2a3a2f29404a9fdc2d7bc2645e7, type: 2}
   - {fileID: 11400000, guid: 89f410526221a4745a99ac95cc50e58f, type: 2}
@@ -1505,7 +1522,6 @@ MonoBehaviour:
   leftFoot: {fileID: 701847161}
   rightFoot: {fileID: 498695498}
   beam: {fileID: 0}
-  coolDowns: []
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -1975,7 +1991,6 @@ MonoBehaviour:
   leftFoot: {fileID: 1879381913}
   rightFoot: {fileID: 962787034}
   beam: {fileID: 0}
-  coolDowns: []
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
