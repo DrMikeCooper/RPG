@@ -6,7 +6,7 @@ namespace RPG
     public class Stat
     {
         public Stat() { }
-        public Stat(float val, bool buff = true) { baseValue = val; isBuff = buff; }
+        public Stat(float val, bool buff = true) { baseValue = val; currentValue = val; isBuff = buff; }
 
         // base value derived from the character and their gear
         public float baseValue = 0;

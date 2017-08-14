@@ -67,9 +67,9 @@ namespace RPG
         [HideInInspector]
         public BeamRenderer beam;
 
-        [HideInInspector]
         Dictionary<Power, float> coolDowns = new Dictionary<Power, float>();
-
+        List<Power> coolDownPowers = new List<Power>();
+                    
         ThirdPersonCharacter tpc;
         float baseJumpPower;
 
@@ -77,6 +77,8 @@ namespace RPG
         void Start()
         {
             InitProp();
+
+            fadeTime = 10.0f;
 
             for (int i=0; i<RPGSettings.BasicDamageTypesCount; i++)
             {
@@ -133,11 +135,12 @@ namespace RPG
                 health = maxHealth;
 
             // update cooldowns
-            foreach(Power p in coolDowns.Keys)
+            float dt = Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
+            foreach (Power p in coolDownPowers)
             {
                 if (coolDowns[p] > 0)
                 {
-                    coolDowns[p] -= Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
+                    coolDowns[p] -= dt;
                     if (coolDowns[p] < 0)
                         coolDowns[p] = 0;
                 }
@@ -147,13 +150,22 @@ namespace RPG
         // returns 1 for fully recharged, 0 for just used
         public float GetCoolDownFactor(Power p)
         {
+            if (p.coolDown == 0)
+                return 1.0f;
+
             return 1.0f - (GetCoolDown(p) / p.coolDown);
         }
 
         public float GetCoolDown(Power p)
         {
+            if (p.coolDown == 0)
+                return 0.0f;
+
             if (!coolDowns.ContainsKey(p))
+            {
                 coolDowns[p] = 0;
+                coolDownPowers.Add(p);
+            }
             return coolDowns[p];
         }
 

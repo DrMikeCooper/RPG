@@ -49,6 +49,8 @@ namespace RPG
         [HideInInspector]
         public Power activePower;
 
+        protected float fadeTime = 0.5f;
+
         // Use this for initialization
         void Start()
         {
@@ -76,11 +78,12 @@ namespace RPG
             // apply damage resistance
             damage *= GetFactor(-stats[RPGSettings.GetResistanceStat(dt)].currentValue);
             health -= damage;
-            if (health < 0)
+            if (health <= 0)
             {
                 // die!
                 if (explosion)
                     explosion.Explode(GetBodyPart(Character.BodyPart.Chest), null);
+                Destroy(gameObject, fadeTime);
             }
 
             NumberFloater numbers = RPGSettings.instance.GetNumberFloater();
