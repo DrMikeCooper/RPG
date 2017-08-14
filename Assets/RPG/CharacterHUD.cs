@@ -64,12 +64,15 @@ namespace RPG
                 }
                 if (characterName)
                     characterName.text = character.characterName;
+
+                // turn off any meters that don't make sense for the target, eg no energy for props
+                foreach (CharacterHUDMeter meter in meters)
+                {
+                    meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
+                }
             }
 
-            foreach (CharacterHUDMeter meter in meters)
-            {
-                meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
-            }
+
 
             gameObject.SetActive(character != null);
             UpdateIcons();

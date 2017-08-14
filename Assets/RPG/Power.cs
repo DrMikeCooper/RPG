@@ -121,7 +121,8 @@ namespace RPG
             }
             else
             {
-                Character ctarget = caster.target as Character;
+                target = caster.target;
+                Character ctarget = target as Character;
                 if (ctarget && ctarget.team == caster.team)
                     target = null;
             }
