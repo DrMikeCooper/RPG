@@ -1495,12 +1495,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da69b0276d9a3ea4b884c650b4d3a7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPos: {x: 0, y: 0, z: 0}
-  headPos: {x: 0, y: 0, z: 0}
   maxHealth: 100
+  characterName: Beta
+  explosion: {fileID: 0}
+  statusEffects: []
+  statusDirty: 0
+  onStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  activePower: {fileID: 0}
   maxEnergy: 100
   portrait: {fileID: 21300000, guid: d1ff89ca024882a4cb425f05ecef879f, type: 3}
-  characterName: Beta
   team: 1
   powers:
   - {fileID: 11400000, guid: 53eabf627a5efea458f8a4dce1d20c44, type: 2}
@@ -1511,7 +1518,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a9ca49c97de0ca46bf8bbb5e6598ec7, type: 2}
   - {fileID: 11400000, guid: c91c66fa112348b4891981e1b4a605de, type: 2}
   - {fileID: 11400000, guid: d06934560ca1d2540932e45b3a2754e2, type: 2}
-  activePower: {fileID: 0}
   timer: 0
   nextTick: 0
   xScreen: 0
@@ -1522,13 +1528,6 @@ MonoBehaviour:
   leftFoot: {fileID: 701847161}
   rightFoot: {fileID: 498695498}
   beam: {fileID: 0}
-  statusEffects: []
-  statusDirty: 0
-  onStatusChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   target: {fileID: 0}
 --- !u!4 &701847161
 Transform:
@@ -1972,15 +1971,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da69b0276d9a3ea4b884c650b4d3a7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootPos: {x: 0, y: 0, z: 0}
-  headPos: {x: 0, y: 0, z: 0}
   maxHealth: 100
+  characterName: Ethan
+  explosion: {fileID: 0}
+  statusEffects: []
+  statusDirty: 0
+  onStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  activePower: {fileID: 0}
   maxEnergy: 100
   portrait: {fileID: 21300000, guid: 8f56b84e6ebe5f24580f871c394d39f2, type: 3}
-  characterName: Ethan
   team: 2
   powers: []
-  activePower: {fileID: 0}
   timer: 0
   nextTick: 0
   xScreen: 0
@@ -1991,13 +1996,6 @@ MonoBehaviour:
   leftFoot: {fileID: 1879381913}
   rightFoot: {fileID: 962787034}
   beam: {fileID: 0}
-  statusEffects: []
-  statusDirty: 0
-  onStatusChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
   target: {fileID: 0}
 --- !u!1 &882556752
 GameObject:
