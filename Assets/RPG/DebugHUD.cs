@@ -8,7 +8,7 @@ namespace RPG
     public class DebugHUD : MonoBehaviour {
 
         Text text;
-        public Character ch;
+        public Prop ch;
 
         void Start()
         {
@@ -22,7 +22,7 @@ namespace RPG
 
             if (text.enabled)
             {
-                Character ch0 = ch;
+                Prop ch0 = ch;
                 if (ch.target != null)
                     ch = ch0.target;
 

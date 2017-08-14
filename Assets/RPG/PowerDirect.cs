@@ -15,13 +15,15 @@ namespace RPG
         // useable on a single target with no to-hit roll
         public override void OnActivate(Character caster)
         {
-            Character target = GetTarget(caster);
+            Prop target = GetTarget(caster);
 
             if (target)
             {
                 float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
                 Apply(target, charge);
-                target.MakeAwareOf(caster);
+                Character ctarget = target as Character;
+                if (ctarget)
+                    ctarget.MakeAwareOf(caster);
                 if (beamMaterial)
                 {
                     caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));

@@ -10,7 +10,7 @@ namespace RPG
     public class CharacterHUD : MonoBehaviour
     {
         // the character this displays info for
-        public Character character;
+        public Prop character;
         public CharacterHUD myTarget;
 
         // the icon template set up in the editor
@@ -20,6 +20,7 @@ namespace RPG
 
         // current icons
         Dictionary<string, GameObject> icons = new Dictionary<string, GameObject>();
+        CharacterHUDMeter[] meters;
 
         // Use this for initialization
         void Start()
@@ -32,6 +33,8 @@ namespace RPG
                 if (child.name == "Portrait")
                     portrait = child.GetComponent<Image>();
             }
+
+            meters = transform.GetComponentsInChildren<CharacterHUDMeter>();
 
             // find a cloneable icon for status effects, and disable it
             Transform iconChild = transform.Find("Icon");
@@ -46,7 +49,7 @@ namespace RPG
                 character.onStatusChanged.AddListener(UpdateIcons);
         }
 
-        public void SetCharacter(Character ch)
+        public void SetCharacter(Prop ch)
         {
             if (character)
                 character.onStatusChanged.RemoveListener(UpdateIcons);
@@ -55,9 +58,17 @@ namespace RPG
             {
                 character.onStatusChanged.AddListener(UpdateIcons);
                 if (portrait)
+                {
                     portrait.sprite = character.portrait;
+                    portrait.transform.parent.gameObject.SetActive(character.portrait != null);
+                }
                 if (characterName)
                     characterName.text = character.characterName;
+            }
+
+            foreach (CharacterHUDMeter meter in meters)
+            {
+                meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
             }
 
             gameObject.SetActive(character != null);
@@ -69,7 +80,7 @@ namespace RPG
         {
             if (myTarget != null)
             {
-                Character tgt = character == null ? null : character.target;
+                Prop tgt = character == null ? null : character.target;
                 if (myTarget.character != tgt)
                     myTarget.SetCharacter(tgt);
             }

@@ -43,10 +43,15 @@ namespace RPG
                 if (stat == RPGSettings.StatName.Health)
                     maximum = hud.character.maxHealth;
                 if (stat == RPGSettings.StatName.Energy)
-                    maximum = hud.character.maxEnergy;
+                {
+                    Character c = hud.character as Character;
+                    if (c)
+                        maximum = c.maxEnergy;
+                    gameObject.SetActive(c != null);
+                }
 
 
-                float pct = hud.character.stats[stat.ToString()].currentValue / maximum;
+                float pct = hud.character.stats.ContainsKey(stat.ToString()) ? hud.character.stats[stat.ToString()].currentValue / maximum :  0;
                 meter.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pct * initialRect.width);
                 Vector3 pos = meter.localPosition;
                 pos.x = 0.5f * (pct - 1.0f) * initialRect.width;

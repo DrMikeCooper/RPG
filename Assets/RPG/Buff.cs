@@ -18,7 +18,7 @@ namespace RPG
         [Tooltip("Used only for Defence and Resistance debuffs")]
         public RPGSettings.DamageType damageType;
          
-        public override void Apply(Character ch)
+        public override void Apply(Prop ch)
         {
             foreach (Modifier mod in modifiers)
             {
@@ -34,16 +34,21 @@ namespace RPG
                         if ((dt & subType) != 0)
                         {
                             string sn = ((RPGSettings.DamageType)subType).ToString() + mod.stat.ToString();
-                            ch.stats[sn].addModifier(mod.modifier);
+                            if (ch.stats.ContainsKey(sn))
+                                ch.stats[sn].addModifier(mod.modifier);
                         }
                     }
                 }
                 else // other buffs with single stat references
                 {
-                    Stat st = ch.stats[mod.stat.ToString()];
-                    if (st == null)
-                        End();
-                    st.addModifier(mod.modifier);
+                    string sn = mod.stat.ToString();
+                    if (ch.stats.ContainsKey(sn))
+                    {
+                        Stat st = ch.stats[sn];
+                        if (st == null)
+                            End();
+                        st.addModifier(mod.modifier);
+                    }
                 }
             }
         }

@@ -104,9 +104,9 @@ namespace RPG
             return true;
         }
 
-        public Character GetTarget(Character caster)
+        public Prop GetTarget(Character caster)
         {
-            Character target = null;
+            Prop target = null;
             if (targetType != TargetType.Enemies)
             {
                 target = caster;
@@ -114,15 +114,15 @@ namespace RPG
                     target = null;
                 if ((targetType == TargetType.SelfAndAllies || targetType == TargetType.All) && caster.target != null) 
                 {
-                    target = caster.target;
-                    if (targetType == TargetType.SelfAndAllies && target && caster.team != target.team)
+                    Character ctarget = caster.target as Character;
+                    if (targetType == TargetType.SelfAndAllies && ctarget && caster.team != ctarget.team)
                         target = null;
                 }
             }
             else
             {
-                target = caster.target;
-                if (target && target.team == caster.team)
+                Character ctarget = caster.target as Character;
+                if (ctarget && ctarget.team == caster.team)
                     target = null;
             }
 
@@ -161,7 +161,7 @@ namespace RPG
 
         // apply this power to a particular target
         // charge varies from 0 to 1
-        public void Apply(Character target, float charge)
+        public void Apply(Prop target, float charge)
         {
             // how does the damage get factored in?
             float damage;

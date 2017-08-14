@@ -77,13 +77,13 @@ namespace RPG
                 RaycastHit info;
                 if (Physics.Raycast(ray, out info))
                 {
-                    user.target = info.collider.GetComponent<Character>();
+                    user.target = info.collider.GetComponent<Prop>();
                     reticle.SetActive(user.target != null);
                 }
             }
         }
 
-        public Character GetTarget()
+        public Prop GetTarget()
         {
             return user.target;
         }

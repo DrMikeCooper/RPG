@@ -6,7 +6,7 @@ namespace RPG
 {
     public class Tester : MonoBehaviour {
 
-        Character character;
+        Prop character;
         TabTarget targetter;
 
         [Serializable]
@@ -34,8 +34,9 @@ namespace RPG
                 character.ApplyDamage(10, RPGSettings.DamageType.Crushing);
             if (Input.GetKeyDown(KeyCode.U))
                 character.ApplyDamage(10, RPGSettings.DamageType.Fire);
-            if (Input.GetKeyDown(KeyCode.P))
-                character.UseEnergy(50);
+            Character c = character as Character;
+            if (Input.GetKeyDown(KeyCode.P) && c)
+                c.UseEnergy(50);
 
             for (int i = 0; i < tests.Length; i++)
             {

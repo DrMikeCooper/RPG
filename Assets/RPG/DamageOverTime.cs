@@ -15,11 +15,12 @@ namespace RPG
         float nextTick = 0;
         int ticks = 0;
         
-        public override void Apply(Character ch)
+        public override void Apply(Prop ch)
         {
+            // TODO - add to a global list of DoT's if not a character?
         }
 
-        public override void UpdateStatus(Character ch)
+        public override void UpdateStatus(Prop ch)
         {
             if (timer > nextTick)
             {

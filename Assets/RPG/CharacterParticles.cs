@@ -6,14 +6,14 @@ namespace RPG
 {
     public class CharacterParticles : MonoBehaviour
     {
-        Character character;
+        Prop character;
 
         Dictionary<string, GameObject> systems = new Dictionary<string, GameObject>();
 
         // Use this for initialization
         void Start()
         {
-            character = GetComponent<Character>();
+            character = GetComponent<Prop>();
             character.onStatusChanged.AddListener(UpdateParticles);
         }
 

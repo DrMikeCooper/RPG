@@ -37,7 +37,7 @@ namespace RPG
             Prop prop = col.gameObject.GetComponent<Prop>();
             if (prop)
             {
-                prop.ApplyDamage(6);
+                //prop.ApplyDamage(6);
             }
 
             Character ch = col.gameObject.GetComponent<Character>();

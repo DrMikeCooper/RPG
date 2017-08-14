@@ -10,7 +10,7 @@ namespace RPG
     {
         public PowerArea explosion;
 
-        public override void Apply(Character ch)
+        public override void Apply(Prop ch)
         {
             if (!explosion)
             {
