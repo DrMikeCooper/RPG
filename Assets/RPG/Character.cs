@@ -119,6 +119,7 @@ namespace RPG
 
             animator = GetComponent<Animator>();
             brain = GetComponent<AIBrain>();
+            ApplyPassives();
         }
 
         // Update is called once per frame

@@ -1356,6 +1356,10 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: d1ff89ca024882a4cb425f05ecef879f, type: 3}
   target: {fileID: 0}
   explosion: {fileID: 0}
+  passives:
+  - {fileID: 11400000, guid: 25c611b493a31e948b682046b81e643a, type: 2}
+  - {fileID: 11400000, guid: a030a6f62e43bbc478c4bb94debd5918, type: 2}
+  - {fileID: 11400000, guid: 0bca93f065f3c6849a783b4bda75f53c, type: 2}
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -1675,6 +1679,7 @@ MonoBehaviour:
   portrait: {fileID: 0}
   target: {fileID: 0}
   explosion: {fileID: 11400000, guid: d06934560ca1d2540932e45b3a2754e2, type: 2}
+  passives: []
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -1919,6 +1924,7 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 8f56b84e6ebe5f24580f871c394d39f2, type: 3}
   target: {fileID: 0}
   explosion: {fileID: 0}
+  passives: []
   statusEffects: []
   statusDirty: 0
   onStatusChanged:

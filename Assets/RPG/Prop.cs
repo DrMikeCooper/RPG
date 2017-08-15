@@ -17,7 +17,10 @@ namespace RPG
         [HideInInspector]
         public Prop target; // who is this character targetting (can be null or yourself)?
         
+        [Tooltip("Explosion power that plays on destruction")]
         public PowerArea explosion;
+
+        public Status[] passives;
 
         public float health
         {
@@ -61,6 +64,7 @@ namespace RPG
         void Start()
         {
             InitProp();
+            ApplyPassives();
         }
 
         protected void InitProp()
@@ -77,6 +81,15 @@ namespace RPG
 
             stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
             healthStat = stats[RPGSettings.StatName.Health.ToString()];
+        }
+
+        protected void ApplyPassives()
+        {
+            foreach (Status s in passives)
+            {
+                // put a permanent boost on the character - 10 million seconds = 115 days
+                ApplyStatus(s, 10000000);
+            }
         }
 
         public virtual void ApplyDamage(float damage, RPGSettings.DamageType dt)
