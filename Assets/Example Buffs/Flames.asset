@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Name: Flames
   m_EditorClassIdentifier: 
   duration: 0
-  fx: {fileID: 0}
+  fx: {fileID: 11400000, guid: be9f03ce1ace1424ab2668c04a04ac63, type: 2}
   bodyPart: 0
-  icon: {fileID: 0}
-  color: 0
+  icon: {fileID: 21300000, guid: 6fd19126d44df6448a16c54686ef1da7, type: 3}
+  color: 4
   timer: 0
   count: 0
-  damageType: 0
-  damagePerTick: 0
-  interval: 0
+  damageType: 4
+  damagePerTick: 2
+  interval: 1
   maxTicks: 0

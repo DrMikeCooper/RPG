@@ -21,5 +21,7 @@ MonoBehaviour:
   damageType: 259
   percentage: 100
   reflection: 0
-  absorbFactor: 2
-  absorbEffect: {fileID: 11400000}
+  absorbFactor: 5
+  absorbEffects:
+  - {fileID: 11400000, guid: a030a6f62e43bbc478c4bb94debd5918, type: 2}
+  - {fileID: 11400000, guid: 0bca93f065f3c6849a783b4bda75f53c, type: 2}

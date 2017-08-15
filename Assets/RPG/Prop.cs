@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 namespace RPG
 {
+    [RequireComponent(typeof(CharacterParticles))]
     // destructable prop with health and a possible explosion
     public class Prop : MonoBehaviour
     {
