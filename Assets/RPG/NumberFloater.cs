@@ -24,7 +24,6 @@ namespace RPG
             gameObject.SetActive(true);
             timer = 0;
             transform.position = t.position;
-            Debug.Log("NumberFloater @" + t.position.ToString());
             if (amount > 0)
             {
                 textMesh.text = "" + (int)(amount);

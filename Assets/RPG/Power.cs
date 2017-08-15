@@ -351,6 +351,12 @@ namespace RPG
 
         // utility stuff for storing all characters. TODO Review this.
         static Character[] allCharacters;
+
+        public static void ClearCharacterList()
+        {
+            allCharacters = null;
+        }
+
         public static Character[] getAll()
         {
             if (allCharacters == null)

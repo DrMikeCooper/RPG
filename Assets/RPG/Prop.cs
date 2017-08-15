@@ -165,7 +165,7 @@ namespace RPG
             }
         }
 
-        public void ApplyStatus(Status s, float duration)
+        public Status ApplyStatus(Status s, float duration)
         {
             if (s.isImmediate() == false)
             {
@@ -175,11 +175,13 @@ namespace RPG
                 status.duration = duration; // TODO modify with debuff resistance?
                 statusEffects.Add(status);
                 statusDirty = true;
+                return status;
             }
             else
             {
                 // apply immediately once
                 s.Apply(this);
+                return null;
             }
         }
 

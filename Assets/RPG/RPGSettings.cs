@@ -108,6 +108,7 @@ namespace RPG
         {
             if (healthBars.ContainsKey(p))
                 Destroy(healthBars[p].gameObject);
+            Power.ClearCharacterList();
         }
 
         // Utility functions for damage types

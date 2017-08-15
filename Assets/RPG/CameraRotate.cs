@@ -17,7 +17,6 @@ namespace RPG
                 float deltaX = Input.mousePosition.x - lastMouseX;
                 float deltaY = Input.mousePosition.y - lastMouseY;
                 Camera.main.transform.eulerAngles +=(Vector3.right * deltaY + Vector3.up * deltaX) * Time.deltaTime * speed;
-                Debug.Log(Input.mouseScrollDelta);
             }
             lastMouseX = Input.mousePosition.x;
             lastMouseY = Input.mousePosition.y;

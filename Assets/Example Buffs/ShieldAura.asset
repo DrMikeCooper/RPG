@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d8ad68e1fd80e41b75b70fec31882a, type: 3}
+  m_Name: ShieldAura
+  m_EditorClassIdentifier: 
+  duration: 0
+  fx: {fileID: 11400000, guid: 176376874fcf7544099a4898c3acb625, type: 2}
+  bodyPart: 2
+  icon: {fileID: 21300000, guid: ce18e2d45ab989042a344457a0b75c67, type: 3}
+  color: 12
+  timer: 0
+  count: 0
+  radius: 8
+  allies: 1
+  buff: {fileID: 11400000, guid: 25c611b493a31e948b682046b81e643a, type: 2}
