@@ -78,6 +78,10 @@ namespace RPG
                 if (Physics.Raycast(ray, out info))
                 {
                     user.target = info.collider.GetComponent<Prop>();
+
+                    //GameObject go = GameObject.Find(user.target.name);
+                    //Prop p = go ? go.GetComponent<Prop>() : null;
+
                     reticle.SetActive(user.target != null);
                 }
             }

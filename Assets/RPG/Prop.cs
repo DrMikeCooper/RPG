@@ -49,6 +49,8 @@ namespace RPG
         [HideInInspector]
         public Power activePower;
 
+        public List<HitResponse> hitResponses = new List<HitResponse>();
+
         protected float fadeTime = 0.5f;
 
         // Use this for initialization
@@ -142,7 +144,7 @@ namespace RPG
         {
             if (s.isImmediate() == false)
             {
-                // status with a duration - add to chracter's queue
+                // status with a duration - add to character's queue
                 Status status = Instantiate(s) as Status;
                 status.name = s.name;
                 status.duration = duration; // TODO modify with debuff resistance?

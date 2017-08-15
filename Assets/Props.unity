@@ -1908,38 +1908,10 @@ Transform:
   m_Father: {fileID: 210639739}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &734348994 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 141654, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
-  m_PrefabInternal: {fileID: 980240451}
 --- !u!4 &734348998 stripped
 Transform:
   m_PrefabParentObject: {fileID: 458728, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
   m_PrefabInternal: {fileID: 980240451}
---- !u!114 &734348999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 734348994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec39c770474c76149b4d5f10d9d24d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  characterName: Wooden Wall
-  portrait: {fileID: 0}
-  target: {fileID: 0}
-  explosion: {fileID: 11400000, guid: d06934560ca1d2540932e45b3a2754e2, type: 2}
-  statusEffects: []
-  statusDirty: 0
-  onStatusChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  activePower: {fileID: 0}
 --- !u!1 &780248985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,24 +2848,6 @@ Prefab:
     - target: {fileID: 458728, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
       propertyPath: m_RootOrder
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 141654, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 141654, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65233498853706298, guid: 344e4116cf98b4643a88a1d956cf10e0,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 0.653123
-      objectReference: {fileID: 0}
-    - target: {fileID: 65233498853706298, guid: 344e4116cf98b4643a88a1d956cf10e0,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 0.21737236
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
@@ -3962,38 +3916,10 @@ Transform:
   m_Father: {fileID: 1646793233}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1452573521 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 141654, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
-  m_PrefabInternal: {fileID: 1605300330}
 --- !u!4 &1452573522 stripped
 Transform:
   m_PrefabParentObject: {fileID: 458728, guid: 344e4116cf98b4643a88a1d956cf10e0, type: 2}
   m_PrefabInternal: {fileID: 1605300330}
---- !u!114 &1452573523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1452573521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec39c770474c76149b4d5f10d9d24d6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  characterName: Wooden Wall
-  portrait: {fileID: 0}
-  target: {fileID: 0}
-  explosion: {fileID: 11400000, guid: d06934560ca1d2540932e45b3a2754e2, type: 2}
-  statusEffects: []
-  statusDirty: 0
-  onStatusChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  activePower: {fileID: 0}
 --- !u!1 &1477022632
 GameObject:
   m_ObjectHideFlags: 0

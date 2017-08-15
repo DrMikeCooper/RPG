@@ -34,25 +34,40 @@ namespace RPG
 
         void OnTriggerEnter(Collider col)
         {
-            Prop prop = col.gameObject.GetComponent<Prop>();
-            if (prop)
-            {
-                //prop.ApplyDamage(6);
-            }
+            bool deflect = false;
 
-            Character ch = col.gameObject.GetComponent<Character>();
+            Prop ch = col.gameObject.GetComponent<Prop>();
             if (ch != caster)
             {
                 if (ch)
                 {
-                    // bullshit correction because the coordinates are coming out wierd here
-                    Vector3 pos  = ch.transform.position;
-                    pos.y = 0;
-                    ch.transform.position = pos;
+                    // check to see if we deflect it first
+                    foreach (HitResponse hr in ch.hitResponses)
+                    {
+                        if (hr.reflection && Random.Range(0, 100) < hr.percentage)
+                            deflect = true;
+                    }
+                    if (!deflect)
+                    {
+                        // apply the power normally
 
-                    parentPower.Apply(ch, charge);
+                        // bullshit correction because the coordinates are coming out wierd here
+                        Vector3 pos = ch.transform.position;
+                        pos.y = 0;
+                        ch.transform.position = pos;
+
+                        parentPower.Apply(ch, charge);
+                    }
+                    else
+                    {
+                        // reverse direction for now
+                        velocity = -velocity;
+                        startPos = transform.position;
+                        caster = ch as Character;
+                    }
                 }
-                Destroy(gameObject);
+                if (!deflect)
+                    Destroy(gameObject);
             }
         }
     }

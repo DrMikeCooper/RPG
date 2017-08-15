@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8198c71c0c05c4a9c149a9fd368472, type: 3}
+  m_Name: Bullet
+  m_EditorClassIdentifier: 
+  energyCost: 5
+  coolDown: 0
+  range: 50
+  lineOfSight: 1
+  type: 2
+  targetType: 3
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
+  color: 3
+  animation: 3
+  releaseAnimation: 4
+  userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
+  userBodyPart: 4
+  targetFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
+  targetBodyPart: 2
+  minDamage: 1
+  maxDamage: 5
+  effects: []
+  statusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  speed: 8
+  projectileParticles: {fileID: 198367894904105668, guid: 7802c9226a3f84b42b790034975c9c92,
+    type: 2}

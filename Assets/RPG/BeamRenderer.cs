@@ -6,7 +6,7 @@ public class BeamRenderer : MonoBehaviour {
 
     LineRenderer lineRenderer;
     Transform source;
-    Transform target;
+    GameObject target;
     float timer;
     Vector3[] pts = new Vector3[2];
     public float uvSpeed = 1.0f;
@@ -23,7 +23,7 @@ public class BeamRenderer : MonoBehaviour {
         lineRenderer.enabled = true;
         timer = duration;
         source = src;
-        target = tgt;
+        target = tgt.gameObject;
         lineRenderer.material = mat;
         
         lineRenderer.startColor = lineRenderer.endColor = col;
@@ -49,10 +49,12 @@ public class BeamRenderer : MonoBehaviour {
             Color col = lineRenderer.startColor;
             col.a = timer * 5.0f;
             lineRenderer.startColor = lineRenderer.endColor = col;
-
-            pts[0] = source.position;
-            pts[1] = target.position;
-            lineRenderer.SetPositions(pts);
+            if (target)
+            { 
+                pts[0] = source.position;
+                pts[1] = target.transform.position;
+                lineRenderer.SetPositions(pts);
+            }
         }
 	}
 }

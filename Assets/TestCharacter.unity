@@ -432,8 +432,14 @@ Prefab:
     - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: rootNode
+      value: 
+      objectReference: {fileID: 11400000, guid: dfe5558188ae74e4b8092ac3d8be5e82,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750a8410977f304f812206a67148f0f, type: 2}
   m_IsPrefabParent: 0
@@ -1358,10 +1364,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   activePower: {fileID: 0}
+  hitResponses: []
   maxEnergy: 100
   team: 1
   powers:
-  - {fileID: 11400000, guid: 8f6f99ff67b089b4d87d254d4a4311cb, type: 2}
+  - {fileID: 11400000, guid: 9ce2c40e346d0f841803b7f115e7b02e, type: 2}
+  - {fileID: 11400000, guid: cfbc97f0f17c94340a13694eda3fa4ab, type: 2}
   timer: 0
   nextTick: 0
   xScreen: 0
@@ -1672,6 +1680,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   activePower: {fileID: 0}
+  hitResponses: []
 --- !u!23 &822280567
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1904,6 +1913,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   activePower: {fileID: 0}
+  hitResponses: []
   maxEnergy: 100
   team: 2
   powers: []
