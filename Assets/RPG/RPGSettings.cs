@@ -107,7 +107,10 @@ namespace RPG
         public void RemoveCharacter(Prop p)
         {
             if (healthBars.ContainsKey(p))
-                Destroy(healthBars[p].gameObject);
+            {
+                if (healthBars[p].gameObject)
+                    Destroy(healthBars[p].gameObject);
+            }
             Power.ClearCharacterList();
         }
 

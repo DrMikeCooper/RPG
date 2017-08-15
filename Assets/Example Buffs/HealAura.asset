@@ -8,17 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
-  m_Name: Regenerate
+  m_Script: {fileID: 11500000, guid: 29d8ad68e1fd80e41b75b70fec31882a, type: 3}
+  m_Name: HealAura
   m_EditorClassIdentifier: 
-  duration: 10
+  duration: 0
   fx: {fileID: 11400000, guid: 176376874fcf7544099a4898c3acb625, type: 2}
   bodyPart: 0
-  icon: {fileID: 21300000, guid: 7ea3aaca0c515964a9ee5c6fbed1461b, type: 3}
-  color: 0
+  icon: {fileID: 21300000, guid: a014db030ee72d74b80c76b480eaa5b1, type: 3}
+  color: 9
   timer: 0
   count: 0
-  modifiers:
-  - modifier: 5
-    stat: 4
-  damageType: 512
+  radius: 5
+  allies: 1
+  buff: {fileID: 11400000, guid: 82f176386a93475409f6234734bbcd15, type: 2}
