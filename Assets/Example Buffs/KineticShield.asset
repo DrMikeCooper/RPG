@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: KineticShield
+  m_EditorClassIdentifier: 
+  energyCost: 20
+  coolDown: 5
+  range: 0
+  lineOfSight: 1
+  type: 8
+  targetType: 0
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  icon: {fileID: 21300000, guid: 7bd6cabe874f7c042a5eb2df0d0cbd36, type: 3}
+  color: 5
+  animation: 2
+  releaseAnimation: 4
+  userFX: {fileID: 11400000, guid: 176376874fcf7544099a4898c3acb625, type: 2}
+  userBodyPart: 2
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  minDamage: 0
+  maxDamage: 0
+  effects:
+  - {fileID: 11400000, guid: 784e3e25d7869b341bfabead009283b4, type: 2}
+  statusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1

@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d610a6bbf3fd2c458facbfe2a39b12c, type: 3}
-  m_Name: Reflection
+  m_Name: KineticAbsorb
   m_EditorClassIdentifier: 
   duration: 0
   fx: {fileID: 11400000, guid: a67281a11d92ea246b4b14df47fb60da, type: 2}
   bodyPart: 0
   icon: {fileID: 21300000, guid: 7bd6cabe874f7c042a5eb2df0d0cbd36, type: 3}
-  color: 11
+  color: 5
   timer: 0
   count: 0
   damageType: 259
   percentage: 100
-  reflection: 1
-  absorbFactor: 0
-  absorbEffect: {fileID: 0}
+  reflection: 0
+  absorbFactor: 2
+  absorbEffect: {fileID: 11400000}

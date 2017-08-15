@@ -1370,6 +1370,7 @@ MonoBehaviour:
   powers:
   - {fileID: 11400000, guid: 9ce2c40e346d0f841803b7f115e7b02e, type: 2}
   - {fileID: 11400000, guid: cfbc97f0f17c94340a13694eda3fa4ab, type: 2}
+  - {fileID: 11400000, guid: adaf84e9cc2f2404287ab89f252dda5b, type: 2}
   timer: 0
   nextTick: 0
   xScreen: 0

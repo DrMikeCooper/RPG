@@ -186,6 +186,13 @@ namespace RPG
             // particles on target
             if (targetFX)
                 targetFX.Begin(target.GetBodyPart(targetBodyPart), color);
+
+            // hit responses on the target
+            foreach (HitResponse hr in target.hitResponses)
+            {
+                if (Random.Range(0, 100) < hr.percentage && (hr.damageType & type) != 0)
+                    hr.OnHit(target, damage);
+            }
         }
 
         public void OnStart(Character caster)
