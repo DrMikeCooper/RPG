@@ -14,15 +14,18 @@ MonoBehaviour:
   energyCost: 20
   coolDown: 2
   range: 8
+  lineOfSight: 1
   type: 128
   targetType: 4
   mode: 2
   duration: 2
   extraEnergyCost: 50
+  interruptable: 0
   tick: 0.5
   icon: {fileID: 21300000, guid: 7ea3aaca0c515964a9ee5c6fbed1461b, type: 3}
   color: 12
   animation: 2
+  releaseAnimation: 4
   userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
   userBodyPart: 3
   targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
@@ -35,5 +38,4 @@ MonoBehaviour:
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
   speed: 3
-  projectileParticles: {fileID: 198367894904105668, guid: 7802c9226a3f84b42b790034975c9c92,
-    type: 2}
+  projectileFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
