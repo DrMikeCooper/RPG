@@ -20,7 +20,7 @@ namespace RPG
         [Tooltip("Damage multiplied by this number goes to the named stat")]
         public float absorbFactor = 0;
         [Tooltip("An effect that plays when you absorb damage")]
-        public Status absorbEffect;
+        public Status[] absorbEffects;
 
         public override void Apply(Prop ch)
         {
@@ -34,7 +34,8 @@ namespace RPG
 
             if (absorbFactor > 0)
             {
-                prop.ApplyStatus(absorbEffect, damage * absorbFactor);
+                foreach(Status absorbEffect in absorbEffects)
+                    prop.ApplyStatus(absorbEffect, damage * absorbFactor);
             }
         }
     }

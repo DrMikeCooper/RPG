@@ -183,6 +183,13 @@ namespace RPG
             foreach (Status s in effects)
                 target.ApplyStatus(s, statusDuration);
 
+            // add to a global list of DoT's if not a character?
+            if (target as Character == null)
+            {
+                if (!Prop.activeProps.Contains(target.gameObject))
+                    Prop.activeProps.Add(target.gameObject);
+            }
+
             // particles on target
             if (targetFX)
                 targetFX.Begin(target.GetBodyPart(targetBodyPart), color);

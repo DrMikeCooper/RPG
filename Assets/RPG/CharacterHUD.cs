@@ -71,8 +71,11 @@ namespace RPG
                     meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
                 }
             }
-
-
+            else
+            {
+                if (myTarget)
+                    myTarget.SetCharacter(null);
+            }
 
             gameObject.SetActive(character != null);
             UpdateIcons();
@@ -84,6 +87,7 @@ namespace RPG
             if (myTarget != null)
             {
                 Prop tgt = character == null ? null : character.target;
+                myTarget.gameObject.SetActive(tgt != null); // needed for when a target gets destroyed
                 if (myTarget.character != tgt)
                     myTarget.SetCharacter(tgt);
             }

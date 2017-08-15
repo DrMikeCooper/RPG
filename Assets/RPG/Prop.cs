@@ -15,7 +15,7 @@ namespace RPG
         public Sprite portrait;
         [HideInInspector]
         public Prop target; // who is this character targetting (can be null or yourself)?
-
+        
         public PowerArea explosion;
 
         public float health
@@ -53,6 +53,9 @@ namespace RPG
 
         protected float fadeTime = 0.5f;
 
+        // global list of atcive props to receive updates for DoTs etc
+        public static List<GameObject> activeProps = new List<GameObject>();
+        
         // Use this for initialization
         void Start()
         {
@@ -96,6 +99,14 @@ namespace RPG
 
             // TODO if we don't have a HUD yet, add a healthbar to props?
 
+        }
+
+        void OnDestroy()
+        {
+            RPGSettings.instance.RemoveCharacter(this);
+            foreach (Character ch in Power.getAll())
+                if (ch.target == this)
+                    ch.target = null;
         }
 
         public void UpdateStatus()
@@ -170,6 +181,7 @@ namespace RPG
                     s.Value.modifier = 0;
 
             groupedEffects.Clear();
+            hitResponses.Clear();
 
             // apply all timed buffs sitting on the character
             foreach (Status status in statusEffects)
@@ -215,8 +227,17 @@ namespace RPG
                 s.Value.currentValue = s.Value.getCurrentValue();
 
             statusDirty = false;
-            
+          
             onStatusChanged.Invoke();
+        }
+
+        public static void UpdateProps()
+        {
+            foreach (GameObject go in activeProps)
+            {
+                if (go)
+                    go.GetComponent<Prop>().UpdateStatus();
+            }
         }
     }
 }

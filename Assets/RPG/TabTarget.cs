@@ -23,6 +23,8 @@ namespace RPG
             {
                 reticle.transform.position = user.target.transform.position;
             }
+            else
+                reticle.SetActive(false);
 
             // no changing targets while a power is active
             if (user.activePower)

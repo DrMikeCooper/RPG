@@ -20,6 +20,8 @@ namespace RPG
          
         public override void Apply(Prop ch)
         {
+            bool awakenProp = false;
+
             foreach (Modifier mod in modifiers)
             {
                 // all stats up to Res require an additional damage type modifier which may be composite
@@ -35,7 +37,10 @@ namespace RPG
                         {
                             string sn = ((RPGSettings.DamageType)subType).ToString() + mod.stat.ToString();
                             if (ch.stats.ContainsKey(sn))
+                            {
+                                awakenProp = true;
                                 ch.stats[sn].addModifier(mod.modifier);
+                            }
                         }
                     }
                 }
@@ -47,10 +52,20 @@ namespace RPG
                         Stat st = ch.stats[sn];
                         if (st == null)
                             End();
-                        st.addModifier(mod.modifier);
+                        else
+                        {
+                            awakenProp = true;
+                            st.addModifier(mod.modifier);
+                        }
                     }
                 }
             }
+            if (awakenProp && (ch as Character) == null)
+            {
+                if (Prop.activeProps.Contains(ch.gameObject)== false)
+                    Prop.activeProps.Add(ch.gameObject);
+            }
+                
         }
     }
 }

@@ -14,6 +14,8 @@ namespace RPG
 
         public ObjectPool numbersPool;
 
+        Dictionary<Prop, OverheadHUD> healthBars = new Dictionary<Prop, OverheadHUD>();
+
         public enum DamageType
         {
             Crushing = 1,
@@ -87,6 +89,11 @@ namespace RPG
             instance = this;
         }
 
+        void Update()
+        {
+            Prop.UpdateProps();
+        }
+
         public void SetupCharacter(Character character)
         {
             // copy the HUD template and make it this
@@ -94,6 +101,13 @@ namespace RPG
             hud.name = "HUD_" + character.name;
             hud.transform.SetParent(transform);
             hud.GetComponent<CharacterHUD>().character = character;
+            healthBars[character] = hud.GetComponent<OverheadHUD>();
+        }
+
+        public void RemoveCharacter(Prop p)
+        {
+            if (healthBars.ContainsKey(p))
+                Destroy(healthBars[p].gameObject);
         }
 
         // Utility functions for damage types
