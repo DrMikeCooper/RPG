@@ -8,7 +8,7 @@ namespace RPG
     public class PowerProjectile : Power
     {
         public float speed = 1;
-        public ParticleSystem projectileParticles;
+        public VisualEffect projectileFX;
         public override void OnActivate(Character caster)
         {
             // spawn a projectile and set it going in the right direction
@@ -19,7 +19,7 @@ namespace RPG
             proj.Init(this, caster, velocity);
 
             // create particles on the projectile
-            GameObject pgo = Instantiate(projectileParticles.gameObject);
+            GameObject pgo = projectileFX.Begin(proj.transform, color, false);
             pgo.transform.parent = go.transform;
             pgo.transform.localPosition = Vector3.zero;
         }

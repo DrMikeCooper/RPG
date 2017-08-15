@@ -7,7 +7,7 @@ namespace RPG
     public class Projectile : MonoBehaviour
     {
         Power parentPower;
-        Character caster;
+        Prop caster;
         Vector3 velocity;
         Vector3 startPos;
 
@@ -15,7 +15,7 @@ namespace RPG
         float charge;
 
         // Use this for initialization
-        public void Init(Power p, Character c, Vector3 v)
+        public void Init(Power p, Prop c, Vector3 v)
         {
             startPos = c.transform.position;
             parentPower = p;
@@ -44,7 +44,7 @@ namespace RPG
                     // check to see if we deflect it first
                     foreach (HitResponse hr in ch.hitResponses)
                     {
-                        if (hr.reflection && Random.Range(0, 100) < hr.percentage)
+                        if (hr.reflection && Random.Range(0, 100) < hr.percentage && (hr.damageType&parentPower.type)!=0)
                             deflect = true;
                     }
                     if (!deflect)
