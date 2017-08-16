@@ -49,6 +49,8 @@ namespace RPG
 
         public void EndToggle(Character caster)
         {
+            caster.UsePower(this);
+
             ToggleData data = caster.toggles[this];
 
             // end all buffs

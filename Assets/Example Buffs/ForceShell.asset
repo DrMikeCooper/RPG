@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ForceShell
   m_EditorClassIdentifier: 
   energyCost: 0
-  coolDown: 0
+  coolDown: 5
   range: 0
   lineOfSight: 1
   type: 0

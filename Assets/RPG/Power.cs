@@ -157,7 +157,8 @@ namespace RPG
             caster.ReleaseAnim(true);
 
             // start the cool down
-            caster.UsePower(this);
+            if (this as PowerToggle == null)
+                caster.UsePower(this);
         }
 
         // apply this power to a particular target
