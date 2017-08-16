@@ -51,6 +51,11 @@ namespace RPG
                     icons[i].color = col;
                 }
                 icons[i].fillAmount = character.GetCoolDownFactor(character.powers[i]);
+                PowerToggle toggle = p as PowerToggle;
+                if (toggle && character.toggles.ContainsKey(toggle))
+                {
+                    icons[i].rectTransform.localScale = Vector3.one * (character.toggles[toggle].on ? 0.7f : 1.0f);
+                }
             }
         }
     }

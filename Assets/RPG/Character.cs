@@ -39,8 +39,11 @@ namespace RPG
         public float timer;
         [HideInInspector]
         public float nextTick;
+        // temp data for toggle powers
+        public Dictionary<PowerToggle, PowerToggle.ToggleData> toggles = new Dictionary<PowerToggle, PowerToggle.ToggleData>();
 
         AIBrain brain;
+
 
         // used by the tab targetter
         [HideInInspector]
@@ -125,6 +128,21 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            foreach (KeyValuePair<PowerToggle, PowerToggle.ToggleData> pair in toggles)
+            {
+                PowerToggle power = pair.Key;
+                PowerToggle.ToggleData data = pair.Value;
+                if (data.on)
+                {
+                    energy -= power.extraEnergyCost * Time.deltaTime;
+                    if (energy == 0)
+                    {
+                        data.on = false;
+                        power.EndToggle(this);
+                    }
+                }
+            }
+            
             UpdateStatus();
 
             // update health and energy over time
