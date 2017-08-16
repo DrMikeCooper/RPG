@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 119240224874845868}
   - component: {fileID: 114337468463355636}
   m_Layer: 0
-  m_Name: BlobLightProjector
+  m_Name: Buff_MandalaDecal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: 81797ef31afe25f4a87d8013073a7da0, type: 2}
+  m_Material: {fileID: 2100000, guid: cf66506092e230449b1868d49e7e6bdb, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 0
