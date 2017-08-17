@@ -12,6 +12,7 @@ namespace RPG
         public Color color;
         [HideInInspector]
         public bool autoDestroy;
+        Glow glow;
 
         float timer;
         [HideInInspector]
@@ -22,6 +23,8 @@ namespace RPG
         {
             particles = GetComponent<ParticleSystem>();
             rend = GetComponent<Renderer>();
+            glow = GetComponent<Glow>();
+
             timer = lifespan;
         }
 
@@ -49,9 +52,13 @@ namespace RPG
                 col.a = timer;
                 if (rend)
                     rend.material.SetColor("_TintColor", col);
+                if (glow)
+                    glow.Update(timer);
             }
             if (timer < 0)
             {
+                if (glow)
+                    glow.Restore();
                 if (autoDestroy)
                     Destroy(gameObject);
                 else

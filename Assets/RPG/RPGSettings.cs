@@ -34,7 +34,7 @@ namespace RPG
             All = Physical | Elemental | Paranormal
         };
         // count of the number of non-compound entries above
-        public const int BasicDamageTypesCount = 10; 
+        public const int BasicDamageTypesCount = 9; 
 
         public enum StatName
         {

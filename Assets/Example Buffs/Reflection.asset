@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Reflection
   m_EditorClassIdentifier: 
   duration: 0
-  fx: {fileID: 11400000, guid: 51c95a6e01ca40d46b7916a28503439a, type: 2}
+  fx: {fileID: 11400000, guid: c2d341cdf2cda5a49975b322918e38f4, type: 2}
   bodyPart: 0
   icon: {fileID: 21300000, guid: 7bd6cabe874f7c042a5eb2df0d0cbd36, type: 3}
   color: 11

@@ -30,7 +30,7 @@ namespace RPG
 
                 if (dt != 0) // composite buff eg Physical Resistance, All Resistance
                 {
-                    for (int i = 0; i <= 7; i++)
+                    for (int i = 0; i <= 8; i++)
                     {
                         int subType = 1 << i;
                         if ((dt & subType) != 0)
