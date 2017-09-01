@@ -44,6 +44,7 @@ namespace RPG
 
         AIBrain brain;
 
+        public bool animLock = false;
 
         // used by the tab targetter
         [HideInInspector]
@@ -121,6 +122,7 @@ namespace RPG
             }
 
             animator = GetComponent<Animator>();
+            ProcessAnimations();
             brain = GetComponent<AIBrain>();
             ApplyPassives();
         }
@@ -276,6 +278,7 @@ namespace RPG
         {
             animator.Play(name);
             ReleaseAnim(false);
+            animLock = true;
         }
 
         public void ReleaseAnim(bool release)
@@ -311,5 +314,22 @@ namespace RPG
             }
             return first == target.gameObject;
         }
+
+        void ProcessAnimations()
+        {
+            string[] names = AnimationUtilities.GetEnumNames<Power.Animations>();
+            AnimationUtilities.ProcessAnimations(animator, names, (AnimationClip a)=> AnimationUtilities.AddEventAtEnd(a, "EndPowerAnim"));
+        }
+
+        public void Hit()
+        {
+            Debug.Log("Pow!");
+        }
+
+        public void EndPowerAnim()
+        {
+            animLock = false;
+        }
+
     }
 }
