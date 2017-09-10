@@ -26,6 +26,11 @@ namespace RPG
 
         void Start()
         {
+            if (transform.parent == null)
+            {
+                Debug.Log("Glow components need a parent! (" + gameObject.name + ")");
+                return;
+            }
             meshes = transform.parent.GetComponentsInChildren<SkinnedMeshRenderer>();
             baseColors = new Color[meshes.Length];
             for (int i = 0; i < meshes.Length; i++)
@@ -41,7 +46,11 @@ namespace RPG
         }
 
         void TurnOn()
-        { 
+        {
+            // not ready yet?
+            if (meshes == null)
+                return;
+
             foreach (SkinnedMeshRenderer mesh in meshes)
             {
                 if (colorName == ColorNames._EmissionColor)
@@ -51,7 +60,7 @@ namespace RPG
                 }
                 mesh.material.SetColor(colorName.ToString(), color);
                 
-                Debug.Log("emission on " + mesh.name);
+                //Debug.Log("emission on " + mesh.name);
             }
             fadeTimer = 1;
             pulseTimer = 1;
@@ -92,7 +101,7 @@ namespace RPG
                 }
 
                 mesh.material.SetColor(colorName.ToString(), col0);
-                Debug.Log("emission on " + mesh.name);
+                //Debug.Log("emission on " + mesh.name);
                 i++;
             }
         }
