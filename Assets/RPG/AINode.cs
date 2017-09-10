@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    public abstract class AINode : ScriptableObject
+    public abstract class AINode : AIAction
     {
         public enum AICondition
         {
@@ -25,8 +25,7 @@ namespace RPG
         public AICondition condition = AICondition.Always;
 
         // functions to override
-        public abstract float Evaluate(AIBrain brain);
-        public abstract AINode Execute(AIBrain brain);
+        public override float GetDuration() { return duration; }
 
         public static bool IsCondition(AICondition condition, Character ch, Power p = null)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    public abstract class Power : ScriptableObject
+    public abstract class Power : AIAction
     {
         public enum TargetType
         {
@@ -424,7 +424,7 @@ namespace RPG
                 {
                     float eval = 100.0f / timeToDeath(caster, ch);
 
-                    // TODO - factor in collateral and splash damage
+                    // TODO - factor in collateral and splash damage ?
 
                     if (eval > bestEval)
                     {
@@ -458,6 +458,27 @@ namespace RPG
                 time += 10.0f; // assume non-damage powers do something better else?
 
             return time;
+        }
+
+        // AI Behaviour interface implemented directly by powers
+        public override float Evaluate(AIBrain brain)
+        {
+            return Evaluate(brain, AINode.AICondition.Always);
+        }
+
+        public override AIAction Execute(AIBrain brain)
+        {
+            Evaluate(brain);
+            brain.target = npcTarget;
+
+            UpdateAction(brain);
+
+            return this;
+        }
+
+        public override float GetDuration()
+        {
+            return 3 + this.duration;
         }
     }
 }

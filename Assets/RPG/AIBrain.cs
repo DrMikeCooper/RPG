@@ -6,7 +6,10 @@ namespace RPG
 {
     public class AIBrain : MonoBehaviour
     {
-        public AINode rootNode;
+        public AIAction[] behaviours;
+
+        [HideInInspector]
+        public AIAction rootNode;
 
         // sibling components
         [HideInInspector]
@@ -28,6 +31,16 @@ namespace RPG
         {
             character = GetComponent<Character>();
             ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
+
+            // set up a suitable rootnode, either a single power, or a group of them which compete!
+            if (behaviours.Length == 1)
+                rootNode = behaviours[0];
+            else
+            {
+                AINodeEvaluate evalNode = ScriptableObject.CreateInstance<AINodeEvaluate>();
+                evalNode.behaviours = behaviours;
+                rootNode = evalNode;
+            }
         }
 
         // Update is called once per frame
@@ -44,8 +57,8 @@ namespace RPG
             {
                 UpdateEnemies();
                 closingRange = 0;
-                AINode node = rootNode.Execute(this);
-                countDown = node.duration;
+                AIAction node = rootNode.Execute(this);
+                countDown = node.GetDuration();
             }
 
             if (character.activePower)

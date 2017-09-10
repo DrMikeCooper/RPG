@@ -7,17 +7,17 @@ namespace RPG
     [CreateAssetMenu(fileName = "AINodeBranch", menuName = "RPG/AINodeBranch", order = 4)]
     public class AINodeBranch : AINode
     {
-        public AINode nodeTrue;
-        public AINode nodeFalse;
+        public AIAction nodeTrue;
+        public AIAction nodeFalse;
 
         public override float Evaluate(AIBrain brain)
         {
             return 0;
         }
 
-        public override AINode Execute(AIBrain brain)
+        public override AIAction Execute(AIBrain brain)
         {
-            AINode node = IsCondition(condition, brain.character) ? nodeTrue : nodeFalse;
+            AIAction node = IsCondition(condition, brain.character) ? nodeTrue : nodeFalse;
             return node.Execute(brain);
         }
     }

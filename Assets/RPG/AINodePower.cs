@@ -7,22 +7,18 @@ namespace RPG
     [CreateAssetMenu(fileName = "AINodePower", menuName = "RPG/AINodePower", order = 4)]
     public class AINodePower : AINode
     {
+        // use this to add a condition to a power, otherwise use the power directly
         public Power power;
-
         public AICondition targetCondition;
+
         public override float Evaluate(AIBrain brain)
         {
             return power.Evaluate(brain, targetCondition);
         }
 
-        public override AINode Execute(AIBrain brain)
+        public override AIAction Execute(AIBrain brain)
         {
-            power.Evaluate(brain, targetCondition);
-            brain.target = power.npcTarget;
-
-            power.UpdateAction(brain);
-
-            return this;
+            return power.Execute(brain);
         }
     }
 }
