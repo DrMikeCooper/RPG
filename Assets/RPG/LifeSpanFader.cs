@@ -43,6 +43,7 @@ namespace RPG
         void Update()
         {
             timer -= Time.deltaTime;
+
             // fade out over the last second
             if (timer < 1)
             {
@@ -53,7 +54,7 @@ namespace RPG
                 if (rend)
                     rend.material.SetColor("_TintColor", col);
                 if (glow)
-                    glow.Update(timer);
+                    glow.UpdateGlow(timer);
             }
             if (timer < 0)
             {
