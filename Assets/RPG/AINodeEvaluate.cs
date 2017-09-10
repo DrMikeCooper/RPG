@@ -35,6 +35,7 @@ namespace RPG
         public override AIAction Execute(AIBrain brain)
         {
             Evaluate(brain);
+            bestBehaviour.Execute(brain);
             return bestBehaviour;
         }
 
