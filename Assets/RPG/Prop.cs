@@ -46,8 +46,7 @@ namespace RPG
 
         [HideInInspector]
         public bool statusDirty;
-        [HideInInspector]
-        public UnityEvent onStatusChanged = new UnityEvent();
+       
 
         [HideInInspector]
         public Dictionary<string, Stat> stats;
@@ -62,7 +61,26 @@ namespace RPG
 
         // global list of atcive props to receive updates for DoTs etc
         public static List<GameObject> activeProps = new List<GameObject>();
-        
+
+        [System.Serializable]
+        public class DeathEvent : UnityEvent<Prop>
+        {
+        }
+
+        [System.Serializable]
+        public class DamageEvent : UnityEvent<Prop, int>
+        {
+        }
+
+        [System.Serializable]
+        public class StatusEvent : UnityEvent<Prop, Status>
+        {
+        }
+
+        public DeathEvent onDead = new DeathEvent();
+        public DamageEvent onDamaged = new DamageEvent();
+        public StatusEvent onStatusChanged = new StatusEvent();
+
         // Use this for initialization
         void Start()
         {
@@ -270,7 +288,7 @@ namespace RPG
 
             statusDirty = false;
           
-            onStatusChanged.Invoke();
+            onStatusChanged.Invoke(this, null);
         }
 
         public static void UpdateProps()

@@ -78,7 +78,7 @@ namespace RPG
             }
 
             gameObject.SetActive(character != null);
-            UpdateIcons();
+            UpdateIcons(character, null);
         }
 
         // Update is called once per frame
@@ -93,7 +93,7 @@ namespace RPG
             }
         }
 
-        public void UpdateIcons()
+        public void UpdateIcons(Prop p, Status newStatus)
         {
             if (icon == null)
                 return;

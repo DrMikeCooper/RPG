@@ -17,7 +17,7 @@ namespace RPG
             character.onStatusChanged.AddListener(UpdateParticles);
         }
 
-        void UpdateParticles()
+        void UpdateParticles(Prop p, Status newStatus)
         {
             foreach (KeyValuePair<string,GameObject> pair in systems)
             {
