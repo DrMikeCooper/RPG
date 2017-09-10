@@ -94,22 +94,27 @@ namespace RPG
             Prop.UpdateProps();
         }
 
-        public void SetupCharacter(Character character)
+        public void SetupCharacter(Prop prop)
         {
+            if (healthBars.ContainsKey(prop))
+                return;
+
             // copy the HUD template and make it this
             GameObject hud = Instantiate(overheadHUD);
-            hud.name = "HUD_" + character.name;
+            hud.name = "HUD_" + prop.name;
             hud.transform.SetParent(transform);
-            hud.GetComponent<CharacterHUD>().character = character;
-            healthBars[character] = hud.GetComponent<OverheadHUD>();
+            hud.GetComponent<CharacterHUD>().character = prop;
+            healthBars[prop] = hud.GetComponent<OverheadHUD>();
         }
 
         public void RemoveCharacter(Prop p)
         {
             if (healthBars.ContainsKey(p))
             {
-                if (healthBars[p].gameObject)
-                    Destroy(healthBars[p].gameObject);
+                if (healthBars.ContainsKey(p) && healthBars[p].gameObject)
+                {
+                    healthBars[p].gameObject.SetActive(false);
+                }
             }
             Power.ClearCharacterList();
         }

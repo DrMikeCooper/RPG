@@ -22,6 +22,9 @@ namespace RPG
 
         public Status[] passives;
 
+        [HideInInspector]
+        public bool dead = false;
+
         public float health
         {
             get
@@ -94,6 +97,9 @@ namespace RPG
 
         public virtual void ApplyDamage(float damage, RPGSettings.DamageType dt)
         {
+            if (dead)
+                return;
+
             // apply damage resistance
             damage *= GetFactor(-stats[RPGSettings.GetResistanceStat(dt)].currentValue);
             health -= damage;
@@ -102,7 +108,15 @@ namespace RPG
                 // die!
                 if (explosion)
                     explosion.Explode(GetBodyPart(Character.BodyPart.Chest), null);
-                Destroy(gameObject, fadeTime);
+
+                dead = true;
+
+                RPGSettings.instance.RemoveCharacter(this);
+                foreach (Character ch in Power.getAll())
+                    if (ch.target == this)
+                        ch.target = null;
+
+                OnDeath();
             }
 
             NumberFloater numbers = RPGSettings.instance.GetNumberFloater();
@@ -112,15 +126,27 @@ namespace RPG
             }
 
             // TODO if we don't have a HUD yet, add a healthbar to props?
-
+            RPGSettings.instance.SetupCharacter(this);
         }
 
-        void OnDestroy()
+        IEnumerator DeathFade(Prop p, float time)
         {
-            RPGSettings.instance.RemoveCharacter(this);
-            foreach (Character ch in Power.getAll())
-                if (ch.target == this)
-                    ch.target = null;
+            yield return new WaitForSeconds(time);
+
+            p.gameObject.SetActive(false);
+        }
+
+        public virtual void OnDeath()
+        {
+            // TODO shatter props/instantiate a broken version?
+
+            // remove the exiting one
+            Destroy(gameObject);
+        }
+
+        void OnDead()
+        {
+
         }
 
         public void UpdateStatus()

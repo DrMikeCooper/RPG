@@ -122,7 +122,7 @@ namespace RPG
             }
 
             animator = GetComponent<Animator>();
-            ProcessAnimations();
+            //ProcessAnimations();
             brain = GetComponent<AIBrain>();
             ApplyPassives();
         }
@@ -328,8 +328,22 @@ namespace RPG
 
         public void EndPowerAnim()
         {
-            animLock = false;
+            //animLock = false;
         }
 
+        // death things
+        IEnumerator DeathFade(Prop p, float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            p.gameObject.SetActive(false);
+        }
+
+        public override void OnDeath()
+        {
+            PlayAnim("Die");
+            StartCoroutine(DeathFade(this, 10));
+        }
     }
 }
+

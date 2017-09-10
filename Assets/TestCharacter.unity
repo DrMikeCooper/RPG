@@ -970,48 +970,6 @@ Transform:
   m_Father: {fileID: 390525819}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &415237689
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.6986399
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.3468517
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4278016574862488, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-      propertyPath: m_RootOrder
-      value: 13
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 358c09f6892b6aa4597a6952f609f6ec, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &449838073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1411,7 @@ MonoBehaviour:
   target: {fileID: 0}
   explosion: {fileID: 0}
   passives: []
+  dead: 0
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -1473,6 +1432,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3aecda456cc508a4ba9fc29a27a0bb05, type: 2}
   timer: 0
   nextTick: 0
+  animLock: 0
   xScreen: 0
   head: {fileID: 1732920245}
   chest: {fileID: 1021894790}
@@ -1780,6 +1740,7 @@ MonoBehaviour:
   explosion: {fileID: 11400000, guid: d06934560ca1d2540932e45b3a2754e2, type: 2}
   passives:
   - {fileID: 11400000, guid: f970de702a6fb1c4893d9c5a9fb88295, type: 2}
+  dead: 0
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -2026,6 +1987,7 @@ MonoBehaviour:
   explosion: {fileID: 0}
   passives:
   - {fileID: 11400000, guid: 2da37bee835e00f43988287cd07891b8, type: 2}
+  dead: 0
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -2040,6 +2002,7 @@ MonoBehaviour:
   powers: []
   timer: 0
   nextTick: 0
+  animLock: 0
   xScreen: 0
   head: {fileID: 1628244196}
   chest: {fileID: 816833772}
@@ -3783,6 +3746,7 @@ MonoBehaviour:
   explosion: {fileID: 0}
   passives:
   - {fileID: 11400000, guid: 2da37bee835e00f43988287cd07891b8, type: 2}
+  dead: 0
   statusEffects: []
   statusDirty: 0
   onStatusChanged:
@@ -3797,6 +3761,7 @@ MonoBehaviour:
   powers: []
   timer: 0
   nextTick: 0
+  animLock: 0
   xScreen: 0
   head: {fileID: 749918327}
   chest: {fileID: 1099396535}

@@ -21,9 +21,7 @@ namespace RPG
         public Character target; // gets set by the Evaluate routines
         public float closingRange; // true if we're currently moving about
 
-        float checkCounter = 0;
         public List<Character> enemies = new List<Character>(); // array of enemies that we are aware of
-        const float checkFrequency = 1.0f;
 
         // Use this for initialization
         void Start()
@@ -35,12 +33,8 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            checkCounter -= Time.deltaTime;
-            if (checkCounter <= 0)
-            {
-                UpdateEnemies();
-                checkCounter = checkFrequency;
-            }
+            if (character.dead)
+                return;
 
             if (countDown > 0)
             {
@@ -48,6 +42,7 @@ namespace RPG
             }
             else
             {
+                UpdateEnemies();
                 closingRange = 0;
                 AINode node = rootNode.Execute(this);
                 countDown = node.duration;
@@ -67,6 +62,7 @@ namespace RPG
 
         public void UpdateEnemies()
         {
+            // check new enemies for line of sight and add to our list
             foreach (Character ch in Power.getAll())
             {
                 if (ch.team != character.team && enemies.Contains(ch) == false)
@@ -77,6 +73,15 @@ namespace RPG
                     }
                 }
             }
+
+            // remove Characters who are no longer on the map
+            List<Character> deathRow = new List<Character>();
+            foreach (Character ch in enemies)
+                if (ch.dead || ch.gameObject.activeSelf == false)
+                    deathRow.Add(ch);
+
+            foreach (Character ch in deathRow)
+                enemies.Remove(ch);
         }
 
         public void MakeAwareOf(Character ch)
