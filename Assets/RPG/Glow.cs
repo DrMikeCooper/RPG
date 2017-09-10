@@ -28,6 +28,7 @@ namespace RPG
                 mesh.material.EnableKeyword("_EMISSION");
                 //mesh.material.GetColor("_EmissionColor")
                 mesh.material.SetColor("_EmissionColor", color);
+                mesh.material.SetFloat("_EmissionScaleUI", color.a);
                 Debug.Log("emission on " + mesh.name);
             }
         }
@@ -40,6 +41,7 @@ namespace RPG
             foreach (SkinnedMeshRenderer mesh in meshes)
             {
                 mesh.material.SetColor("_EmissionColor", col);
+                mesh.material.SetFloat("_EmissionScaleUI", col.a);
                 Debug.Log("emission on " + mesh.name);
             }
         }
