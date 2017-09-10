@@ -153,7 +153,6 @@ namespace RPG
 
         protected void EndPower(Character caster)
         {
-            caster.activePower = null;
             caster.ReleaseAnim(true);
 
             // start the cool down
@@ -224,7 +223,8 @@ namespace RPG
 
         public void OnUpdate(Character caster)
         {
-            caster.timer += Time.deltaTime;
+            if (caster.powerStarted)
+                caster.timer += Time.deltaTime;
 
             // special code once a lunge is triggered
             if (lunge)
@@ -322,6 +322,8 @@ namespace RPG
                     return;
                 }
             }
+            else
+                caster.activePower = null;
 
             if (releaseAnimation != Animations.None)
                 caster.PlayAnim(releaseAnimation.ToString());
@@ -330,13 +332,13 @@ namespace RPG
             switch (mode)
             {
                 case Mode.Instant:
-                    OnActivate(caster);
                     break;
                 case Mode.Charge:
                     if (!interrupted)
                     {
                         OnActivate(caster);
                     }
+                    caster.activePower = null;
                     caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue = 0;
                     break;
                 case Mode.Maintain:

@@ -31,6 +31,8 @@ namespace RPG
 
         public int team = 2;
         public Power[] powers;
+        [HideInInspector]
+        public bool powerStarted = false;
 
         Animator animator;
 
@@ -279,6 +281,21 @@ namespace RPG
             animator.Play(name);
             ReleaseAnim(false);
             animLock = true;
+            powerStarted = false;
+        }
+
+        // animation event response
+        public void Hit()
+        {
+            // for instant powers, trigger it now
+            if (activePower && activePower.mode == Power.Mode.Instant)
+            {
+                // trigger it
+                activePower.OnActivate(this);
+                activePower = null;
+            }
+            // flag the power as ready to go for charge, maintain etc
+            powerStarted = true;
         }
 
         public void ReleaseAnim(bool release)
@@ -319,11 +336,6 @@ namespace RPG
         {
             string[] names = AnimationUtilities.GetEnumNames<Power.Animations>();
             AnimationUtilities.ProcessAnimations(animator, names, (AnimationClip a)=> AnimationUtilities.AddEventAtEnd(a, "EndPowerAnim"));
-        }
-
-        public void Hit()
-        {
-            Debug.Log("Pow!");
         }
 
         public void EndPowerAnim()
