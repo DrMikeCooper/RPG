@@ -26,21 +26,43 @@ namespace RPG
 
         public List<Character> enemies = new List<Character>(); // array of enemies that we are aware of
 
+        [HideInInspector]
+        public Patrolling patrolling;
+
         // Use this for initialization
         void Start()
         {
             character = GetComponent<Character>();
             ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
 
+            List<AIAction> extras = new List<AIAction>();
+            Patrolling patrol = GetComponent<Patrolling>();
+            if (patrol)
+                extras.Add(ScriptableObject.CreateInstance<AIPatrol>());
+
+            int numActions = behaviours.Length + extras.Count;
+
             // set up a suitable rootnode, either a single power, or a group of them which compete!
-            if (behaviours.Length == 1)
-                rootNode = behaviours[0];
+            if (numActions == 1)
+            {
+                if (behaviours.Length > 0)
+                    rootNode = behaviours[0];
+                else
+                    rootNode = extras[0];
+            }
             else
             {
+                AIAction[] actions = new AIAction[numActions];
+                for (int i = 0; i < behaviours.Length; i++)
+                    actions[i] = behaviours[i];
+                for (int i = 0; i < extras.Count; i++)
+                    actions[i + behaviours.Length] = extras[i];
+
                 AINodeEvaluate evalNode = ScriptableObject.CreateInstance<AINodeEvaluate>();
-                evalNode.behaviours = behaviours;
+                evalNode.behaviours = actions;
                 rootNode = evalNode;
             }
+            patrolling = GetComponent<Patrolling>();
         }
 
         // Update is called once per frame
@@ -68,8 +90,9 @@ namespace RPG
                 countDown = 0;
         }
 
-        public void MoveTo(Transform pos)
+        public void MoveTo(Transform pos, bool walking = false)
         {
+            GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().walking = walking;
             ai.target = pos;
         }
 

@@ -385,6 +385,16 @@ Prefab:
       propertyPath: powers.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: behaviours.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4136002470040052, guid: a750a8410977f304f812206a67148f0f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 1.3918977
@@ -438,7 +448,35 @@ Prefab:
         type: 2}
       propertyPath: rootNode
       value: 
-      objectReference: {fileID: 11400000, guid: dfe5558188ae74e4b8092ac3d8be5e82,
+      objectReference: {fileID: 11400000, guid: 3a9ca49c97de0ca46bf8bbb5e6598ec7,
+        type: 2}
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114148945537348020, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: behaviours.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3a9ca49c97de0ca46bf8bbb5e6598ec7,
+        type: 2}
+    - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: behaviours.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8abeb139f6c825f4a9215b6b3ed8e848,
+        type: 2}
+    - target: {fileID: 114825129599258300, guid: a750a8410977f304f812206a67148f0f,
+        type: 2}
+      propertyPath: behaviours.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f6f99ff67b089b4d87d254d4a4311cb,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a750a8410977f304f812206a67148f0f, type: 2}
@@ -1414,13 +1452,23 @@ MonoBehaviour:
   dead: 0
   statusEffects: []
   statusDirty: 0
+  activePower: {fileID: 0}
+  hitResponses: []
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DeathEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DamageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   onStatusChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: RPG.Prop+StatusEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activePower: {fileID: 0}
-  hitResponses: []
   maxEnergy: 100
   team: 1
   powers:
@@ -1430,6 +1478,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0556cb5045371b34db86236ea1436e14, type: 2}
   - {fileID: 11400000, guid: 1e915213c6b712f42bc49bc14e92fb1d, type: 2}
   - {fileID: 11400000, guid: 3aecda456cc508a4ba9fc29a27a0bb05, type: 2}
+  powerStarted: 0
   timer: 0
   nextTick: 0
   animLock: 0
@@ -1743,13 +1792,23 @@ MonoBehaviour:
   dead: 0
   statusEffects: []
   statusDirty: 0
+  activePower: {fileID: 0}
+  hitResponses: []
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DeathEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DamageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   onStatusChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: RPG.Prop+StatusEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activePower: {fileID: 0}
-  hitResponses: []
 --- !u!23 &822280567
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1990,16 +2049,27 @@ MonoBehaviour:
   dead: 0
   statusEffects: []
   statusDirty: 0
+  activePower: {fileID: 0}
+  hitResponses: []
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DeathEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DamageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   onStatusChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: RPG.Prop+StatusEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activePower: {fileID: 0}
-  hitResponses: []
   maxEnergy: 100
   team: 1
   powers: []
+  powerStarted: 0
   timer: 0
   nextTick: 0
   animLock: 0
@@ -3749,16 +3819,27 @@ MonoBehaviour:
   dead: 0
   statusEffects: []
   statusDirty: 0
+  activePower: {fileID: 0}
+  hitResponses: []
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DeathEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: RPG.Prop+DamageEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   onStatusChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+    m_TypeName: RPG.Prop+StatusEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activePower: {fileID: 0}
-  hitResponses: []
   maxEnergy: 100
   team: 1
   powers: []
+  powerStarted: 0
   timer: 0
   nextTick: 0
   animLock: 0
