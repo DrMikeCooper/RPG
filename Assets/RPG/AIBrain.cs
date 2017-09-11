@@ -74,6 +74,8 @@ namespace RPG
             if (countDown > 0)
             {
                 countDown -= Time.deltaTime;
+                if (character.isHeld())
+                    ai.SetTarget(null);
             }
             else
             {
