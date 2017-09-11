@@ -69,13 +69,18 @@ namespace RPG
         void Update()
         {
             if (character.dead)
+            {
+                ai.SetTarget(null);
                 return;
+            }
+
+            if (character.isHeld())
+                ai.SetTarget(null);
 
             if (countDown > 0)
             {
                 countDown -= Time.deltaTime;
-                if (character.isHeld())
-                    ai.SetTarget(null);
+
             }
             else
             {
