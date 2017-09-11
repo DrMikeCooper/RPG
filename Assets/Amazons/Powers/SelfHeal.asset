@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: SelfHeal
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  coolDown: 6
+  range: 0
+  lineOfSight: 1
+  type: 512
+  targetType: 0
+  mode: 2
+  duration: 3
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  icon: {fileID: 21300000, guid: 7ea3aaca0c515964a9ee5c6fbed1461b, type: 3}
+  color: 0
+  animation: 3
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 76197c2ac14f6dc489f874a14bc03763, type: 2}
+  userBodyPart: 2
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  minDamage: -5
+  maxDamage: -7
+  effects:
+  - {fileID: 11400000, guid: 84d291ad896f58e4f9a8e72514d470ae, type: 2}
+  statusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1

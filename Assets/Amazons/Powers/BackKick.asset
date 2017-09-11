@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: BackKick
+  m_EditorClassIdentifier: 
+  energyCost: 20
+  coolDown: 0
+  range: 2
+  lineOfSight: 1
+  type: 1
+  targetType: 3
+  mode: 1
+  duration: 1
+  extraEnergyCost: 20
+  interruptable: 1
+  tick: 0.5
+  icon: {fileID: 21300000, guid: 0e84edf343e794a4fbff63501786bf08, type: 3}
+  color: 0
+  animation: 9
+  releaseAnimation: 5
+  userFX: {fileID: 11400000, guid: e71a3eea37041a64fab7b6346871e949, type: 2}
+  userBodyPart: 5
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  targetBodyPart: 2
+  minDamage: 20
+  maxDamage: 60
+  effects: []
+  statusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1

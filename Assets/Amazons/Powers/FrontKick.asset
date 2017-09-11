@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: FrontKick
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  coolDown: 0
+  range: 2
+  lineOfSight: 1
+  type: 1
+  targetType: 3
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  icon: {fileID: 21300000, guid: 030de8df2e920184fb9156ae0f1abccb, type: 3}
+  color: 0
+  animation: 8
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 60e5de774cf7ec0459e43b6a72733898, type: 2}
+  userBodyPart: 6
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  minDamage: 5
+  maxDamage: 10
+  effects: []
+  statusDuration: 6
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1
