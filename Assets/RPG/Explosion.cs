@@ -23,5 +23,20 @@ namespace RPG
         }
 
         public override bool isImmediate() { return true; }
+
+        public override float DamagePerHit()
+        {
+            return explosion.DamagePerHit();
+        }
+
+        public override float StatusPerHit(Character target)
+        {
+            return explosion.StatusPerHit(target);
+        }
+
+        public virtual float BenefitPerHit(Character target)
+        {
+            return explosion.BenefitPerHit(target);
+        }
     }
 }

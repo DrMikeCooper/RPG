@@ -31,5 +31,10 @@ namespace RPG
         public abstract void Apply(Prop ch);
         public virtual bool isImmediate() { return false; } // true if the status applies instantly
         public virtual void UpdateStatus(Prop ch) {}
+
+        public virtual float DamagePerHit() { return 0; }
+        public virtual float StatusPerHit(Character target) { return 0; }
+        public virtual float BenefitPerHit(Character target) { return 0; }
+
     }
 }

@@ -340,7 +340,7 @@ namespace RPG
 
         public void EndPowerAnim()
         {
-            //animLock = false;
+            animLock = false;
         }
 
         // death things

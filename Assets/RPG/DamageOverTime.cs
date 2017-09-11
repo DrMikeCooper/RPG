@@ -14,7 +14,7 @@ namespace RPG
 
         float nextTick = 0;
         int ticks = 0;
-        
+
         public override void Apply(Prop ch)
         {
 
@@ -36,6 +36,17 @@ namespace RPG
                 }
                 nextTick += interval;
             }
+        }
+
+        public override float DamagePerHit()
+        {
+            // AI eval factor, DoT is worth half of immediate damage
+            const float fudgeFactor = 0.5f;
+
+            int numTicks = (int)(duration / interval);
+            if (numTicks > maxTicks)
+                numTicks = maxTicks;
+            return damagePerTick * numTicks * fudgeFactor;
         }
     }
 }

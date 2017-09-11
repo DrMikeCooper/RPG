@@ -17,7 +17,7 @@ namespace RPG
 
         [Tooltip("Used only for Defence and Resistance debuffs")]
         public RPGSettings.DamageType damageType;
-         
+
         public override void Apply(Prop ch)
         {
             bool awakenProp = false;
@@ -62,10 +62,48 @@ namespace RPG
             }
             if (awakenProp && (ch as Character) == null)
             {
-                if (Prop.activeProps.Contains(ch.gameObject)== false)
+                if (Prop.activeProps.Contains(ch.gameObject) == false)
                     Prop.activeProps.Add(ch.gameObject);
             }
-                
+
+        }
+        public override float StatusPerHit(Character target)
+        {
+            // some kind of heuristic to equate debuffs and holds to damage
+            // 100 hp is considered to be the ultimate debuff of death ie full disablement for ever!
+
+            float value = 0;
+            foreach (Modifier mod in modifiers)
+            {
+                if (mod.stat == RPGSettings.StatName.Hold || mod.stat == RPGSettings.StatName.Stun)
+                    value = Mathf.Max(value, target.isHeld() ? 0 : 70);
+                else if (mod.stat == RPGSettings.StatName.Root)
+                    value = Mathf.Max(value, target.isRooted() ? 0 : 30);
+                else if (mod.stat <= RPGSettings.StatName.Def) // buffs to basic combat abilities stack - 100% modifier to damage etc is bonus of 50
+                    value = Mathf.Max(value, Mathf.Abs(-mod.modifier) * 0.5f);
+                else // run speed, energy regen etc, nice to inflict but not crippling
+                    value = Mathf.Max(value, Mathf.Abs(-mod.modifier) * 0.25f);
+            }
+            return value;
+        }
+
+        public override float BenefitPerHit(Character target)
+        {
+            // heuristic to determine how useful a buff is
+
+            float value = 0;
+            foreach (Modifier mod in modifiers)
+            {
+                if (mod.stat == RPGSettings.StatName.Hold || mod.stat == RPGSettings.StatName.Stun)
+                    value = Mathf.Max(value, !target.isHeld() ? 0 : 70);
+                else if (mod.stat == RPGSettings.StatName.Root)
+                    value = Mathf.Max(value, !target.isRooted() ? 0 : 30);
+                else if (mod.stat <= RPGSettings.StatName.Def) // buffs to basic combat abilities stack - 100% modifier to damage etc is bonus of 50
+                    value = Mathf.Max(value, Mathf.Abs(mod.modifier) * 0.5f);
+                else // run speed, energy regen etc, nice to have
+                    value = Mathf.Max(value, Mathf.Abs(mod.modifier) * 0.25f);
+            }
+            return value;
         }
     }
 }

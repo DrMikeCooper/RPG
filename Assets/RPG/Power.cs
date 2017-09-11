@@ -437,6 +437,48 @@ namespace RPG
             return bestEval;
         }
 
+        float Eval(Character caster, Character target)
+        {
+            float eval = 0;
+            if (targetType == TargetType.Enemies)
+            {
+                if (target != caster && target.team != caster.team)
+                    eval = 100.0f / timeToDeath(caster, target);
+            }
+            else // ally or self benefit power
+            {
+                if (target.team == caster.team && !(target == caster && targetType == TargetType.AlliesOnly) && !(target != caster && targetType == TargetType.SelfOnly))
+                {
+                    eval = BenefitPerHit(target);
+                }
+            }
+            return eval;
+        }
+
+        public float DamagePerHit()
+        {
+            float damage = (minDamage + maxDamage)*0.5f;
+
+            for (int i = 0; i < effects.Length; i++)
+            {
+                damage += effects[i].DamagePerHit(); 
+            }
+
+            return damage;
+        }
+
+        public float StatusPerHit(Character target)
+        {
+            float value = 0;
+
+            for (int i = 0; i < effects.Length; i++)
+            {
+                value += effects[i].StatusPerHit(target);
+            }
+
+            return value;
+        }
+
         // how many seconds will it take us to kill this character?
         protected float timeToDeath(Character caster, Character target)
         {
@@ -449,16 +491,36 @@ namespace RPG
             if (distance > range)
                 time += distance / speed;
 
-            // plus time to kill
-            if (maxDamage > 0)
-            {
-                time += target.health * recharge / ((minDamage + maxDamage) * 0.5f);
-            }
-            else
-                time += 10.0f; // assume non-damage powers do something better else?
+            // this equates status to damage to attempt to work out time to death of the target
+            time += target.health * recharge / (StatusPerHit(target) + DamagePerHit());
 
             return time;
         }
+
+        // figure out how much a firendly power helps the target
+        public float BenefitPerHit(Character target)
+        {
+            float benefit = 0;
+
+            // if its a heal - either negative damage or DoT
+            float heal = -DamagePerHit();
+            float damage = target.maxHealth - target.health;
+            heal = Mathf.Max(heal, damage); // take into account over-heal
+            float pct = target.GetHealthPct();
+            // weight this for characters low on health = 1 at half health, 4 at death's door
+            float urgency = 4.0f * (1.0f - pct) * (1.0f - pct);
+
+            benefit += urgency * heal;
+
+            // status effect benefits
+            for (int i = 0; i < effects.Length; i++)
+            {
+                benefit += effects[i].BenefitPerHit(target);
+            }
+
+            return benefit;
+        }
+
 
         // AI Behaviour interface implemented directly by powers
         public override float Evaluate(AIBrain brain)

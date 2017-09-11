@@ -31,5 +31,7 @@ namespace RPG
             ch.stats[RPGSettings.GetResistanceStat(RPGSettings.DamageType.Negative)].addModifier(negativeRes);
         }
 
+        public virtual float StatusPerHit(Character target) { return -BenefitPerHit(target); }
+        public virtual float BenefitPerHit(Character target) { return (crushingRes + piercingRes + toxicRes + fireRes + coldRes + energyRes + magicRes + psionicRes + negativeRes) *0.1f; }
     }
 }

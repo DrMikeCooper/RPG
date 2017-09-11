@@ -23,6 +23,11 @@ namespace RPG
 
         }
 
+        // is this right?
+        public virtual float DamagePerHit() { return buff.DamagePerHit(); }
+        public virtual float StatusPerHit(Character target) { return buff.StatusPerHit(target); }
+        public virtual float BenefitPerHit(Character target) { return buff.BenefitPerHit(target); }
+
         public override void UpdateStatus(Prop p)
         {
             Character caster = p as Character;

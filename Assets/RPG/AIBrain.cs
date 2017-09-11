@@ -77,10 +77,17 @@ namespace RPG
             }
             else
             {
-                UpdateEnemies();
-                closingRange = 0;
-                AIAction node = rootNode.Execute(this);
-                countDown = node.GetDuration();
+                if (character.isHeld())
+                {
+                    countDown = 1;
+                }
+                else
+                {
+                    UpdateEnemies();
+                    closingRange = 0;
+                    AIAction node = rootNode.Execute(this);
+                    countDown = node.GetDuration();
+                }
             }
 
             if (character.activePower)
