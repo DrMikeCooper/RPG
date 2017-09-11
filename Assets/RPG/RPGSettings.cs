@@ -119,6 +119,11 @@ namespace RPG
             Power.ClearCharacterList();
         }
 
+        public OverheadHUD GetHUD(Character ch)
+        {
+            return healthBars[ch];
+        }
+
         // Utility functions for damage types
         public static bool IsComposite(DamageType dt)
         {

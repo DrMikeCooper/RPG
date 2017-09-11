@@ -25,9 +25,12 @@ namespace RPG
         public float closingRange; // true if we're currently moving about
 
         public List<Character> enemies = new List<Character>(); // array of enemies that we are aware of
+        public List<Character> allies = new List<Character>();
 
         [HideInInspector]
         public Patrolling patrolling;
+
+        public bool showDebug = false;
 
         // Use this for initialization
         void Start()
@@ -80,6 +83,8 @@ namespace RPG
             if (countDown > 0)
             {
                 countDown -= Time.deltaTime;
+                if (character.isHeld() == false && character.target)
+                    character.FaceTarget();
 
             }
             else
@@ -91,6 +96,14 @@ namespace RPG
                 else
                 {
                     UpdateEnemies();
+
+                    if (showDebug)
+                    {
+                        foreach (Character enemy in enemies)
+                            RPGSettings.instance.GetHUD(enemy).ClearDebugText();
+                        foreach (Character ally in allies)
+                            RPGSettings.instance.GetHUD(ally).ClearDebugText();
+                    }
                     closingRange = 0;
                     AIAction node = rootNode.Execute(this);
                     countDown = node.GetDuration();
@@ -122,6 +135,14 @@ namespace RPG
                         enemies.Add(ch);
                     }
                 }
+
+                if (ch.team == character.team && allies.Contains(ch) == false)
+                {
+                    if (character.CanSee(ch))
+                    {
+                        allies.Add(ch);
+                    }
+                }
             }
 
             // remove Characters who are no longer on the map
@@ -132,6 +153,15 @@ namespace RPG
 
             foreach (Character ch in deathRow)
                 enemies.Remove(ch);
+
+            deathRow.Clear();
+            foreach (Character ch in allies)
+                if (ch.dead || ch.gameObject.activeSelf == false)
+                    deathRow.Add(ch);
+
+            foreach (Character ch in deathRow)
+                allies.Remove(ch);
+
         }
 
         public void MakeAwareOf(Character ch)

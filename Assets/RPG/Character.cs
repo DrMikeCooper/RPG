@@ -356,6 +356,15 @@ namespace RPG
             PlayAnim("Die");
             StartCoroutine(DeathFade(this, 10));
         }
+
+        public void AddAIDebugText(Character caster, string msg)
+        {
+            AIBrain brain = caster.GetComponent<AIBrain>();
+            if (brain && brain.showDebug)
+            {
+                RPGSettings.instance.GetHUD(this).AddDebugText(msg);
+            }
+        }
     }
 }
 

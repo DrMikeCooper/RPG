@@ -19,6 +19,9 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            if (user.target && user.target.dead)
+                user.target = null;
+
             if (user.target)
             {
                 reticle.transform.position = user.target.transform.position;
@@ -37,7 +40,7 @@ namespace RPG
                 foreach (Character ch in PowerArea.getAll())
                 {
                     // left shift-TAB toggles between allies, normla TAB through enemies
-                    bool valid = Input.GetKey(KeyCode.LeftShift) ?
+                    bool valid = (!ch.dead) && Input.GetKey(KeyCode.LeftShift) ?
                         (ch != user && ch.team == user.team)
                         : (ch.team != user.team);
                     if (valid)

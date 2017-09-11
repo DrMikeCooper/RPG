@@ -29,6 +29,12 @@ namespace RPG
             KickRight,
             PunchLeft,
             PunchRight,
+            axe_kick,
+            back_kick,
+            brazilian_kick,
+            defensive_side_kick,
+            front_kick,
+            CombatReady,
             None
         };
     
@@ -418,11 +424,12 @@ namespace RPG
 
             npcTarget = null;
             float bestEval = 0;
-            foreach (Character ch in brain.enemies)
+            List<Character> targets = targetType == TargetType.Enemies ? brain.enemies : brain.allies;
+            foreach (Character ch in targets)
             {
-                if (ch != caster && ch.team != caster.team && AINode.IsCondition(condition, ch, this))
+                if (ch != caster && AINode.IsCondition(condition, ch, this))
                 {
-                    float eval = 100.0f / timeToDeath(caster, ch);
+                    float eval = Eval(caster, ch);
 
                     // TODO - factor in collateral and splash damage ?
 
@@ -443,13 +450,17 @@ namespace RPG
             if (targetType == TargetType.Enemies)
             {
                 if (target != caster && target.team != caster.team)
+                {
                     eval = 100.0f / timeToDeath(caster, target);
+                    target.AddAIDebugText(caster, name + " " + eval);
+                }
             }
             else // ally or self benefit power
             {
                 if (target.team == caster.team && !(target == caster && targetType == TargetType.AlliesOnly) && !(target != caster && targetType == TargetType.SelfOnly))
                 {
                     eval = BenefitPerHit(target);
+                    target.AddAIDebugText(caster, name + " " + eval);
                 }
             }
             return eval;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RPG
 {
@@ -8,6 +9,9 @@ namespace RPG
     {
         Transform target;
         RectTransform rect;
+
+        public GameObject debugPanel;
+        public Text debugText;
 
         // Use this for initialization
         void Start()
@@ -22,6 +26,18 @@ namespace RPG
             Vector3 targetPos = target.position + 2.5f * Vector3.up;
             rect.position = targetPos;
             transform.forward = Camera.main.transform.forward;
+
+            debugPanel.SetActive(debugText.text != "");
+        }
+
+        public void ClearDebugText()
+        {
+            debugText.text = "";
+        }
+
+        public void AddDebugText(string msg)
+        {
+            debugText.text += (msg + "\n");
         }
     }
 }

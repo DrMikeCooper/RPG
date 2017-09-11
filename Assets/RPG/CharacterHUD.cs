@@ -47,6 +47,8 @@ namespace RPG
             gameObject.SetActive(character != null);
             if (character)
                 character.onStatusChanged.AddListener(UpdateIcons);
+
+            SetCharacter(character);
         }
 
         public void SetCharacter(Prop ch)
