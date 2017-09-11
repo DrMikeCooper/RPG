@@ -6,12 +6,14 @@ namespace RPG
 {
     public class AttackAnimation : StateMachineBehaviour
     {
-        // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        // When we fire off one of these, make sure we have the right animation events at the end
+        override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            Character ch = animator.gameObject.GetComponent<Character>();
-            if (ch)
-                ch.animLock = false;
+            AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(layerIndex);
+            foreach (AnimatorClipInfo clipInfo in clips)
+            {
+                AnimationUtilities.AddEventAtEnd(clipInfo.clip, "EndPowerAnim");
+            }
         }
     }
 }

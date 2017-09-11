@@ -120,6 +120,7 @@ namespace RPG
                         ike.transform.SetParent(transform);
                         RectTransform rect = ike.GetComponent<RectTransform>();
                         rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
+                        rect.localScale = Vector3.one;
                         offsetX += 18; //todo
                         icons[s.name] = ike;
                         ike.name = s.name;
