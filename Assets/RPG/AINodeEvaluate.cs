@@ -18,6 +18,9 @@ namespace RPG
 
         public override float Evaluate(AIBrain brain)
         {
+            // if the caster condition fails, don't do it!
+            if (!IsCondition(condition, brain.character)) return 0;
+
             bestBehaviour = null;
             for (int i = 0; i < behaviours.Length; i++)
             {

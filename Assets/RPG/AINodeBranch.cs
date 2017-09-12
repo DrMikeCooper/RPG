@@ -10,14 +10,19 @@ namespace RPG
         public AIAction nodeTrue;
         public AIAction nodeFalse;
 
+        bool isTrue = false;
         public override float Evaluate(AIBrain brain)
         {
-            return 0;
+            isTrue = IsCondition(condition, brain.character);
+            if (isTrue)
+                return nodeTrue.Evaluate(brain);
+            else
+                return nodeFalse.Evaluate(brain);
         }
 
         public override AIAction Execute(AIBrain brain)
         {
-            AIAction node = IsCondition(condition, brain.character) ? nodeTrue : nodeFalse;
+            AIAction node = isTrue ? nodeTrue : nodeFalse;
             return node.Execute(brain);
         }
     }

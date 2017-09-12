@@ -41,6 +41,7 @@ namespace RPG
 
         public override float Evaluate(AIBrain brain, AINode.AICondition condition)
         {
+            // TODO
             return GetSplashDamage(brain.character) * 0.5f *(maxDamage + minDamage);
         }
 

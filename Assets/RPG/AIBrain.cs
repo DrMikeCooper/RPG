@@ -166,7 +166,7 @@ namespace RPG
 
         public void MakeAwareOf(Character ch)
         {
-            if (ch.team != character.team && enemies.Contains(ch) == false)
+            if (ch && ch.team != character.team && enemies.Contains(ch) == false)
                 enemies.Add(ch);
         }
     }

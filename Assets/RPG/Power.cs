@@ -237,7 +237,8 @@ namespace RPG
             {
                 FaceTarget(caster);
                 caster.transform.position = Vector3.MoveTowards(caster.transform.position, caster.target.transform.position, closeToTargetSpeed*Time.deltaTime);
-                if (Vector3.Distance(caster.transform.position, caster.target.transform.position) <= 1)
+                float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
+                if (dist <= 1)
                     OnEnd(caster);
                 return;
             }
@@ -322,10 +323,19 @@ namespace RPG
             if (mode == Mode.Instant)
             {
                 StartPower(caster);
-                if (closeToTargetSpeed > 0 && Vector3.Distance(caster.transform.position, caster.target.transform.position) > 1)
+                float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
+                if (closeToTargetSpeed > 0)
                 {
-                    lunge = true;
-                    return;
+                    if (dist > 1)
+                    {
+                        lunge = true;
+                        return;
+                    }
+                    else
+                    {
+                        caster.animLock = false;
+                        caster.activePower = null;
+                    }
                 }
             }
             else
