@@ -323,9 +323,10 @@ namespace RPG
             if (mode == Mode.Instant)
             {
                 StartPower(caster);
-                float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
+
                 if (closeToTargetSpeed > 0)
                 {
+                    float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
                     if (dist > 1)
                     {
                         lunge = true;
@@ -546,7 +547,7 @@ namespace RPG
         // AI Behaviour interface implemented directly by powers
         public override float Evaluate(AIBrain brain)
         {
-            return Evaluate(brain, AINode.AICondition.Always);
+            return Evaluate(brain, AINode.always);
         }
 
         public override AIAction Execute(AIBrain brain)

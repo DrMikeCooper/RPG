@@ -6,56 +6,53 @@ namespace RPG
 {
     public abstract class AINode : AIAction
     {
-        public enum AICondition
+        public enum AIConditionType
         {
             Always,
             Held,
             Rooted,
-            HalfHealth,
-            QuarterHealth,
-            Percent75,
-            Percent50,
-            Percent25,
-            Vulnerable,
+            Health,
+            Energy,
+            Random,
             Shielded,
+            Boosted,
         };
+
+        [System.Serializable]
+        public struct AICondition
+        {
+            public AICondition(AIConditionType t) { type = t; threshold = 0; reverse = false; }
+            public AIConditionType type;
+            public float threshold;
+            public bool reverse;
+        }
+
+        public static AICondition always = new AICondition(AIConditionType.Always);
+
         public float duration;
 
         // the condition to check against the caster before using
-        public AICondition condition = AICondition.Always;
+        public AICondition condition;
 
         // functions to override
         public override float GetDuration() { return duration; }
 
         public static bool IsCondition(AICondition condition, Character ch, Power p = null)
         {
-            switch (condition)
+            bool isTrue = true;
+            switch (condition.type)
             {
-                case AICondition.Held: return ch.isHeld();
-                case AICondition.Rooted: return ch.isRooted();
-                case AICondition.HalfHealth: return ch.health <= ch.maxHealth * 0.5f;
-                case AICondition.QuarterHealth: return ch.health <= ch.maxHealth * 0.25f;
-                case AICondition.Percent75: return Random.Range(0, 100) < 75;
-                case AICondition.Percent50: return Random.Range(0, 100) < 50;
-                case AICondition.Percent25: return Random.Range(0, 100) < 25;
-                case AICondition.Vulnerable:
-                    {
-                        if (p)
-                        {
-                            return ch.stats[RPGSettings.GetResistanceStat(p.type)].currentValue < 0;
-                        }
-                        return false; 
-                    }
-                case AICondition.Shielded:
-                    {
-                        if (p)
-                        {
-                            return ch.stats[RPGSettings.GetResistanceStat(p.type)].currentValue > 0;
-                        }
-                        return false; 
-                    }
+                case AIConditionType.Held: isTrue = ch.isHeld(); break;
+                case AIConditionType.Rooted: isTrue = ch.isRooted(); break;
+                case AIConditionType.Health: isTrue = ch.GetHealthPct() < condition.threshold; break;
+                case AIConditionType.Energy: isTrue = ch.GetEnergyPct() < condition.threshold; break;
+                case AIConditionType.Random: isTrue = Random.Range(0, 100) < condition.threshold; break;
+                case AIConditionType.Shielded: isTrue = ch.stats[RPGSettings.GetResistanceStat(p.type)].currentValue > condition.threshold; break;
+                case AIConditionType.Boosted: isTrue = ch.stats[RPGSettings.GetDamageStat(p.type)].currentValue > condition.threshold; break;
             }
-            return true;
+            if (condition.reverse)
+                isTrue = !isTrue;
+            return isTrue;
         }
     }
 }
