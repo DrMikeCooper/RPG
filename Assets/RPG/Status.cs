@@ -13,8 +13,11 @@ namespace RPG
         public Sprite icon;
         public RPGSettings.ColorCode color;
         public int maxStacks = 1;
+        [HideInInspector]
         public int stacks = 0;
+        [HideInInspector]
         public Character sourceCharacter;
+        [HideInInspector]
         public ScriptableObject sourcePower; // could be a Power or HitResponse
 
         [HideInInspector]

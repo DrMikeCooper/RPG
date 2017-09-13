@@ -7,6 +7,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "PowerProjectile", menuName = "RPG/PowerProjectile", order = 2)]
     public class PowerProjectile : Power
     {
+        [Header("Power Projectile Settings")]
         public float speed = 1;
         public VisualEffect projectileFX;
         public override void OnActivate(Character caster)

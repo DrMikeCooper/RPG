@@ -38,6 +38,7 @@ namespace RPG
             None
         };
     
+        [Header("General Settings")]
         public float energyCost;
         public float coolDown;
         public float range;
@@ -45,6 +46,7 @@ namespace RPG
         public RPGSettings.DamageType type;
         public TargetType targetType;
         public Mode mode = Mode.Instant;
+        [Header("Charge/Maintain Settings")]
         [Tooltip("How long the power lasts if its a Charge or Maintain")]
         public float duration;
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
@@ -52,11 +54,13 @@ namespace RPG
         public bool interruptable = false;
 
         [Tooltip("Interval at which the power ticks, used for Maintains")]
-        public float tick = 0.5f; 
+        public float tick = 0.5f;
 
+        [Header("HUD Settings")]
         public Sprite icon;
         public RPGSettings.ColorCode color;
 
+        [Header("Animation Settings")]
         public Animations animation = Animations.PunchRight;
         public Animations releaseAnimation = Animations.None;
 
@@ -65,6 +69,7 @@ namespace RPG
         public VisualEffect targetFX;
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
+        [Header("RPG Effects")]
         public float minDamage;
         public float maxDamage;
         public Status[] effects;

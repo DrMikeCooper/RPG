@@ -7,6 +7,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "PowerArea", menuName = "RPG/PowerArea", order = 2)]
     public class PowerArea : Power
     {
+        [Header("Power Area Settings")]
         public float radius;
         [Tooltip("Optional settings to allow for different chargeup particles. Leave empty to use userFX for the explosion")]
         public VisualEffect explodeFX;

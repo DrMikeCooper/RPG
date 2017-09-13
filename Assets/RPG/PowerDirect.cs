@@ -8,6 +8,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerDirect", order = 2)]
     public class PowerDirect : Power
     {
+        [Header("Power Direct Settings")]
         public Material beamMaterial;
         public float beamWidth = 0.5f;
         public float beamUVSpeed = 1.0f;
