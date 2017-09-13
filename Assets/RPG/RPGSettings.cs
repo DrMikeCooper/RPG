@@ -76,6 +76,7 @@ namespace RPG
         public GameObject projectile;
         public GameObject beam;
 
+        [HideInInspector]
         public Color[] colors = new Color[(int)ColorCode.Custom];
 
         public static Color GetColor(ColorCode cc)
