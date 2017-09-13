@@ -30,8 +30,8 @@ MonoBehaviour:
   userBodyPart: 4
   targetFX: {fileID: 11400000, guid: e71a3eea37041a64fab7b6346871e949, type: 2}
   targetBodyPart: 1
-  minDamage: -10
-  maxDamage: -10
+  minDamage: -20
+  maxDamage: -30
   effects: []
   statusDuration: 10
   closeToTargetSpeed: 0

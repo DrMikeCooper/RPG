@@ -12,6 +12,10 @@ namespace RPG
         public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
         public RPGSettings.ColorCode color;
+        public int maxStacks = 1;
+        public int stacks = 0;
+        public Character sourceCharacter;
+        public ScriptableObject sourcePower; // could be a Power or HitResponse
 
         [HideInInspector]
         public float timer = 0;

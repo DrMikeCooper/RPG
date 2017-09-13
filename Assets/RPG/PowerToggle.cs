@@ -44,7 +44,7 @@ namespace RPG
 
             // start all buffs off with a really long life
             for (int i = 0; i < effects.Length; i++)
-                data.buffs[i] = caster.ApplyStatus(effects[i], longtime);
+                data.buffs[i] = caster.ApplyStatus(effects[i], longtime, caster, this);
         }
 
         public void EndToggle(Character caster)

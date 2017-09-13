@@ -40,16 +40,16 @@ namespace RPG
         }
 
         [HideInInspector]
-        public List<Status> statusEffects;
+        public List<Status> statusEffects = new List<Status>();
         [HideInInspector]
-        public Dictionary<string, Status> groupedEffects;
+        public Dictionary<string, Status> groupedEffects = new Dictionary<string, Status>();
 
         [HideInInspector]
         public bool statusDirty;
        
 
         [HideInInspector]
-        public Dictionary<string, Stat> stats;
+        public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
 
         // here in the base class for logic in ProcessStatus, only ever non-null on characters
         [HideInInspector]
@@ -91,9 +91,6 @@ namespace RPG
         protected void InitProp()
         {
             statusDirty = true;
-            stats = new Dictionary<string, Stat>();
-            statusEffects = new List<Status>();
-            groupedEffects = new Dictionary<string, Status>();
 
             for (int i = 0; i < RPGSettings.BasicDamageTypesCount; i++)
             {
@@ -109,7 +106,7 @@ namespace RPG
             foreach (Status s in passives)
             {
                 // put a permanent boost on the character - 10 million seconds = 115 days
-                ApplyStatus(s, 10000000);
+                ApplyStatus(s, 10000000, this as Character, s);
             }
         }
 
@@ -209,17 +206,36 @@ namespace RPG
             }
         }
 
-        public Status ApplyStatus(Status s, float duration)
+        public Status ApplyStatus(Status s, float duration, Character caster, ScriptableObject power)
         {
             if (s.isImmediate() == false)
             {
-                // status with a duration - add to character's queue
-                Status status = Instantiate(s) as Status;
-                status.name = s.name;
-                status.duration = duration; // TODO modify with debuff resistance?
-                statusEffects.Add(status);
-                statusDirty = true;
-                return status;
+                // can we find a status of the same type with the same character and name?
+                Status copy = null;
+                for (int i = 0; i < statusEffects.Count; i++)
+                    if (statusEffects[i].sourceCharacter == caster && statusEffects[i].sourcePower == power && statusEffects[i].name == s.name)
+                        copy = statusEffects[i];
+
+                if (copy)
+                {
+                    // refresh the duration, and possibly increase how amny stacks we have
+                    copy.duration = duration;
+                    if (copy.stacks < copy.maxStacks)
+                        copy.stacks++;
+                    return copy;
+                }
+                else
+                {
+                    // status with a duration - add to character's queue
+                    Status status = Instantiate(s) as Status;
+                    status.name = s.name;
+                    status.sourceCharacter = caster;
+                    status.sourcePower = power;
+                    status.duration = duration; // TODO modify with debuff resistance?
+                    statusEffects.Add(status);
+                    statusDirty = true;
+                    return status;
+                }
             }
             else
             {

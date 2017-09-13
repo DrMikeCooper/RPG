@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Name: AxeKickWhenStunned
   m_EditorClassIdentifier: 
   duration: 5
-  condition: 1
+  condition:
+    type: 0
+    threshold: 0
+    reverse: 0
   power: {fileID: 11400000, guid: bf5e6d046e52637498adec17fd201eb5, type: 2}
-  targetCondition: 0
+  targetCondition:
+    type: 1
+    threshold: 0
+    reverse: 0

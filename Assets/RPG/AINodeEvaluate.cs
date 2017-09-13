@@ -38,13 +38,14 @@ namespace RPG
         public override AIAction Execute(AIBrain brain)
         {
             Evaluate(brain);
-            bestBehaviour.Execute(brain);
+            if (bestBehaviour)
+                bestBehaviour.Execute(brain);
             return bestBehaviour;
         }
 
         public override float GetDuration()
         {
-            return bestBehaviour.GetDuration();
+            return bestBehaviour == null ? 10 : bestBehaviour.GetDuration();
         }
     }
 }

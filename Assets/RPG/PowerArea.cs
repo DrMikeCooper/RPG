@@ -28,7 +28,7 @@ namespace RPG
             {
                 if (ch != caster && Vector3.Distance(ch.transform.position, centre.position) < radius)
                 {
-                    Apply(ch, charge);
+                    Apply(ch, charge, caster);
                 }
             }
         }

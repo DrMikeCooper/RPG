@@ -168,7 +168,7 @@ namespace RPG
 
         // apply this power to a particular target
         // charge varies from 0 to 1
-        public void Apply(Prop target, float charge)
+        public void Apply(Prop target, float charge, Character caster)
         {
             // how does the damage get factored in?
             float damage;
@@ -187,7 +187,7 @@ namespace RPG
             if (damage != 0)
                 target.ApplyDamage(damage, type);
             foreach (Status s in effects)
-                target.ApplyStatus(s, statusDuration);
+                target.ApplyStatus(s, statusDuration, caster, this);
 
             // add to a global list of DoT's if not a character?
             if (target as Character == null)

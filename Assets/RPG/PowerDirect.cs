@@ -20,7 +20,7 @@ namespace RPG
             if (target)
             {
                 float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
-                Apply(target, charge);
+                Apply(target, charge, caster);
                 Character ctarget = target as Character;
                 if (ctarget)
                     ctarget.MakeAwareOf(caster);

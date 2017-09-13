@@ -56,7 +56,7 @@ namespace RPG
                         pos.y = 0;
                         ch.transform.position = pos;
 
-                        parentPower.Apply(ch, charge);
+                        parentPower.Apply(ch, charge, caster as Character);
                     }
                     else
                     {

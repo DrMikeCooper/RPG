@@ -70,7 +70,8 @@ namespace RPG
                 // turn off any meters that don't make sense for the target, eg no energy for props
                 foreach (CharacterHUDMeter meter in meters)
                 {
-                    meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
+                    if (character.stats != null)
+                        meter.transform.parent.gameObject.SetActive(character.stats.ContainsKey(meter.stat.ToString()));
                 }
             }
             else

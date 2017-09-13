@@ -106,7 +106,7 @@ namespace RPG
                     }
                     closingRange = 0;
                     AIAction node = rootNode.Execute(this);
-                    countDown = node.GetDuration();
+                    countDown = node == null ? 10 : node.GetDuration();
                 }
             }
 

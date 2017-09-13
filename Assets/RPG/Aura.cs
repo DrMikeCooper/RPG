@@ -55,7 +55,7 @@ namespace RPG
                                 }
                                 else
                                 {
-                                    affected[ch] = ch.ApplyStatus(buff, 1.5f);
+                                    affected[ch] = ch.ApplyStatus(buff, 1.5f, caster, this);
                                     //Debug.Log("start");
                                 }
                             }

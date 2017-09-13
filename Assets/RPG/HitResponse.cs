@@ -35,7 +35,7 @@ namespace RPG
             if (absorbFactor > 0)
             {
                 foreach(Status absorbEffect in absorbEffects)
-                    prop.ApplyStatus(absorbEffect, damage * absorbFactor);
+                    prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
             }
         }
     }

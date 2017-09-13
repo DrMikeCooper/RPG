@@ -82,6 +82,9 @@ namespace RPG
         // Use this for initialization
         void Start()
         {
+            animator = GetComponent<Animator>();
+            brain = GetComponent<AIBrain>();
+
             InitProp();
 
             fadeTime = 10.0f;
@@ -123,9 +126,6 @@ namespace RPG
                 beam = beamChild.GetComponent<BeamRenderer>();
             }
 
-            animator = GetComponent<Animator>();
-            //ProcessAnimations();
-            brain = GetComponent<AIBrain>();
             ApplyPassives();
         }
 
