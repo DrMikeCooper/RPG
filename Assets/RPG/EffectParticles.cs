@@ -10,7 +10,7 @@ namespace RPG
         public GameObject prefab; // reference to the prefab set up in editor
         LifeSpanFader fader;
 
-        public override GameObject Begin(Transform t, RPGSettings.ColorCode color, bool autoStop = true)
+        public override GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true)
         {
             GameObject go = Instantiate(prefab);
             go.transform.parent = t;
@@ -20,7 +20,7 @@ namespace RPG
             // deals with trail renderers, mesh renderers and particle renderers if they use the Particles shaders (and not the mobile ones)
             Renderer r = go.GetComponent<Renderer>();
             if (r)
-                r.material.SetColor("_TintColor", RPGSettings.GetColor(color));
+                r.material.SetColor("_TintColor", tint.GetColor());
 
             fader = go.GetComponent<LifeSpanFader>();
             if (fader == null)
@@ -28,7 +28,7 @@ namespace RPG
 
             fader.enabled = autoStop;
             fader.lifespan = lifespan;
-            fader.color = RPGSettings.GetColor(color);
+            fader.color = tint.GetColor();
             fader.autoDestroy = autoStop;
 
             return go;

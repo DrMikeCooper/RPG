@@ -46,19 +46,21 @@ namespace RPG
         public RPGSettings.DamageType type;
         public TargetType targetType;
         public Mode mode = Mode.Instant;
-        [Header("Charge/Maintain Settings")]
+        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
         [Tooltip("How long the power lasts if its a Charge or Maintain")]
         public float duration;
+        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
         public float extraEnergyCost;
+        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
         public bool interruptable = false;
-
+        [ShowIf("mode", 2)]
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f;
 
         [Header("HUD Settings")]
         public Sprite icon;
-        public RPGSettings.ColorCode color;
+        public RPGSettings.Tint tint;
 
         [Header("Animation Settings")]
         public Animations animation = Animations.PunchRight;
@@ -66,7 +68,9 @@ namespace RPG
 
         public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
+        [ShowIf("targetType", 0, ShowIfAttribute.Comparison.Not)]
         public VisualEffect targetFX;
+        [ShowIf("targetType", 0, ShowIfAttribute.Comparison.Not)]
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         [Header("RPG Effects")]
@@ -147,7 +151,7 @@ namespace RPG
             caster.energy -= energyCost;
             if (userFX)
             {
-                userFX.Begin(caster.GetBodyPart(userBodyPart), color);
+                userFX.Begin(caster.GetBodyPart(userBodyPart), tint);
             }
 
             FaceTarget(caster);
@@ -203,7 +207,7 @@ namespace RPG
 
             // particles on target
             if (targetFX)
-                targetFX.Begin(target.GetBodyPart(targetBodyPart), color);
+                targetFX.Begin(target.GetBodyPart(targetBodyPart), tint);
 
             // hit responses on the target
             foreach (HitResponse hr in target.hitResponses)

@@ -11,7 +11,7 @@ namespace RPG
         public VisualEffect fx;
         public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
-        public RPGSettings.ColorCode color;
+        public RPGSettings.Tint tint;
         public int maxStacks = 1;
         [HideInInspector]
         public int stacks = 0;

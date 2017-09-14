@@ -22,7 +22,7 @@ namespace RPG
         {
             VisualEffect fx = explodeFX ? explodeFX : userFX;
             if (fx)
-                fx.Begin(centre, color);
+                fx.Begin(centre, tint);
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
             // check all other characters within the radius
             foreach (Character ch in getAll())

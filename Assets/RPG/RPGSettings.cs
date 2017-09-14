@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace RPG
 {
+    [ExecuteInEditMode]
     public class RPGSettings : MonoBehaviour
     {
         [Tooltip("Standard HUD to display over the head of every character in the scene")]
@@ -72,6 +74,21 @@ namespace RPG
             Paranormal,
             Custom
         };
+
+        [Serializable]
+        public struct Tint
+        {
+            public ColorCode code;
+            public Color customColor;
+
+            public Color GetColor()
+            {
+                if (code == ColorCode.Custom)
+                    return customColor;
+                else
+                    return RPGSettings.instance ? RPGSettings.instance.colors[(int)code] : Color.white;
+            }
+        }
 
         public GameObject projectile;
         public GameObject beam;

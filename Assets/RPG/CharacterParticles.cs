@@ -42,7 +42,7 @@ namespace RPG
                 {
                     Status s = pair.Value;
                     if (s.fx)
-                        systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.color, false);
+                        systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.tint, false);
                 }
                 else
                 {

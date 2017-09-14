@@ -14,8 +14,7 @@ namespace RPG
 
             // Show default inspector property editor
             DrawDefaultInspector();
-            //EditorGUILayout.LabelField("Some help", "Some other text");
-            //targetPlayer.speed = EditorGUILayout.Slider("Speed", targetPlayer.speed, 0, 100);
+
             EditorGUILayout.LabelField("Standard Colours", EditorStyles.boldLabel);
             for (int i = 0; i < (int)RPGSettings.ColorCode.Custom; i++)
             {

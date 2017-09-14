@@ -129,7 +129,7 @@ namespace RPG
                         ike.name = s.name;
 
                         // copy the colour and image from global settings
-                        ike.GetComponent<Image>().color = RPGSettings.GetColor(s.color);
+                        ike.GetComponent<Image>().color = s.tint.GetColor();
                         ike.GetComponent<Image>().sprite = s.icon;
 
                         Transform counter = ike.transform.Find("Counter");

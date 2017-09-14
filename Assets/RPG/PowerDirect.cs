@@ -10,7 +10,9 @@ namespace RPG
     {
         [Header("Power Direct Settings")]
         public Material beamMaterial;
+        [ShowIf("beamMaterial")]
         public float beamWidth = 0.5f;
+        [ShowIf("beamMaterial")]
         public float beamUVSpeed = 1.0f;
 
         // useable on a single target with no to-hit roll
@@ -27,7 +29,7 @@ namespace RPG
                     ctarget.MakeAwareOf(caster);
                 if (beamMaterial)
                 {
-                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, RPGSettings.GetColor(color));
+                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor());
                     caster.beam.uvSpeed = beamUVSpeed;
                 }
             }

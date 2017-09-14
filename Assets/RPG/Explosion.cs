@@ -18,7 +18,7 @@ namespace RPG
                 return;
             }
             if (explosion.userFX)
-                explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.color);
+                explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
             explosion.Explode(ch.transform, null);
         }
 
