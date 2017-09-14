@@ -8,6 +8,8 @@ namespace RPG
     [ExecuteInEditMode]
     public class RPGSettings : MonoBehaviour
     {
+        public float baseAccuracy = 50.0f;
+
         [Tooltip("Standard HUD to display over the head of every character in the scene")]
         public GameObject overheadHUD;
 
@@ -22,21 +24,22 @@ namespace RPG
         {
             Crushing = 1,
             Piercing = 2,
-            Fire = 4,
-            Cold = 8,
-            Energy = 16,
-            Negative = 32,
-            Psionic = 64,
-            Magic = 128,
-            Toxic = 256,
-            Healing = 512,
+            Toxic = 4,
+            Fire = 8,
+            Cold = 16,
+            Electric = 32,
+            Energy = 64,
+            Negative = 128,
+            Psionic = 256,
+            Magic = 512,
+            Healing = 1024,
             Physical = Crushing | Piercing | Toxic,
-            Elemental = Fire | Cold | Energy,
+            Elemental = Fire | Cold | Energy | Electric,
             Paranormal = Negative | Psionic | Magic,
             All = Physical | Elemental | Paranormal
         };
         // count of the number of non-compound entries above
-        public const int BasicDamageTypesCount = 9; 
+        public const int BasicDamageTypesCount = 10; 
 
         public enum StatName
         {
@@ -54,6 +57,7 @@ namespace RPG
             Root, 
             Hold,
             Stun,
+            Accuracy,
         }
 
 
@@ -63,8 +67,10 @@ namespace RPG
             Mana,
             Crushing, 
             Piercing,
+            Toxic,
             Fire,
             Cold,
+            Electric,
             Energy,
             Negative,
             Psionic,
@@ -93,7 +99,7 @@ namespace RPG
         public GameObject projectile;
         public GameObject beam;
 
-        [HideInInspector]
+        [HideInInspector] // these get drawn in the Inspector with some custom code
         public Color[] colors = new Color[(int)ColorCode.Custom];
 
         public static Color GetColor(ColorCode cc)

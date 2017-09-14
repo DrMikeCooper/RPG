@@ -99,7 +99,8 @@ namespace RPG
             stats[RPGSettings.StatName.Charge.ToString()] = new Stat(0, false);
 
             // all others are normal buffable stats
-            for (RPGSettings.StatName i = RPGSettings.StatName.EnergyRegen; i <= RPGSettings.StatName.Stun; i++)
+            RPGSettings.StatName numStats = (RPGSettings.StatName)System.Enum.GetNames(typeof(RPGSettings.StatName)).Length;
+            for (RPGSettings.StatName i = RPGSettings.StatName.EnergyRegen; i <= numStats; i++)
             {
                 if (!stats.ContainsKey(i.ToString()))
                     stats[i.ToString()] = new Stat();

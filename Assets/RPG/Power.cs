@@ -177,8 +177,16 @@ namespace RPG
 
         // apply this power to a particular target
         // charge varies from 0 to 1
-        public void Apply(Prop target, float charge, Character caster)
+        public bool Apply(Prop target, float charge, Character caster)
         {
+            // calculate chance to hit
+            float chanceToHit = RPGSettings.instance.baseAccuracy + caster.stats[RPGSettings.StatName.Accuracy.ToString()].currentValue- caster.stats[RPGSettings.GetDefenceStat(type)].currentValue;
+            if (Random.Range(0, 100) > chanceToHit)
+            {
+                target.NumberFloat("MISS!", Color.black);
+                return false;
+            }
+
             // how does the damage get factored in?
             float damage;
             switch (mode)
@@ -215,6 +223,8 @@ namespace RPG
                 if (Random.Range(0, 100) < hr.percentage && (hr.damageType & type) != 0)
                     hr.OnHit(target, damage);
             }
+
+            return true;
         }
 
         public void OnStart(Character caster)

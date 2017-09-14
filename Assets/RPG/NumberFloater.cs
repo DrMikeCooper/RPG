@@ -16,7 +16,7 @@ namespace RPG
             textMesh = GetComponent<TextMesh>();
         }
 
-        public void Activate(Transform t, float amount)
+        public void Activate(Transform t, string msg, Color color)
         {
             if (textMesh == null)
                 textMesh = GetComponent<TextMesh>();
@@ -24,16 +24,8 @@ namespace RPG
             gameObject.SetActive(true);
             timer = 0;
             transform.position = t.position;
-            if (amount > 0)
-            {
-                textMesh.text = "" + (int)(amount);
-                textMesh.color = Color.red;
-            }
-            else
-            {
-                textMesh.text = "" + (int)(-amount);
-                textMesh.color = Color.green;
-            }
+            textMesh.text = "" + msg;
+            textMesh.color = color;
         }
 
         // Update is called once per frame

@@ -95,6 +95,7 @@ namespace RPG
             for (int i = 0; i < RPGSettings.BasicDamageTypesCount; i++)
             {
                 stats[RPGSettings.GetResistanceStat((RPGSettings.DamageType)(1 << i))] = new Stat();
+                stats[RPGSettings.GetDefenceStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
 
             stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
@@ -134,14 +135,20 @@ namespace RPG
                 OnDeath();
             }
 
-            NumberFloater numbers = RPGSettings.instance.GetNumberFloater();
-            if (numbers)
-            {
-                numbers.Activate(GetBodyPart(Character.BodyPart.Chest), damage);
-            }
+            int dmg = (int)Mathf.Abs(damage);
+            NumberFloat(dmg.ToString(), damage > 0 ? Color.red : Color.green);
 
             // TODO if we don't have a HUD yet, add a healthbar to props?
             RPGSettings.instance.SetupCharacter(this);
+        }
+
+        public void NumberFloat(string msg, Color col)
+        {
+            NumberFloater numbers = RPGSettings.instance.GetNumberFloater();
+            if (numbers)
+            {
+                numbers.Activate(GetBodyPart(Character.BodyPart.Chest), msg, col);
+            }
         }
 
         IEnumerator DeathFade(Prop p, float time)

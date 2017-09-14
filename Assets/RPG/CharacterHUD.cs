@@ -22,6 +22,8 @@ namespace RPG
         Dictionary<string, GameObject> icons = new Dictionary<string, GameObject>();
         CharacterHUDMeter[] meters;
 
+        bool firstUpdate;
+
         // Use this for initialization
         void Start()
         {
@@ -47,8 +49,6 @@ namespace RPG
             gameObject.SetActive(character != null);
             if (character)
                 character.onStatusChanged.AddListener(UpdateIcons);
-
-            SetCharacter(character);
         }
 
         public void SetCharacter(Prop ch)
@@ -82,11 +82,19 @@ namespace RPG
 
             gameObject.SetActive(character != null);
             UpdateIcons(character, null);
+
+            firstUpdate = true;
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (firstUpdate)
+            {
+                firstUpdate = false;
+                SetCharacter(character);
+            }
+
             if (myTarget != null)
             {
                 Prop tgt = character == null ? null : character.target;
