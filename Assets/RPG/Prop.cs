@@ -103,6 +103,10 @@ namespace RPG
 
             stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
             healthStat = stats[RPGSettings.StatName.Health.ToString()];
+
+            UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter tpc = GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>();
+            if (tpc)
+                tpc.onGrounded.AddListener(EndKnockback);
         }
 
         protected void ApplyPassives()
@@ -341,13 +345,42 @@ namespace RPG
                 if (nv)
                     nv.enabled = false;
 
-                // TODO - animation
+                // TODO - knockback animation
+
+                Character ch = this as Character;
+                if (ch)
+                    ch.animLock = true;
 
                 // apply a force to them
                 rb.velocity = Vector3.zero;
                 rb.AddForce(force);
                 knockback = true;
             }
+
+        }
+
+        public void EndKnockback()
+        {
+            // turn Navmesh back on again
+            NavMeshAgent nv = GetComponent<NavMeshAgent>();
+            if (nv)
+                nv.enabled = true;
+
+            // TODO play get up animation
+
+
+            Character ch = this as Character;
+            if (ch)
+                ch.animLock = false;
+
+            // apply damage
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb)
+            {
+                float damage = rb.velocity.magnitude;
+                ApplyDamage(damage, RPGSettings.DamageType.Crushing);
+                rb.velocity = Vector3.zero;
+             }
 
         }
     }

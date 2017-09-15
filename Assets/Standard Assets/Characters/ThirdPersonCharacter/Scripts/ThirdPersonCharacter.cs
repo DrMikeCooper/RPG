@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
 {
@@ -29,6 +31,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
         public bool walking;
+        public UnityEvent onGrounded;
+
+        public bool forceJump = false;
 
 		void Start()
 		{
@@ -167,16 +172,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		void HandleGroundedMovement(bool crouch, bool jump)
 		{
+            if (forceJump)
+            {
+                jump = true;
+            }
 			// check whether conditions are right to allow a jump:
 			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
 			{
 				// jump!
-				m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
+                if (!forceJump)
+				    m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
 				m_IsGrounded = false;
 				m_Animator.applyRootMotion = false;
 				m_GroundCheckDistance = 0.1f;
 			}
-		}
+            forceJump = false;
+        }
 
 		void ApplyExtraTurnRotation()
 		{
@@ -214,10 +225,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// it is also good to note that the transform position in the sample assets is at the base of the character
 			if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
 			{
-				m_GroundNormal = hitInfo.normal;
+                // DMC RPG
+                if (!m_IsGrounded)
+                    onGrounded.Invoke();
+
+                m_GroundNormal = hitInfo.normal;
 				m_IsGrounded = true;
 				m_Animator.applyRootMotion = true;
-			}
+
+                
+            }
 			else
 			{
 				m_IsGrounded = false;
