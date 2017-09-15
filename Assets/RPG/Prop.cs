@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace RPG
@@ -24,6 +25,8 @@ namespace RPG
 
         [HideInInspector]
         public bool dead = false;
+
+        bool knockback = false;
 
         public float health
         {
@@ -247,7 +250,7 @@ namespace RPG
             else
             {
                 // apply immediately once
-                s.Apply(this);
+                s.Apply(this, caster);
                 return null;
             }
         }
@@ -321,6 +324,31 @@ namespace RPG
                 if (go)
                     go.GetComponent<Prop>().UpdateStatus();
             }
+        }
+
+        public void ApplyKnockback(Vector3 force)
+        {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb)
+            {
+                // make the character jump
+                UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter tpc = GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>();
+                if (tpc)
+                    tpc.forceJump = true;
+
+                // turn off the NavMeshAgent so we can leave the ground
+                NavMeshAgent nv = GetComponent<NavMeshAgent>();
+                if (nv)
+                    nv.enabled = false;
+
+                // TODO - animation
+
+                // apply a force to them
+                rb.velocity = Vector3.zero;
+                rb.AddForce(force);
+                knockback = true;
+            }
+
         }
     }
 }

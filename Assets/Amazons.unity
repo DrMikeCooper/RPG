@@ -2856,6 +2856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6bbf8cf0ae85b4d90faf96241c5486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAccuracy: 50
   overheadHUD: {fileID: 1734074604745550, guid: 2b43de62a84cae040994a331920b8ea2,
     type: 2}
   numbersPool: {fileID: 1205511509}
@@ -5487,6 +5488,11 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: e263ba56add6ceb4f945782389198368,
         type: 2}
+    - target: {fileID: 195920890577738744, guid: 2f8384075ab50d3428243b4b10026b32,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f8384075ab50d3428243b4b10026b32, type: 2}
   m_IsPrefabParent: 0
@@ -6812,7 +6818,7 @@ Prefab:
     - target: {fileID: 114789204999595680, guid: bd33de461650bed4ab7bd12af7560045,
         type: 2}
       propertyPath: showDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd33de461650bed4ab7bd12af7560045, type: 2}

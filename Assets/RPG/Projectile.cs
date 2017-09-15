@@ -51,7 +51,7 @@ namespace RPG
                     {
                         // apply the power normally
 
-                        // bullshit correction because the coordinates are coming out wierd here
+                        // bullshit correction because the coordinates are coming out weird here
                         Vector3 pos = ch.transform.position;
                         pos.y = 0;
                         ch.transform.position = pos;

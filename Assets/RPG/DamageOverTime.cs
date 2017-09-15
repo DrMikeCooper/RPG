@@ -15,7 +15,7 @@ namespace RPG
         float nextTick = 0;
         int ticks = 0;
 
-        public override void Apply(Prop ch)
+        public override void Apply(Prop ch, Character caster = null)
         {
 
         }

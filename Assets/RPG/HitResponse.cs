@@ -22,7 +22,7 @@ namespace RPG
         [Tooltip("An effect that plays when you absorb damage")]
         public Status[] absorbEffects;
 
-        public override void Apply(Prop ch)
+        public override void Apply(Prop ch, Character caster = null)
         {
             ch.hitResponses.Add(this);
         }

@@ -18,15 +18,15 @@ namespace RPG
         public Status buff;
         Dictionary<Character, Status> affected = new Dictionary<Character, Status>();
 
-        public override void Apply(Prop ch)
+        public override void Apply(Prop ch, Character caster = null)
         {
 
         }
 
         // is this right?
-        public virtual float DamagePerHit() { return buff.DamagePerHit(); }
-        public virtual float StatusPerHit(Character target) { return buff.StatusPerHit(target); }
-        public virtual float BenefitPerHit(Character target) { return buff.BenefitPerHit(target); }
+        public override float DamagePerHit() { return buff.DamagePerHit(); }
+        public override float StatusPerHit(Character target) { return buff.StatusPerHit(target); }
+        public override float BenefitPerHit(Character target) { return buff.BenefitPerHit(target); }
 
         public override void UpdateStatus(Prop p)
         {

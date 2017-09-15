@@ -18,7 +18,7 @@ namespace RPG
         [Tooltip("Used only for Defence and Resistance debuffs")]
         public RPGSettings.DamageType damageType;
 
-        public override void Apply(Prop ch)
+        public override void Apply(Prop ch, Character caster = null)
         {
             bool awakenProp = false;
 

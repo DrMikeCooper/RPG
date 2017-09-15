@@ -18,7 +18,7 @@ namespace RPG
         public float psionicRes = 0;
         public float negativeRes = 0;
 
-        public override void Apply(Prop ch)
+        public override void Apply(Prop ch, Character caster = null)
         {
             ch.stats[RPGSettings.GetResistanceStat(RPGSettings.DamageType.Crushing)].addModifier(crushingRes);
             ch.stats[RPGSettings.GetResistanceStat(RPGSettings.DamageType.Piercing)].addModifier(piercingRes);
@@ -31,7 +31,7 @@ namespace RPG
             ch.stats[RPGSettings.GetResistanceStat(RPGSettings.DamageType.Negative)].addModifier(negativeRes);
         }
 
-        public virtual float StatusPerHit(Character target) { return -BenefitPerHit(target); }
-        public virtual float BenefitPerHit(Character target) { return (crushingRes + piercingRes + toxicRes + fireRes + coldRes + energyRes + magicRes + psionicRes + negativeRes) *0.1f; }
+        public override float StatusPerHit(Character target) { return -BenefitPerHit(target); }
+        public override float BenefitPerHit(Character target) { return (crushingRes + piercingRes + toxicRes + fireRes + coldRes + energyRes + magicRes + psionicRes + negativeRes) *0.1f; }
     }
 }

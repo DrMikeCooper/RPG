@@ -35,7 +35,7 @@ namespace RPG
             return timer >= duration;
         }
 
-        public abstract void Apply(Prop ch);
+        public abstract void Apply(Prop ch, Character caster = null);
         public virtual bool isImmediate() { return false; } // true if the status applies instantly
         public virtual void UpdateStatus(Prop ch) {}
 
