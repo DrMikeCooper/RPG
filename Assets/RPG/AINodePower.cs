@@ -19,10 +19,6 @@ namespace RPG
             if (!IsCondition(condition, brain.character))
                 return 0;
 
-            // return zero if the power's on cooldown or we don't have enough energy
-            if (brain.character.GetCoolDown(power) > 0 || power.energyCost > brain.character.energy)
-                return 0;
-
             // we can use the power, so evaluate it
             return power.Evaluate(brain, targetCondition);
         }

@@ -208,11 +208,12 @@ namespace RPG
                 tpc.m_MoveSpeedMultiplier = GetFactor(RPGSettings.StatName.Speed);
 
                 // being stunned allows you to move at half speed
+                float maxSpeed = 1;
                 if (stats[RPGSettings.StatName.Stun.ToString()].currentValue > 0)
-                    tpc.m_MoveSpeedMultiplier *= 0.2f;
+                    maxSpeed = 0.2f;
                 if (isRooted())
-                    tpc.m_MoveSpeedMultiplier = 0;
-
+                    maxSpeed = 0;
+                tpc.maxSpeed = maxSpeed;
             }
         }
 

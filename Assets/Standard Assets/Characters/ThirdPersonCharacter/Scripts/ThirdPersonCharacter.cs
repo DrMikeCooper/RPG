@@ -31,6 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
         public bool walking;
+        public float maxSpeed = 1;
         public UnityEvent onGrounded;
 
         public bool forceJump = false;
@@ -123,6 +124,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
             if (walking && m_ForwardAmount > 0.5f)
                 m_ForwardAmount = 0.5f;
+            if (m_ForwardAmount > maxSpeed)
+                m_ForwardAmount = maxSpeed;
 
 			// update the animator parameters
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);

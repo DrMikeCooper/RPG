@@ -25,7 +25,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
-            if (target != null)
+            if (target != null && character.maxSpeed > 0)
                 agent.SetDestination(target.position);
 
             if (agent.remainingDistance > agent.stoppingDistance)

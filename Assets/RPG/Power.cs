@@ -566,12 +566,18 @@ namespace RPG
         // AI Behaviour interface implemented directly by powers
         public override float Evaluate(AIBrain brain)
         {
+            // return zero if the power's on cooldown or we don't have enough energy
+            if (brain.character.GetCoolDown(this) > 0 || energyCost > brain.character.energy)
+                return 0;
+
             return Evaluate(brain, AINode.always);
         }
 
         public override AIAction Execute(AIBrain brain)
         {
-            Evaluate(brain);
+            if (Evaluate(brain) == 0)
+                return null;
+
             brain.target = npcTarget;
 
             UpdateAction(brain);
