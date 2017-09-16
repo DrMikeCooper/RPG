@@ -13,11 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 4
   condition:
-    type: 5
+    type: 4
     threshold: 30
     reverse: 0
   power: {fileID: 11400000, guid: ab2589d739dafc1438d70160a08ca12a, type: 2}
   targetCondition:
-    type: 0
+    type: 4
     threshold: 0
     reverse: 0

@@ -26,7 +26,7 @@ MonoBehaviour:
   timer: 0
   count: 0
   damageType: 120
-  percentage: 100
+  percentage: 50
   reflection: 1
   absorbFactor: 0
   absorbEffects: []
