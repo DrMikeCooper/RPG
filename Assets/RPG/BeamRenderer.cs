@@ -12,14 +12,20 @@ public class BeamRenderer : MonoBehaviour {
     public float uvSpeed = 1.0f;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = false;
+        if (lineRenderer == null)
+        {
+            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.enabled = false;
+        }
 	}
 
     public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, Color col)
     {
+        gameObject.SetActive(true);
+        if (lineRenderer == null)
+            lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = true;
         timer = duration;
         source = src;
@@ -41,7 +47,10 @@ public class BeamRenderer : MonoBehaviour {
         {
             timer -= Time.deltaTime;
             if (timer < 0)
+            {
+                gameObject.SetActive(false);
                 lineRenderer.enabled = false;
+            }
 
             lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer*uvSpeed, 0));
 
@@ -50,11 +59,13 @@ public class BeamRenderer : MonoBehaviour {
             col.a = timer * 5.0f;
             lineRenderer.startColor = lineRenderer.endColor = col;
             if (target)
-            { 
+            {
                 pts[0] = source.position;
                 pts[1] = target.transform.position;
                 lineRenderer.SetPositions(pts);
             }
+            else
+                Debug.Log("Beam has no target?");
         }
 	}
 }
