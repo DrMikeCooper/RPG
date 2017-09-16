@@ -45,6 +45,11 @@ namespace RPG
         //[HideInInspector]
         public float animCountDown;
 
+        // combo information
+        public PowerCombo currentCombo = null;
+        public int currentComboStage = 0;
+        public float currentComboTimer = 0;
+
         // temp data for toggle powers
         public Dictionary<PowerToggle, PowerToggle.ToggleData> toggles = new Dictionary<PowerToggle, PowerToggle.ToggleData>();
 
@@ -144,11 +149,29 @@ namespace RPG
             ApplyPassives();
         }
 
+        public void ResetCombos()
+        {
+            currentCombo = null;
+            currentComboStage = 0;
+            currentComboTimer = 0;
+        }
+
         // Update is called once per frame
         void Update()
         {
+            // count down animation lock
             if (animCountDown > 0)
                 animCountDown -= Time.deltaTime;
+
+            // count down combo windows
+            if (currentComboTimer > 0)
+            {
+                currentComboTimer -= Time.deltaTime;
+                if (currentComboTimer <= 0)
+                {
+                    ResetCombos();
+                }
+            }
 
             foreach (KeyValuePair<PowerToggle, PowerToggle.ToggleData> pair in toggles)
             {

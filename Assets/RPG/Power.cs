@@ -249,13 +249,15 @@ namespace RPG
             if (CanUse(caster) == false)
                 return;
 
-            caster.activePower = this;
+            // checks combos for advancement, ro returns the base power
+            caster.activePower = GetPower(caster);
             if (mode != Mode.Instant)
-                StartPower(caster);
+                caster.activePower.StartPower(caster);
             caster.nextTick = 0;
 
             if (mode == Mode.Block)
             {
+                statusDuration = selfStatusDuration = tick + 0.5f;
                 caster.statusDirty = true;
                 caster.ReleaseAnim(true);
             }
@@ -343,12 +345,13 @@ namespace RPG
                     if (caster.timer >= caster.nextTick)
                     {
                         caster.nextTick += tick;
-                        foreach (Status s in effects)
-                        {
-                            Explosion ex = s as Explosion;
-                            if (ex)
-                                ex.Apply(caster);
-                        }
+                        Apply(caster, 1, caster);
+                        //foreach (Status s in effects)
+                        //{
+                        //    Explosion ex = s as Explosion;
+                        //    if (ex)
+                        //        ex.Apply(caster);
+                        //}
                     }
                     break;
             }
@@ -358,7 +361,7 @@ namespace RPG
         {
             if (mode == Mode.Instant)
             {
-                StartPower(caster);
+                GetStartPower(caster).StartPower(caster);
 
                 if (closeToTargetSpeed > 0)
                 {
@@ -631,6 +634,17 @@ namespace RPG
             }
 
             return desc;
+        }
+
+        public virtual Power GetStartPower(Character caster)
+        {
+            caster.ResetCombos();
+            return this;
+        }
+
+        public virtual Power GetPower(Character caster)
+        {
+            return this;
         }
     }
 }

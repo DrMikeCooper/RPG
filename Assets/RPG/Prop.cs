@@ -55,7 +55,7 @@ namespace RPG
         public Dictionary<string, Stat> stats = new Dictionary<string, Stat>();
 
         // here in the base class for logic in ProcessStatus, only ever non-null on characters
-        [HideInInspector]
+        //[HideInInspector]
         public Power activePower;
 
         public List<HitResponse> hitResponses = new List<HitResponse>();

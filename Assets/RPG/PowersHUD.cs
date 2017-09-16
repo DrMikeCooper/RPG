@@ -28,7 +28,7 @@ namespace RPG
                 RectTransform rt = obj.GetComponent<RectTransform>();
                 rt.position = iconRect.position + 48 * i * Vector3.right;
                 icons[i] = obj.GetComponent<Image>();
-                icons[i].sprite = character.powers[i].icon;
+                icons[i].sprite = character.powers[i].GetPower(character).icon;
                 if (character.powers[i].coolDown > 0)
                 {
                     icons[i].type = Image.Type.Filled;
@@ -50,8 +50,11 @@ namespace RPG
             for (int i = 0; i < character.powers.Length; i++)
             {
                 Power p = character.powers[i];
-                icons[i].color = p.tint.GetColor();
-                if (!p.CanUse(character) || p.GetTarget(character) == null)
+                Power subP = p.GetPower(character);
+                if (p != subP)
+                    icons[i].sprite = subP.icon;
+                icons[i].color = subP.tint.GetColor();
+                if (!subP.CanUse(character) || subP.GetTarget(character) == null)
                 {
                     Color col = icons[i].color;
                     col *= 0.5f; col.a = 1;

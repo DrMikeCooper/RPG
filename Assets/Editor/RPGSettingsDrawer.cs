@@ -6,7 +6,7 @@ using UnityEditor;
 namespace RPG
 {
     [CustomEditor(typeof(RPGSettings))]
-    public class Example : Editor
+    public class RPGSettingsDrawer : Editor
     {
         public override void OnInspectorGUI()
         {

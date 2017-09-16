@@ -34,7 +34,7 @@ namespace RPG
 
         void OnTriggerEnter(Collider col)
         {
-            bool deflect = false;
+            HitResponse.ReflectionType deflect = HitResponse.ReflectionType.None;
 
             Prop ch = col.gameObject.GetComponent<Prop>();
             if (ch != caster)
@@ -44,10 +44,10 @@ namespace RPG
                     // check to see if we deflect it first
                     foreach (HitResponse hr in ch.hitResponses)
                     {
-                        if (hr.reflection && Random.Range(0, 100) < hr.percentage && (hr.damageType&parentPower.type)!=0)
-                            deflect = true;
+                        if (hr.reflection != HitResponse.ReflectionType.None && Random.Range(0, 100) < hr.percentage && (hr.damageType&parentPower.type)!=0)
+                            deflect = hr.reflection;
                     }
-                    if (!deflect)
+                    if (deflect == HitResponse.ReflectionType.None)
                     {
                         // apply the power normally
 
@@ -56,18 +56,24 @@ namespace RPG
                         pos.y = 0;
                         ch.transform.position = pos;
 
+                        // if we miss (based on accuracy), set the flag here so we dont destroy the projectile
                         if (!parentPower.Apply(ch, charge, caster as Character))
-                            deflect = true;
+                            deflect = HitResponse.ReflectionType.Deflect;
                     }
                     else
                     {
                         // reverse direction for now
-                        velocity = -velocity;
+                        int team = -1;
+                        Character cha = ch as Character;
+                        if (cha) team = cha.team;
+                        float speed = velocity.magnitude;
+                        velocity = speed * HitResponse.Reflect(ch, caster.transform.position, deflect, team);
+
                         startPos = transform.position;
                         caster = ch as Character;
                     }
                 }
-                if (!deflect)
+                if (deflect == HitResponse.ReflectionType.None)
                     Destroy(gameObject);
             }
         }

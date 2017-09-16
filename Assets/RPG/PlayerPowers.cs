@@ -22,8 +22,11 @@ namespace RPG
             {
                 if (Input.GetKeyDown(key) && character.activePower == null && character.animLock == false)
                     p.OnStart(character);
-                if (Input.GetKeyUp(key) && character.activePower == p)
-                    p.OnEnd(character);
+                if (Input.GetKeyUp(key))
+                {
+                    if (character.activePower != null) // == p.GetPower(character))
+                        p.OnEnd(character);
+                    }
                 key++;
             }
             if (character.activePower)

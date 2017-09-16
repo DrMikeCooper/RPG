@@ -17,6 +17,7 @@ namespace RPG
         public static RPGSettings instance; // singleton accessor
 
         public ObjectPool numbersPool;
+        public ObjectPool beamPool;
 
         Dictionary<Prop, OverheadHUD> healthBars = new Dictionary<Prop, OverheadHUD>();
 
