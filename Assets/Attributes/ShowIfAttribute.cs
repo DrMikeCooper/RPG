@@ -15,7 +15,7 @@ public class ShowIfAttribute : PropertyAttribute {
     };
     public Comparison comparison;
 
-    public ShowIfAttribute(string vn, float th = 0, ShowIfAttribute.Comparison c = ShowIfAttribute.Comparison.Equals)
+    public ShowIfAttribute(string vn, ShowIfAttribute.Comparison c = ShowIfAttribute.Comparison.Equals, float th = 0)
     {
         varName = vn;
         threshold = th;

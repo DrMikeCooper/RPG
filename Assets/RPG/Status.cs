@@ -13,7 +13,7 @@ namespace RPG
         public Sprite icon;
         public RPGSettings.Tint tint;
         public int maxStacks = 1;
-        [ShowIf("maxStacks", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("maxStacks", ShowIfAttribute.Comparison.Not, 0)]
         [Tooltip("Untick this if you want this buff to stack from all sources. Tick it and each character/power source will maintain a different stack")]
         public bool sourceSelectiveStacks = true;
         [HideInInspector]

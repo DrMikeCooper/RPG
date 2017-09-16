@@ -11,19 +11,19 @@ namespace RPG
         public AudioClip[] launchFX;
         public AudioClip[] hitFX;
 
-        public void Start(AudioSource src)
+        public void PlayStart(AudioSource src)
         {
             if (startFX.Length > 0)
                 src.PlayOneShot(startFX[Random.Range(0, startFX.Length)]);
         }
 
-        public void Launch(AudioSource src)
+        public void PlayLaunch(AudioSource src)
         {
             if (launchFX.Length > 0)
                 src.PlayOneShot(launchFX[Random.Range(0, launchFX.Length)]);
         }
 
-        public void Hit(AudioSource src)
+        public void PlayHit(AudioSource src)
         {
             if (hitFX.Length > 0)
                 src.PlayOneShot(hitFX[Random.Range(0, hitFX.Length)]);

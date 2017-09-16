@@ -46,15 +46,15 @@ namespace RPG
         public RPGSettings.DamageType type;
         public TargetType targetType;
         public Mode mode = Mode.Instant;
-        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
         [Tooltip("How long the power lasts if its a Charge or Maintain")]
         public float duration;
-        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
         public float extraEnergyCost;
-        [ShowIf("mode", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
         public bool interruptable = false;
-        [ShowIf("mode", 2)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, 2)]
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f;
         public PowerSounds sounds;
@@ -69,9 +69,9 @@ namespace RPG
 
         public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
-        [ShowIf("targetType", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, 0)]
         public VisualEffect targetFX;
-        [ShowIf("targetType", 0, ShowIfAttribute.Comparison.Not)]
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, 0)]
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         [Header("RPG Effects")]
@@ -152,7 +152,7 @@ namespace RPG
         protected void StartPower(Character caster)
         {
             if (sounds)
-                sounds.Start(caster.audioSource);
+                sounds.PlayStart(caster.audioSource);
             caster.PlayAnim(animation.ToString());
             caster.energy -= energyCost;
             if (userFX)
@@ -198,7 +198,7 @@ namespace RPG
 
             Character ch = target as Character;
             if (ch && sounds)
-                sounds.Hit(ch.audioSource);
+                sounds.PlayHit(ch.audioSource);
 
             // how does the damage get factored in?
             float damage;
