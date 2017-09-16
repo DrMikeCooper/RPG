@@ -49,6 +49,8 @@ namespace RPG
             gameObject.SetActive(character != null);
             if (character)
                 character.onStatusChanged.AddListener(UpdateIcons);
+
+            firstUpdate = true;
         }
 
         public void SetCharacter(Prop ch)
@@ -82,8 +84,6 @@ namespace RPG
 
             gameObject.SetActive(character != null);
             UpdateIcons(character, null);
-
-            firstUpdate = true;
         }
 
         // Update is called once per frame

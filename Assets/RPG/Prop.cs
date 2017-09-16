@@ -287,12 +287,12 @@ namespace RPG
                 status.Apply(this);
                 if (groupedEffects.ContainsKey(status.name))
                 {
-                    groupedEffects[status.name].count++;
+                    groupedEffects[status.name].count+= status.stacks;
                 }
                 else
                 {
                     groupedEffects[status.name] = status;
-                    groupedEffects[status.name].count = 1;
+                    groupedEffects[status.name].count = status.stacks;
                 }
             }
 
