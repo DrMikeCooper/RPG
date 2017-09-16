@@ -12,6 +12,14 @@ namespace RPG
         {
             public float modifier;
             public RPGSettings.StatName stat;
+
+            public string GetDescription(RPGSettings.DamageType damageType)
+            {
+                string desc = (modifier > 0 ? "+" : "") + modifier + (RPGSettings.IsPercentage(stat) ? "% to " : " ");
+                if (stat <= RPGSettings.StatName.Def) desc += damageType.ToString() +" ";
+                desc += stat.ToString();
+                return desc;
+            }
         }
         public Modifier[] modifiers;
 
@@ -104,6 +112,23 @@ namespace RPG
                     value = Mathf.Max(value, Mathf.Abs(mod.modifier) * 0.25f);
             }
             return value;
+        }
+
+        public override string GetDescription(bool brief = false)
+        {
+            string desc = "";
+            if (brief)
+            {
+                for (int k =0; k<modifiers.Length; k++)
+                    desc += modifiers[k].GetDescription(damageType) + ((k != modifiers.Length - 1) ? ", " : "");
+            }
+            else
+            {
+                desc = name + "\n ";
+                foreach (Modifier mod in modifiers)
+                    desc += mod.GetDescription(damageType) + "\n ";
+            }
+            return desc;
         }
     }
 }

@@ -45,5 +45,10 @@ namespace RPG
         {
             return -50;
         }
+
+        public override string GetDescription(bool brief = false)
+        {
+            return Mathf.Abs(strength).ToString() + (knockUp == false ? (strength < 0 ? " KnockTo" : " Knockback") : " KnockUp");
+        }
     }
 }

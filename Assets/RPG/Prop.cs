@@ -229,17 +229,20 @@ namespace RPG
         {
             if (s.isImmediate() == false)
             {
-                // can we find a status of the same type with the same character and name?
+                // can we find a status of the same type, with the same character and name (if required)?
                 Status copy = null;
-                for (int i = 0; i < statusEffects.Count; i++)
-                    if (statusEffects[i].sourceCharacter == caster && statusEffects[i].sourcePower == power && statusEffects[i].name == s.name)
-                        copy = statusEffects[i];
+                if (s.maxStacks > 0) // search for an existing copy if this status supports stacking
+                {
+                    for (int i = 0; i < statusEffects.Count; i++)
+                        if (statusEffects[i].name == s.name && (s.sourceSelectiveStacks == false || (statusEffects[i].sourceCharacter == caster && statusEffects[i].sourcePower == power)))
+                            copy = statusEffects[i];
+                }
 
                 statusDirty = true;
                 if (copy)
                 {
-                    // refresh the duration, and possibly increase how amny stacks we have
-                    copy.duration = duration;
+                    // refresh the duration, and possibly increase how many stacks we have
+                    copy.timer = 0;
                     if (copy.stacks < copy.maxStacks)
                         copy.stacks++;
                     return copy;
@@ -287,7 +290,7 @@ namespace RPG
                 status.Apply(this);
                 if (groupedEffects.ContainsKey(status.name))
                 {
-                    groupedEffects[status.name].count+= status.stacks;
+                    groupedEffects[status.name].count += status.stacks;
                 }
                 else
                 {

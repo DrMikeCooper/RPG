@@ -33,5 +33,10 @@ namespace RPG
 
         public override float StatusPerHit(Character target) { return -BenefitPerHit(target); }
         public override float BenefitPerHit(Character target) { return (crushingRes + piercingRes + toxicRes + fireRes + coldRes + energyRes + magicRes + psionicRes + negativeRes) *0.1f; }
+
+        public override string GetDescription(bool brief = false)
+        {
+            return name + "(Material)";
+        }
     }
 }

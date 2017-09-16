@@ -74,5 +74,9 @@ namespace RPG
                 }
             }
         }
+        public override string GetDescription(bool brief = false)
+        {
+            return name + "(Aura)" + "\n";
+        }
     }
 }

@@ -34,6 +34,13 @@ namespace RPG
                     icons[i].type = Image.Type.Filled;
                     icons[i].fillMethod = Image.FillMethod.Radial360;
                 }
+                ToolTipIcon toolTip = icons[i].GetComponent<ToolTipIcon>();
+                if (toolTip)
+                {
+                    Text text = toolTip.toolTip.GetComponentInChildren<Text>();
+                    if (text)
+                        text.text = character.powers[i].GetDescription();
+                }
             }
         }
 

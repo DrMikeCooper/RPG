@@ -24,6 +24,8 @@ namespace RPG
 
         bool firstUpdate;
 
+        Dictionary<Status, Text> timers = new Dictionary<Status, Text>();
+
         // Use this for initialization
         void Start()
         {
@@ -102,12 +104,19 @@ namespace RPG
                 if (myTarget.character != tgt)
                     myTarget.SetCharacter(tgt);
             }
+
+            foreach (var pair in timers)
+            {
+                pair.Value.text = ((int)(pair.Key.duration - pair.Key.timer)).ToString();
+            }
         }
 
         public void UpdateIcons(Prop p, Status newStatus)
         {
             if (icon == null)
                 return;
+
+            timers.Clear();
 
             // delete old gameobjects and clear the list
             foreach (KeyValuePair<string, GameObject> pair in icons)
@@ -146,6 +155,23 @@ namespace RPG
                             counter.gameObject.SetActive(s.count > 1);
                             Text text = counter.GetComponent<Text>();
                             text.text = "" + s.count;
+                        }
+
+                        ToolTipIcon toolTip = ike.GetComponent<ToolTipIcon>();
+                        if (toolTip)
+                        {
+                            Text text = toolTip.toolTip.GetComponentInChildren<Text>();
+                            if (text)
+                                text.text = s.GetDescription();
+                        }
+                        if (s.duration < 100000)
+                        {
+                            Transform timer = ike.transform.Find("Timer");
+                            if (timer)
+                            {
+                                timers[s] = timer.GetComponent<Text>();
+                                timers[s].enabled = true;
+                            }
                         }
                     }
                 }

@@ -60,6 +60,10 @@ namespace RPG
             Accuracy,
         }
 
+        public static bool IsPercentage(StatName stat)
+        {
+            return stat != StatName.Root && stat != StatName.Stun && stat != StatName.Hold;
+        }
 
         public enum ColorCode
         {

@@ -13,6 +13,9 @@ namespace RPG
         public Sprite icon;
         public RPGSettings.Tint tint;
         public int maxStacks = 1;
+        [ShowIf("maxStacks", 0, ShowIfAttribute.Comparison.Not)]
+        [Tooltip("Untick this if you want this buff to stack from all sources. Tick it and each character/power source will maintain a different stack")]
+        public bool sourceSelectiveStacks = true;
         [HideInInspector]
         public int stacks = 0;
         [HideInInspector]
@@ -36,6 +39,7 @@ namespace RPG
         }
 
         public abstract void Apply(Prop ch, Character caster = null);
+        public abstract string GetDescription(bool brief = false);
         public virtual bool isImmediate() { return false; } // true if the status applies instantly
         public virtual void UpdateStatus(Prop ch) {}
 

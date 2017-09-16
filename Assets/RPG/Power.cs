@@ -599,5 +599,32 @@ namespace RPG
         {
             return 3 + this.duration;
         }
+
+        public string GetDescription()
+        {
+            string desc = name;
+            if (mode == Mode.Charge) desc += "(Charge)";
+            if (mode == Mode.Maintain) desc += "(Maintain)";
+            if (mode == Mode.Block) desc += "(Block)";
+            desc += "\n ";
+
+            if (minDamage + maxDamage > 0)
+            {
+                if (minDamage == maxDamage)
+                    desc += minDamage + " " + type.ToString() + " damage\n ";
+                else
+                    desc += minDamage + "-" + maxDamage + " " + type.ToString() + " damage\n ";
+            }
+            for (int k = 0; k < effects.Length; k++)
+            {
+                desc += effects[k].GetDescription(true) + ((k != effects.Length - 1) ? ", " : "\n ");
+            }
+            for (int k = 0; k < selfEffects.Length; k++)
+            {
+                desc += selfEffects[k].GetDescription(true) + ((k != selfEffects.Length - 1) ? ", " : " to self\n ");
+            }
+
+            return desc;
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace RPG
                     prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
             }
         }
+
+        public override string GetDescription(bool brief = false)
+        {
+            return name;
+        }
     }
 }

@@ -38,5 +38,10 @@ namespace RPG
         {
             return explosion.BenefitPerHit(target);
         }
+
+        public override string GetDescription(bool brief = false)
+        {
+            return "Explosion ";
+        }
     }
 }
