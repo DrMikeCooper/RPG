@@ -188,7 +188,8 @@ namespace RPG
             // calculate chance to hit
             if (targetType == TargetType.Enemies)
             {
-                float chanceToHit = RPGSettings.instance.baseAccuracy * accuracy + caster.stats[RPGSettings.StatName.Accuracy.ToString()].currentValue - target.stats[RPGSettings.GetDefenceStat(type)].currentValue;
+                float casterAcc = caster == null ? 0 : caster.stats[RPGSettings.StatName.Accuracy.ToString()].currentValue;
+                float chanceToHit = RPGSettings.instance.baseAccuracy * accuracy + casterAcc - target.stats[RPGSettings.GetDefenceStat(type)].currentValue;
                 if (Random.Range(0, 100) > chanceToHit)
                 {
                     target.NumberFloat("MISS!", Color.black);
@@ -214,7 +215,8 @@ namespace RPG
                     damage = Random.Range(minDamage, maxDamage);
                     break;
             }
-            damage *= caster.GetFactor(RPGSettings.GetDamageStat(type));
+            if (caster)
+                damage *= caster.GetFactor(RPGSettings.GetDamageStat(type));
 
             if (damage != 0)
                 target.ApplyDamage(damage, type);

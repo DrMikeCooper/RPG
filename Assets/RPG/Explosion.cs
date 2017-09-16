@@ -19,7 +19,7 @@ namespace RPG
             }
             if (explosion.userFX)
                 explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
-            explosion.Explode(ch.transform, null);
+            explosion.Explode(ch.transform, caster);
         }
 
         public override bool isImmediate() { return true; }

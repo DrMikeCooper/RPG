@@ -48,11 +48,6 @@ namespace RPG
             }
         }
 
-        public override string GetDescription(bool brief = false)
-        {
-            return name;
-        }
-
         // utility function for chained projectiles/beams and deflection code
         public static Vector3 Reflect(Prop prop, Vector3 source, ReflectionType type, int team)
         {
@@ -92,6 +87,27 @@ namespace RPG
             newDir = (toSource + UnityEngine.Random.Range(-2.0f, 2.0f) * sideWays);
             newDir.y = 0;
             return newDir.normalized;
+        }
+
+        public override string GetDescription(bool brief = false)
+        {
+            string msg = "";
+            if (!brief)
+                msg += name + "\n ";
+            if (reflection != ReflectionType.None)
+            {
+                msg += "" + percentage + "% to " + reflection.ToString() + " " + damageType.ToString() + "\n ";
+            }
+            if (absorbFactor > 0 && absorbEffects.Length > 0)
+            {
+                msg +=  "" + percentage + "% to absorb " + damageType.ToString() + " to ";
+                for (int i = 0; i < absorbEffects.Length; i++)
+                {
+                    msg += absorbEffects[i].name + ((i == absorbEffects.Length - 1) ? "\n " : ", ");
+                }
+            }
+
+            return msg;
         }
     }
 }
