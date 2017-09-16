@@ -61,6 +61,8 @@ namespace RPG
         // used by the tab targetter
         [HideInInspector]
         public float xScreen;
+        [HideInInspector]
+        public AudioSource audioSource;
 
         public enum BodyPart
         {
@@ -94,7 +96,9 @@ namespace RPG
         {
             animator = GetComponent<Animator>();
             brain = GetComponent<AIBrain>();
-
+            audioSource = GetComponent<AudioSource>();
+            if (audioSource == null)
+                audioSource = gameObject.AddComponent<AudioSource>();
             InitProp();
 
             fadeTime = 10.0f;

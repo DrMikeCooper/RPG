@@ -57,6 +57,7 @@ namespace RPG
         [ShowIf("mode", 2)]
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f;
+        public PowerSounds sounds;
 
         [Header("HUD Settings")]
         public Sprite icon;
@@ -150,6 +151,8 @@ namespace RPG
 
         protected void StartPower(Character caster)
         {
+            if (sounds)
+                sounds.Start(caster.audioSource);
             caster.PlayAnim(animation.ToString());
             caster.energy -= energyCost;
             if (userFX)
@@ -192,6 +195,10 @@ namespace RPG
                     return false;
                 }
             }
+
+            Character ch = target as Character;
+            if (ch && sounds)
+                sounds.Hit(ch.audioSource);
 
             // how does the damage get factored in?
             float damage;
