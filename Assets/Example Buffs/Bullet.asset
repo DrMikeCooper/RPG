@@ -23,7 +23,9 @@ MonoBehaviour:
   interruptable: 0
   tick: 0.5
   icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
-  color: 12
+  tint:
+    code: 6
+    customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 4
   userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}

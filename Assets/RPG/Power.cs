@@ -363,7 +363,6 @@ namespace RPG
                     }
                     else
                     {
-                        caster.animLock = false;
                         caster.activePower = null;
                     }
                 }

@@ -16,26 +16,32 @@ MonoBehaviour:
   range: 20
   lineOfSight: 1
   type: 16
-  targetType: 3
+  targetType: 1
   mode: 0
   duration: 0
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
   icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
-  color: 6
+  tint:
+    code: 0
+    customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 4
   userFX: {fileID: 0}
   userBodyPart: 4
   targetFX: {fileID: 0}
   targetBodyPart: 2
+  accuracy: 1
   minDamage: 10
   maxDamage: 20
   effects:
   - {fileID: 11400000, guid: a030a6f62e43bbc478c4bb94debd5918, type: 2}
   - {fileID: 11400000, guid: 2044e68d8bfa48b4e9b26724d1ea9bc2, type: 2}
   statusDuration: 10
+  selfEffects:
+  - {fileID: 11400000, guid: a030a6f62e43bbc478c4bb94debd5918, type: 2}
+  selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
   speed: 3

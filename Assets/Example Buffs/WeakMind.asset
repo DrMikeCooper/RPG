@@ -15,10 +15,17 @@ MonoBehaviour:
   fx: {fileID: 11400000, guid: e71a3eea37041a64fab7b6346871e949, type: 2}
   bodyPart: 1
   icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
-  color: 8
+  tint:
+    code: 0
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  maxStacks: 1
+  sourceSelectiveStacks: 1
+  stacks: 0
+  sourceCharacter: {fileID: 0}
+  sourcePower: {fileID: 0}
   timer: 0
   count: 0
   modifiers:
   - modifier: -20
     stat: 0
-  damageType: 224
+  damageType: 896

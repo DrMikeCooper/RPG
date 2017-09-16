@@ -359,7 +359,7 @@ namespace RPG
 
                 Character ch = this as Character;
                 if (ch)
-                    ch.animLock = true;
+                    ch.animCountDown = 10000;
 
                 // apply a force to them
                 rb.velocity = Vector3.zero;
@@ -381,7 +381,7 @@ namespace RPG
 
             Character ch = this as Character;
             if (ch)
-                ch.animLock = false;
+                ch.PlayAnim("GetUp");
 
             // apply damage
             Rigidbody rb = GetComponent<Rigidbody>();

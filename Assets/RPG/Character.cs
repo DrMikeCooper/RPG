@@ -41,12 +41,22 @@ namespace RPG
         public float timer;
         [HideInInspector]
         public float nextTick;
+
+        //[HideInInspector]
+        public float animCountDown;
+
         // temp data for toggle powers
         public Dictionary<PowerToggle, PowerToggle.ToggleData> toggles = new Dictionary<PowerToggle, PowerToggle.ToggleData>();
 
         AIBrain brain;
 
-        public bool animLock = false;
+        public bool animLock
+        {
+            get
+            {
+                return animCountDown > 0;
+            }
+        }
 
         // used by the tab targetter
         [HideInInspector]
@@ -133,6 +143,9 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            if (animCountDown > 0)
+                animCountDown -= Time.deltaTime;
+
             foreach (KeyValuePair<PowerToggle, PowerToggle.ToggleData> pair in toggles)
             {
                 PowerToggle power = pair.Key;
@@ -282,7 +295,6 @@ namespace RPG
         {
             animator.Play(name);
             ReleaseAnim(false);
-            animLock = true;
             powerStarted = false;
         }
 
@@ -338,11 +350,6 @@ namespace RPG
         {
             string[] names = AnimationUtilities.GetEnumNames<Power.Animations>();
             AnimationUtilities.ProcessAnimations(animator, names, (AnimationClip a)=> AnimationUtilities.AddEventAtEnd(a, "EndPowerAnim"));
-        }
-
-        public void EndPowerAnim()
-        {
-            animLock = false;
         }
 
         // death things

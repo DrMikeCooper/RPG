@@ -10,10 +10,11 @@ namespace RPG
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(layerIndex);
-            foreach (AnimatorClipInfo clipInfo in clips)
-            {
-                AnimationUtilities.AddEventAtEnd(clipInfo.clip, "EndPowerAnim");
-            }
+            if (clips.Length > 0)
+                animator.GetComponent<Character>().animCountDown = clips[0].clip.length;
+            else
+                animator.GetComponent<Character>().animCountDown = 1;
+
         }
     }
 }
