@@ -9,41 +9,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
-  m_Name: VestalStance
+  m_Name: LightningBolt
   m_EditorClassIdentifier: 
-  energyCost: 10
+  energyCost: 0
   coolDown: 0
-  range: 0
+  range: 10
   lineOfSight: 1
-  type: 512
-  targetType: 0
-  mode: 3
+  type: 32
+  targetType: 3
+  mode: 0
   duration: 0
-  extraEnergyCost: 1
+  extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
   sounds: {fileID: 0}
-  icon: {fileID: 21300000, guid: 7bd6cabe874f7c042a5eb2df0d0cbd36, type: 3}
+  icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
   tint:
-    code: 14
+    code: 8
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
   userBodyPart: 4
-  targetFX: {fileID: 0}
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
   targetBodyPart: 2
-  accuracy: 1
-  minDamage: 0
-  maxDamage: 0
-  effects:
-  - {fileID: 11400000, guid: 3db0c3b21dd8f204981e08e17efaa5a9, type: 2}
-  statusDuration: 1
+  accuracy: 1.5
+  minDamage: 2
+  maxDamage: 8
+  effects: []
+  statusDuration: 10
   selfEffects: []
-  selfStatusDuration: 1
+  selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 0}
+  beamMaterial: {fileID: 2100000, guid: f63c576739a709747a1a571260d4fabd, type: 2}
   beamWidth: 0.5
-  beamUVSpeed: 1
+  beamUVSpeed: 20
   maxChains: 0

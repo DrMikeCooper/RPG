@@ -340,6 +340,16 @@ namespace RPG
             }
         }
 
+        public HitResponse.ReflectionType GetReflection(RPGSettings.DamageType type)
+        {
+            foreach (HitResponse hr in hitResponses)
+            {
+                if (hr.reflection != HitResponse.ReflectionType.None && Random.Range(0, 100) < hr.percentage && (hr.damageType & type) != 0)
+                    return hr.reflection;
+            }
+            return HitResponse.ReflectionType.None;
+        }
+
         public void ApplyKnockback(Vector3 force)
         {
             Rigidbody rb = GetComponent<Rigidbody>();

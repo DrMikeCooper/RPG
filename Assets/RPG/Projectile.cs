@@ -42,11 +42,8 @@ namespace RPG
                 if (ch)
                 {
                     // check to see if we deflect it first
-                    foreach (HitResponse hr in ch.hitResponses)
-                    {
-                        if (hr.reflection != HitResponse.ReflectionType.None && Random.Range(0, 100) < hr.percentage && (hr.damageType&parentPower.type)!=0)
-                            deflect = hr.reflection;
-                    }
+                    deflect = ch.GetReflection(parentPower.type);
+
                     if (deflect == HitResponse.ReflectionType.None)
                     {
                         // apply the power normally

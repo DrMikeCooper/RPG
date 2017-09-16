@@ -334,7 +334,7 @@ Prefab:
     - target: {fileID: 114999801157727494, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
       propertyPath: passives.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -386,7 +386,7 @@ Prefab:
         type: 2}
       propertyPath: behaviours.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: bf5e6d046e52637498adec17fd201eb5,
+      objectReference: {fileID: 11400000, guid: 30fd9e97de06cc541a47f9c84bdf9085,
         type: 2}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1607369680447326, guid: 4e5462408152d504fa3a22cc7454da8c, type: 2}
-  number: 0
+  number: 20
 --- !u!4 &327801554
 Transform:
   m_ObjectHideFlags: 0
@@ -2470,7 +2470,7 @@ Prefab:
     - target: {fileID: 114491682630009874, guid: b51937ab03816d948b1ccb88f9e79de5,
         type: 2}
       propertyPath: passives.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4393158252937686, guid: b51937ab03816d948b1ccb88f9e79de5, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2550,6 +2550,12 @@ Prefab:
       propertyPath: powers.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: a52a9f6057c03424eae244c9317499ef,
+        type: 2}
+    - target: {fileID: 114491682630009874, guid: b51937ab03816d948b1ccb88f9e79de5,
+        type: 2}
+      propertyPath: powers.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 58ea054db99f72c4995dd327a6625804,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b51937ab03816d948b1ccb88f9e79de5, type: 2}
@@ -3302,7 +3308,7 @@ MonoBehaviour:
   overheadHUD: {fileID: 1734074604745550, guid: 2b43de62a84cae040994a331920b8ea2,
     type: 2}
   numbersPool: {fileID: 1205511509}
-  beamPool: {fileID: 0}
+  beamPool: {fileID: 327801553}
   projectile: {fileID: 1105569275140022, guid: ac59d7546f325e446a3f4a6260172564, type: 2}
   beam: {fileID: 1607369680447326, guid: 4e5462408152d504fa3a22cc7454da8c, type: 2}
   colors:
@@ -3566,7 +3572,7 @@ Prefab:
     - target: {fileID: 114999801157727494, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
       propertyPath: passives.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -3618,7 +3624,7 @@ Prefab:
         type: 2}
       propertyPath: behaviours.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: bf5e6d046e52637498adec17fd201eb5,
+      objectReference: {fileID: 11400000, guid: 30fd9e97de06cc541a47f9c84bdf9085,
         type: 2}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -6145,7 +6151,7 @@ Prefab:
     - target: {fileID: 114999801157727494, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
       propertyPath: passives.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -6197,7 +6203,7 @@ Prefab:
         type: 2}
       propertyPath: behaviours.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 6ac0acde13a4a1944bc9c372090ebe18,
+      objectReference: {fileID: 11400000, guid: 30fd9e97de06cc541a47f9c84bdf9085,
         type: 2}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
