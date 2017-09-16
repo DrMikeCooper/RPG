@@ -376,21 +376,23 @@ namespace RPG
             if (nv)
                 nv.enabled = true;
 
-            // TODO play get up animation
-
-
-            Character ch = this as Character;
-            if (ch)
-                ch.PlayAnim("GetUp");
-
-            // apply damage
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb)
+            if (knockback)
             {
-                float damage = rb.velocity.magnitude;
-                ApplyDamage(damage, RPGSettings.DamageType.Crushing);
-                rb.velocity = Vector3.zero;
-             }
+                // play get up animation
+                Character ch = this as Character;
+                if (ch)
+                    ch.PlayAnim("GetUp");
+
+                // apply damage
+                Rigidbody rb = GetComponent<Rigidbody>();
+                if (rb)
+                {
+                    float damage = rb.velocity.magnitude;
+                    ApplyDamage(damage, RPGSettings.DamageType.Crushing);
+                    rb.velocity = Vector3.zero;
+                }
+            }
+            knockback = false;
 
         }
     }
