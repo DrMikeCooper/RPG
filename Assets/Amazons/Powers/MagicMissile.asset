@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8198c71c0c05c4a9c149a9fd368472, type: 3}
   m_Name: MagicMissile
   m_EditorClassIdentifier: 
-  energyCost: 50
-  coolDown: 10
+  energyCost: 10
+  coolDown: 0
   range: 30
   lineOfSight: 1
   type: 128
@@ -23,7 +23,9 @@ MonoBehaviour:
   interruptable: 0
   tick: 0.5
   icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
-  color: 9
+  tint:
+    code: 11
+    customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
   userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
@@ -32,7 +34,8 @@ MonoBehaviour:
   targetBodyPart: 2
   minDamage: 7
   maxDamage: 10
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: 524be57865a59ba40a8e3646c2368de3, type: 2}
   statusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}

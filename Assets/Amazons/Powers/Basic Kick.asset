@@ -9,11 +9,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
-  m_Name: FrontKick
+  m_Name: Basic Kick
   m_EditorClassIdentifier: 
   energyCost: 0
   coolDown: 0
-  range: 8
+  range: 0
   lineOfSight: 1
   type: 1
   targetType: 3
@@ -26,20 +26,20 @@ MonoBehaviour:
   tint:
     code: 0
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 8
+  animation: 1
   releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: 60e5de774cf7ec0459e43b6a72733898, type: 2}
-  userBodyPart: 6
+  userFX: {fileID: 0}
+  userBodyPart: 4
   targetFX: {fileID: 0}
   targetBodyPart: 2
   accuracy: 1
   minDamage: 5
   maxDamage: 10
   effects: []
-  statusDuration: 6
+  statusDuration: 10
   selfEffects: []
   selfStatusDuration: 10
-  closeToTargetSpeed: 8
+  closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 0}
   beamWidth: 0.5

@@ -26,7 +26,7 @@ namespace RPG
             {
                 // all stats up to Res require an additional damage type modifier which may be composite
                 // all stats after are single use and used as-is
-                int dt = (mod.stat <= RPGSettings.StatName.Res) ? (int)damageType : 0;
+                int dt = (mod.stat <= RPGSettings.StatName.Def) ? (int)damageType : 0;
 
                 if (dt != 0) // composite buff eg Physical Resistance, All Resistance
                 {
@@ -39,7 +39,7 @@ namespace RPG
                             if (ch.stats.ContainsKey(sn))
                             {
                                 awakenProp = true;
-                                ch.stats[sn].addModifier(mod.modifier);
+                                ch.stats[sn].addModifier(mod.modifier * stacks);
                             }
                         }
                     }
@@ -55,7 +55,7 @@ namespace RPG
                         else
                         {
                             awakenProp = true;
-                            st.addModifier(mod.modifier);
+                            st.addModifier(mod.modifier * stacks);
                         }
                     }
                 }

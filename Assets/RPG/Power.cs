@@ -74,10 +74,13 @@ namespace RPG
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         [Header("RPG Effects")]
+        public float accuracy = 1;
         public float minDamage;
         public float maxDamage;
         public Status[] effects;
         public float statusDuration = 10;
+        public Status[] selfEffects;
+        public float selfStatusDuration = 10;
 
         // true of we run to the target in order to get within 1 unit before activating
         public float closeToTargetSpeed = 0;
@@ -180,11 +183,14 @@ namespace RPG
         public bool Apply(Prop target, float charge, Character caster)
         {
             // calculate chance to hit
-            float chanceToHit = RPGSettings.instance.baseAccuracy + caster.stats[RPGSettings.StatName.Accuracy.ToString()].currentValue- caster.stats[RPGSettings.GetDefenceStat(type)].currentValue;
-            if (Random.Range(0, 100) > chanceToHit)
+            if (targetType == TargetType.Enemies)
             {
-                target.NumberFloat("MISS!", Color.black);
-                return false;
+                float chanceToHit = RPGSettings.instance.baseAccuracy * accuracy + caster.stats[RPGSettings.StatName.Accuracy.ToString()].currentValue - target.stats[RPGSettings.GetDefenceStat(type)].currentValue;
+                if (Random.Range(0, 100) > chanceToHit)
+                {
+                    target.NumberFloat("MISS!", Color.black);
+                    return false;
+                }
             }
 
             // how does the damage get factored in?
@@ -201,10 +207,14 @@ namespace RPG
                     damage = Random.Range(minDamage, maxDamage);
                     break;
             }
+            damage *= caster.GetFactor(RPGSettings.GetDamageStat(type));
+
             if (damage != 0)
                 target.ApplyDamage(damage, type);
             foreach (Status s in effects)
                 target.ApplyStatus(s, statusDuration, caster, this);
+            foreach (Status s in selfEffects)
+                caster.ApplyStatus(s, selfStatusDuration, caster, this);
 
             // add to a global list of DoT's if not a character?
             if (target as Character == null)

@@ -201,6 +201,11 @@ namespace RPG
                 statusEffects.Remove(d);
         }
 
+        public float GetFactor(string stat)
+        {
+            return GetFactor(stats[stat].currentValue);
+        }
+
         public float GetFactor(RPGSettings.StatName stat)
         {
             return GetFactor(stats[stat.ToString()].currentValue);
@@ -230,6 +235,7 @@ namespace RPG
                     if (statusEffects[i].sourceCharacter == caster && statusEffects[i].sourcePower == power && statusEffects[i].name == s.name)
                         copy = statusEffects[i];
 
+                statusDirty = true;
                 if (copy)
                 {
                     // refresh the duration, and possibly increase how amny stacks we have
@@ -242,12 +248,13 @@ namespace RPG
                 {
                     // status with a duration - add to character's queue
                     Status status = Instantiate(s) as Status;
+                    status.stacks = 1;
                     status.name = s.name;
                     status.sourceCharacter = caster;
                     status.sourcePower = power;
                     status.duration = duration; // TODO modify with debuff resistance?
                     statusEffects.Add(status);
-                    statusDirty = true;
+
                     return status;
                 }
             }
@@ -301,12 +308,12 @@ namespace RPG
                         status.Apply(this);
                         if (groupedEffects.ContainsKey(status.name))
                         {
-                            groupedEffects[status.name].count++;
+                            groupedEffects[status.name].count+=status.stacks;
                         }
                         else
                         {
                             groupedEffects[status.name] = status;
-                            groupedEffects[status.name].count = 1;
+                            groupedEffects[status.name].count = status.stacks;
                         }
                     }
                 }

@@ -20,7 +20,10 @@ namespace RPG
             }
             else
             {
-                force = (ch.transform.position - caster.transform.position).normalized;
+                if (caster == ch)
+                    force = caster.transform.forward;
+                else
+                    force = (ch.transform.position - caster.transform.position).normalized;
                 force.y = 1;
             }
             ch.ApplyKnockback(strength * 250 * force);
