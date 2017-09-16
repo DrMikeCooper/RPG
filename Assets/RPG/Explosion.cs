@@ -10,16 +10,23 @@ namespace RPG
     {
         public PowerArea explosion;
 
+        // data to stop the same character exploding too regularly
+        Dictionary<Prop, float> delays = new Dictionary<Prop, float>();
+
         public override void Apply(Prop ch, Character caster = null)
         {
-            if (!explosion)
+            if (!delays.ContainsKey(ch) || delays[ch] < Time.time)
             {
-                Debug.Log("Explosion " + name + "has no PowerArea");
-                return;
+                if (!explosion)
+                {
+                    Debug.Log("Explosion " + name + "has no PowerArea");
+                    return;
+                }
+                if (explosion.userFX)
+                    explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
+                explosion.Explode(ch.transform, caster);
+                delays[ch] = Time.time + 0.4f;
             }
-            if (explosion.userFX)
-                explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
-            explosion.Explode(ch.transform, caster);
         }
 
         public override bool isImmediate() { return true; }
