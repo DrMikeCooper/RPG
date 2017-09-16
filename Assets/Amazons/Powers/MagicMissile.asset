@@ -22,6 +22,7 @@ MonoBehaviour:
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
+  sounds: {fileID: 11400000, guid: ea75b82d328668d418d56003adf50a6e, type: 2}
   icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
   tint:
     code: 11
@@ -32,11 +33,14 @@ MonoBehaviour:
   userBodyPart: 4
   targetFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
   targetBodyPart: 2
+  accuracy: 1
   minDamage: 7
   maxDamage: 10
   effects:
   - {fileID: 11400000, guid: 524be57865a59ba40a8e3646c2368de3, type: 2}
   statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
   speed: 5

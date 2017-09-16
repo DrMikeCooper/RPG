@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f8e4e78d44e9642a91a09dddaeda51, type: 3}
+  m_Name: ThrowingKnife
+  m_EditorClassIdentifier: 
+  startFX:
+  - {fileID: 8300000, guid: c0b7e0a2d3672d747bed6c31e95b1bd5, type: 3}
+  - {fileID: 8300000, guid: 7502be478531378469617d4682ed0a06, type: 3}
+  - {fileID: 8300000, guid: db4b4e97f6129164db4488e75a296b07, type: 3}
+  launchFX:
+  - {fileID: 8300000, guid: ced2b3bd346aa4a4d8ebca9c4adf9b3b, type: 3}
+  hitFX:
+  - {fileID: 8300000, guid: 9a47aa0ca9369294b86d2d6331439c62, type: 3}
+  - {fileID: 8300000, guid: e1a21a75b401f824292e59a586157a44, type: 3}
+  - {fileID: 8300000, guid: 47ef5068637b9b64db42751e033d5a3f, type: 3}

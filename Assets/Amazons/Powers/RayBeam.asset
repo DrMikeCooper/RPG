@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f8e4e78d44e9642a91a09dddaeda51, type: 3}
+  m_Name: RayBeam
+  m_EditorClassIdentifier: 
+  startFX:
+  - {fileID: 8300000, guid: ccc567196dce69440aff87578e7b5636, type: 3}
+  launchFX:
+  - {fileID: 8300000, guid: 64acb3029635a3844b4276a84778010c, type: 3}
+  - {fileID: 8300000, guid: df0305654ccb8ba41b39e430bd27e24a, type: 3}
+  - {fileID: 8300000, guid: e4d1b4a40668e8e4eba470a211757d50, type: 3}
+  hitFX:
+  - {fileID: 8300000, guid: 3a161d6daa91f354f908ed76b90bb324, type: 3}
+  - {fileID: 8300000, guid: e48e3ea1729b4bc429667c4783b61cb1, type: 3}
