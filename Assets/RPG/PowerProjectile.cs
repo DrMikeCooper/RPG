@@ -10,6 +10,8 @@ namespace RPG
         [Header("Power Projectile Settings")]
         public float speed = 1;
         public VisualEffect projectileFX;
+        public int maxChains = 0;
+
         public override void OnActivate(Character caster)
         {
             // spawn a projectile and set it going in the right direction

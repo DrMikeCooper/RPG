@@ -13,6 +13,7 @@ namespace RPG
 
         float range;
         float charge;
+        int chains;
 
         // Use this for initialization
         public void Init(Power p, Prop c, Vector3 v)
@@ -22,6 +23,7 @@ namespace RPG
             caster = c;
             velocity = v;
             charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+            chains = 0;
         }
 
         // Update is called once per frame
@@ -35,6 +37,7 @@ namespace RPG
         void OnTriggerEnter(Collider col)
         {
             HitResponse.ReflectionType deflect = HitResponse.ReflectionType.None;
+            bool finished = true;
 
             Prop ch = col.gameObject.GetComponent<Prop>();
             if (ch != caster)
@@ -44,7 +47,19 @@ namespace RPG
                     // check to see if we deflect it first
                     deflect = ch.GetReflection(parentPower.type);
 
-                    if (deflect == HitResponse.ReflectionType.None)
+                    bool apply = (deflect == HitResponse.ReflectionType.None);
+                    bool bounce = !apply;
+                    bool chaining = false;
+
+                    if (chains < (parentPower as PowerProjectile).maxChains)
+                    {
+                        chains++;
+                        bounce = true;
+                        chaining = true;
+                        deflect = HitResponse.ReflectionType.Redirect;
+                    }
+
+                    if (apply)
                     {
                         // apply the power normally
 
@@ -55,22 +70,25 @@ namespace RPG
 
                         // if we miss (based on accuracy), set the flag here so we dont destroy the projectile
                         if (!parentPower.Apply(ch, charge, caster as Character))
-                            deflect = HitResponse.ReflectionType.Deflect;
+                            finished = false;
                     }
-                    else
+
+                    if (bounce)
                     {
+                        finished = false;
                         // reverse direction for now
                         int team = -1;
-                        Character cha = ch as Character;
+                        Character cha = (chaining ? caster : ch) as Character;
                         if (cha) team = cha.team;
                         float speed = velocity.magnitude;
                         velocity = speed * HitResponse.Reflect(ch, caster.transform.position, deflect, team);
 
                         startPos = transform.position;
-                        caster = ch as Character;
+                        if (!chaining)
+                            caster = ch as Character;
                     }
                 }
-                if (deflect == HitResponse.ReflectionType.None)
+                if (finished)
                     Destroy(gameObject);
             }
         }

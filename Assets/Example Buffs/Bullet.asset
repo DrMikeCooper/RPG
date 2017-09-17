@@ -44,3 +44,4 @@ MonoBehaviour:
   npcTarget: {fileID: 0}
   speed: 8
   projectileFX: {fileID: 11400000, guid: 60e5de774cf7ec0459e43b6a72733898, type: 2}
+  maxChains: 4
