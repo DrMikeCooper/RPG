@@ -39,6 +39,7 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: a441d77e87d58ef458ebb646af99c75c, type: 2}
   - {fileID: 11400000, guid: edc9bb20687f5c640ad30fa6e75fd5ee, type: 2}
+  - {fileID: 11400000, guid: 541e07e9480c08f44806a013134e68d2, type: 2}
   statusDuration: 20
   selfEffects: []
   selfStatusDuration: 10
@@ -47,3 +48,4 @@ MonoBehaviour:
   beamMaterial: {fileID: 2100000, guid: f63c576739a709747a1a571260d4fabd, type: 2}
   beamWidth: 0.5
   beamUVSpeed: 5
+  maxChains: 0

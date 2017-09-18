@@ -14,25 +14,35 @@ MonoBehaviour:
   energyCost: 50
   coolDown: 3
   range: 0
+  lineOfSight: 1
   type: 4
   targetType: 0
   mode: 0
   duration: 0
   extraEnergyCost: 0
+  interruptable: 0
   tick: 0.5
+  sounds: {fileID: 0}
   icon: {fileID: 21300000, guid: 24b46870513983848813311e60dcb8f7, type: 3}
-  color: 4
+  tint:
+    code: 0
+    customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
+  releaseAnimation: 10
   userFX: {fileID: 11400000, guid: e1fc47a700458d94ea37a65d12c797ee, type: 2}
   userBodyPart: 0
   targetFX: {fileID: 11400000, guid: be9f03ce1ace1424ab2668c04a04ac63, type: 2}
   targetBodyPart: 0
+  accuracy: 1
   minDamage: 20
   maxDamage: 30
   effects: []
   statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
-  radius: 3
+  radius: 10
+  angle: 60
   explodeFX: {fileID: 0}
   explodeBodyPart: 0

@@ -8,7 +8,11 @@ namespace RPG
     public class PowerArea : Power
     {
         [Header("Power Area Settings")]
+        [Tooltip("Distance from caster at which the power stops working")]
         public float radius;
+        [Tooltip("Total arc of the power in radians. 360 means circular area of effect")]
+        public int angle = 360;
+
         [Tooltip("Optional settings to allow for different chargeup particles. Leave empty to use userFX for the explosion")]
         public VisualEffect explodeFX;
         public Character.BodyPart explodeBodyPart = Character.BodyPart.Root;
@@ -24,12 +28,17 @@ namespace RPG
             if (fx)
                 fx.Begin(centre, tint);
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
+
+            float dotMin = Mathf.Cos(angle * Mathf.Deg2Rad * 0.5f);
+
             // check all other characters within the radius
             foreach (Character ch in getAll())
             {
                 if (ch != caster && Vector3.Distance(ch.transform.position, centre.position) < radius)
                 {
-                    Apply(ch, charge, caster);
+                    // arc test, to see how forwards of caster we are
+                    if (angle >=360 || Vector3.Dot((ch.transform.position - caster.transform.position).normalized, caster.transform.forward) > dotMin)
+                        Apply(ch, charge, caster);
                 }
             }
         }

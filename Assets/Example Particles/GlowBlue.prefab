@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e1dc16d93acee42957a5098b376a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0.14482737, a: 0.409}
+  color: {r: 0.704361, g: 0.6102941, b: 1, a: 1}
   pulseSpeed: 2
   pulseBase: 0.2
   fadeTimer: 1
   pulseTimer: 2.6096807
-  colorName: 1
+  colorName: 0
