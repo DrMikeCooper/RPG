@@ -493,7 +493,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4970358108221086}
-  - component: {fileID: 95065004574715076}
   m_Layer: 0
   m_Name: girl
   m_TagString: Untagged
@@ -2698,23 +2697,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &95065004574715076
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1340906938504314}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: acf11a592599f7b4f91f62197d4cd1cb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 118f008ca42d41046af6e491b51d6f36, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95777037812261402
 Animator:
   serializedVersion: 3
@@ -2752,6 +2734,13 @@ MonoBehaviour:
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   walking: 0
+  maxSpeed: 1
+  onGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  forceJump: 0
 --- !u!114 &114281317869979782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2795,8 +2784,12 @@ MonoBehaviour:
   powerStarted: 0
   timer: 0
   nextTick: 0
-  animLock: 0
+  animCountDown: 0
+  currentCombo: {fileID: 0}
+  currentComboStage: 0
+  currentComboTimer: 0
   xScreen: 0
+  audioSource: {fileID: 0}
   head: {fileID: 4920006397947256}
   chest: {fileID: 4373078171191060}
   leftHand: {fileID: 4134339528121636}
@@ -2847,7 +2840,9 @@ MonoBehaviour:
   target: {fileID: 0}
   closingRange: 0
   enemies: []
+  allies: []
   patrolling: {fileID: 0}
+  showDebug: 0
 --- !u!136 &136469606226369354
 CapsuleCollider:
   m_ObjectHideFlags: 1

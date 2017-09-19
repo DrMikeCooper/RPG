@@ -1306,7 +1306,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4973329172348588}
-  - component: {fileID: 95924075240113170}
   m_Layer: 0
   m_Name: girl
   m_TagString: Untagged
@@ -2715,23 +2714,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!95 &95924075240113170
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1890815927725784}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: acf11a592599f7b4f91f62197d4cd1cb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 118f008ca42d41046af6e491b51d6f36, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114047486108785076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2752,6 +2734,13 @@ MonoBehaviour:
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   walking: 0
+  maxSpeed: 1
+  onGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  forceJump: 0
 --- !u!114 &114789204999595680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2772,7 +2761,9 @@ MonoBehaviour:
   target: {fileID: 0}
   closingRange: 0
   enemies: []
+  allies: []
   patrolling: {fileID: 0}
+  showDebug: 0
 --- !u!114 &114832921188878006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2840,8 +2831,12 @@ MonoBehaviour:
   powerStarted: 0
   timer: 0
   nextTick: 0
-  animLock: 0
+  animCountDown: 0
+  currentCombo: {fileID: 0}
+  currentComboStage: 0
+  currentComboTimer: 0
   xScreen: 0
+  audioSource: {fileID: 0}
   head: {fileID: 4814489977478278}
   chest: {fileID: 4767442501518718}
   leftHand: {fileID: 4827029171945456}
