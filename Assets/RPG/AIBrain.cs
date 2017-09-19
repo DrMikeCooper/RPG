@@ -123,6 +123,12 @@ namespace RPG
             ai.target = pos;
         }
 
+        public void MoveTo(Vector3 pos, bool walking = false)
+        {
+            GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().walking = walking;
+            ai.SetTargetPos(pos);
+        }
+
         public void UpdateEnemies()
         {
             // check new enemies for line of sight and add to our list

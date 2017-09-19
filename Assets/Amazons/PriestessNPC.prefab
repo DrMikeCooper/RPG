@@ -2755,6 +2755,7 @@ MonoBehaviour:
   behaviours:
   - {fileID: 11400000, guid: 6ac0acde13a4a1944bc9c372090ebe18, type: 2}
   - {fileID: 11400000, guid: 6b70bb27617f0b34a83853e4747c8b0e, type: 2}
+  - {fileID: 11400000, guid: ddeb0832295270546a5ddf832e8c2246, type: 2}
   rootNode: {fileID: 0}
   character: {fileID: 0}
   countDown: 0

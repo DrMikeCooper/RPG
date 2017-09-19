@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
   m_Name: Hermetic Flame
   m_EditorClassIdentifier: 
-  energyCost: 50
-  coolDown: 0
+  energyCost: 10
+  coolDown: 3
   range: 30
   lineOfSight: 1
   type: 512
@@ -22,20 +22,27 @@ MonoBehaviour:
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
+  sounds: {fileID: 0}
   icon: {fileID: 21300000, guid: 7ea3aaca0c515964a9ee5c6fbed1461b, type: 3}
-  color: 1
+  tint:
+    code: 0
+    customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 2
   releaseAnimation: 10
   userFX: {fileID: 11400000, guid: 176376874fcf7544099a4898c3acb625, type: 2}
   userBodyPart: 4
   targetFX: {fileID: 11400000, guid: e71a3eea37041a64fab7b6346871e949, type: 2}
   targetBodyPart: 1
+  accuracy: 1
   minDamage: -20
   maxDamage: -30
   effects: []
   statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 0}
   beamWidth: 0.5
   beamUVSpeed: 1
+  maxChains: 0
