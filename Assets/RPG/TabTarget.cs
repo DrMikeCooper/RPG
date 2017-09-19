@@ -6,19 +6,20 @@ namespace RPG
 {
     public class TabTarget : MonoBehaviour
     {
-        public GameObject reticle;
         Character user;
+        GameObject reticle;
 
         // Use this for initialization
         void Start()
         {
-            reticle.SetActive(false);
             user = GetComponent<Character>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            reticle = user.GetReticle();
+
             if (user.target && user.target.dead)
                 user.target = null;
 

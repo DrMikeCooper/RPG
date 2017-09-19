@@ -14,6 +14,9 @@ namespace RPG
         PowerArea previewPower;
         public Material previewMaterial;
         bool previewOnTarget;
+        List<Character> previewTargets = new List<Character>();
+        List<Character> targets = new List<Character>();
+        public Color targetColor = Color.white;
 
         // Use this for initialization
         void Start()
@@ -30,18 +33,22 @@ namespace RPG
                 if (Input.GetKeyDown(key) && character.activePower == null && character.animLock == false)
                 {
                     p.OnStart(character);
-                    previewPower = p as PowerArea;
-                    previewOnTarget = false;
-                    if (previewPower == null)
+                    if (p.CanUse(character))
                     {
+                        previewPower = p as PowerArea;
                         previewOnTarget = false;
-                        foreach (Status s in p.effects)
+                        // is its not an Area power, check for explosive effects and preview them
+                        if (previewPower == null)
                         {
-                            Explosion ex = s as Explosion;
-                            if (ex)
+                            previewOnTarget = false;
+                            foreach (Status s in p.effects)
                             {
-                                previewPower = ex.explosion;
-                                previewOnTarget = true;
+                                Explosion ex = s as Explosion;
+                                if (ex)
+                                {
+                                    previewPower = ex.explosion;
+                                    previewOnTarget = true;
+                                }
                             }
                         }
                     }
@@ -56,12 +63,15 @@ namespace RPG
                 }
                 key++;
             }
+
+
+            targets.Clear();
             if (previewPower)
             {
                 Transform t = (previewOnTarget && character.target) ? character.target.transform : character.transform;
                 GetPreviewObject().SetActive(true);
                 GetPreviewObject().transform.position = t.position + Vector3.up;
-                GetPreviewObject().transform.forward = t.forward;
+                GetPreviewObject().transform.forward = character.target ? character.target.transform.position - character.transform.position : character.transform.forward;
                 if (previewPower.angle >= 360)
                 {
                     previewMeshFilter.mesh = previewSphere;
@@ -73,6 +83,21 @@ namespace RPG
                     float x0 = Mathf.Tan(previewPower.angle * 0.5f * Mathf.Deg2Rad);
                     GetPreviewObject().transform.localScale = new Vector3(x0, x0, 1) * previewPower.radius;
                 }
+                targets = previewPower.GetTargets(character, GetPreviewObject().transform.position, GetPreviewObject().transform.forward);
+            }
+
+            // update multi-reticles
+            foreach (Character ch in previewTargets)
+            {
+                if (targets.Contains(ch) == false)
+                    ch.GetReticle().SetActive(false);
+            }
+            previewTargets.Clear();
+            foreach (Character ch in targets)
+            {
+                ch.GetReticle().transform.localScale = 0.8f * Vector3.one;
+                ch.ShowReticle(targetColor);
+                previewTargets.Add(ch);
             }
 
             if (character.activePower)

@@ -19,6 +19,8 @@ namespace RPG
 
         public override void OnActivate(Character caster)
         {
+            if (angle < 360 && caster.target)
+                caster.FaceTarget();
             Explode(caster.GetBodyPart(explodeBodyPart), caster);
         }
 
@@ -29,18 +31,30 @@ namespace RPG
                 fx.Begin(centre, tint);
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
 
-            float dotMin = Mathf.Cos(angle * Mathf.Deg2Rad * 0.5f);
+            List<Character> targets = GetTargets(caster, centre.position, centre.forward);
 
             // check all other characters within the radius
+            foreach (Character ch in targets)
+                  Apply(ch, charge, caster);
+        }
+
+        public List<Character> GetTargets(Character caster, Vector3 centre, Vector3 forward)
+        {
+            List<Character> targets = new List<Character>();
+
+            float dotMin = Mathf.Cos(angle * Mathf.Deg2Rad * 0.5f);
+
             foreach (Character ch in getAll())
             {
-                if (ch != caster && Vector3.Distance(ch.transform.position, centre.position) < radius)
+                if (ch != caster && Vector3.Distance(ch.transform.position, centre) < radius)
                 {
                     // arc test, to see how forwards of caster we are
-                    if (angle >=360 || Vector3.Dot((ch.transform.position - caster.transform.position).normalized, caster.transform.forward) > dotMin)
-                        Apply(ch, charge, caster);
+                    if (angle >= 360 || Vector3.Dot((ch.transform.position - centre).normalized, forward) > dotMin)
+                        targets.Add(ch);
                 }
             }
+
+            return targets;
         }
 
         public override void UpdateAction(AIBrain brain)

@@ -54,6 +54,7 @@ namespace RPG
         public Dictionary<PowerToggle, PowerToggle.ToggleData> toggles = new Dictionary<PowerToggle, PowerToggle.ToggleData>();
 
         AIBrain brain;
+        GameObject reticle;
 
         public bool animLock
         {
@@ -147,6 +148,13 @@ namespace RPG
             }
 
             ApplyPassives();
+
+            //create a tragetting reticle and disable it
+            reticle = Instantiate(RPGSettings.instance.reticle);
+            reticle.transform.parent = transform;
+            reticle.transform.localPosition = Vector3.zero;
+            reticle.name = "reticle";
+            reticle.SetActive(false);
         }
 
         public void ResetCombos()
@@ -400,6 +408,13 @@ namespace RPG
             {
                 RPGSettings.instance.GetHUD(this).AddDebugText(msg);
             }
+        }
+
+        public GameObject GetReticle() { return reticle; }
+        public void ShowReticle(Color color)
+        {
+            reticle.SetActive(true);
+            reticle.GetComponent<MeshRenderer>().material.SetColor("_TintColor", color);
         }
     }
 }

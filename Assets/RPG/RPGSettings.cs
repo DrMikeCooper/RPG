@@ -12,6 +12,8 @@ namespace RPG
 
         [Tooltip("Standard HUD to display over the head of every character in the scene")]
         public GameObject overheadHUD;
+        [Tooltip("Targetting reticle prefab")]
+        public GameObject reticle;
 
         [HideInInspector]
         public static RPGSettings instance; // singleton accessor
@@ -20,7 +22,7 @@ namespace RPG
         public ObjectPool beamPool;
 
         Dictionary<Prop, OverheadHUD> healthBars = new Dictionary<Prop, OverheadHUD>();
-
+        
         public enum DamageType
         {
             Crushing = 1,
