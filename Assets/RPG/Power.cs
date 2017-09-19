@@ -192,7 +192,7 @@ namespace RPG
                 float chanceToHit = RPGSettings.instance.baseAccuracy * accuracy + casterAcc - target.stats[RPGSettings.GetDefenceStat(type)].currentValue;
                 if (Random.Range(0, 100) > chanceToHit)
                 {
-                    target.NumberFloat("MISS!", Color.black);
+                    target.NumberFloat("MISS!", Color.white);
                     return false;
                 }
             }
