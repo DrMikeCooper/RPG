@@ -40,7 +40,7 @@ namespace RPG
 
                 foreach (Character ch in PowerArea.getAll())
                 {
-                    // left shift-TAB toggles between allies, normla TAB through enemies
+                    // left shift-TAB toggles between allies, normal TAB through enemies
                     bool valid = (!ch.dead) && Input.GetKey(KeyCode.LeftShift) ?
                         (ch != user && ch.team == user.team)
                         : (ch.team != user.team);

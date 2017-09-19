@@ -3621,6 +3621,7 @@ GameObject:
   - component: {fileID: 693853954}
   - component: {fileID: 700627214}
   - component: {fileID: 700627213}
+  - component: {fileID: 700627221}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3652,8 +3653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72e120395f2b984e87abed695bf4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previewMaterial: {fileID: 2100000, guid: 8a2b67edd8678574297cc15ee33da109, type: 2}
-  targetColor: {r: 0.6764705, g: 0.5955882, b: 1, a: 1}
 --- !u!114 &700627215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3754,6 +3753,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &700627221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 700627212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2745425627274c40b615f4fba07922b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  previewMaterial: {fileID: 2100000, guid: 8a2b67edd8678574297cc15ee33da109, type: 2}
+  targetColor: {r: 0.90588236, g: 1, b: 0.5735294, a: 1}
+  previewColorCan: {r: 1, g: 0.95371455, b: 0.41911763, a: 1}
+  previewColorCant: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &708040087
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,7 +67,7 @@ namespace RPG
                 List<Transform> targets = new List<Transform>();
                 foreach (Character ch in PowerArea.getAll())
                 {
-                    if (ch.team != team)
+                    if (!ch.dead && ch.team != team)
                     {
                         if (ch.CanSee(prop))
                             targets.Add(ch.transform);

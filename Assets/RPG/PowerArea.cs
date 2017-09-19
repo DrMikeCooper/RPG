@@ -46,7 +46,7 @@ namespace RPG
 
             foreach (Character ch in getAll())
             {
-                if (ch != caster && Vector3.Distance(ch.transform.position, centre) < radius)
+                if (!ch.dead && ch != caster && Vector3.Distance(ch.transform.position, centre) < radius)
                 {
                     // arc test, to see how forwards of caster we are
                     if (angle >= 360 || Vector3.Dot((ch.transform.position - centre).normalized, forward) > dotMin)
