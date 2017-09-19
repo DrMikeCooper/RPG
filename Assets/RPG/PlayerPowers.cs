@@ -8,6 +8,7 @@ namespace RPG
     {
         Character character;
         TargetPreview preview;
+        Power pendingPower;
 
         // Use this for initialization
         void Start()
@@ -24,19 +25,25 @@ namespace RPG
             {
                 if (Input.GetKeyDown(key) && character.activePower == null && character.animLock == false)
                 {
-                    p.OnStart(character);
+                    // queue the power up for starting
+                    pendingPower = p;
                     if (preview)
                         preview.StartPreview(p);
                 }
                 
                 if (Input.GetKeyUp(key))
                 {
+                    pendingPower = null;
                     if (character.activePower != null) // == p.GetPower(character))
                         p.OnEnd(character);
                     if (preview) preview.EndPreview();
                 }
                 key++;
             }
+
+            // once the powers queued, start when cooldown and energy permit
+            if (pendingPower && pendingPower.CanUse(character))
+                pendingPower.OnStart(character);
 
             if (character.activePower)
             {
