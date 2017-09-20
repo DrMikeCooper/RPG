@@ -11,6 +11,8 @@ namespace RPG
     public class AINodeEvaluate : AINode
     {
         public AIAction[] behaviours;
+        float[] evals;
+        Prop[] targets;
 
         // TODO - member variables can be expected to last between Evaluate and Execute in the same function call, but feels fragile!
         AIAction bestBehaviour;

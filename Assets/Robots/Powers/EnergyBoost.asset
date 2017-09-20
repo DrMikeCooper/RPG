@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
+  m_Name: EnergyBoost
+  m_EditorClassIdentifier: 
+  duration: 0
+  fx: {fileID: 11400000, guid: c2d341cdf2cda5a49975b322918e38f4, type: 2}
+  bodyPart: 0
+  icon: {fileID: 21300000, guid: 030de8df2e920184fb9156ae0f1abccb, type: 3}
+  tint:
+    code: 7
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  maxStacks: 1
+  sourceSelectiveStacks: 1
+  stacks: 0
+  sourceCharacter: {fileID: 0}
+  sourcePower: {fileID: 0}
+  timer: 0
+  count: 0
+  modifiers:
+  - modifier: 200
+    stat: 3
+  damageType: 1024

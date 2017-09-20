@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: Energise
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  coolDown: 5
+  range: 10
+  lineOfSight: 1
+  type: 1024
+  targetType: 2
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  sounds: {fileID: 0}
+  icon: {fileID: 21300000, guid: 030de8df2e920184fb9156ae0f1abccb, type: 3}
+  tint:
+    code: 7
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 3
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  userBodyPart: 1
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  targetBodyPart: 2
+  accuracy: 1
+  minDamage: 0
+  maxDamage: 0
+  effects:
+  - {fileID: 11400000, guid: 9be369dfa890a334386027ac63d18a03, type: 2}
+  statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
+  beamWidth: 0.5
+  beamUVSpeed: 1
+  maxChains: 0

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: ForceField
+  m_EditorClassIdentifier: 
+  energyCost: 25
+  coolDown: 10
+  range: 10
+  lineOfSight: 1
+  type: 1024
+  targetType: 2
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  sounds: {fileID: 0}
+  icon: {fileID: 21300000, guid: ce18e2d45ab989042a344457a0b75c67, type: 3}
+  tint:
+    code: 8
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 2
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 176376874fcf7544099a4898c3acb625, type: 2}
+  userBodyPart: 0
+  targetFX: {fileID: 11400000, guid: e71a3eea37041a64fab7b6346871e949, type: 2}
+  targetBodyPart: 0
+  accuracy: 1
+  minDamage: 0
+  maxDamage: 0
+  effects:
+  - {fileID: 11400000, guid: 7df71c85d8377c849a89d635b5f94d37, type: 2}
+  statusDuration: 20
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1
+  maxChains: 0

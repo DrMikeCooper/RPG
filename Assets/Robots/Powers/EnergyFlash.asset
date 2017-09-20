@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558353b6810369d42b81b5fafdaaea93, type: 3}
+  m_Name: EnergyFlash
+  m_EditorClassIdentifier: 
+  energyCost: 50
+  coolDown: 0
+  range: 0
+  lineOfSight: 1
+  type: 64
+  targetType: 0
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  sounds: {fileID: 0}
+  icon: {fileID: 21300000, guid: 24b46870513983848813311e60dcb8f7, type: 3}
+  tint:
+    code: 8
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 6
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 6d26458e37411cb4dbdd5adf5cb93185, type: 2}
+  userBodyPart: 2
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  accuracy: 1
+  minDamage: 10
+  maxDamage: 20
+  effects:
+  - {fileID: 11400000, guid: edc9bb20687f5c640ad30fa6e75fd5ee, type: 2}
+  statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  radius: 5
+  angle: 360
+  explodeFX: {fileID: 0}
+  explodeBodyPart: 0

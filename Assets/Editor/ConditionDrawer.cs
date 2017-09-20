@@ -23,9 +23,9 @@ public class ConditionDrawer : PropertyDrawer
 
         // Calculate rects
         var typeRect = new Rect(position.x, position.y, 100, position.height);
-        var labelRect = new Rect(position.x + 105, position.y, 30, position.height);
-        var thresholdRect = new Rect(position.x + 145, position.y, 60, position.height);
-        var reverseRect = new Rect(position.x + 205, position.y, 50, position.height);
+        var labelRect = new Rect(position.x + 105, position.y, 15, position.height);
+        var thresholdRect = new Rect(position.x + 130, position.y, 60, position.height);
+        var reverseRect = new Rect(position.x + 190, position.y, 50, position.height);
 
         SerializedProperty typeProp = property.FindPropertyRelative("type");
         SerializedProperty reverseProp = property.FindPropertyRelative("reverse");
@@ -33,7 +33,7 @@ public class ConditionDrawer : PropertyDrawer
         EditorGUI.PropertyField(typeRect, typeProp, GUIContent.none);
         if (typeProp.intValue > 0)
         {
-            EditorGUI.LabelField(labelRect, reverseProp.boolValue ? " <" : ">");
+            EditorGUI.LabelField(labelRect, reverseProp.boolValue ? ">" : "<");
             EditorGUI.PropertyField(thresholdRect, property.FindPropertyRelative("threshold"), GUIContent.none);
             EditorGUI.PropertyField(reverseRect, reverseProp, GUIContent.none);
         }

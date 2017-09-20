@@ -113,6 +113,8 @@ namespace RPG
             {
                 stats[RPGSettings.GetDamageStat((RPGSettings.DamageType)(1 << i))] = new Stat();
             }
+            // healing damage boost does make sense
+            stats[RPGSettings.GetDamageStat(RPGSettings.DamageType.Healing)] = new Stat();
 
             // special starting values and non-buffs go here
             stats[RPGSettings.StatName.Energy.ToString()] = new Stat(maxEnergy, false);

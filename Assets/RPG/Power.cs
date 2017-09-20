@@ -131,10 +131,11 @@ namespace RPG
                 target = caster;
                 if (targetType == TargetType.AlliesOnly)
                     target = null;
-                if ((targetType == TargetType.SelfAndAllies || targetType == TargetType.All) && caster.target != null) 
+                if ((targetType == TargetType.AlliesOnly || targetType == TargetType.SelfAndAllies || targetType == TargetType.All) && caster.target != null) 
                 {
+                    target = caster.target;
                     Character ctarget = caster.target as Character;
-                    if (targetType == TargetType.SelfAndAllies && ctarget && caster.team != ctarget.team)
+                    if ((targetType == TargetType.AlliesOnly || targetType == TargetType.SelfAndAllies) && ctarget && caster.team != ctarget.team)
                         target = null;
                 }
             }
@@ -478,17 +479,24 @@ namespace RPG
             List<Character> targets = targetType == TargetType.Enemies ? brain.enemies : brain.allies;
             foreach (Character ch in targets)
             {
-                if (ch != caster && AINode.IsCondition(condition, ch, this))
+                if (ch != caster)
                 {
-                    float eval = Eval(caster, ch);
-
-                    // TODO - factor in collateral and splash damage ?
-
-                    if (eval > bestEval)
+                    bool cond = AINode.IsCondition(condition, ch, this);
+                    if (cond)
                     {
-                        bestEval = eval;
-                        npcTarget = ch;
+                        float eval = Eval(caster, ch);
+
+                        // TODO - factor in collateral and splash damage ?
+
+                        Debug.Log("Power:" + name + " Ch:" + ch.name + " Eval:" + eval);
+                        if (eval > bestEval)
+                        {
+                            bestEval = eval;
+                            npcTarget = ch;
+                        }
                     }
+                    else
+                        Debug.Log("Power:" + name + " Ch:" + ch.name + "condition not met");
                 }
             }
 
@@ -567,7 +575,7 @@ namespace RPG
             // if its a heal - either negative damage or DoT
             float heal = -DamagePerHit();
             float damage = target.maxHealth - target.health;
-            heal = Mathf.Max(heal, damage); // take into account over-heal
+            heal = Mathf.Min(heal, damage); // take into account over-heal
             float pct = target.GetHealthPct();
             // weight this for characters low on health = 1 at half health, 4 at death's door
             float urgency = 4.0f * (1.0f - pct) * (1.0f - pct);
@@ -600,7 +608,7 @@ namespace RPG
                 return null;
 
             brain.target = npcTarget;
-
+            Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
             UpdateAction(brain);
 
             return this;

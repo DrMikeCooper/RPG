@@ -102,14 +102,24 @@ namespace RPG
             float value = 0;
             foreach (Modifier mod in modifiers)
             {
+                float value0 = 0;
                 if (mod.stat == RPGSettings.StatName.Hold || mod.stat == RPGSettings.StatName.Stun)
-                    value = Mathf.Max(value, !target.isHeld() ? 0 : 70);
+                    value0 = !target.isHeld() ? 0 : 70;
                 else if (mod.stat == RPGSettings.StatName.Root)
-                    value = Mathf.Max(value, !target.isRooted() ? 0 : 30);
+                    value0 =  !target.isRooted() ? 0 : 30;
                 else if (mod.stat <= RPGSettings.StatName.Def) // buffs to basic combat abilities stack - 100% modifier to damage etc is bonus of 50
-                    value = Mathf.Max(value, Mathf.Abs(mod.modifier) * 0.5f);
+                    value0 = Mathf.Abs(mod.modifier) * 0.5f;
                 else // run speed, energy regen etc, nice to have
-                    value = Mathf.Max(value, Mathf.Abs(mod.modifier) * 0.25f);
+                    value0 = Mathf.Abs(mod.modifier) * 0.25f;
+
+                //how many stacks of this buff does the character have?
+                int numStacks = target.GetStacks(this);
+                if (numStacks > 0)
+                    value0 *= 0.5f;
+                if (numStacks == maxStacks)
+                    value0 = 0;
+
+                value = Mathf.Max(value, value0);
             }
             return value;
         }

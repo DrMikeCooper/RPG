@@ -99,13 +99,17 @@ namespace RPG
 
                     if (showDebug)
                     {
+                        RPGSettings.instance.GetHUD(character).ClearDebugText();
                         foreach (Character enemy in enemies)
                             RPGSettings.instance.GetHUD(enemy).ClearDebugText();
                         foreach (Character ally in allies)
                             RPGSettings.instance.GetHUD(ally).ClearDebugText();
                     }
                     closingRange = 0;
+
+                    Debug.Log("THINKING...");
                     AIAction node = rootNode.Execute(this);
+                    Debug.Log("...THINKING");
                     countDown = node == null ? 10 : node.GetDuration();
                 }
             }
@@ -126,6 +130,7 @@ namespace RPG
         public void MoveTo(Vector3 pos, bool walking = false)
         {
             GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().walking = walking;
+            ai.SetTarget(null);
             ai.SetTargetPos(pos);
         }
 

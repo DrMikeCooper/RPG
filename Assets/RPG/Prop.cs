@@ -124,7 +124,8 @@ namespace RPG
                 return;
 
             // apply damage resistance
-            damage *= GetFactor(-stats[RPGSettings.GetResistanceStat(dt)].currentValue);
+            if (dt != RPGSettings.DamageType.Healing)
+                damage *= GetFactor(-stats[RPGSettings.GetResistanceStat(dt)].currentValue);
             health -= damage;
             if (health <= 0)
             {
@@ -404,6 +405,17 @@ namespace RPG
             }
             knockback = false;
 
+        }
+
+        public int GetStacks(Status st)
+        {
+            int stacks = 0;
+            foreach (Status s in statusEffects)
+            {
+                if (s.name == st.name)
+                    stacks += s.stacks;
+            }
+            return stacks;
         }
     }
 }
