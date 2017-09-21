@@ -17,7 +17,10 @@ namespace RPG
         {
             // if our condition is false, don't do it
             if (!IsCondition(condition, brain.character))
+            {
+                brain.AddDebugMsg("-PW(not)" + power.name);
                 return 0;
+            }
 
             // we can use the power, so evaluate it
             return power.Evaluate(brain, targetCondition);
@@ -25,7 +28,7 @@ namespace RPG
 
         public override AIAction Execute(AIBrain brain)
         {
-
+            brain.AddDebugMsg("+PW:" + power.name);
             return power.Execute(brain);
         }
     }

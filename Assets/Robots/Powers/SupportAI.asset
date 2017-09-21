@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b75f1cb40672c459a013cb01809937, type: 3}
+  m_Name: SupportAI
+  m_EditorClassIdentifier: 
+  duration: 3
+  condition:
+    type: 0
+    threshold: 0
+    reverse: 0
+  behaviours:
+  - {fileID: 11400000, guid: 30f93f977a6bf1f41acb14f3af9d8cb6, type: 2}
+  - {fileID: 11400000, guid: 5a384a111e1264c45a2cba429772a572, type: 2}
+  - {fileID: 11400000, guid: d693d40cf89f38c4786ca95d9cb54b07, type: 2}

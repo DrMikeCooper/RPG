@@ -53,6 +53,9 @@ namespace RPG
         {
             Evaluate(brain);
 
+            string msg = "+EV:" + (bestBehaviour ? bestBehaviour.name : "null") + "(" + bestEvaluation + ")";
+            brain.AddDebugMsg(msg);
+
             if (bestBehaviour)
                 bestBehaviour.Execute(brain);
             return bestBehaviour;

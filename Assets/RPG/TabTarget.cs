@@ -72,8 +72,11 @@ namespace RPG
                 if (selected >= targets.Count)
                     selected = 0;
 
-                user.target = targets[selected];
-                reticle.SetActive(true);
+                if (selected < targets.Count)
+                {
+                    user.target = targets[selected];
+                    reticle.SetActive(true);
+                }
             }
 
             // left mouse clicks select a character (or none)

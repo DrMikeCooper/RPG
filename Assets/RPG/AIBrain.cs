@@ -99,6 +99,7 @@ namespace RPG
 
                     if (showDebug)
                     {
+                        Debug.Log(RPGSettings.instance.GetHUD(character).debugText.text);
                         RPGSettings.instance.GetHUD(character).ClearDebugText();
                         foreach (Character enemy in enemies)
                             RPGSettings.instance.GetHUD(enemy).ClearDebugText();
@@ -107,9 +108,9 @@ namespace RPG
                     }
                     closingRange = 0;
 
-                    Debug.Log("THINKING...");
+                    //Debug.Log("THINKING...");
                     AIAction node = rootNode.Execute(this);
-                    Debug.Log("...THINKING");
+                    //Debug.Log("...THINKING");
                     countDown = node == null ? 10 : node.GetDuration();
                 }
             }
@@ -179,6 +180,12 @@ namespace RPG
         {
             if (ch && ch.team != character.team && enemies.Contains(ch) == false)
                 enemies.Add(ch);
+        }
+
+        public void AddDebugMsg(string msg)
+        {
+            if (showDebug)
+                RPGSettings.instance.GetHUD(character).AddDebugText(msg);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace RPG
         
         public override AIAction Execute(AIBrain brain)
         {
+            brain.AddDebugMsg("+PATROL");
             brain.patrolling.Patrol(brain);
             return this;
         }

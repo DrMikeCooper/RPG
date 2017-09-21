@@ -27,6 +27,7 @@ namespace RPG
 
         public override AIAction Execute(AIBrain brain)
         {
+            string msg = "+MV:";
             GameObject target = null;
             switch (follow)
             {
@@ -45,7 +46,11 @@ namespace RPG
                 dir.Normalize();
                 Vector3 targetPoint = target.transform.position + dir * distance;
                 brain.MoveTo(targetPoint);
+                msg += "(" + (int)targetPoint.x + "," + (int)targetPoint.z + ")";
             }
+
+            brain.AddDebugMsg(msg);
+
             return this;
         }
 
@@ -61,7 +66,7 @@ namespace RPG
             float dist = Mathf.Abs(distance - Vector3.Distance(target.transform.position, brain.transform.position));
             dist = Mathf.Max(dist - 1, 0);
 
-            brain.character.AddAIDebugText(brain.character, "Follow " + dist * 0.1f);
+            brain.AddDebugMsg("-FW(" + dist * 0.1f +")");
             return dist * 0.1f;
         }
 

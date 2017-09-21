@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6598993e0d932140ba59e12c576c11b, type: 3}
+  m_Name: HybridAI
+  m_EditorClassIdentifier: 
+  duration: 0
+  condition:
+    type: 5
+    threshold: 50
+    reverse: 0
+  nodeTrue: {fileID: 11400000, guid: 01b38c22d255e62488a69d64f460d33a, type: 2}
+  nodeFalse: {fileID: 11400000, guid: f85b052ad5f20324491c6b610386b376, type: 2}

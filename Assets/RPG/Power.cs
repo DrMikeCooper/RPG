@@ -488,15 +488,15 @@ namespace RPG
 
                         // TODO - factor in collateral and splash damage ?
 
-                        Debug.Log("Power:" + name + " Ch:" + ch.name + " Eval:" + eval);
+                        //Debug.Log("Power:" + name + " Ch:" + ch.name + " Eval:" + eval);
                         if (eval > bestEval)
                         {
                             bestEval = eval;
                             npcTarget = ch;
                         }
                     }
-                    else
-                        Debug.Log("Power:" + name + " Ch:" + ch.name + "condition not met");
+                   // else
+                        //Debug.Log("Power:" + name + " Ch:" + ch.name + "condition not met");
                 }
             }
 
@@ -511,7 +511,6 @@ namespace RPG
                 if (target != caster && target.team != caster.team)
                 {
                     eval = 100.0f / timeToDeath(caster, target);
-                    target.AddAIDebugText(caster, name + " " + eval);
                 }
             }
             else // ally or self benefit power
@@ -519,9 +518,10 @@ namespace RPG
                 if (target.team == caster.team && !(target == caster && targetType == TargetType.AlliesOnly) && !(target != caster && targetType == TargetType.SelfOnly))
                 {
                     eval = BenefitPerHit(target);
-                    target.AddAIDebugText(caster, name + " " + eval);
                 }
             }
+            target.AddAIDebugText(caster, name + " " + eval);
+            caster.AddAIDebugText(caster, "-PW(" + eval + ")" + name);
             return eval;
         }
 
@@ -605,7 +605,7 @@ namespace RPG
         public override AIAction Execute(AIBrain brain)
         {
             brain.target = npcTarget;
-            Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
+            //Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
             UpdateAction(brain);
 
             return this;
