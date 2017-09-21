@@ -604,9 +604,6 @@ namespace RPG
 
         public override AIAction Execute(AIBrain brain)
         {
-            if (Evaluate(brain) == 0)
-                return null;
-
             brain.target = npcTarget;
             Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
             UpdateAction(brain);

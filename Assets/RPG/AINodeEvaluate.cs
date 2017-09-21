@@ -24,10 +24,22 @@ namespace RPG
             if (!IsCondition(condition, brain.character)) return 0;
 
             bestBehaviour = null;
+            bestEvaluation = 0;
+            evals = new float[behaviours.Length];
+            targets = new Prop[behaviours.Length];
             for (int i = 0; i < behaviours.Length; i++)
             {
                 float evaluation = behaviours[i].Evaluate(brain);
-                if (bestBehaviour == null || evaluation > bestEvaluation)
+                evals[i] = evaluation;
+                Power p = behaviours[i] as Power;
+                if (p == null)
+                {
+                    AINodePower pn = behaviours[i] as AINodePower;
+                    if (pn) p = pn.power;
+                }
+                if (p)
+                    targets[i] = p.npcTarget;
+                if (evaluation > bestEvaluation)
                 {
                     bestBehaviour = behaviours[i];
                     bestEvaluation = evaluation;
@@ -40,6 +52,7 @@ namespace RPG
         public override AIAction Execute(AIBrain brain)
         {
             Evaluate(brain);
+
             if (bestBehaviour)
                 bestBehaviour.Execute(brain);
             return bestBehaviour;

@@ -1897,7 +1897,7 @@ Prefab:
         type: 2}
       propertyPath: behaviours.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 1880daed59082434092366f136193b26,
+      objectReference: {fileID: 11400000, guid: 30f93f977a6bf1f41acb14f3af9d8cb6,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5d7e34dbf3dcdd94c98a7bf327c23b72, type: 2}
@@ -2015,12 +2015,12 @@ GameObject:
   - component: {fileID: 1410182667}
   - component: {fileID: 1410182666}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1410182665
 Transform:
   m_ObjectHideFlags: 0
@@ -2805,6 +2805,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114078515584203358, guid: 2b4747d631a719840b6d0adabf355693,
+        type: 2}
+      propertyPath: powers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4269608447945590, guid: 2b4747d631a719840b6d0adabf355693, type: 2}
       propertyPath: m_LocalPosition.x
       value: 24.3
@@ -2837,6 +2842,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114078515584203358, guid: 2b4747d631a719840b6d0adabf355693,
+        type: 2}
+      propertyPath: powers.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: ecfe5e61d3e7026429950a58b61c7f67,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b4747d631a719840b6d0adabf355693, type: 2}
   m_IsPrefabParent: 0

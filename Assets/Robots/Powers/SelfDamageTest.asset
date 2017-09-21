@@ -11,31 +11,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
   m_Name: SelfDamageTest
   m_EditorClassIdentifier: 
-  energyCost: 0
+  energyCost: 80
   coolDown: 0
   range: 0
   lineOfSight: 1
-  type: 0
-  targetType: 0
+  type: 1024
+  targetType: 1
   mode: 0
   duration: 0
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
   sounds: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
   tint:
-    code: 0
+    code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 3
+  animation: 1
   releaseAnimation: 10
-  userFX: {fileID: 0}
-  userBodyPart: 4
-  targetFX: {fileID: 0}
-  targetBodyPart: 2
+  userFX: {fileID: 11400000, guid: 60e5de774cf7ec0459e43b6a72733898, type: 2}
+  userBodyPart: 6
+  targetFX: {fileID: 11400000, guid: be9f03ce1ace1424ab2668c04a04ac63, type: 2}
+  targetBodyPart: 0
   accuracy: 1
-  minDamage: 0
-  maxDamage: 0
+  minDamage: 50
+  maxDamage: 80
   effects: []
   statusDuration: 10
   selfEffects: []
