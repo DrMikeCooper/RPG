@@ -63,7 +63,15 @@ namespace RPG
 
         public override float GetDuration()
         {
-            return bestBehaviour == null ? 10 : bestBehaviour.GetDuration();
+            return bestBehaviour == null ? 3 : bestBehaviour.GetDuration();
+        }
+
+        public override AIAction MakeInstance()
+        {
+            AINodeEvaluate eval = base.MakeInstance() as AINodeEvaluate;
+            for (int i = 0; i < behaviours.Length; i++)
+                eval.behaviours[i] = eval.behaviours[i].MakeInstance();
+            return eval;
         }
     }
 }

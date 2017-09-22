@@ -520,8 +520,8 @@ namespace RPG
                     eval = BenefitPerHit(target);
                 }
             }
-            target.AddAIDebugText(caster, name + " " + eval);
-            caster.AddAIDebugText(caster, "-PW(" + eval + ")" + name);
+            //target.AddAIDebugText(caster, name + " " + eval);
+            caster.AddAIDebugText(caster, "-PW(" + eval + ")" + name + " vs. " + target.name);
             return eval;
         }
 

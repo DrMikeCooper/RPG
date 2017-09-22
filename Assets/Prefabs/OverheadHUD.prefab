@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1345368381753784
 GameObject:
   m_ObjectHideFlags: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debugPanel: {fileID: 1242278779969510}
-  debugText: {fileID: 114457246740436252}
+  debugText: {fileID: 0}
 --- !u!114 &114457246740436252
 MonoBehaviour:
   m_ObjectHideFlags: 1

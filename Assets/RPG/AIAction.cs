@@ -9,5 +9,12 @@ namespace RPG
         public abstract AIAction Execute(AIBrain brain);
         public abstract float Evaluate(AIBrain brain);
         public abstract float GetDuration();
+
+        public virtual AIAction MakeInstance()
+        {
+            AIAction action = Instantiate(this);
+            action.name = name;
+            return action;
+        }
     }
 }

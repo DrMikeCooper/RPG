@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RPG
 {
@@ -31,6 +32,8 @@ namespace RPG
         public Patrolling patrolling;
 
         public bool showDebug = false;
+        public Text debugText;
+        public Text debugCountdown;
 
         // Use this for initialization
         void Start()
@@ -49,17 +52,17 @@ namespace RPG
             if (numActions == 1)
             {
                 if (behaviours.Length > 0)
-                    rootNode = behaviours[0];
+                    rootNode = behaviours[0].MakeInstance();
                 else
-                    rootNode = extras[0];
+                    rootNode = extras[0].MakeInstance();
             }
             else
             {
                 AIAction[] actions = new AIAction[numActions];
                 for (int i = 0; i < behaviours.Length; i++)
-                    actions[i] = behaviours[i];
+                    actions[i] = behaviours[i].MakeInstance();
                 for (int i = 0; i < extras.Count; i++)
-                    actions[i + behaviours.Length] = extras[i];
+                    actions[i + behaviours.Length] = extras[i].MakeInstance();
 
                 AINodeEvaluate evalNode = ScriptableObject.CreateInstance<AINodeEvaluate>();
                 evalNode.behaviours = actions;
@@ -85,7 +88,8 @@ namespace RPG
                 countDown -= Time.deltaTime;
                 if (character.isHeld() == false && character.target)
                     character.FaceTarget();
-
+                if (debugCountdown)
+                    debugCountdown.text = "" + countDown;
             }
             else
             {
@@ -99,7 +103,7 @@ namespace RPG
 
                     if (showDebug)
                     {
-                        Debug.Log(RPGSettings.instance.GetHUD(character).debugText.text);
+                        //Debug.Log(RPGSettings.instance.GetHUD(character).debugText.text);
                         RPGSettings.instance.GetHUD(character).ClearDebugText();
                         foreach (Character enemy in enemies)
                             RPGSettings.instance.GetHUD(enemy).ClearDebugText();
@@ -111,7 +115,7 @@ namespace RPG
                     //Debug.Log("THINKING...");
                     AIAction node = rootNode.Execute(this);
                     //Debug.Log("...THINKING");
-                    countDown = node == null ? 10 : node.GetDuration();
+                    countDown = node == null ? 3 : node.GetDuration();
                 }
             }
 

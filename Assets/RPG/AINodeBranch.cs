@@ -36,5 +36,13 @@ namespace RPG
 
             return node.Execute(brain);
         }
+
+        public override AIAction MakeInstance()
+        {
+            AINodeBranch branch = base.MakeInstance() as AINodeBranch;
+            branch.nodeTrue = nodeTrue.MakeInstance();
+            branch.nodeFalse = nodeFalse.MakeInstance();
+            return branch;
+        }
     }
 }

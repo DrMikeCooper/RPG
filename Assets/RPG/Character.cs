@@ -408,7 +408,10 @@ namespace RPG
             AIBrain brain = caster.GetComponent<AIBrain>();
             if (brain && brain.showDebug)
             {
-                RPGSettings.instance.GetHUD(this).AddDebugText(msg);
+                OverheadHUD hud = RPGSettings.instance.GetHUD(this);
+                if (brain.debugText != null)
+                    hud.debugText = brain.debugText;
+                hud.AddDebugText(msg);
             }
         }
 

@@ -27,17 +27,20 @@ namespace RPG
             rect.position = targetPos;
             transform.forward = Camera.main.transform.forward;
 
-            debugPanel.SetActive(debugText.text != "");
+            if (debugPanel && debugText)
+                debugPanel.SetActive(debugText.text != "");
         }
 
         public void ClearDebugText()
         {
-            debugText.text = "";
+            if (debugText)
+                debugText.text = "";
         }
 
         public void AddDebugText(string msg)
         {
-            debugText.text += (msg + "\n");
+            if (debugText)
+                debugText.text += (msg + "\n");
         }
     }
 }
