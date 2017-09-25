@@ -12,6 +12,7 @@ namespace RPG
         // the character this displays info for
         public Prop character;
         public CharacterHUD myTarget;
+        public Vector3 iconOffset = new Vector3(18, 0, 0);
 
         // the icon template set up in the editor
         GameObject icon;
@@ -125,7 +126,7 @@ namespace RPG
             }
             icons.Clear();
 
-            float offsetX = 0;
+            Vector3 offsetX = Vector3.zero;
 
             if (character != null)
             {
@@ -139,9 +140,9 @@ namespace RPG
                         ike.SetActive(true);
                         ike.transform.SetParent(transform);
                         RectTransform rect = ike.GetComponent<RectTransform>();
-                        rect.localPosition = iconLocalPosition + offsetX * Vector3.right;
+                        rect.localPosition = iconLocalPosition + offsetX;
                         rect.localScale = Vector3.one;
-                        offsetX += 18; //todo
+                        offsetX += iconOffset; //todo
                         icons[s.name] = ike;
                         ike.name = s.name;
 
