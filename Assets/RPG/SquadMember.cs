@@ -16,7 +16,8 @@ namespace RPG
 
         static Color targetColor = new Color(1,1,0.5f, 0.7f);
 
-        Character ch;
+        [HideInInspector]
+        public Character ch;
 
         UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
 

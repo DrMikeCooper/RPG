@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace RPG
 {
@@ -10,6 +12,12 @@ namespace RPG
         public GameObject memberHud;
         public GameObject[] memberHuds;
 
+        public MenuItem menuItem;
+        public EventSystem eventSystem;
+
+        MenuItem[] menuItems;
+
+        // TODO - blink these on when clicking on a point
         GameObject[] moveReticle;
 
         float basePosY;
@@ -20,6 +28,9 @@ namespace RPG
         int lastKeyCounter;
 
         CameraSquad cameraSquad;
+
+        float squadRadius = 2;
+        bool firstUpdate = true;
 
         // Use this for initialization
         void Start()
@@ -46,11 +57,29 @@ namespace RPG
 
             cameraSquad = Camera.main.GetComponent<CameraSquad>();
             cameraSquad.target = squad[0].transform;
+
+            menuItems = new MenuItem[8];
+            for (int i = 0; i < 8; i++)
+            {
+                GameObject go = Instantiate(menuItem.gameObject);
+                go.transform.parent = menuItem.transform.parent;
+                menuItems[i] = go.GetComponent<MenuItem>();
+                menuItems[i].controller = this;
+                go.SetActive(false);
+            }
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (firstUpdate)
+            {
+                for (int i = 0; i < squad.Length; i++)
+                {
+                    memberHuds[i].GetComponent<CharacterHUD>().SetCharacter(squad[i].gameObject.GetComponent<Character>());
+                }
+                firstUpdate = false;
+            }
             UpdateSelection();
             UpdateKeyCounter();
             CheckCommands();
@@ -111,13 +140,21 @@ namespace RPG
         // mopve selected characters to point of a single mouseclick
         void CheckCommands()
         {
+            if (eventSystem.IsPointerOverGameObject())
+                return;
+
             if (Input.GetMouseButtonDown(0))
             {
+                HideActionMenu();
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit info;
                 if (Physics.Raycast(ray, out info))
                 {
-                    MoveSquadToPoint(info.point);
+                    Prop prop = info.transform.GetComponent<Prop>();
+                    if (prop)
+                        DisplayActionMenu(prop);
+                    else
+                        MoveSquadToPoint(info.point);
                 }
             }
         }
@@ -138,6 +175,7 @@ namespace RPG
             {
                 if (sm.selected)
                 {
+                    sm.GetComponent<AIBrain>().SetRootNode(null);
                     centroid += sm.transform.position;
                     selected.Add(sm);
                 }
@@ -164,27 +202,51 @@ namespace RPG
                 {
                     return a.deltaAngle.CompareTo(b.deltaAngle);
                 });
+
+                // copy the angles into an array and find the best spread for them
                 float[] angles = new float[selected.Count];
                 for (int i = 0; i < selected.Count; i++)
                     angles[i] = selected[i].deltaAngle;
-
                 SpreadAngles(angles);
 
+                // move the characters to positions around a circle centred on the point
                 int index = 0;
                 for (int i = 0; i < selected.Count; i++)
                 {
-                    selected[i].MoveTo(pos + new Vector3(Mathf.Cos(angles[i]), 0, Mathf.Sin(angles[i])) * 2);
+                    selected[i].MoveTo(pos + new Vector3(Mathf.Cos(angles[i]), 0, Mathf.Sin(angles[i])) * squadRadius);
                     index++;
                 }
             }
-
-
-
-
-
-
         }
 
+        void DisplayActionMenu(Prop p)
+        {
+            Character caster = null;
+            for (int i = 0; i < squad.Length; i++)
+            {
+                if (squad[i].selected)
+                    caster = squad[i].ch;
+            }
+
+            if (caster)
+            {
+                for (int i = 0; i < caster.powers.Length; i++)
+                {
+                    float angle = Mathf.Deg2Rad * (90 - 45 * i);
+                    menuItems[i].transform.position = Input.mousePosition + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 64;
+                    menuItems[i].Init(caster, p, caster.powers[i]);
+                    menuItems[i].gameObject.SetActive(true);
+                }
+            }
+        }
+
+        public void HideActionMenu()
+        {
+            for (int i = 0; i < 8; i++)
+                menuItems[i].gameObject.SetActive(false);
+        }
+
+        // TODO move to maths utilities
         // given a set of angles, find the best even spread round a circle that minimises change.
         // assumes the angles are all sorted
         public static void SpreadAngles(float[] angles)

@@ -49,7 +49,11 @@ namespace RPG
             int numActions = behaviours.Length + extras.Count;
 
             // set up a suitable rootnode, either a single power, or a group of them which compete!
-            if (numActions == 1)
+            if (numActions == 0)
+            {
+                rootNode = null;
+            }
+            else if (numActions == 1)
             {
                 if (behaviours.Length > 0)
                     rootNode = behaviours[0].MakeInstance();
@@ -69,6 +73,12 @@ namespace RPG
                 rootNode = evalNode;
             }
             patrolling = GetComponent<Patrolling>();
+        }
+
+        public void SetRootNode(AIAction action)
+        {
+            rootNode = action;
+            countDown = 0;
         }
 
         // Update is called once per frame
@@ -113,7 +123,7 @@ namespace RPG
                     closingRange = 0;
 
                     //Debug.Log("THINKING...");
-                    AIAction node = rootNode.Execute(this);
+                    AIAction node = rootNode ? rootNode.Execute(this): null;
                     //Debug.Log("...THINKING");
                     countDown = node == null ? 3 : node.GetDuration();
                 }
