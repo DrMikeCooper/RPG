@@ -2161,6 +2161,7 @@ MonoBehaviour:
   selected: 0
   deltaPos: {x: 0, y: 0, z: 0}
   deltaAngle: 0
+  ch: {fileID: 0}
 --- !u!114 &114575305451128954
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2559,7 +2560,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

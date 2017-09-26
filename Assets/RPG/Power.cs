@@ -606,7 +606,19 @@ namespace RPG
         {
             brain.target = npcTarget;
             //Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
-            UpdateAction(brain);
+            Character caster = brain.character;
+            caster.target = brain.target;
+
+            if (!WithinRange(caster))
+            {
+                brain.MoveTo(caster.target.transform);
+                brain.countDown = 0.5f;
+                brain.closingRange = range;
+                return null;
+            }
+
+            if (CanUse(brain.character))
+                UpdateAction(brain);
 
             return this;
         }

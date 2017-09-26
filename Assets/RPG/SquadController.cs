@@ -175,7 +175,10 @@ namespace RPG
             {
                 if (sm.selected)
                 {
-                    sm.GetComponent<AIBrain>().SetRootNode(null);
+                    AIBrain brain = sm.GetComponent<AIBrain>();
+                    brain.SetRootNode(null);
+                    brain.target = null;
+                    brain.character.target = null;
                     centroid += sm.transform.position;
                     selected.Add(sm);
                 }
