@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8198c71c0c05c4a9c149a9fd368472, type: 3}
+  m_Name: Stinger
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  coolDown: 0
+  range: 0
+  lineOfSight: 1
+  type: 0
+  targetType: 0
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  sounds: {fileID: 0}
+  icon: {fileID: 0}
+  tint:
+    code: 0
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 3
+  releaseAnimation: 10
+  userFX: {fileID: 0}
+  userBodyPart: 4
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  accuracy: 1
+  minDamage: 0
+  maxDamage: 0
+  effects: []
+  statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  speed: 1
+  projectileFX: {fileID: 0}
+  maxChains: 0

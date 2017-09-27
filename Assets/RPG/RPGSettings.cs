@@ -61,6 +61,8 @@ namespace RPG
             Hold,
             Stun,
             Accuracy,
+            Enrage,
+            Confusion,
         }
 
         public static bool IsPercentage(StatName stat)
