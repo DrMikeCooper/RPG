@@ -149,12 +149,18 @@ namespace RPG
             ai.SetTargetPos(pos);
         }
 
+        public void ResetEnemies()
+        {
+            enemies.Clear();
+            allies.Clear();
+        }
+
         public void UpdateEnemies()
         {
             // check new enemies for line of sight and add to our list
             foreach (Character ch in Power.getAll())
             {
-                if (ch.team != character.team && enemies.Contains(ch) == false)
+                if (ch.team != character.GetTeam() && enemies.Contains(ch) == false)
                 {
                     if (character.CanSee(ch))
                     {
@@ -162,7 +168,7 @@ namespace RPG
                     }
                 }
 
-                if (ch.team == character.team && allies.Contains(ch) == false)
+                if (ch.team == character.GetTeam() && allies.Contains(ch) == false)
                 {
                     if (character.CanSee(ch))
                     {
@@ -192,7 +198,7 @@ namespace RPG
 
         public void MakeAwareOf(Character ch)
         {
-            if (ch && ch.team != character.team && enemies.Contains(ch) == false)
+            if (ch && ch.team != character.GetTeam() && enemies.Contains(ch) == false)
                 enemies.Add(ch);
         }
 

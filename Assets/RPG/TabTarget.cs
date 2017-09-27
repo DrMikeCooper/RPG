@@ -42,7 +42,7 @@ namespace RPG
                 {
                     // left shift-TAB toggles between allies, normal TAB through enemies
                     bool valid = (!ch.dead) && Input.GetKey(KeyCode.LeftShift) ?
-                        (ch != user && ch.team == user.team)
+                        (ch != user && ch.GetTeam() == user.team) // TODO - use GetTeam()?
                         : (ch.team != user.team);
                     if (valid)
                     {

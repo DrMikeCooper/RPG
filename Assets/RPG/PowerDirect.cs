@@ -46,7 +46,7 @@ namespace RPG
                     for (int i = 0; i < all.Length; i++)
                     {
                         // TODO - chaining ally powers
-                        if (!all[i].dead && all[i].team != ctarget.team)
+                        if (!all[i].dead && all[i].GetTeam() != ctarget.team)
                             targets.Add(all[i]);
                     }
 
@@ -68,7 +68,7 @@ namespace RPG
                         Character[] all = PowerArea.getAll();
                         for (int i = 0; i < all.Length; i++)
                         {
-                            if (all[i] != ctarget && all[i].team == ctarget.team)
+                            if (all[i] != ctarget && all[i].GetTeam() == ctarget.team)
                                 targets.Add(all[i]);
                         }
 

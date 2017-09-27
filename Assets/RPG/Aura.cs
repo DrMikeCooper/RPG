@@ -42,7 +42,7 @@ namespace RPG
                 {
                     if (ch != caster)
                     {
-                        if ((ch.team == caster.team) == allies)
+                        if ((ch.team == caster.GetTeam()) == allies)
                         {
                             float dist = Vector3.Distance(ch.transform.position, caster.transform.position);
                             if (dist < radius)

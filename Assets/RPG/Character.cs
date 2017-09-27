@@ -30,6 +30,7 @@ namespace RPG
         }
 
         public int team = 2;
+
         public Power[] powers;
         [HideInInspector]
         public bool powerStarted = false;
@@ -251,6 +252,8 @@ namespace RPG
         protected override void ProcessStatus()
         {
             base.ProcessStatus();
+            if (brain)
+                brain.ResetEnemies();
 
             if (tpc)
             {
@@ -420,6 +423,15 @@ namespace RPG
         {
             reticle.SetActive(true);
             reticle.GetComponent<MeshRenderer>().material.SetColor("_TintColor", color);
+        }
+
+        public int GetTeam()
+        {
+            if (stats[RPGSettings.StatName.Confusion.ToString()].getCurrentValue() > 0)
+                team = 3-team; // swap between 1 and 2 for now.
+            if (stats[RPGSettings.StatName.Enrage.ToString()].getCurrentValue() > 0)
+                team = -1;
+            return team;
         }
     }
 }

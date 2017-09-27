@@ -135,7 +135,7 @@ namespace RPG
                 {
                     target = caster.target;
                     Character ctarget = caster.target as Character;
-                    if ((targetType == TargetType.AlliesOnly || targetType == TargetType.SelfAndAllies) && ctarget && caster.team != ctarget.team)
+                    if ((targetType == TargetType.AlliesOnly || targetType == TargetType.SelfAndAllies) && ctarget && caster.GetTeam() != ctarget.team)
                         target = null;
                 }
             }
@@ -143,7 +143,7 @@ namespace RPG
             {
                 target = caster.target;
                 Character ctarget = target as Character;
-                if (ctarget && ctarget.team == caster.team)
+                if (ctarget && ctarget.team == caster.GetTeam())
                     target = null;
             }
 
@@ -156,7 +156,7 @@ namespace RPG
             if (ctarget)
             {
                 bool isSelf = ctarget == caster;
-                bool isAlly = ctarget.team == caster.team;
+                bool isAlly = ctarget.team == caster.GetTeam();
                 switch (targetType)
                 {
                     case TargetType.AlliesOnly: return isAlly && !isSelf;
@@ -528,14 +528,14 @@ namespace RPG
             float eval = 0;
             if (targetType == TargetType.Enemies)
             {
-                if (target != caster && target.team != caster.team)
+                if (target != caster && target.team != caster.GetTeam())
                 {
                     eval = 100.0f / timeToDeath(caster, target);
                 }
             }
             else // ally or self benefit power
             {
-                if (target.team == caster.team && !(target == caster && targetType == TargetType.AlliesOnly) && !(target != caster && targetType == TargetType.SelfOnly))
+                if (target.team == caster.GetTeam() && !(target == caster && targetType == TargetType.AlliesOnly) && !(target != caster && targetType == TargetType.SelfOnly))
                 {
                     eval = BenefitPerHit(target);
                 }

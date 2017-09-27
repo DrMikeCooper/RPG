@@ -76,7 +76,7 @@ namespace RPG
             foreach (Character ch in getAll())
             {
                 if (Vector3.Distance(caster.transform.position, ch.transform.position) < radius)
-                    if (ch != caster && ch.team != caster.team)
+                    if (ch != caster && ch.team != caster.GetTeam())
                         total += 1.0f;
                     else
                         total -= 1.0f;
