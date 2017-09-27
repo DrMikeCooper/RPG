@@ -46,10 +46,10 @@ namespace RPG
             if (!ignoreScrolling)
             {
                 float dx = 0, dy = 0;
-                if (mousePos.x < border) dx = -1;
-                if (mousePos.x > Screen.width - border) dx = 1;
-                if (mousePos.y < border) dy = -1;
-                if (mousePos.y > Screen.height - border) dy = 1;
+                if (mousePos.x >=0  && mousePos.x < border) dx = -1;
+                if (mousePos.x > Screen.width - border && mousePos.x < Screen.width) dx = 1;
+                if (mousePos.y >=0  && mousePos.y < border) dy = -1;
+                if (mousePos.y > Screen.height - border & mousePos.y < Screen.height) dy = 1;
 
                 if (dx != 0 || dy != 0)
                 {

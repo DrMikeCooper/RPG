@@ -14,7 +14,7 @@ namespace RPG
         [HideInInspector]
         public float deltaAngle;
 
-        static Color targetColor = new Color(1,1,0.5f, 0.7f);
+        public static Color targetColor = new Color(1,1,0.2f, 0.7f);
 
         [HideInInspector]
         public Character ch;

@@ -15,11 +15,27 @@ namespace RPG
 
         public Button button;
         public SquadController controller;
+        Image image;
 
         // Use this for initialization
         void Start()
         {
             button.onClick.AddListener(OnClick);
+            image = GetComponent<Image>();
+            image.fillMethod = Image.FillMethod.Radial360;
+        }
+
+        void Update()
+        {
+            if (image)
+            {
+                image.fillAmount = 0.5f;
+                Power p = action as Power;
+                if (p && p.coolDown > 0)
+                {
+                    image.fillAmount = caster.GetCoolDownFactor(p);
+                }
+            }
         }
 
         // Set up.
@@ -49,7 +65,7 @@ namespace RPG
         {
             caster.target = target;
             AIBrain brain = caster.GetComponent<AIBrain>();
-            brain.SetRootNode(Instantiate(action)); // TODO  - make sure Character has a copy
+            brain.SetRootNode(action.MakeInstance()); // TODO  - make sure Character has a copy
             Power power = brain.rootNode as Power;
             if (power)
                 power.npcTarget = target as Character;

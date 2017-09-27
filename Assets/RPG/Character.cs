@@ -91,8 +91,8 @@ namespace RPG
         [HideInInspector]
         public BeamRenderer beam;
 
-        Dictionary<Power, float> coolDowns = new Dictionary<Power, float>();
-        List<Power> coolDownPowers = new List<Power>();
+        Dictionary<string, float> coolDowns = new Dictionary<string, float>();
+        List<string> coolDownPowers = new List<string>();
                     
         ThirdPersonCharacter tpc;
         float baseJumpPower;
@@ -210,7 +210,7 @@ namespace RPG
 
             // update cooldowns
             float dt = Time.deltaTime * GetFactor(RPGSettings.StatName.Recharge);
-            foreach (Power p in coolDownPowers)
+            foreach (string p in coolDownPowers)
             {
                 if (coolDowns[p] > 0)
                 {
@@ -235,17 +235,17 @@ namespace RPG
             if (p.coolDown == 0)
                 return 0.0f;
 
-            if (!coolDowns.ContainsKey(p))
+            if (!coolDowns.ContainsKey(p.name))
             {
-                coolDowns[p] = 0;
-                coolDownPowers.Add(p);
+                coolDowns[p.name] = 0;
+                coolDownPowers.Add(p.name);
             }
-            return coolDowns[p];
+            return coolDowns[p.name];
         }
 
         public void UsePower(Power p)
         {
-            coolDowns[p] = p.coolDown;
+            coolDowns[p.name] = p.coolDown;
         }
 
         protected override void ProcessStatus()

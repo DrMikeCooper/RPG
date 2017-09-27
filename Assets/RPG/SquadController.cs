@@ -42,6 +42,7 @@ namespace RPG
             selectedPosY = basePosY + 16;
 
             memberHuds = new GameObject[squad.Length];
+            moveReticle = new GameObject[squad.Length];
             for (int i = 0; i < squad.Length; i++)
             {
                 GameObject hud = Instantiate(memberHud);
@@ -52,7 +53,12 @@ namespace RPG
                 squad[i].index = i;
                 // select the first member by default
                 squad[i].selected = (i == 0);
+
+                moveReticle[i] = Instantiate(RPGSettings.instance.reticle);
+                moveReticle[i].SetActive(false);
+                moveReticle[i].GetComponent<MeshRenderer>().material.SetColor("_TintColor", SquadMember.targetColor);
             }
+
             memberHud.SetActive(false);
 
             cameraSquad = Camera.main.GetComponent<CameraSquad>();
@@ -72,6 +78,16 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
+            AttachCharacters();
+            UpdateSelection();
+            UpdateReticles();
+            UpdateKeyCounter();
+            CheckCommands();
+        }
+
+        // sets the characters for each portrait on first update only
+        void AttachCharacters()
+        {
             if (firstUpdate)
             {
                 for (int i = 0; i < squad.Length; i++)
@@ -80,9 +96,22 @@ namespace RPG
                 }
                 firstUpdate = false;
             }
-            UpdateSelection();
-            UpdateKeyCounter();
-            CheckCommands();
+        }
+
+        // animate the little reticles that appear when moving
+        void UpdateReticles()
+        {
+            for (int i = 0; i < squad.Length; i++)
+            {
+                if (moveReticle[i].activeInHierarchy)
+                {
+                    float scale = moveReticle[i].transform.localScale.x - 2*Time.deltaTime;
+                    if (scale < 0)
+                        moveReticle[i].SetActive(false);
+                    else
+                        moveReticle[i].transform.localScale = scale * Vector3.one;
+                }
+            }
         }
 
         // update who's selected by 1,2,3,4, etc keys
@@ -191,6 +220,9 @@ namespace RPG
                 foreach (SquadMember sm in selected)
                 {
                     sm.MoveTo(pos);
+                    moveReticle[0].SetActive(true);
+                    moveReticle[0].transform.position = pos;
+                    moveReticle[0].transform.localScale = Vector3.one;
                 }
             }
             else
@@ -216,7 +248,11 @@ namespace RPG
                 int index = 0;
                 for (int i = 0; i < selected.Count; i++)
                 {
-                    selected[i].MoveTo(pos + new Vector3(Mathf.Cos(angles[i]), 0, Mathf.Sin(angles[i])) * squadRadius);
+                    Vector3 targetPos = pos + new Vector3(Mathf.Cos(angles[i]), 0, Mathf.Sin(angles[i])) * squadRadius;
+                    moveReticle[i].SetActive(true);
+                    moveReticle[i].transform.position = targetPos;
+                    moveReticle[i].transform.localScale = Vector3.one;
+                    selected[i].MoveTo(targetPos);
                     index++;
                 }
             }

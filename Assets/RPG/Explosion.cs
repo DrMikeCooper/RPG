@@ -41,7 +41,7 @@ namespace RPG
             return explosion.StatusPerHit(target);
         }
 
-        public virtual float BenefitPerHit(Character target)
+        public override float BenefitPerHit(Character target)
         {
             return explosion.BenefitPerHit(target);
         }

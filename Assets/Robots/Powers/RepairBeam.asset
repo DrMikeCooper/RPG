@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyCost: 20
   coolDown: 3
-  range: 20
+  range: 2
   lineOfSight: 1
   type: 1024
   targetType: 2
