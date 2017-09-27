@@ -150,6 +150,26 @@ namespace RPG
             return target;
         }
 
+        public bool CanUseOn(Character caster, Prop target)
+        {
+            Character ctarget = target as Character;
+            if (ctarget)
+            {
+                bool isSelf = ctarget == caster;
+                bool isAlly = ctarget.team == caster.team;
+                switch (targetType)
+                {
+                    case TargetType.AlliesOnly: return isAlly && !isSelf;
+                    case TargetType.Enemies: return !isAlly;
+                    case TargetType.SelfAndAllies: return isAlly;
+                    case TargetType.SelfOnly: return isSelf;
+                }
+                return true;
+            }
+            else
+                return targetType != TargetType.SelfOnly;
+        }
+
         protected void StartPower(Character caster)
         {
             if (sounds)
@@ -604,6 +624,9 @@ namespace RPG
 
         public override AIAction Execute(AIBrain brain)
         {
+            if (npcTarget == null)
+                Evaluate(brain);
+
             brain.target = npcTarget;
             //Debug.Log("Executing Power: " + name + " Ch:" + npcTarget.name);
             Character caster = brain.character;

@@ -2178,6 +2178,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d693d40cf89f38c4786ca95d9cb54b07, type: 2}
   - {fileID: 11400000, guid: 5a384a111e1264c45a2cba429772a572, type: 2}
   - {fileID: 11400000, guid: 1880daed59082434092366f136193b26, type: 2}
+  - {fileID: 11400000, guid: ac78ee9b7658c2e469b85296aae524a7, type: 2}
   powerStarted: 0
   timer: 0
   nextTick: 0

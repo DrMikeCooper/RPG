@@ -2228,7 +2228,9 @@ MonoBehaviour:
       PublicKeyToken=null
   maxEnergy: 100
   team: 1
-  powers: []
+  powers:
+  - {fileID: 11400000, guid: ac78ee9b7658c2e469b85296aae524a7, type: 2}
+  - {fileID: 11400000, guid: fbe3a9f92aa24f841abdfeb761da41c0, type: 2}
   powerStarted: 0
   timer: 0
   nextTick: 0

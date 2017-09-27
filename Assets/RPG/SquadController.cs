@@ -264,17 +264,27 @@ namespace RPG
             for (int i = 0; i < squad.Length; i++)
             {
                 if (squad[i].selected)
-                    caster = squad[i].ch;
+                {
+                    if (caster != null)
+                        squad[i].selected = false;
+                    else
+                        caster = squad[i].ch;
+                }
             }
 
             if (caster)
             {
+                int index = 0;
                 for (int i = 0; i < caster.powers.Length; i++)
                 {
-                    float angle = Mathf.Deg2Rad * (90 - 45 * i);
-                    menuItems[i].transform.position = Input.mousePosition + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 64;
-                    menuItems[i].Init(caster, p, caster.powers[i]);
-                    menuItems[i].gameObject.SetActive(true);
+                    if (caster.powers[i].CanUseOn(caster, p))
+                    {
+                        float angle = Mathf.Deg2Rad * (90 - 45 * index);
+                        menuItems[index].transform.position = Input.mousePosition + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 64;
+                        menuItems[index].Init(caster, p, caster.powers[i]);
+                        menuItems[index].gameObject.SetActive(true);
+                        index++;
+                    }
                 }
             }
         }

@@ -1415,9 +1415,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193522227687450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.07385063, y: 6.176792, z: -4.157181}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40.19467, y: 0, z: 24.848951}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4254403346451024}
   - {fileID: 4436801399669604}
@@ -2199,7 +2199,7 @@ MonoBehaviour:
     m_TypeName: RPG.Prop+StatusEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   maxEnergy: 100
-  team: 1
+  team: 2
   powers:
   - {fileID: 11400000, guid: 7f89c70dbc2ce0a429cd5386269b6a26, type: 2}
   - {fileID: 11400000, guid: 53eabf627a5efea458f8a4dce1d20c44, type: 2}
@@ -2241,6 +2241,8 @@ MonoBehaviour:
   allies: []
   patrolling: {fileID: 0}
   showDebug: 0
+  debugText: {fileID: 0}
+  debugCountdown: {fileID: 0}
 --- !u!114 &114761163946312090
 MonoBehaviour:
   m_ObjectHideFlags: 1

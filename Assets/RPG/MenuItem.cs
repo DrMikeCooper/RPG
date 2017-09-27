@@ -23,6 +23,7 @@ namespace RPG
             button.onClick.AddListener(OnClick);
             image = GetComponent<Image>();
             image.type = Image.Type.Filled;
+            image.fillAmount = 1;
             image.fillMethod = Image.FillMethod.Radial360;
         }
 
