@@ -22,6 +22,7 @@ namespace RPG
         {
             button.onClick.AddListener(OnClick);
             image = GetComponent<Image>();
+            image.type = Image.Type.Filled;
             image.fillMethod = Image.FillMethod.Radial360;
         }
 
@@ -33,7 +34,9 @@ namespace RPG
                 Power p = action as Power;
                 if (p && p.coolDown > 0)
                 {
+
                     image.fillAmount = caster.GetCoolDownFactor(p);
+                    //image.color = Color.white * caster.GetCoolDownFactor(p);
                 }
             }
         }
