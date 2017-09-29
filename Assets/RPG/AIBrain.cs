@@ -123,6 +123,10 @@ namespace RPG
                     closingRange = 0;
 
                     //Debug.Log("THINKING...");
+                    Power p = rootNode as Power;
+                    if (p)
+                        p.npcTarget = null;
+
                     AIAction node = rootNode ? rootNode.Execute(this): null;
                     //Debug.Log("...THINKING");
                     countDown = node == null ? 3 : node.GetDuration();
