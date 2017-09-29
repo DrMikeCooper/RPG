@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Confusion
   m_EditorClassIdentifier: 
   lifespan: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 1356745016674584, guid: 06ad716a7844c754ab32c44bf9b3fe20, type: 2}

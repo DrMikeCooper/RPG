@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Enrage
   m_EditorClassIdentifier: 
   lifespan: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 1844139135247484, guid: 33501a2f56b70ec48911b43aa4a654d2, type: 2}
