@@ -170,6 +170,7 @@ namespace RPG
                 return targetType != TargetType.SelfOnly;
         }
 
+        // does the animation, FX on caster, sound and uses activation energy
         protected void StartPower(Character caster)
         {
             if (sounds)
@@ -267,12 +268,15 @@ namespace RPG
             return true;
         }
 
+        // called when key is pressed down
+        // for Instant powers, this just sets activePower
+        // otherwise calls StartPower, which fires of the animation
         public void OnStart(Character caster)
         {
             if (CanUse(caster) == false)
                 return;
 
-            // checks combos for advancement, ro returns the base power
+            // checks combos for advancement, or returns the base power
             caster.activePower = GetPower(caster);
             if (mode != Mode.Instant)
                 caster.activePower.StartPower(caster);
