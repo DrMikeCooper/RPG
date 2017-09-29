@@ -253,7 +253,10 @@ namespace RPG
         {
             base.ProcessStatus();
             if (brain)
+            {
                 brain.ResetEnemies();
+                brain.UpdateEnemies();
+            }
 
             if (tpc)
             {

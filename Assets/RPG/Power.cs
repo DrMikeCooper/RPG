@@ -651,9 +651,9 @@ namespace RPG
             return 3 + this.duration;
         }
 
-        public string GetDescription()
+        public string GetDescription(bool skipName = false)
         {
-            string desc = name;
+            string desc = skipName? "" : name;
             if (mode == Mode.Charge) desc += "(Charge)";
             if (mode == Mode.Maintain) desc += "(Maintain)";
             if (mode == Mode.Block) desc += "(Block)";

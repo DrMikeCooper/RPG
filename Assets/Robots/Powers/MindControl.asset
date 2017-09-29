@@ -11,38 +11,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
   m_Name: MindControl
   m_EditorClassIdentifier: 
-  energyCost: 0
+  energyCost: 20
   coolDown: 0
-  range: 0
+  range: 10
   lineOfSight: 1
-  type: 0
-  targetType: 0
+  type: 256
+  targetType: 3
   mode: 0
   duration: 0
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
   sounds: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
   tint:
-    code: 0
+    code: 10
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 3
+  animation: 2
   releaseAnimation: 10
-  userFX: {fileID: 0}
-  userBodyPart: 4
-  targetFX: {fileID: 0}
-  targetBodyPart: 2
-  accuracy: 1
+  userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  userBodyPart: 1
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  targetBodyPart: 1
+  accuracy: 1.5
   minDamage: 0
   maxDamage: 0
-  effects: []
-  statusDuration: 10
+  effects:
+  - {fileID: 11400000, guid: 8d92033818bafbc499058e249be94d58, type: 2}
+  statusDuration: 20
   selfEffects: []
   selfStatusDuration: 10
   closeToTargetSpeed: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 0}
-  beamWidth: 0.5
+  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
+  beamWidth: 0.2
   beamUVSpeed: 1
   maxChains: 0
