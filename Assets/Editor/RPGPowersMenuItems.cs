@@ -18,7 +18,7 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Crushing;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerMelee Icon.png");
     }
 
     [MenuItem("RPG/Make Projectile Power")]
@@ -34,8 +34,8 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Piercing;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
-        // power.projectileFX = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerProjectile Icon.png");
+        power.projectileFX = AssetDatabase.LoadAssetAtPath<RPG.VisualEffect>("Assets/Example Particles/Trail.asset");
     }
 
     [MenuItem("RPG/Make Beam Power")]
@@ -50,8 +50,9 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Energy;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.beamMaterial = // TODO prefs
-        // power.icon = // TODO prefs
+        power.beamMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/RadialBeam.mat");
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerBeam Icon.png");
+
     }
 
     [MenuItem("RPG/Make Direct Power")]
@@ -66,7 +67,7 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Magic;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerDirect Icon.png");
     }
 
     [MenuItem("RPG/Make Area Power")]
@@ -82,7 +83,7 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Fire;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerArea Icon.png");
     }
 
     [MenuItem("RPG/Make Block Power")]
@@ -97,7 +98,7 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Crushing;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerShield Icon.png");
     }
 
     [MenuItem("RPG/Make Toggle Power")]
@@ -112,7 +113,7 @@ public class RPGPowersMenuItems : MonoBehaviour
         power.tint.code = RPG.RPGSettings.ColorCode.Magic;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        // power.icon = // TODO prefs
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerToggle Icon.png");
     }
 
     // validations
