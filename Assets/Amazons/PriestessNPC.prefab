@@ -2764,7 +2764,9 @@ MonoBehaviour:
   enemies: []
   allies: []
   patrolling: {fileID: 0}
-  showDebug: 0
+  showDebug: 1
+  debugText: {fileID: 0}
+  debugCountdown: {fileID: 0}
 --- !u!114 &114832921188878006
 MonoBehaviour:
   m_ObjectHideFlags: 1

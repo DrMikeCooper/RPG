@@ -348,8 +348,11 @@ namespace RPG
             if (activePower && activePower.IsInstant())
             {
                 // trigger it
-                activePower.OnActivate(this);
-                activePower = null;
+                if (activePower.lunge == false)
+                {
+                    activePower.OnActivate(this);
+                    activePower = null;
+                }
             }
             // flag the power as ready to go for charge, maintain etc
             powerStarted = true;

@@ -8,32 +8,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
-  m_Name: Toughness
+  m_Script: {fileID: 11500000, guid: f2424774f8008c340a807f31d959cb9f, type: 3}
+  m_Name: Material Wood
   m_EditorClassIdentifier: 
   duration: 0
   fx: {fileID: 0}
   bodyPart: 0
-  icon: {fileID: 21300000, guid: ce18e2d45ab989042a344457a0b75c67, type: 3}
+  icon: {fileID: 21300000, guid: aed4ef94391df1d4fa3de477c9caed83, type: 3}
   tint:
-    code: 0
+    code: 11
     customColor: {r: 0, g: 0, b: 0, a: 0}
   maxStacks: 1
-  sourceSelectiveStacks: 1
+  sourceSelectiveStacks: 0
   stacks: 0
   sourceCharacter: {fileID: 0}
   sourcePower: {fileID: 0}
   timer: 0
   count: 0
-  modifiers:
-  - modifier: -3
-    stat: 12
-  - modifier: -10
-    stat: 13
-  - modifier: 200
-    stat: 0
-  - modifier: 200
-    stat: 3
-  - modifier: 50
-    stat: 14
-  damageType: 1023
+  crushingRes: 50
+  piercingRes: 50
+  toxicRes: 0
+  fireRes: -100
+  coldRes: 0
+  energyRes: -50
+  electricRes: 50
+  magicRes: 50
+  psionicRes: 0
+  negativeRes: 0

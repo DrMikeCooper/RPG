@@ -90,11 +90,12 @@ namespace RPG
         [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public float selfStatusDuration = 10;
 
-        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, 4)]
-        // true of we run to the target in order to get within 1 unit before activating
-        public float closeToTargetSpeed = 0;
+        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, (int)Mode.MoveTo)]
+        // the speed at which we lunge towards the target
+        public float closeToTargetSpeed = 10;
 
-        bool lunge = false;
+        [HideInInspector]
+        public bool lunge = false;
 
         public bool CanUse(Character caster)
         {
@@ -311,8 +312,11 @@ namespace RPG
                 FaceTarget(caster);
                 caster.transform.position = Vector3.MoveTowards(caster.transform.position, caster.target.transform.position, closeToTargetSpeed*Time.deltaTime);
                 float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
-                if (dist <= 1)
+                if (dist <= 1 || caster.timer > 5) // 5 second limit to prevent you getting stuck in a lunge
+                {
+                    lunge = false;
                     OnEnd(caster);
+                }
                 return;
             }
 
@@ -398,11 +402,12 @@ namespace RPG
         {
             if (IsInstant())
             {
+                Debug.Log("OnEnd: index = " + caster.currentComboStage);
                 GetStartPower(caster).StartPower(caster);
 
                 if (mode == Mode.MoveTo)
                 {
-                    float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
+                    float dist = caster.target== null ? 0 : Vector3.Distance(caster.transform.position, caster.target.transform.position);
                     if (dist > 1)
                     {
                         lunge = true;
@@ -410,7 +415,8 @@ namespace RPG
                     }
                     else
                     {
-                        caster.activePower = null;
+                        lunge = false;
+                        caster.Hit();
                     }
                 }
             }

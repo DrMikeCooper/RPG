@@ -24,6 +24,9 @@ namespace RPG
         public override Power GetStartPower(Character caster)
         {
             int index = caster.currentComboStage;
+
+            //Debug.Log("GetStartPower: index = " + index);
+
             if (caster.currentCombo != this)
                 index = 0;
 

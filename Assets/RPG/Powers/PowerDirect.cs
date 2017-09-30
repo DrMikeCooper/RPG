@@ -9,6 +9,7 @@ namespace RPG
     public class PowerDirect : Power
     {
         [Header("Power Direct Settings")]
+        [HideIfType(typeof(PowerMelee))]
         public Material beamMaterial;
         [ShowIf("beamMaterial")]
         public float beamWidth = 0.5f;

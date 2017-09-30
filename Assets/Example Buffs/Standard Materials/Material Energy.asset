@@ -9,21 +9,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2424774f8008c340a807f31d959cb9f, type: 3}
-  m_Name: Wood
+  m_Name: Material Energy
   m_EditorClassIdentifier: 
   duration: 0
   fx: {fileID: 0}
   bodyPart: 0
-  icon: {fileID: 0}
-  color: 0
+  icon: {fileID: 21300000, guid: aed4ef94391df1d4fa3de477c9caed83, type: 3}
+  tint:
+    code: 8
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  maxStacks: 1
+  sourceSelectiveStacks: 1
+  stacks: 0
+  sourceCharacter: {fileID: 0}
+  sourcePower: {fileID: 0}
   timer: 0
   count: 0
-  crushingRes: 50
-  piercingRes: 50
+  crushingRes: 0
+  piercingRes: 0
   toxicRes: 0
-  fireRes: -100
+  fireRes: 50
   coldRes: 0
-  energyRes: -50
-  magicRes: 50
+  energyRes: 50
+  electricRes: 50
+  magicRes: 0
   psionicRes: 0
-  negativeRes: 0
+  negativeRes: -50
