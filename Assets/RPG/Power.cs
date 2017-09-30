@@ -18,8 +18,9 @@ namespace RPG
         public enum Mode
         {
             Instant,
-            Charge,
+            MoveTo,
             Maintain,
+            Charge,
             Block,
         };
     
@@ -41,20 +42,23 @@ namespace RPG
         [Header("General Settings")]
         public float energyCost;
         public float coolDown;
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public float range;
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public bool lineOfSight = true;
         public RPGSettings.DamageType type;
         public TargetType targetType;
+        [HideIfType(typeof(PowerToggle))]
         public Mode mode = Mode.Instant;
-        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
         [Tooltip("How long the power lasts if its a Charge or Maintain")]
         public float duration;
-        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
         [Tooltip("Cost for full charge for a Charge, cost per tick for a Maintain")]
         public float extraEnergyCost;
-        [ShowIf("mode", ShowIfAttribute.Comparison.Not, 0)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
         public bool interruptable = false;
-        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, 2)]
+        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, (int)Mode.Maintain)]
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f;
         public PowerSounds sounds;
@@ -69,20 +73,24 @@ namespace RPG
 
         public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
-        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, 0)]
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public VisualEffect targetFX;
-        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, 0)]
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public Character.BodyPart targetBodyPart = Character.BodyPart.Chest;
 
         [Header("RPG Effects")]
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public float accuracy = 1;
         public float minDamage;
         public float maxDamage;
         public Status[] effects;
         public float statusDuration = 10;
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public Status[] selfEffects;
+        [ShowIf("targetType", ShowIfAttribute.Comparison.Not, (int)TargetType.SelfOnly)]
         public float selfStatusDuration = 10;
 
+        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, 4)]
         // true of we run to the target in order to get within 1 unit before activating
         public float closeToTargetSpeed = 0;
 
@@ -278,7 +286,7 @@ namespace RPG
 
             // checks combos for advancement, or returns the base power
             caster.activePower = GetPower(caster);
-            if (mode != Mode.Instant)
+            if (!IsInstant())
                 caster.activePower.StartPower(caster);
             caster.nextTick = 0;
 
@@ -310,7 +318,9 @@ namespace RPG
 
             switch (mode)
             {
+
                 case Mode.Instant:
+                case Mode.MoveTo:
                     break;
                 case Mode.Charge:
                     {
@@ -386,11 +396,11 @@ namespace RPG
 
         public void OnEnd(Character caster, bool interrupted = false)
         {
-            if (mode == Mode.Instant)
+            if (IsInstant())
             {
                 GetStartPower(caster).StartPower(caster);
 
-                if (closeToTargetSpeed > 0)
+                if (mode == Mode.MoveTo)
                 {
                     float dist = Vector3.Distance(caster.transform.position, caster.target.transform.position);
                     if (dist > 1)
@@ -414,6 +424,7 @@ namespace RPG
             switch (mode)
             {
                 case Mode.Instant:
+                case Mode.MoveTo:
                     break;
                 case Mode.Charge:
                     if (!interrupted)
@@ -482,6 +493,7 @@ namespace RPG
             }
         }
 
+        // activate the power using AI
         protected void OnDoPower(AIBrain brain)
         {
             Character caster = brain.character;
@@ -490,7 +502,7 @@ namespace RPG
             OnStart(caster);
 
             // instant powers release the key immediately. Others, we let energy or duration end it.
-            if (mode == Mode.Instant)
+            if (IsInstant())
                 OnEnd(caster);
         }
 
@@ -692,5 +704,11 @@ namespace RPG
         {
             return this;
         }
+
+        public bool IsInstant()
+        {
+            return mode == Mode.Instant || mode == Mode.MoveTo;
+        }
+
     }
 }

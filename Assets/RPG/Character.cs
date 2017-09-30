@@ -345,7 +345,7 @@ namespace RPG
         public void Hit()
         {
             // for instant powers, trigger it now
-            if (activePower && activePower.mode == Power.Mode.Instant)
+            if (activePower && activePower.IsInstant())
             {
                 // trigger it
                 activePower.OnActivate(this);
