@@ -2813,6 +2813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72e120395f2b984e87abed695bf4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pendingPower: {fileID: 0}
+  queuedPower: {fileID: 0}
 --- !u!114 &114133743028462626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2824,7 +2826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588fb88a6aa1c2948b8c84daf9898720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reticle: {fileID: 1037238067707292}
 --- !u!114 &114349844114011440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2877,17 +2878,17 @@ MonoBehaviour:
   maxEnergy: 100
   team: 1
   powers:
-  - {fileID: 11400000, guid: bf5e6d046e52637498adec17fd201eb5, type: 2}
-  - {fileID: 11400000, guid: 311aefb1f95ddfc4199a2f6461821df7, type: 2}
-  - {fileID: 11400000, guid: 5302861cafa99804fad394b0c00237ae, type: 2}
-  - {fileID: 11400000, guid: e263ba56add6ceb4f945782389198368, type: 2}
-  - {fileID: 11400000, guid: 67303cb35ae3cc4458a1830ad092b131, type: 2}
-  - {fileID: 11400000, guid: d44dada6468658741accebf331737ca5, type: 2}
+  - {fileID: 11400000, guid: 0a119aefe211860448b13db0872ce538, type: 2}
+  - {fileID: 11400000, guid: 442ce0f5a9b102e49a97f1e313ae4438, type: 2}
   powerStarted: 0
   timer: 0
   nextTick: 0
-  animLock: 0
+  animCountDown: 0
+  currentCombo: {fileID: 0}
+  currentComboStage: 0
+  currentComboTimer: 0
   xScreen: 0
+  audioSource: {fileID: 0}
   head: {fileID: 4622849494895152}
   chest: {fileID: 4903291002768048}
   leftHand: {fileID: 4530904096980984}
@@ -2915,6 +2916,13 @@ MonoBehaviour:
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   walking: 0
+  maxSpeed: 1
+  onGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  forceJump: 0
 --- !u!114 &114883521646598454
 MonoBehaviour:
   m_ObjectHideFlags: 1

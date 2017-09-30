@@ -33,7 +33,7 @@ namespace RPG
 
         public void Explode(Transform centre, Character caster)
         {
-            VisualEffect fx = explodeFX ? explodeFX : userFX;
+            VisualEffect fx = explodeFX;
             if (fx)
                 fx.Begin(centre, tint);
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;

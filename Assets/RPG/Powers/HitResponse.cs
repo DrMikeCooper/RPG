@@ -31,6 +31,10 @@ namespace RPG
         [Tooltip("An effect that plays when you absorb damage")]
         public Status[] absorbEffects;
 
+        [Tooltip("Visual FX to play on activation")]
+        public VisualEffect responseFX;
+        public Character.BodyPart responseBodyPart;
+
         public override void Apply(Prop ch, Character caster = null)
         {
             ch.hitResponses.Add(this);
@@ -43,6 +47,7 @@ namespace RPG
 
             if (absorbFactor > 0)
             {
+                PlayEffect(prop);
                 foreach(Status absorbEffect in absorbEffects)
                     prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
             }
@@ -54,7 +59,7 @@ namespace RPG
             Vector3 position = prop.transform.position;
             Vector3 newDir;
 
-            // for simple types, just refelct straight back
+            // for simple types, just reflect straight back
             if (type == ReflectionType.None || type == ReflectionType.Reflect)
             {
                 return (source - position).normalized;
@@ -108,6 +113,11 @@ namespace RPG
             }
 
             return msg;
+        }
+
+        public void PlayEffect(Prop p)
+        {
+            responseFX.Begin(p.GetBodyPart(responseBodyPart), tint);
         }
     }
 }
