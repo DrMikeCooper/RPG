@@ -27,9 +27,7 @@ namespace RPG
             for (int i = 0; i < combo.powers.Length; i++)
             {
                 if (combo.powers[i].mode != Power.Mode.Instant)
-                    msg += "WARNING!: Power " + combo.powers[i].name + " is not Instant!\n";
-                if (combo.powers[i].closeToTargetSpeed != 0)
-                    msg += "WARNING!: Power " + combo.powers[i].name + " is a Lunge!\n";
+                    msg += "WARNING!: Power " + combo.powers[i].name + " is not an Instant Power!\n";
             }
 
             if (msg.Length > 0)
