@@ -17,6 +17,13 @@ namespace RPG
         public VisualEffect explodeFX;
         public Character.BodyPart explodeBodyPart = Character.BodyPart.Root;
 
+        [Tooltip("Optional beam to track from the user to each target")]
+        public Material beamMaterial;
+        [ShowIf("beamMaterial")]
+        public float beamWidth = 0.5f;
+        [ShowIf("beamMaterial")]
+        public float beamUVSpeed = 1.0f;
+
         public override void OnActivate(Character caster)
         {
             if (angle < 360 && caster.target)
@@ -35,7 +42,15 @@ namespace RPG
 
             // check all other characters within the radius
             foreach (Character ch in targets)
-                  Apply(ch, charge, caster);
+            {
+                Apply(ch, charge, caster);
+
+                // add a beam to each one
+                if (beamMaterial != null)
+                {
+                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamUVSpeed);
+                }
+            }
         }
 
         public List<Character> GetTargets(Character caster, Vector3 centre, Vector3 forward)

@@ -106,15 +106,7 @@ namespace RPG
                 Character newTarget = subTargets[Random.Range(0, subTargets.Count)];
 
                 // create the visible beam
-                GameObject beamObj = RPGSettings.instance.beamPool.GetObject();
-                if (beamObj)
-                {
-                    BeamRenderer beam = beamObj.GetComponent<BeamRenderer>();
-                    beam.Activate(lastTarget.GetBodyPart(targetBodyPart), newTarget.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor());
-                    beam.uvSpeed = beamUVSpeed;
-                }
-                else
-                    Debug.Log("Running out of beams! Increase the pool size in RPGSettings");
+                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamUVSpeed);
 
                 // Apply the game effects to the next target and alert them
                 Apply(newTarget, charge, lastTarget);
@@ -125,5 +117,7 @@ namespace RPG
             else
                 return null;
         }
+
+        
     }
 }

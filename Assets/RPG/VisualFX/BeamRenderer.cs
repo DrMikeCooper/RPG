@@ -52,6 +52,10 @@ public class BeamRenderer : MonoBehaviour {
                 lineRenderer.enabled = false;
             }
 
+            // set UV titling to match distance
+            float distance = Vector3.Distance(source.position, target.transform.position);
+            lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+
             lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer*uvSpeed, 0));
 
             // fade out at last 0.2 secs
