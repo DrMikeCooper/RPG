@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: ClingingFlamesDirect
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  coolDown: 0
+  range: 10
+  lineOfSight: 0
+  type: 512
+  targetType: 3
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  sounds: {fileID: 0}
+  icon: {fileID: 0}
+  tint:
+    code: 11
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 3
+  releaseAnimation: 10
+  userFX: {fileID: 0}
+  userBodyPart: 4
+  targetFX: {fileID: 0}
+  targetBodyPart: 2
+  accuracy: 1
+  minDamage: 0
+  maxDamage: 0
+  effects:
+  - {fileID: 11400000, guid: 35ed3d854a06f30498feebe3a2b486f9, type: 2}
+  statusDuration: 10
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 0
+  npcTarget: {fileID: 0}
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1
+  maxChains: 0
