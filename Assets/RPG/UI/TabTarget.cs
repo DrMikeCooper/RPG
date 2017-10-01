@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RPG
 {
@@ -8,6 +9,7 @@ namespace RPG
     {
         Character user;
         GameObject reticle;
+        public EventSystem eventSystem;
 
         // Use this for initialization
         void Start()
@@ -82,6 +84,9 @@ namespace RPG
             // left mouse clicks select a character (or none)
             if (Input.GetMouseButtonDown(0))
             {
+                if (eventSystem.IsPointerOverGameObject())
+                    return;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit info;
                 if (Physics.Raycast(ray, out info))

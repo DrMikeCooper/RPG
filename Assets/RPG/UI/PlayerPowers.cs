@@ -4,28 +4,33 @@ using UnityEngine;
 
 namespace RPG
 {
-    public class PlayerPowers : MonoBehaviour
+    public class PlayerPowers : MonoBehaviour, IMenuItemResponder
     {
         Character character;
         TargetPreview preview;
         public Power pendingPower;
         public Power queuedPower;
         Power keyDownPower;
+        bool[] keyDown;
+        bool[] keyUp;
 
         // Use this for initialization
         void Start()
         {
             character = GetComponent<Character>();
             preview = GetComponent<TargetPreview>();
+            keyDown = new bool[character.powers.Length];
+            keyUp = new bool[character.powers.Length];
         }
 
         // Update is called once per frame
         void Update()
         {
             KeyCode key = KeyCode.Alpha1;
+            int index = 0;
             foreach (Power p in character.powers)
             {
-                if (Input.GetKeyDown(key))
+                if (Input.GetKeyDown(key) || keyDown[index])
                 {
                     if (character.activePower == null && character.animLock == false)
                     {
@@ -39,12 +44,16 @@ namespace RPG
                     keyDownPower = p;
                 }
                 
-                if (Input.GetKeyUp(key))
+                if (Input.GetKeyUp(key) || (!keyDown[index] && keyUp[index]))
                 {
                     Debug.Log("Actual key up");
                     OnKeyUp(p);
+                    keyUp[index] = false;
                 }
+
+                keyDown[index] = false;
                 key++;
+                index++;
             }
 
             if (queuedPower != null && pendingPower == null && character.activePower == null && character.animLock == false)
@@ -79,6 +88,17 @@ namespace RPG
                 p.OnEnd(character);
             if (preview) preview.EndPreview();
         }
-        
+
+
+        public void OnButtonDown(MenuItem item)
+        {
+            keyDown[item.index] = true;
+        }
+
+        public void OnButtonUp(MenuItem item)
+        {
+            keyUp[item.index] = true;
+        }
+
     }
 }

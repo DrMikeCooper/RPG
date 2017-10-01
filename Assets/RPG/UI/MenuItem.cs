@@ -8,14 +8,16 @@ namespace RPG
     // makes the caster perform the action against their target
     public class MenuItem : MonoBehaviour
     {
-
         Character caster;
         Prop target;
-        AIAction action;
+        [HideInInspector]
+        public AIAction action;
 
         public Button button;
         public SquadController controller;
         Image image;
+        IMenuItemResponder responder;
+        public int index;
 
         // Use this for initialization
         void Start()
@@ -31,23 +33,29 @@ namespace RPG
         {
             if (image)
             {
-                image.fillAmount = 0.5f;
                 Power p = action as Power;
                 if (p && p.coolDown > 0)
                 {
-
                     image.fillAmount = caster.GetCoolDownFactor(p);
-                    //image.color = Color.white * caster.GetCoolDownFactor(p);
                 }
+                else
+                    image.fillAmount = 1.0f;
+                if (p && button.image)
+                {
+                    Color color = p.CanUse(caster) ? p.tint.GetColor() : p.tint.GetColor() * 0.5f;
+                    color.a = 1;
+                    button.image.color = color;
+                } 
             }
         }
 
         // Set up.
-        public void Init(Character cas, Prop targ, AIAction ac)
+        public void Init(Character cas, Prop targ, AIAction ac, int ind)
         {
             caster = cas;
             target = targ;
             action = ac;
+            index = ind;
             Power power = action as Power;
             if (power)
             {
@@ -62,19 +70,41 @@ namespace RPG
                         text.text = power.GetDescription();
                 }
             }
+
+            // could be AIBrain (squad based setup) or PlayerPower (third person setup)
+            responder = caster.GetComponent<IMenuItemResponder>();
+        }
+
+        public void SetPower(Power p)
+        {
+            action = p;
+            button.image.sprite = p.icon;
+        }
+
+        public void SetTarget(Prop t)
+        {
+            target = t;
+        }
+
+        void OnButtonDown()
+        {
+            responder.OnButtonDown(this);
+        }
+
+        void OnButtonUp()
+        {
+            OnClick();
         }
 
         // Called when the button is clicked
         void OnClick()
         {
             caster.target = target;
-            AIBrain brain = caster.GetComponent<AIBrain>();
-            brain.SetRootNode(action.MakeInstance()); // TODO  - make sure Character has a copy
-            Power power = brain.rootNode as Power;
-            if (power)
-                power.npcTarget = target as Character;
+            responder.OnButtonDown(this);
+            responder.OnButtonUp(this);
 
-            controller.HideActionMenu();
+            if (controller)
+                controller.HideActionMenu();
         }
     }
 }

@@ -17,7 +17,6 @@ namespace RPG
 
         MenuItem[] menuItems;
 
-        // TODO - blink these on when clicking on a point
         GameObject[] moveReticle;
 
         float basePosY;
@@ -281,7 +280,7 @@ namespace RPG
                     {
                         float angle = Mathf.Deg2Rad * (90 - 45 * index);
                         menuItems[index].transform.position = Input.mousePosition + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * 64;
-                        menuItems[index].Init(caster, p, caster.powers[i]);
+                        menuItems[index].Init(caster, p, caster.powers[i], index);
                         menuItems[index].gameObject.SetActive(true);
                         index++;
                     }

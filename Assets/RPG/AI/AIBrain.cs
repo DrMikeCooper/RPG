@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace RPG
 {
-    public class AIBrain : MonoBehaviour
+    public class AIBrain : MonoBehaviour, IMenuItemResponder
     {
         public AIAction[] behaviours;
 
@@ -211,5 +211,18 @@ namespace RPG
             if (showDebug)
                 RPGSettings.instance.GetHUD(character).AddDebugText(msg);
         }
+
+        public void OnButtonDown(MenuItem item)
+        {
+        }
+
+        public void OnButtonUp(MenuItem item)
+        {
+            SetRootNode(item.action.MakeInstance()); // TODO  - make sure Character has a copy
+            Power power = rootNode as Power;
+            if (power)
+                power.npcTarget = target as Character;
+        }
+
     }
 }
