@@ -31,6 +31,7 @@ public class ToolTipIcon : MonoBehaviour {
 
     public void OnPointerEnter()
     {
+        transform.SetAsLastSibling();
         toolTip.SetActive(true);
     }
 
