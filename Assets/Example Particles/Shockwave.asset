@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c4a8ea6962cea47911fb4bea0496ed, type: 3}
   m_Name: Shockwave
   m_EditorClassIdentifier: 
-  lifespan: 5
-  prefab: {fileID: 0}
+  lifespan: 3
+  prefab: {fileID: 1901758175203228, guid: b07dfa706b35a4342b371ac21e4015fd, type: 2}

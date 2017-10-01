@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: ForceSphereLarge
   m_EditorClassIdentifier: 
   lifespan: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 1179620942061994, guid: c4da87eee5f4b7e44a01a381868b036f, type: 2}

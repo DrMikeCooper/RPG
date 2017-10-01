@@ -104,7 +104,7 @@ namespace RPG
             stats[RPGSettings.StatName.Health.ToString()] = new Stat(maxHealth, false);
             healthStat = stats[RPGSettings.StatName.Health.ToString()];
 
-            UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter tpc = GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>();
+            ThirdPersonCharacter tpc = GetComponent<ThirdPersonCharacter>();
             if (tpc)
                 tpc.onGrounded.AddListener(EndKnockback);
         }
@@ -360,7 +360,7 @@ namespace RPG
             if (rb)
             {
                 // make the character jump
-                UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter tpc = GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>();
+                ThirdPersonCharacter tpc = GetComponent<ThirdPersonCharacter>();
                 if (tpc)
                     tpc.forceJump = true;
 

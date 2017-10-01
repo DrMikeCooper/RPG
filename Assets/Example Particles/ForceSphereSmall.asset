@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c4a8ea6962cea47911fb4bea0496ed, type: 3}
   m_Name: ForceSphereSmall
   m_EditorClassIdentifier: 
-  lifespan: 5
-  prefab: {fileID: 0}
+  lifespan: 1.5
+  prefab: {fileID: 1024871718827840, guid: 795fae411068b9d4ea13e002c8c05d7f, type: 2}

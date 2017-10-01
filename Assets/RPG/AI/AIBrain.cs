@@ -16,7 +16,7 @@ namespace RPG
         [HideInInspector]
         public Character character;
         [HideInInspector]
-        UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
+        AICharacterControl ai;
 
         // dynamic data
         [HideInInspector]
@@ -39,7 +39,7 @@ namespace RPG
         void Start()
         {
             character = GetComponent<Character>();
-            ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
+            ai = GetComponent<AICharacterControl>();
 
             List<AIAction> extras = new List<AIAction>();
             Patrolling patrol = GetComponent<Patrolling>();
@@ -142,13 +142,13 @@ namespace RPG
 
         public void MoveTo(Transform pos, bool walking = false)
         {
-            GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().walking = walking;
+            GetComponent<ThirdPersonCharacter>().walking = walking;
             ai.target = pos;
         }
 
         public void MoveTo(Vector3 pos, bool walking = false)
         {
-            GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().walking = walking;
+            GetComponent<ThirdPersonCharacter>().walking = walking;
             ai.SetTarget(null);
             ai.SetTargetPos(pos);
         }

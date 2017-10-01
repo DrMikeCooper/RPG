@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: KirbyDots
   m_EditorClassIdentifier: 
   lifespan: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 1466130483448056, guid: 936ffcf37be491e4ea998c962bd91356, type: 2}

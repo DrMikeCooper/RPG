@@ -19,12 +19,12 @@ namespace RPG
         [HideInInspector]
         public Character ch;
 
-        UnityStandardAssets.Characters.ThirdPerson.AICharacterControl ai;
+        AICharacterControl ai;
 
         // Use this for initialization
         void Start()
         {
-            ai = GetComponent<UnityStandardAssets.Characters.ThirdPerson.AICharacterControl>();
+            ai = GetComponent<AICharacterControl>();
             ch = GetComponent<Character>();
         }
 
