@@ -8048,12 +8048,12 @@ Prefab:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1038711945617138, guid: c30cb95490fac4b409ffc9eabf697940, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038711945617138, guid: c30cb95490fac4b409ffc9eabf697940, type: 2}
       propertyPath: m_Name
       value: Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038711945617138, guid: c30cb95490fac4b409ffc9eabf697940, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c30cb95490fac4b409ffc9eabf697940, type: 2}
