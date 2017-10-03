@@ -3452,6 +3452,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff6f0f9d99c166543ac45935df715425, type: 2}
   - {fileID: 11400000, guid: e19becfe73d5e794f8cf401426718772, type: 2}
   - {fileID: 11400000, guid: 63ed37d93af693d44a3ef63fa9ded3be, type: 2}
+  - {fileID: 11400000, guid: 0a119aefe211860448b13db0872ce538, type: 2}
   powerStarted: 0
   timer: 0
   nextTick: 0
@@ -3581,8 +3582,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b72e120395f2b984e87abed695bf4466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pendingPower: {fileID: 0}
-  queuedPower: {fileID: 0}
+  pendingPowerStart: {fileID: 0}
+  pendingPowerEnd: {fileID: 0}
+  queuedPowerStart: {fileID: 0}
+  queuedPowerEnd: {fileID: 0}
+  queuedPower: -1
 --- !u!114 &700627215
 MonoBehaviour:
   m_ObjectHideFlags: 0

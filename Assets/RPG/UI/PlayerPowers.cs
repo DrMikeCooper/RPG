@@ -13,6 +13,9 @@ namespace RPG
         public Power pendingPowerStart;
         public Power pendingPowerEnd;
 
+        public Power queuedPowerStart;
+        public Power queuedPowerEnd;
+
         // queued power while another one has been activated, which will trigger once the activePower is clear
         public int queuedPower = -1;
 
@@ -55,6 +58,8 @@ namespace RPG
                         pendingPowerStart = p;
                         pendingPowerEnd = null;
                     }
+                    else
+                        queuedPowerStart = p;
                     keyDown[i] = false;
                 }
                 
@@ -62,6 +67,8 @@ namespace RPG
                 {
                     pendingPowerEnd = p;
                     keyUp[i] = false;
+                    if (queuedPowerStart == p)
+                        queuedPowerEnd = p;
                 }
             }
 
@@ -74,13 +81,19 @@ namespace RPG
 
             if (pendingPowerEnd)
             {
-                pendingPowerEnd.OnEnd(character);
-
                 if (character.activePower != null) 
                     pendingPowerEnd.OnEnd(character);
                 if (preview) preview.EndPreview();
 
                 pendingPowerEnd = null;
+            }
+
+            if (pendingPowerStart == null && pendingPowerEnd == null)
+            {
+                pendingPowerStart = queuedPowerStart;
+                pendingPowerEnd = queuedPowerEnd;
+                queuedPowerStart = null;
+                queuedPowerEnd = null;
             }
 
             if (character.activePower)
