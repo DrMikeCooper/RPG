@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 222852072132275052}
   - component: {fileID: 114426019529087588}
   - component: {fileID: 114658415970407570}
+  - component: {fileID: 114803216606266486}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -230,8 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3504bed4036a481449c2ebc58875e5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action: {fileID: 0}
   button: {fileID: 114658415970407570}
   controller: {fileID: 0}
+  index: 0
 --- !u!114 &114658415970407570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,6 +303,53 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114803216606266486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264194447548594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114556708417184148}
+          m_MethodName: OnButtonDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114556708417184148}
+          m_MethodName: OnButtonUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!114 &114978919263658450
 MonoBehaviour:
   m_ObjectHideFlags: 1

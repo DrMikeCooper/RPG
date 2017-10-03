@@ -8,9 +8,15 @@ namespace RPG
     {
         Character character;
         TargetPreview preview;
-        public Power pendingPower;
-        public Power queuedPower;
-        Power keyDownPower;
+
+        // the power that's been held down but can't activate yet due to range, energy or cooldown
+        public Power pendingPowerStart;
+        public Power pendingPowerEnd;
+
+        // queued power while another one has been activated, which will trigger once the activePower is clear
+        public int queuedPower = -1;
+
+        // array of inputs that have happened this frame
         bool[] keyDown;
         bool[] keyUp;
 
@@ -26,48 +32,55 @@ namespace RPG
         // Update is called once per frame
         void Update()
         {
-            KeyCode key = KeyCode.Alpha1;
-            int index = 0;
-            foreach (Power p in character.powers)
+            // read the keyboard
+            for (int i=0; i< character.powers.Length; i++)
             {
-                if (Input.GetKeyDown(key) || keyDown[index])
+                KeyCode key = KeyCode.Alpha1 + i;
+                if (Input.GetKeyDown(key)) keyDown[i] = true;
+                if (Input.GetKeyUp(key)) keyUp[i] = true;
+            }
+
+            // check each power for activation
+            for (int i = 0; i < character.powers.Length; i++)
+            {
+                Power p = character.powers[i];
+                if (keyDown[i])
                 {
                     if (character.activePower == null && character.animLock == false)
                     {
                         // queue the power up for starting
-                        pendingPower = p;
                         if (preview)
                             preview.StartPreview(p);
+
+                        pendingPowerStart = p;
+                        pendingPowerEnd = null;
                     }
-                    else
-                        queuedPower = p;
-                    keyDownPower = p;
+                    keyDown[i] = false;
                 }
                 
-                if (Input.GetKeyUp(key) || (!keyDown[index] && keyUp[index]))
+                if (keyUp[i])
                 {
-                    Debug.Log("Actual key up");
-                    OnKeyUp(p);
-                    keyUp[index] = false;
+                    pendingPowerEnd = p;
+                    keyUp[i] = false;
                 }
-
-                keyDown[index] = false;
-                key++;
-                index++;
-            }
-
-            if (queuedPower != null && pendingPower == null && character.activePower == null && character.animLock == false)
-            {
-                pendingPower = queuedPower;
-                queuedPower = null;
             }
 
             // once the powers queued, start when cooldown and energy and everything else permit
-            if (pendingPower && pendingPower.GetPower(character).CanUse(character))
+            if (pendingPowerStart && pendingPowerStart.GetPower(character).CanUse(character))
             {
-                pendingPower.OnStart(character);
-                Debug.Log("onKeyUp called from pending");
-                OnKeyUp(pendingPower);
+                pendingPowerStart.OnStart(character);
+                pendingPowerStart = null;
+            }
+
+            if (pendingPowerEnd)
+            {
+                pendingPowerEnd.OnEnd(character);
+
+                if (character.activePower != null) 
+                    pendingPowerEnd.OnEnd(character);
+                if (preview) preview.EndPreview();
+
+                pendingPowerEnd = null;
             }
 
             if (character.activePower)
@@ -76,20 +89,7 @@ namespace RPG
             }
         }
 
-        void OnKeyUp(Power p)
-        {
-            pendingPower = null;
-
-            if (p != keyDownPower)
-                return;
-            keyDownPower = null;
-
-            if (character.activePower != null) // == p.GetPower(character))
-                p.OnEnd(character);
-            if (preview) preview.EndPreview();
-        }
-
-
+        // simulated keypresses using buttons on screen
         public void OnButtonDown(MenuItem item)
         {
             keyDown[item.index] = true;
