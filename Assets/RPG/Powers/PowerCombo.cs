@@ -36,5 +36,24 @@ namespace RPG
 
             return powers[index];
         }
+
+        public override float Evaluate(AIBrain brain, AINode.AICondition condition)
+        {
+            duration = -1.5f;
+            Power subP = GetPower(brain.character);
+            range = subP.range;
+            return subP.Evaluate(brain, condition);
+        }
+
+        public override void UpdateAction(AIBrain brain)
+        {
+            Power subP = GetPower(brain.character);
+            brain.target = subP.npcTarget;
+            range = subP.range;
+            subP.UpdateAction(brain);
+
+            // advance to the next power!
+            GetStartPower(brain.character);
+        }
     }
 }

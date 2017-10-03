@@ -16,7 +16,8 @@ namespace RPG
 
             // Show default inspector property editor
             //DrawDefaultInspector();
-            
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("duration"), new GUILayoutOption[0]);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("window"), new GUILayoutOption[0]);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("powers"), true, new GUILayoutOption[0]);
 
