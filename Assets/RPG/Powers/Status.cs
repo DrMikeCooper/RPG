@@ -47,5 +47,7 @@ namespace RPG
         public virtual float StatusPerHit(Character target) { return 0; }
         public virtual float BenefitPerHit(Character target) { return 0; }
 
+        // return false if the status is dormant eg a Hold or Stun that's being neutralised by resistance to such effects
+        public virtual bool IsCurrentlyActive(Prop p) { return true; }
     }
 }

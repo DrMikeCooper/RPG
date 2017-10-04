@@ -65,9 +65,9 @@ namespace RPG
             Confusion,
         }
 
-        public static bool IsPercentage(StatName stat)
+        public static bool IsMez(StatName stat)
         {
-            return stat != StatName.Root && stat != StatName.Stun && stat != StatName.Hold;
+            return stat == StatName.Root || stat == StatName.Stun || stat == StatName.Hold || stat == StatName.Enrage || stat == StatName.Confusion;
         }
 
         public enum ColorCode

@@ -15,7 +15,7 @@ namespace RPG
 
             public string GetDescription(RPGSettings.DamageType damageType)
             {
-                string desc = (modifier > 0 ? "+" : "") + modifier + (RPGSettings.IsPercentage(stat) ? "% to " : " ");
+                string desc = (modifier > 0 ? "+" : "") + modifier + (RPGSettings.IsMez(stat) ? " " : "% to ");
                 if (stat <= RPGSettings.StatName.Def) desc += damageType.ToString() +" ";
                 desc += stat.ToString();
                 return desc;
@@ -139,6 +139,22 @@ namespace RPG
                     desc += mod.GetDescription(damageType) + "\n ";
             }
             return desc;
+        }
+
+        public override bool IsCurrentlyActive(Prop p)
+        {
+            foreach (Modifier mod in modifiers)
+            {
+                if (RPGSettings.IsMez(mod.stat))
+                    if (p.stats.ContainsKey(mod.stat.ToString()))
+                    {
+                        float val = p.stats[mod.stat.ToString()].getCurrentValue();
+                        Debug.Log("ActiveCheck: " + mod.stat.ToString() + " = " + val);
+                        if (val <= 0)
+                            return false;
+                    }
+            }
+            return true;
         }
     }
 }

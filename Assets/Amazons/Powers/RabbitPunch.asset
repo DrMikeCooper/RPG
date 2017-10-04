@@ -36,13 +36,15 @@ MonoBehaviour:
   accuracy: 1.3
   minDamage: 5
   maxDamage: 5
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: d2d851aa656bdc64c89e42b88e4dbd48, type: 2}
   statusDuration: 10
-  selfEffects:
-  - {fileID: 11400000, guid: c2491529b83137b43b529a64b1f1a6bd, type: 2}
+  selfEffects: []
   selfStatusDuration: 10
   closeToTargetSpeed: 0
+  lunge: 0
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 0}
   beamWidth: 0.5
   beamUVSpeed: 1
+  maxChains: 0

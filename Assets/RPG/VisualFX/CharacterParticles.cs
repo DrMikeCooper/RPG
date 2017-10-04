@@ -21,7 +21,12 @@ namespace RPG
         {
             foreach (KeyValuePair<string,GameObject> pair in systems)
             {
-                if (character.groupedEffects.ContainsKey(pair.Key) == false)
+                bool turnOff = (character.groupedEffects.ContainsKey(pair.Key) == false);
+                if (!turnOff)
+                {
+                    turnOff = !character.groupedEffects[pair.Key].IsCurrentlyActive(character);
+                }
+                if (turnOff)
                 {
                     // turn on the fader to deactivate it
                     LifeSpanFader fader = pair.Value.GetComponent<LifeSpanFader>();
@@ -37,20 +42,23 @@ namespace RPG
 
             foreach (KeyValuePair<string, Status> pair in character.groupedEffects)
             {
-                // if we dont have a particle system for this key yet, make one
-                if (systems.ContainsKey(pair.Key) == false)
+                if (pair.Value.fx && pair.Value.IsCurrentlyActive(character)) // only turn on if valid and we have na FX for it
                 {
-                    Status s = pair.Value;
-                    if (s.fx)
-                        systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.tint, false);
-                }
-                else
-                {
-                    LifeSpanFader fader = systems[pair.Key].GetComponent<LifeSpanFader>();
-                    if (!fader)
-                        Debug.Log("Missing fader!");
+                    // if we dont have a particle system for this key yet, make one
+                    if (systems.ContainsKey(pair.Key) == false)
+                    {
+                        Status s = pair.Value;
+                        if (s.fx)
+                            systems[pair.Key] = s.fx.Begin(character.GetBodyPart(s.bodyPart), s.tint, false);
+                    }
                     else
-                        fader.Restart();
+                    {
+                        LifeSpanFader fader = systems[pair.Key].GetComponent<LifeSpanFader>();
+                        if (!fader)
+                            Debug.Log("Missing fader!");
+                        else
+                            fader.Restart();
+                    }
                 }
             }
         }

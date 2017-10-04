@@ -28,7 +28,7 @@ MonoBehaviour:
   modifiers:
   - modifier: -3
     stat: 12
-  - modifier: -10
+  - modifier: -2
     stat: 13
   - modifier: 200
     stat: 0

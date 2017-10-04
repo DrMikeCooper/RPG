@@ -3494,7 +3494,6 @@ MonoBehaviour:
   explosion: {fileID: 0}
   passives:
   - {fileID: 11400000, guid: 84d291ad896f58e4f9a8e72514d470ae, type: 2}
-  - {fileID: 11400000, guid: 3d571c4a3c4c00b479495631c803b7bb, type: 2}
   dead: 0
   statusEffects: []
   statusDirty: 0
@@ -5760,7 +5759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1033425711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9097,7 +9096,7 @@ Prefab:
         type: 2}
       propertyPath: behaviours.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 0a119aefe211860448b13db0872ce538,
+      objectReference: {fileID: 11400000, guid: 201815f4bf1d7064f9537ca96cde9589,
         type: 2}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
@@ -9129,7 +9128,7 @@ Prefab:
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
       propertyPath: showDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114497800285981148, guid: 2f8384075ab50d3428243b4b10026b32,
         type: 2}
