@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 198687399523922920}
   - component: {fileID: 199337895180958078}
   - component: {fileID: 114502864485415946}
+  - component: {fileID: 114300827257892780}
   m_Layer: 0
   m_Name: Buff_Stunned
   m_TagString: Untagged
@@ -42,6 +43,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114300827257892780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1862804841349220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00aec7bab84798b42ade1a5bd3e06efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: Stunned
 --- !u!114 &114502864485415946
 MonoBehaviour:
   m_ObjectHideFlags: 1

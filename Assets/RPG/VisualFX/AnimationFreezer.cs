@@ -11,7 +11,13 @@ namespace RPG
         // Use this for initialization
         void Start()
         {
-            animator = transform.parent.GetComponent<Animator>();
+            // look up the heirarchy for an animator
+            Transform t = transform;
+            while (animator == null && t.parent != null)
+            {
+                t = t.parent;
+                animator = t.GetComponent<Animator>();
+            }
             TurnOn();
         }
 

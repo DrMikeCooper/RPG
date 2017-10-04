@@ -39,12 +39,13 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: a441d77e87d58ef458ebb646af99c75c, type: 2}
   - {fileID: 11400000, guid: d2d851aa656bdc64c89e42b88e4dbd48, type: 2}
-  - {fileID: 11400000, guid: 62265f7a40a39c74ca4ac423ed059545, type: 2}
   statusDuration: 5
   selfEffects: []
   selfStatusDuration: 10
   closeToTargetSpeed: 0
+  lunge: 0
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
   beamWidth: 0.1
   beamUVSpeed: 10
+  maxChains: 0
