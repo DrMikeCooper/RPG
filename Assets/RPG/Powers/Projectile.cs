@@ -32,6 +32,7 @@ namespace RPG
             transform.position += velocity * Time.deltaTime;
             if (Vector3.Distance(startPos, transform.position) > parentPower.range)
                 Destroy(gameObject);
+            transform.forward = velocity;
         }
 
         void OnTriggerEnter(Collider col)
