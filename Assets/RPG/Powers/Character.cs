@@ -30,6 +30,7 @@ namespace RPG
 
         public int team = 2;
 
+        [Header("Active Powers")]
         public Power[] powers;
         [HideInInspector]
         public bool powerStarted = false;
@@ -81,6 +82,7 @@ namespace RPG
             RightFoot
         }
 
+        [Header("Body Parts")]
         public Transform head;
         public Transform chest;
         public Transform leftHand;

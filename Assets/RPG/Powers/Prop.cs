@@ -21,6 +21,7 @@ namespace RPG
         [Tooltip("Explosion power that plays on destruction")]
         public PowerArea explosion;
 
+        [Header("Passive Powers")]
         public Status[] passives;
 
         [HideInInspector]
@@ -80,8 +81,11 @@ namespace RPG
         {
         }
 
+        [HideInInspector]
         public DeathEvent onDead = new DeathEvent();
+        [HideInInspector]
         public DamageEvent onDamaged = new DamageEvent();
+        [HideInInspector]
         public StatusEvent onStatusChanged = new StatusEvent();
 
         // Use this for initialization

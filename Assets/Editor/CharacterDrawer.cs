@@ -19,6 +19,11 @@ namespace RPG
             {
                 FindBodyParts(ch);
             }
+
+            EditorGUILayout.LabelField("Events", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("onDead"), EditorStyles.standardFont);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("onDamaged"), EditorStyles.standardFont);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("onStatusChanged"), EditorStyles.standardFont);
         }
 
         void FindBodyParts(Character ch)
