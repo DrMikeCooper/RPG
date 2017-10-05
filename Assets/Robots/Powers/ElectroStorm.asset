@@ -19,7 +19,7 @@ MonoBehaviour:
   targetType: 3
   mode: 2
   duration: 3
-  extraEnergyCost: 5
+  extraEnergyCost: 60
   interruptable: 0
   tick: 0.5
   sounds: {fileID: 0}

@@ -97,6 +97,9 @@ namespace RPG
         [HideInInspector]
         public bool lunge = false;
 
+        // for charge and maintains - stores the user fx to keep going while charging/maintaining
+        GameObject userFXInstance;
+
         public bool CanUse(Character caster)
         {
             if (caster.isHeld())
@@ -188,7 +191,10 @@ namespace RPG
             caster.energy -= energyCost;
             if (userFX)
             {
-                userFX.Begin(caster.GetBodyPart(userBodyPart), tint);
+                bool continuous = (mode == Mode.Charge || mode == Mode.Maintain);
+                GameObject fx = userFX.Begin(caster.GetBodyPart(userBodyPart), tint, !continuous, true);
+                if (continuous)
+                    userFXInstance = fx;
             }
 
             FaceTarget(caster);
@@ -205,6 +211,12 @@ namespace RPG
 
         protected void EndPower(Character caster)
         {
+            // close off any fx from charge/maintain
+            if (userFXInstance)
+            {
+                userFX.End(userFXInstance);
+                userFXInstance = null;
+            }
             caster.ReleaseAnim(true);
 
             // start the cool down

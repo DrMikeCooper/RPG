@@ -9,33 +9,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c8198c71c0c05c4a9c149a9fd368472, type: 3}
-  m_Name: SprintProjectile
+  m_Name: Energy SMG
   m_EditorClassIdentifier: 
-  energyCost: 0
+  energyCost: 10
   coolDown: 0
-  range: 0
+  range: 20
   lineOfSight: 1
-  type: 0
-  targetType: 0
-  mode: 0
-  duration: 0
-  extraEnergyCost: 0
+  type: 64
+  targetType: 3
+  mode: 2
+  duration: 5
+  extraEnergyCost: 10
   interruptable: 0
-  tick: 0.5
+  tick: 1
   sounds: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
   tint:
-    code: 0
+    code: 8
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
-  userFX: {fileID: 0}
+  userFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
   userBodyPart: 4
-  targetFX: {fileID: 0}
+  targetFX: {fileID: 11400000, guid: 0fa258611d7ff67429e8ce760306ae22, type: 2}
   targetBodyPart: 2
-  accuracy: 1
-  minDamage: 0
-  maxDamage: 0
+  accuracy: 1.5
+  minDamage: 8
+  maxDamage: 8
   effects: []
   statusDuration: 10
   selfEffects: []
@@ -43,6 +43,6 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  speed: 1
-  projectileFX: {fileID: 0}
+  speed: 10
+  projectileFX: {fileID: 11400000, guid: 8a3dfe24963b4dc47875178bc3146da8, type: 2}
   maxChains: 0

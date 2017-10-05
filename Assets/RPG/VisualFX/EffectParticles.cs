@@ -10,7 +10,7 @@ namespace RPG
         public GameObject prefab; // reference to the prefab set up in editor
         LifeSpanFader fader;
 
-        public override GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true)
+        public override GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true, bool autoDestroy = true)
         {
             GameObject go = Instantiate(prefab, t);
             go.transform.localPosition = prefab.transform.position;
@@ -25,17 +25,27 @@ namespace RPG
             if (fader == null)
                 fader = go.AddComponent<LifeSpanFader>();
 
+            // make any particle systems loop 
+            if (!autoStop)
+            {
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+                if (ps)
+                    ps.loop = true;
+            }
+
             fader.enabled = autoStop;
             fader.lifespan = lifespan;
             fader.color = tint.GetColor();
-            fader.autoDestroy = autoStop;
+            fader.autoDestroy = autoDestroy;
 
             return go;
         }
 
         public override void End(GameObject go)
         {
-            fader.enabled = true;
+            LifeSpanFader fd = go.GetComponent<LifeSpanFader>();
+            if (fd)
+                fd.enabled = true;
         }
     }
 

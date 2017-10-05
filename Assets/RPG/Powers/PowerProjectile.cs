@@ -22,7 +22,7 @@ namespace RPG
             proj.Init(this, caster, velocity);
 
             // create particles on the projectile
-            GameObject pgo = projectileFX.Begin(proj.transform, tint, false);
+            GameObject pgo = projectileFX.Begin(proj.transform, tint, false, false);
             pgo.transform.parent = go.transform;
             pgo.transform.localPosition = Vector3.zero;
         }

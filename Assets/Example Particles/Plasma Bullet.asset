@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Plasma Bullet
   m_EditorClassIdentifier: 
   lifespan: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 1224531204016720, guid: fdefd0b03f3b2d144a14ca99561affb1, type: 2}

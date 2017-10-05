@@ -8,7 +8,7 @@ namespace RPG
     {
         public float lifespan = 5; // how long before ending it?
 
-        public abstract GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true);
+        public abstract GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true, bool autoDestroy = true);
         public abstract void End(GameObject go);
 
     }
