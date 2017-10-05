@@ -30,7 +30,10 @@ namespace RPG
             {
                 ParticleSystem ps = go.GetComponent<ParticleSystem>();
                 if (ps)
-                    ps.loop = true;
+                {
+                    ParticleSystem.MainModule main = ps.main;
+                    main.loop = true;
+                }
             }
 
             fader.enabled = autoStop;
