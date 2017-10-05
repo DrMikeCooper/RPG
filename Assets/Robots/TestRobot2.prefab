@@ -2259,7 +2259,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3167a5006546b5446997d4e74b7481d6, type: 2}
   - {fileID: 11400000, guid: c5d8d69839b6c8e4a93da605571e2783, type: 2}
   - {fileID: 11400000, guid: 48b8c211c58d3d644a7e9b96fbcc604f, type: 2}
-  - {fileID: 11400000, guid: b2756a12d1f61164a9f74dfb26d02584, type: 2}
+  - {fileID: 11400000, guid: 65692a44bf732c44b9f70e0964187d94, type: 2}
   powerStarted: 0
   timer: 0
   nextTick: 0
