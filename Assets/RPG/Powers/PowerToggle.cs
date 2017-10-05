@@ -65,5 +65,21 @@ namespace RPG
         {
             return caster.toggles.ContainsKey(this) && caster.toggles[this].on;
         }
+
+        public override float Evaluate(AIBrain brain)
+        {
+            Character character = brain.character;
+            // start the toggle off if we're not about to run out of energy from it.
+            if (!IsOn(character) && character.energy > 20)
+                return BenefitPerHit(character);
+
+            return 0.0f;
+        }
+
+        public override void UpdateAction(AIBrain brain)
+        {
+            OnStart(brain.character);
+            OnEnd(brain.character);
+        }
     }
 }

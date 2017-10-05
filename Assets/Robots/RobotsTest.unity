@@ -3000,11 +3000,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 114372705340198716, guid: e7492388baac1094591653ad436b4fb8,
-        type: 2}
-      propertyPath: maxHealth
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 1193522227687450, guid: e7492388baac1094591653ad436b4fb8, type: 2}
       propertyPath: m_Name
       value: RobotSlugger (3)
@@ -3215,6 +3210,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114263915468030874, guid: 96f9038659341524eb5df80525307242,
+        type: 2}
+      propertyPath: eventSystem
+      value: 
+      objectReference: {fileID: 349509058}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96f9038659341524eb5df80525307242, type: 2}
   m_IsPrefabParent: 0
