@@ -438,7 +438,9 @@ namespace RPG
             if (releaseAnimation != Animations.None)
                 caster.PlayAnim(releaseAnimation.ToString());
 
-            EndPower(caster);
+            if (mode != Mode.MoveTo || lunge == false)
+                EndPower(caster);
+
             switch (mode)
             {
                 case Mode.Instant:

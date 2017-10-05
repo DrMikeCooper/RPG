@@ -45,6 +45,9 @@ namespace RPG
                     Color color = p.CanUse(caster) ? p.tint.GetColor() : p.tint.GetColor() * 0.5f;
                     color.a = 1;
                     button.image.color = color;
+                    PowerToggle pt = action as PowerToggle;
+                    if (pt)
+                        button.image.transform.localScale = Vector3.one * (pt.IsOn(caster) ? 0.9f : 1.0f);
                 } 
             }
         }

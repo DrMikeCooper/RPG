@@ -61,5 +61,9 @@ namespace RPG
             }
         }
 
+        public bool IsOn(Character caster)
+        {
+            return caster.toggles.ContainsKey(this) && caster.toggles[this].on;
+        }
     }
 }

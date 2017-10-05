@@ -7,7 +7,7 @@ namespace RPG
     {
         [HideInInspector]
         public float duration;
-        //public ParticleSystem particles;
+
         public VisualEffect fx;
         public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
