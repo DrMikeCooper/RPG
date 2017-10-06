@@ -13,6 +13,8 @@ namespace RPG
         public GameObject debugPanel;
         public Text debugText;
 
+        public Vector3 screenPos;
+
         // Use this for initialization
         void Start()
         {
@@ -26,6 +28,8 @@ namespace RPG
             Vector3 targetPos = target.position + 2.5f * Vector3.up;
             rect.position = targetPos;
             transform.forward = Camera.main.transform.forward;
+
+            screenPos = Camera.main.WorldToScreenPoint(targetPos);
 
             if (debugPanel && debugText)
                 debugPanel.SetActive(debugText.text != "");

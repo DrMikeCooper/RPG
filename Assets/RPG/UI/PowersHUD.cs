@@ -16,6 +16,25 @@ namespace RPG
         {
             // find the Icon for each power and clone one
             icon = transform.Find("Icon").gameObject;
+            
+
+            Init();
+        }
+
+        public void SetCharacter(Character ch)
+        {
+            character = ch;
+            Init();
+        }
+
+        void Init()
+        {
+            if (items != null)
+            {
+                for (int i = 0; i < items.Length; i++)
+                    Destroy(items[i].gameObject);
+            }
+
             RectTransform iconRect = icon.GetComponent<RectTransform>();
 
             items = new MenuItem[character.powers.Length];
