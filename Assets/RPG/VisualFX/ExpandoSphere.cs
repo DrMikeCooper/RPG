@@ -25,14 +25,16 @@ public class ExpandoSphere : MonoBehaviour {
         float alpha = timer / lifeTime;
         if (alpha < 1)
         {
+            alpha = 1 - (1 - alpha) * (1 - alpha);
             transform.localScale = Vector3.one * (startRadius * (1 - alpha) + endRadius * alpha);
-            if (alpha > 0.5)
-            {
-                Color col = color;
-                col.a = 1.0f - 2.0f * alpha;
-                if (rend)
-                    rend.material.SetColor("_TintColor", col);
-            }
+        }
+        else if (alpha < 1.5f)
+        {
+            alpha = (1.5f - alpha) * 2;
+            Color col = color;
+            col.a = alpha;
+            if (rend)
+                rend.material.SetColor("_TintColor", col);
         }
         else
             gameObject.SetActive(false);

@@ -80,6 +80,9 @@ namespace RPG
                     }
                 }
             }
+            ExpandoSphere exp = go.GetComponent<ExpandoSphere>();
+            if (exp)
+                exp.endRadius = 2 * radius;
         }
     }
 

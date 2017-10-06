@@ -203,6 +203,12 @@ namespace RPG
             {
                 bool continuous = (mode == Mode.Charge || mode == Mode.Maintain);
                 GameObject fx = userFX.Begin(caster.GetBodyPart(userBodyPart), tint, !continuous, true);
+
+                // scale up area powers to match the radius
+                PowerArea area = this as PowerArea;
+                if (area)
+                    userFX.ScaleToRadius(fx, area.radius);
+
                 if (continuous)
                     userFXInstance = fx;
             }
