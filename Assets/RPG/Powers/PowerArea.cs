@@ -37,7 +37,10 @@ namespace RPG
         {
             VisualEffect fx = explodeFX;
             if (fx)
-                fx.Begin(centre, tint);
+            {
+                GameObject go = fx.Begin(centre, tint);
+                fx.ScaleToRadius(go, radius);
+            }
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
 
             List<Character> targets = GetTargets(caster, centre.position, centre.forward);

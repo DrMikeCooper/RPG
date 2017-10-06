@@ -50,6 +50,37 @@ namespace RPG
             if (fd)
                 fd.enabled = true;
         }
+
+        public override void ScaleToRadius(GameObject go, float radius)
+        {
+            if (scalingType != VisualEffect.ScalingType.ScaleNone)
+            {
+                ParticleSystem ps = go.GetComponent<ParticleSystem>();
+                if (ps)
+                {
+                    ParticleSystem.MainModule main = ps.main;
+                    ParticleSystem.MinMaxCurve curve;
+                    switch (scalingType)
+                    {
+                        case VisualEffect.ScalingType.ScaleSpeed:
+                            curve = main.startSpeed;
+                            curve.constant = radius / main.startLifetime.constant;
+                            main.startSpeed = curve;
+                            break;
+                        case VisualEffect.ScalingType.ScaleLifeTime:
+                            curve = main.startLifetime;
+                            curve.constant = radius / main.startSpeed.constant;
+                            main.startLifetime = curve;
+                            break;
+                        case VisualEffect.ScalingType.ScaleRadius:
+                            //beamParticles.transform.localScale = new Vector3(1,1,Vector3.Distance(target.transform.position, source.position));
+                            ParticleSystem.ShapeModule shape = ps.GetComponent<ParticleSystem>().shape;
+                            shape.radius = radius;
+                            break;
+                    }
+                }
+            }
+        }
     }
 
 }

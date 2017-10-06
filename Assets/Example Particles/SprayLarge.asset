@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: SprayLarge
   m_EditorClassIdentifier: 
   lifespan: 5
+  scalingType: 2
   prefab: {fileID: 1151504207986104, guid: 83629b9eb45599746ba10c99e7d8e08f, type: 2}

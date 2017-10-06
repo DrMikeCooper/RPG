@@ -23,7 +23,10 @@ namespace RPG
                     return;
                 }
                 if (explosion.userFX)
-                    explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
+                {
+                    GameObject go = explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
+                    explosion.userFX.ScaleToRadius(go, explosion.radius);
+                }
                 explosion.Explode(ch.transform, caster);
                 delays[ch] = Time.time + 0.4f;
             }

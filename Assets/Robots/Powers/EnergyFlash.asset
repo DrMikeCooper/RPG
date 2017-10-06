@@ -22,6 +22,7 @@ MonoBehaviour:
   extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
+  applyStatusWhen: 0
   sounds: {fileID: 0}
   icon: {fileID: 21300000, guid: 24b46870513983848813311e60dcb8f7, type: 3}
   tint:
@@ -29,7 +30,7 @@ MonoBehaviour:
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 6
   releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: 6d26458e37411cb4dbdd5adf5cb93185, type: 2}
+  userFX: {fileID: 11400000, guid: e7521631762a84043afe3e635ee2dc2c, type: 2}
   userBodyPart: 2
   targetFX: {fileID: 0}
   targetBodyPart: 2
@@ -42,8 +43,13 @@ MonoBehaviour:
   selfEffects: []
   selfStatusDuration: 10
   closeToTargetSpeed: 0
+  lunge: 0
   npcTarget: {fileID: 0}
-  radius: 5
+  radius: 3
   angle: 360
   explodeFX: {fileID: 0}
   explodeBodyPart: 0
+  beamMaterial: {fileID: 0}
+  beamWidth: 0.5
+  beamUVSpeed: 1
+  beamParticles: {fileID: 0}
