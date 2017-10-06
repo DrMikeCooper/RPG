@@ -23,6 +23,13 @@ namespace RPG
             Charge,
             Block,
         };
+
+        public enum ApplyStatusMaintains
+        {
+            FinalTick,
+            FirstTick,
+            EveryTick,
+        };
     
         public enum Animations
         {
@@ -61,6 +68,9 @@ namespace RPG
         [ShowIf("mode", ShowIfAttribute.Comparison.Equals, (int)Mode.Maintain)]
         [Tooltip("Interval at which the power ticks, used for Maintains")]
         public float tick = 0.5f;
+        [ShowIf("mode", ShowIfAttribute.Comparison.Equals, (int)Mode.Maintain)]
+        public ApplyStatusMaintains applyStatusWhen;
+
         public PowerSounds sounds;
 
         [Header("HUD Settings")]
@@ -226,7 +236,7 @@ namespace RPG
 
         // apply this power to a particular target
         // charge varies from 0 to 1
-        public bool Apply(Prop target, float charge, Character caster)
+        public bool Apply(Prop target, float charge, Character caster, bool doStatus = true)
         {
             // calculate chance to hit
             if (targetType == TargetType.Enemies)
@@ -263,16 +273,19 @@ namespace RPG
 
             if (damage != 0)
                 target.ApplyDamage(damage, type);
-            foreach (Status s in effects)
-                target.ApplyStatus(s, statusDuration, caster, this);
-            foreach (Status s in selfEffects)
-                caster.ApplyStatus(s, selfStatusDuration, caster, this);
-
-            // add to a global list of DoT's if not a character?
-            if (target as Character == null)
+            if (doStatus)
             {
-                if (!Prop.activeProps.Contains(target.gameObject))
-                    Prop.activeProps.Add(target.gameObject);
+                foreach (Status s in effects)
+                    target.ApplyStatus(s, statusDuration, caster, this);
+                foreach (Status s in selfEffects)
+                    caster.ApplyStatus(s, selfStatusDuration, caster, this);
+
+                // add to a global list of DoT's if not a character?
+                if (target as Character == null)
+                {
+                    if (!Prop.activeProps.Contains(target.gameObject))
+                        Prop.activeProps.Add(target.gameObject);
+                }
             }
 
             // particles on target
@@ -372,8 +385,17 @@ namespace RPG
                         // activate the power effect every tick
                         if (caster.timer >= caster.nextTick)
                         {
+                            // figure out if we're applying statuses this frame or not
+                            bool doStatus = true;
+                            if (applyStatusWhen == ApplyStatusMaintains.FirstTick && caster.nextTick >= tick)
+                                doStatus = false;
+
                             caster.nextTick += tick;
-                            OnActivate(caster);
+
+                            if (applyStatusWhen == ApplyStatusMaintains.FinalTick && caster.nextTick <= duration)
+                                doStatus = false;
+
+                            OnActivate(caster, doStatus);
 
                             // subtract energy for the charge and discharge if we run out
                             float deltaEnergy = extraEnergyCost * tick/(duration);
@@ -468,7 +490,7 @@ namespace RPG
             }
         }
 
-        public abstract void OnActivate(Character caster);
+        public abstract void OnActivate(Character caster, bool doStatus = true);
 
         // utility stuff for storing all characters. TODO Review this.
         static Character[] allCharacters;

@@ -12,7 +12,7 @@ namespace RPG
         public VisualEffect projectileFX;
         public int maxChains = 0;
 
-        public override void OnActivate(Character caster)
+        public override void OnActivate(Character caster, bool doStatus = true)
         {
             // spawn a projectile and set it going in the right direction
             GameObject go = Instantiate(RPGSettings.instance.projectile);
@@ -25,6 +25,8 @@ namespace RPG
             GameObject pgo = projectileFX.Begin(proj.transform, tint, false, false);
             pgo.transform.parent = go.transform;
             pgo.transform.localPosition = Vector3.zero;
+
+            // TODO - pass doStatus on to projectile
         }
 
         public override float Evaluate(AIBrain brain, AINode.AICondition condition)

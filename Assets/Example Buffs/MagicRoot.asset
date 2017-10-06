@@ -18,7 +18,8 @@ MonoBehaviour:
   tint:
     code: 11
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  maxStacks: 1
+  maxStacks: 0
+  sourceSelectiveStacks: 1
   stacks: 0
   sourceCharacter: {fileID: 0}
   sourcePower: {fileID: 0}

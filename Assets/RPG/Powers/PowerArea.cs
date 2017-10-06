@@ -26,14 +26,14 @@ namespace RPG
 
         public BeamParticles beamParticles;
 
-        public override void OnActivate(Character caster)
+        public override void OnActivate(Character caster, bool doStatus = true)
         {
             if (angle < 360 && caster.target)
                 caster.FaceTarget();
-            Explode(caster.GetBodyPart(explodeBodyPart), caster);
+            Explode(caster.GetBodyPart(explodeBodyPart), caster, doStatus);
         }
 
-        public void Explode(Transform centre, Character caster)
+        public void Explode(Transform centre, Character caster, bool doStatus = true)
         {
             VisualEffect fx = explodeFX;
             if (fx)
@@ -45,7 +45,7 @@ namespace RPG
             // check all other characters within the radius
             foreach (Character ch in targets)
             {
-                Apply(ch, charge, caster);
+                Apply(ch, charge, caster, doStatus);
 
                 // add a beam to each one
                 if (beamMaterial != null || beamParticles != null)

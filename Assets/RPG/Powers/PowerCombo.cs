@@ -9,10 +9,10 @@ namespace RPG
     {
         public float window = 3;
         public Power[] powers;
-        public override void OnActivate(Character caster)
+        public override void OnActivate(Character caster, bool doStatus = true)
         {
             int index = caster.currentComboStage;
-            powers[index].OnActivate(caster);
+            powers[index].OnActivate(caster, doStatus);
         }
 
         public override Power GetPower(Character caster)

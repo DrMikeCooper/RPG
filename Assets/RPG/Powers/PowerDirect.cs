@@ -20,7 +20,7 @@ namespace RPG
         public BeamParticles beamParticles;
 
         // useable on a single target with no to-hit roll
-        public override void OnActivate(Character caster)
+        public override void OnActivate(Character caster, bool doStatus = true)
         {
             Prop target = GetTarget(caster);
 
@@ -58,7 +58,7 @@ namespace RPG
                 }
 
                 // no deflection, carry on...
-                bool hit = Apply(target, charge, caster);
+                bool hit = Apply(target, charge, caster, doStatus);
 
                 // if we're a beam, check for chaining
                 if (beamMaterial || beamParticles)

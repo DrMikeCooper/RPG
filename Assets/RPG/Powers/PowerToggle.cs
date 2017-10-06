@@ -17,7 +17,7 @@ namespace RPG
             public Status[] buffs;
         }
     
-        public override void OnActivate(Character caster)
+        public override void OnActivate(Character caster, bool doStatus = true)
         {
             // create a new toggle data when we require one
             ToggleData data;
