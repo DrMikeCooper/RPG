@@ -415,7 +415,12 @@ namespace RPG
             if (IsInstant())
             {
                 Debug.Log("OnEnd: index = " + caster.currentComboStage);
-                GetStartPower(caster).StartPower(caster);
+                GetPower(caster).StartPower(caster);
+
+                // set off a coroutine to advance combos
+                PowerCombo combo = this as PowerCombo;
+                if (combo)
+                    caster.QueueAdvanceCombo(combo);
 
                 if (mode == Mode.MoveTo)
                 {

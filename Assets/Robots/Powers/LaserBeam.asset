@@ -47,3 +47,4 @@ MonoBehaviour:
   beamWidth: 0.2
   beamUVSpeed: 20
   maxChains: 0
+  beamParticles: {fileID: 11400000, guid: 0f9b75cc94dbf7149b94b7672b690090, type: 2}

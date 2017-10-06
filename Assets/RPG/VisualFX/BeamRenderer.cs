@@ -2,74 +2,98 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeamRenderer : MonoBehaviour {
+namespace RPG
+{
 
-    LineRenderer lineRenderer;
-    Transform source;
-    GameObject target;
-    float timer;
-    Vector3[] pts = new Vector3[2];
-    public float uvSpeed = 1.0f;
-
-    // Use this for initialization
-    void Start()
+    public class BeamRenderer : MonoBehaviour
     {
-        if (lineRenderer == null)
+
+        LineRenderer lineRenderer;
+        Transform source;
+        GameObject target;
+        public float timer;
+        Vector3[] pts = new Vector3[2];
+        public float uvSpeed = 1.0f;
+        public BeamParticles beamParticles;
+
+        // Use this for initialization
+        void Start()
         {
-            lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.enabled = false;
-        }
-	}
-
-    public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, Color col)
-    {
-        gameObject.SetActive(true);
-        if (lineRenderer == null)
-            lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.enabled = true;
-        timer = duration;
-        source = src;
-        target = tgt.gameObject;
-        lineRenderer.material = mat;
-        
-        lineRenderer.startColor = lineRenderer.endColor = col;
-        lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
-
-        // set UV titling to match distance
-        float distance = Vector3.Distance(src.position, tgt.position);
-        lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2*distance, 1));
-    }
-
-	// Update is called once per frame
-	void Update ()
-    {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime;
-            if (timer < 0)
+            if (lineRenderer == null)
             {
-                gameObject.SetActive(false);
+                lineRenderer = GetComponent<LineRenderer>();
                 lineRenderer.enabled = false;
             }
+        }
+
+        public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, Color col, BeamParticles bp = null)
+        {
+            // make the particles a child of this
+            if (bp != null && beamParticles == null)
+            {
+                beamParticles = Instantiate(bp);
+                beamParticles.Init(src, tgt);
+            }
+
+            gameObject.SetActive(true);
+            if (lineRenderer == null)
+                lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer.enabled = true;
+            timer = duration;
+            source = src;
+            target = tgt.gameObject;
+            lineRenderer.material = mat;
+
+            lineRenderer.startColor = lineRenderer.endColor = col;
+            lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
 
             // set UV titling to match distance
-            float distance = Vector3.Distance(source.position, target.transform.position);
+            float distance = Vector3.Distance(src.position, tgt.position);
             lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
-
-            lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer*uvSpeed, 0));
-
-            // fade out at last 0.2 secs
-            Color col = lineRenderer.startColor;
-            col.a = timer * 5.0f;
-            lineRenderer.startColor = lineRenderer.endColor = col;
-            if (target)
-            {
-                pts[0] = source.position;
-                pts[1] = target.transform.position;
-                lineRenderer.SetPositions(pts);
-            }
-            else
-                Debug.Log("Beam has no target?");
         }
-	}
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+                if (timer < 0)
+                {
+                    gameObject.SetActive(false);
+                    lineRenderer.enabled = false;
+                    if (beamParticles)
+                    {
+                        Debug.Log("Beam Particles finished");
+                        beamParticles.Finish();
+                        beamParticles = null;
+                    }
+                }
+
+                // set UV titling to match distance
+                float distance = Vector3.Distance(source.position, target.transform.position);
+                lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+
+                lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer * uvSpeed, 0));
+
+                // fade out at last 0.2 secs
+                Color col = lineRenderer.startColor;
+                col.a = timer * 5.0f;
+                lineRenderer.startColor = lineRenderer.endColor = col;
+                if (target)
+                {
+                    pts[0] = source.position;
+                    pts[1] = target.transform.position;
+                    lineRenderer.SetPositions(pts);
+                }
+                else
+                    Debug.Log("Beam has no target?");
+
+                // update any particles on the beam
+                if (beamParticles)
+                    beamParticles.UpdateParticles(this);
+
+            }
+        }
+    }
 }

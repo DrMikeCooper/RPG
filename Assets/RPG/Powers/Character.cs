@@ -440,6 +440,25 @@ namespace RPG
                 team = -1;
             return team;
         }
+
+        public void QueueAdvanceCombo(PowerCombo combo)
+        {
+            StartCoroutine(AdvanceCombo(combo));
+        }
+
+        IEnumerator AdvanceCombo(PowerCombo combo)
+        {
+            yield return new WaitForSeconds(0.5f);
+
+            int index = currentComboStage;
+
+            if (currentCombo != combo)
+                index = 0;
+
+            currentCombo = combo;
+            currentComboStage = (index + 1) % combo.powers.Length;
+            currentComboTimer = combo.window;
+        }
     }
 }
 

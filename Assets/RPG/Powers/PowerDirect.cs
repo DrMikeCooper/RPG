@@ -17,6 +17,7 @@ namespace RPG
         public float beamUVSpeed = 1.0f;
         [ShowIf("beamMaterial")]
         public int maxChains = 0;
+        public BeamParticles beamParticles;
 
         // useable on a single target with no to-hit roll
         public override void OnActivate(Character caster)
@@ -33,7 +34,7 @@ namespace RPG
                 // draw the beam to the target
                 if (beamMaterial)
                 {
-                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor());
+                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor(), beamParticles);
                     caster.beam.uvSpeed = beamUVSpeed;
                 }
 
