@@ -735,13 +735,13 @@ namespace RPG
             return mode == Mode.Instant || mode == Mode.MoveTo;
         }
 
-        protected void AddBeamBetween(Character source, Character dest, Character.BodyPart sourceBodyPart, Material beamMaterial, float beamWidth, float beamUVSpeed)
+        protected void AddBeamBetween(Character source, Character dest, Character.BodyPart sourceBodyPart, Material beamMaterial, float beamWidth, float beamUVSpeed, BeamParticles bp)
         {
             GameObject beamObj = RPGSettings.instance.beamPool.GetObject();
             if (beamObj)
             {
                 BeamRenderer beam = beamObj.GetComponent<BeamRenderer>();
-                beam.Activate(source.GetBodyPart(sourceBodyPart), dest.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor());
+                beam.Activate(source.GetBodyPart(sourceBodyPart), dest.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor(), bp);
                 beam.uvSpeed = beamUVSpeed;
             }
             else

@@ -10,7 +10,8 @@ namespace RPG
 
         LineRenderer lineRenderer;
         Transform source;
-        GameObject target;
+        [HideInInspector]
+        public GameObject target;
         public float timer;
         Vector3[] pts = new Vector3[2];
         public float uvSpeed = 1.0f;
@@ -32,24 +33,28 @@ namespace RPG
             if (bp != null && beamParticles == null)
             {
                 beamParticles = Instantiate(bp);
-                beamParticles.Init(src, tgt);
+                beamParticles.Init(src);
             }
 
             gameObject.SetActive(true);
             if (lineRenderer == null)
                 lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.enabled = true;
+            lineRenderer.enabled = (mat != null);
             timer = duration;
             source = src;
             target = tgt.gameObject;
-            lineRenderer.material = mat;
 
-            lineRenderer.startColor = lineRenderer.endColor = col;
-            lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
+            if (mat != null)
+            {
+                lineRenderer.material = mat;
 
-            // set UV titling to match distance
-            float distance = Vector3.Distance(src.position, tgt.position);
-            lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+                lineRenderer.startColor = lineRenderer.endColor = col;
+                lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
+
+                // set UV titling to match distance
+                float distance = Vector3.Distance(src.position, tgt.position);
+                lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+            }
         }
 
         // Update is called once per frame
@@ -72,22 +77,26 @@ namespace RPG
 
                 // set UV titling to match distance
                 float distance = Vector3.Distance(source.position, target.transform.position);
-                lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
 
-                lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer * uvSpeed, 0));
-
-                // fade out at last 0.2 secs
-                Color col = lineRenderer.startColor;
-                col.a = timer * 5.0f;
-                lineRenderer.startColor = lineRenderer.endColor = col;
-                if (target)
+                if (lineRenderer.enabled)
                 {
-                    pts[0] = source.position;
-                    pts[1] = target.transform.position;
-                    lineRenderer.SetPositions(pts);
+                    lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+
+                    lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer * uvSpeed, 0));
+
+                    // fade out at last 0.2 secs
+                    Color col = lineRenderer.startColor;
+                    col.a = timer * 5.0f;
+                    lineRenderer.startColor = lineRenderer.endColor = col;
+                    if (target)
+                    {
+                        pts[0] = source.position;
+                        pts[1] = target.transform.position;
+                        lineRenderer.SetPositions(pts);
+                    }
+                    else
+                        Debug.Log("Beam has no target?");
                 }
-                else
-                    Debug.Log("Beam has no target?");
 
                 // update any particles on the beam
                 if (beamParticles)

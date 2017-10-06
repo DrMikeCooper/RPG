@@ -32,9 +32,10 @@ namespace RPG
                     ctarget.MakeAwareOf(caster);
 
                 // draw the beam to the target
-                if (beamMaterial)
+                if (beamMaterial || beamParticles)
                 {
-                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, tint.GetColor(), beamParticles);
+                    float beamDuration = 2.0f; // IsInstant() ? 1.2f : 2.0f;
+                    caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), beamDuration, beamMaterial, beamWidth, tint.GetColor(), beamParticles);
                     caster.beam.uvSpeed = beamUVSpeed;
                 }
 
@@ -60,7 +61,7 @@ namespace RPG
                 bool hit = Apply(target, charge, caster);
 
                 // if we're a beam, check for chaining
-                if (beamMaterial)
+                if (beamMaterial || beamParticles)
                 {
                     // chained beams
                     if (maxChains > 0)
@@ -107,7 +108,7 @@ namespace RPG
                 Character newTarget = subTargets[Random.Range(0, subTargets.Count)];
 
                 // create the visible beam
-                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamUVSpeed);
+                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamUVSpeed, beamParticles);
 
                 // Apply the game effects to the next target and alert them
                 Apply(newTarget, charge, lastTarget);

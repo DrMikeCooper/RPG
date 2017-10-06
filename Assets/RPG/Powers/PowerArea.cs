@@ -24,6 +24,8 @@ namespace RPG
         [ShowIf("beamMaterial")]
         public float beamUVSpeed = 1.0f;
 
+        public BeamParticles beamParticles;
+
         public override void OnActivate(Character caster)
         {
             if (angle < 360 && caster.target)
@@ -46,9 +48,9 @@ namespace RPG
                 Apply(ch, charge, caster);
 
                 // add a beam to each one
-                if (beamMaterial != null)
+                if (beamMaterial != null || beamParticles != null)
                 {
-                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamUVSpeed);
+                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamUVSpeed, beamParticles);
                 }
             }
         }

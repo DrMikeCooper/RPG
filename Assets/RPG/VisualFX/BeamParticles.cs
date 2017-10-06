@@ -17,15 +17,12 @@ namespace RPG
         public ScalingType scalingType;
         
         ParticleSystem particles;
-        Transform target;
 
         float baseEmissionRate;
 
         // Use this for initialization
-        public void Init(Transform parent, Transform targ)
-        {
-            target = targ;
-
+        public void Init(Transform parent)
+        { 
             // TODO - make some pools!
             GameObject go = Instantiate(prefab, parent);
             particles = go.GetComponent<ParticleSystem>();
@@ -37,6 +34,8 @@ namespace RPG
         // Update is called once per frame
         public void UpdateParticles(BeamRenderer br)
         {
+            Transform target = br.target.transform;
+
             float timer = br.timer;
 
             // update particles - position the at the parent transform
@@ -66,8 +65,8 @@ namespace RPG
                     break;
             }
 
-           // if (timer < 0.5f)
-           //     Stop();
+            if (timer < 1.01f)
+                Stop();
         }
 
         public void Stop()
