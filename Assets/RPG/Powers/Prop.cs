@@ -281,6 +281,7 @@ namespace RPG
             else
             {
                 // apply immediately once
+                s.duration = duration; // pass this in for Conversions
                 s.Apply(this, caster);
                 return null;
             }
@@ -435,6 +436,18 @@ namespace RPG
                     stacks += s.stacks;
             }
             return stacks;
+        }
+
+        public void RemoveStatus(Status st)
+        {
+            List<Status> deathRow = new List<Status>();
+            foreach (Status s in statusEffects)
+            {
+                if (s.name == st.name)
+                    deathRow.Add(s);
+            }
+            foreach (Status s in deathRow)
+                statusEffects.Remove(s);
         }
     }
 }

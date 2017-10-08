@@ -25,15 +25,12 @@ namespace RPG
             if (fader == null)
                 fader = go.AddComponent<LifeSpanFader>();
 
-            // make any particle systems loop 
-            if (!autoStop)
+            // particle systems should loop if we're going to tell them when to finish later
+            ParticleSystem ps = go.GetComponent<ParticleSystem>();
+            if (ps)
             {
-                ParticleSystem ps = go.GetComponent<ParticleSystem>();
-                if (ps)
-                {
-                    ParticleSystem.MainModule main = ps.main;
-                    main.loop = true;
-                }
+                ParticleSystem.MainModule main = ps.main;
+                main.loop = !autoStop;
             }
 
             fader.enabled = autoStop;

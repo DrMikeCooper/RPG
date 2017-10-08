@@ -22,6 +22,11 @@ MonoBehaviour:
   extraEnergyCost: 20
   interruptable: 1
   tick: 0.5
+  applyStatusWhen: 0
+  maxRadius: 0
+  maxStatusDuration: 0
+  maxSelfStatusDuration: 0
+  maxBuffStrength: 0
   sounds: {fileID: 11400000, guid: 5f7b069bb897f124aa596ece9c29bd83, type: 2}
   icon: {fileID: 21300000, guid: 0e84edf343e794a4fbff63501786bf08, type: 3}
   tint:
@@ -38,10 +43,14 @@ MonoBehaviour:
   maxDamage: 60
   effects: []
   statusDuration: 10
-  selfEffects: []
+  selfEffects:
+  - {fileID: 11400000, guid: c2491529b83137b43b529a64b1f1a6bd, type: 2}
   selfStatusDuration: 10
   closeToTargetSpeed: 0
+  lunge: 0
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 0}
   beamWidth: 0.5
   beamUVSpeed: 1
+  maxChains: 0
+  beamParticles: {fileID: 0}
