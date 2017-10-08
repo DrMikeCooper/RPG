@@ -8,18 +8,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 558353b6810369d42b81b5fafdaaea93, type: 3}
-  m_Name: ElectroStorm
+  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Name: Ionise
   m_EditorClassIdentifier: 
-  energyCost: 10
+  energyCost: 0
   coolDown: 0
-  range: 0
+  range: 10
   lineOfSight: 1
-  type: 32
+  type: 64
   targetType: 3
-  mode: 2
-  duration: 3
-  extraEnergyCost: 60
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
   interruptable: 0
   tick: 0.5
   applyStatusWhen: 0
@@ -28,21 +28,21 @@ MonoBehaviour:
   maxSelfStatusDuration: 0
   maxBuffStrength: 0
   sounds: {fileID: 0}
-  icon: {fileID: 21300000, guid: 24b46870513983848813311e60dcb8f7, type: 3}
+  icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
   tint:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 1
+  animation: 3
   releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
-  userBodyPart: 2
-  targetFX: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
+  userFX: {fileID: 0}
+  userBodyPart: 4
+  targetFX: {fileID: 0}
   targetBodyPart: 2
   accuracy: 1
-  minDamage: 2
-  maxDamage: 8
+  minDamage: 0
+  maxDamage: 0
   effects:
-  - {fileID: 11400000, guid: a3ad6dd4dceb90546a4c6b891e7fb99c, type: 2}
+  - {fileID: 11400000, guid: 962427bce6499fa498682d152a6236b7, type: 2}
   - {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
   statusDuration: 10
   selfEffects: []
@@ -50,11 +50,8 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  radius: 8
-  angle: 360
-  explodeFX: {fileID: 0}
-  explodeBodyPart: 0
-  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
+  beamMaterial: {fileID: 2100000, guid: 448bbc63884559444904a23057f1190b, type: 2}
   beamWidth: 0.5
-  beamUVSpeed: 20
-  beamParticles: {fileID: 0}
+  beamUVSpeed: 1
+  maxChains: 0
+  beamParticles: {fileID: 11400000, guid: d24f984d4fcc04548a3cf06ce74a5fed, type: 2}

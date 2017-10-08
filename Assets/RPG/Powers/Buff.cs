@@ -126,6 +126,9 @@ namespace RPG
 
         public override string GetDescription(bool brief = false)
         {
+            if (modifiers.Length == 0)
+                return name;
+
             string desc = "";
             if (brief)
             {

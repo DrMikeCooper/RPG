@@ -1624,7 +1624,7 @@ Prefab:
         type: 2}
       propertyPath: powers.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 3a9ca49c97de0ca46bf8bbb5e6598ec7,
+      objectReference: {fileID: 11400000, guid: 72e10073579e15648bcc68c8ae40ff1b,
         type: 2}
     - target: {fileID: 114643165777592574, guid: 96f9038659341524eb5df80525307242,
         type: 2}
