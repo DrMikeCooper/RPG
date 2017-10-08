@@ -70,7 +70,12 @@ namespace RPG
         public float tick = 0.5f;
         [ShowIf("mode", ShowIfAttribute.Comparison.Equals, (int)Mode.Maintain)]
         public ApplyStatusMaintains applyStatusWhen;
-
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
+        public float maxRadius = 0;
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
+        public float maxStatusDuration = 0;
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
+        public float maxBuffStrength = 0;
         public PowerSounds sounds;
 
         [Header("HUD Settings")]
@@ -207,7 +212,7 @@ namespace RPG
                 // scale up area powers to match the radius
                 PowerArea area = this as PowerArea;
                 if (area)
-                    userFX.ScaleToRadius(fx, area.radius);
+                    userFX.ScaleToRadius(fx, area.GetRadius(caster));
 
                 if (continuous)
                     userFXInstance = fx;
@@ -774,6 +779,28 @@ namespace RPG
             }
             else
                 Debug.Log("Running out of beams! Increase the pool size in RPGSettings");
+        }
+
+        public float GetDuration(Character caster)
+        {
+            float d = statusDuration;
+            if (maxStatusDuration != 0 && caster)
+            {
+                float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+                d *= charge * maxStatusDuration + (1 - charge) * statusDuration;
+            }
+            return d;
+        }
+
+        public float GetBuffPower(Character caster, float basePower)
+        {
+            float p = basePower;
+            if (maxBuffStrength != 0 && caster)
+            {
+                float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+                p *= charge * maxBuffStrength + (1 - charge) * basePower;
+            }
+            return p;
         }
 
     }

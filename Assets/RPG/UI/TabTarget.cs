@@ -84,7 +84,7 @@ namespace RPG
             // left mouse clicks select a character (or none)
             if (Input.GetMouseButtonDown(0))
             {
-                if (eventSystem.IsPointerOverGameObject())
+                if (eventSystem && eventSystem.IsPointerOverGameObject())
                     return;
 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

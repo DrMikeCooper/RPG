@@ -230,7 +230,7 @@ namespace RPG
             }
         }
 
-        public Status ApplyStatus(Status s, float duration, Character caster, ScriptableObject power)
+        public Status ApplyStatus(Status s, float duration, Character caster, ScriptableObject power, float buffPower = 1.0f)
         {
             if (s.isImmediate() == false)
             {
@@ -244,13 +244,13 @@ namespace RPG
                 }
 
                 statusDirty = true;
+                Status returnVal = copy;
                 if (copy)
                 {
                     // refresh the duration, and possibly increase how many stacks we have
                     copy.timer = 0;
                     if (copy.stacks < copy.maxStacks)
                         copy.stacks++;
-                    return copy;
                 }
                 else
                 {
@@ -263,8 +263,20 @@ namespace RPG
                     status.duration = duration; // TODO modify with debuff resistance?
                     statusEffects.Add(status);
 
-                    return status;
+                    returnVal = status;
                 }
+
+                // if its a buff, multiply the base by the buffMultiplier
+                Buff buff = returnVal as Buff;
+                if (buff)
+                {
+                    Buff originalBuff = s as Buff;
+                    for (int i = 0; i < buff.modifiers.Length; i++)
+                    {
+                        buff.modifiers[i].modifier = originalBuff.modifiers[i].modifier * buffPower;
+                    }
+                }
+                return returnVal;
             }
             else
             {

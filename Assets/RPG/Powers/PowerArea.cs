@@ -39,7 +39,7 @@ namespace RPG
             if (fx)
             {
                 GameObject go = fx.Begin(centre, tint);
-                fx.ScaleToRadius(go, radius);
+                fx.ScaleToRadius(go, GetRadius(caster));
             }
             float charge = caster ? caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f : 1.0f;
 
@@ -64,9 +64,10 @@ namespace RPG
 
             float dotMin = Mathf.Cos(angle * Mathf.Deg2Rad * 0.5f);
 
+            float rad = GetRadius(caster);
             foreach (Character ch in getAll())
             {
-                if (!ch.dead && ch != caster && Vector3.Distance(ch.transform.position, centre) < radius)
+                if (!ch.dead && ch != caster && Vector3.Distance(ch.transform.position, centre) < rad)
                 {
                     // arc test, to see how forwards of caster we are
                     if (angle >= 360 || Vector3.Dot((ch.transform.position - centre).normalized, forward) > dotMin)
@@ -93,15 +94,27 @@ namespace RPG
         float GetSplashDamage(Character caster)
         {
             float total = 0;
+            float r = GetRadius(caster);
             foreach (Character ch in getAll())
             {
-                if (Vector3.Distance(caster.transform.position, ch.transform.position) < radius)
+                if (Vector3.Distance(caster.transform.position, ch.transform.position) < r)
                     if (ch != caster && ch.team != caster.GetTeam())
                         total += 1.0f;
                     else
                         total -= 1.0f;
             }
             return total;
+        }
+
+        public float GetRadius(Character caster)
+        {
+            float r = radius;
+            if (maxRadius!=0 && caster)
+            {
+                float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+                r *= charge * maxRadius + (1 - charge) * radius;
+            }
+            return r;
         }
     }
 }

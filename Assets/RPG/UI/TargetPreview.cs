@@ -42,13 +42,13 @@ namespace RPG
                 if (previewPower.angle >= 360)
                 {
                     previewMeshFilter.mesh = previewSphere;
-                    GetPreviewObject().transform.localScale = 2 * previewPower.radius * Vector3.one;
+                    GetPreviewObject().transform.localScale = 2 * previewPower.GetRadius(character) * Vector3.one;
                 }
                 else
                 {
                     previewMeshFilter.mesh = previewCone;
                     float x0 = Mathf.Tan(previewPower.angle * 0.5f * Mathf.Deg2Rad);
-                    GetPreviewObject().transform.localScale = new Vector3(x0, x0, 1) * previewPower.radius;
+                    GetPreviewObject().transform.localScale = new Vector3(x0, x0, 1) * previewPower.GetRadius(character);
                 }
                 targets = previewPower.GetTargets(character, GetPreviewObject().transform.position, GetPreviewObject().transform.forward);
             }

@@ -14,14 +14,7 @@ namespace RPG
         // Use this for initialization
         void Start()
         {
-            objects = new GameObject[number];
-            for (int i = 0; i < number; i++)
-            {
-                objects[i] = Instantiate(prefab);
-                objects[i].transform.parent = transform;
-                objects[i].name = prefab.name + "_obj_" + i;
-                objects[i].SetActive(false);
-            }
+            GrowBy(number);
         }
 
         public GameObject GetObject()
@@ -34,8 +27,32 @@ namespace RPG
                     return objects[i];
                 }
             }
-            Debug.Log("Object Pool " + gameObject.name + "has run out of objects!");
-            return null;
+
+            // allocate more then!
+            int index = objects.Length;
+            GrowBy(number);
+            return objects[index];
+        }
+
+        void GrowBy(int delta)
+        {
+            int num = objects == null ? 0 : objects.Length;
+            GameObject[] newObjects = new GameObject[num + delta];
+
+            // copy old ones across
+            for (int i = 0; i < num; i++)
+                newObjects[i] = objects[i];
+
+            // allocate new ones
+            for (int i = 0; i < delta; i++)
+            {
+                newObjects[i + num] = Instantiate(prefab);
+                newObjects[i + num].transform.parent = transform;
+                newObjects[i + num].name = prefab.name + "_obj_" + (i+ num);
+                newObjects[i + num].SetActive(false);
+            }
+
+            objects = newObjects;
         }
     }
 }

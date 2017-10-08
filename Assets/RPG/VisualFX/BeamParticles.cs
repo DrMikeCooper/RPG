@@ -23,8 +23,7 @@ namespace RPG
         // Use this for initialization
         public void Init(Transform parent)
         { 
-            // TODO - make some pools!
-            GameObject go = Instantiate(prefab, parent);
+            GameObject go = ObjectFactory.GetObject(prefab, parent);
             particles = go.GetComponent<ParticleSystem>();
 
             ParticleSystem.EmissionModule emission = particles.emission;
@@ -78,7 +77,7 @@ namespace RPG
         {
             // TODO - make some pools!
             particles.gameObject.SetActive(false);
-            Destroy(particles.gameObject, 0.1f);
+            ObjectFactory.Recycle(particles.gameObject); // had a 01.f delay...
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RPG
         public override void OnActivate(Character caster, bool doStatus = true)
         {
             // spawn a projectile and set it going in the right direction
-            GameObject go = Instantiate(RPGSettings.instance.projectile);
+            GameObject go = ObjectFactory.GetObject(RPGSettings.instance.projectile);
             go.transform.position = caster.GetBodyPart(userBodyPart).position;
             Projectile proj = go.GetComponent<Projectile>();
             Vector3 velocity = caster.transform.forward * speed;

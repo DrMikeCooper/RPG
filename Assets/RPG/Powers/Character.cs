@@ -141,7 +141,7 @@ namespace RPG
             Transform beamChild = transform.Find("Beam");
             if (beamChild == null)
             {
-                GameObject go = Instantiate(RPGSettings.instance.beam);
+                GameObject go = ObjectFactory.GetObject(RPGSettings.instance.beam);
                 beamChild = go.transform;
                 beamChild.parent = transform;
                 beamChild.localPosition = Vector3.zero;
@@ -154,7 +154,7 @@ namespace RPG
             ApplyPassives();
 
             //create a tragetting reticle and disable it
-            reticle = Instantiate(RPGSettings.instance.reticle);
+            reticle = ObjectFactory.GetObject(RPGSettings.instance.reticle);
             reticle.transform.parent = transform;
             reticle.transform.localPosition = Vector3.zero;
             reticle.name = "reticle";

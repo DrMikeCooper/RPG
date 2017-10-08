@@ -25,7 +25,7 @@ namespace RPG
                 if (explosion.userFX)
                 {
                     GameObject go = explosion.userFX.Begin(ch.GetBodyPart(explosion.userBodyPart), explosion.tint);
-                    explosion.userFX.ScaleToRadius(go, explosion.radius);
+                    explosion.userFX.ScaleToRadius(go, explosion.GetRadius(caster));
                 }
                 explosion.Explode(ch.transform, caster);
                 delays[ch] = Time.time + 0.4f;

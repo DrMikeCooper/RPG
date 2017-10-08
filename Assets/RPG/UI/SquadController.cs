@@ -44,7 +44,7 @@ namespace RPG
             moveReticle = new GameObject[squad.Length];
             for (int i = 0; i < squad.Length; i++)
             {
-                GameObject hud = Instantiate(memberHud);
+                GameObject hud = ObjectFactory.GetObject(memberHud);
                 hud.transform.parent = memberHud.transform.parent;
                 hud.transform.position = memberHud.transform.position + Vector3.right * i * 64;
                 hud.name = "SquadMember" + (i + 1);
@@ -53,7 +53,7 @@ namespace RPG
                 // select the first member by default
                 squad[i].selected = (i == 0);
 
-                moveReticle[i] = Instantiate(RPGSettings.instance.reticle);
+                moveReticle[i] = ObjectFactory.GetObject(RPGSettings.instance.reticle);
                 moveReticle[i].SetActive(false);
                 moveReticle[i].GetComponent<MeshRenderer>().material.SetColor("_TintColor", SquadMember.targetColor);
             }
@@ -66,7 +66,7 @@ namespace RPG
             menuItems = new MenuItem[8];
             for (int i = 0; i < 8; i++)
             {
-                GameObject go = Instantiate(menuItem.gameObject);
+                GameObject go = ObjectFactory.GetObject(menuItem.gameObject);
                 go.transform.parent = menuItem.transform.parent;
                 menuItems[i] = go.GetComponent<MenuItem>();
                 menuItems[i].controller = this;

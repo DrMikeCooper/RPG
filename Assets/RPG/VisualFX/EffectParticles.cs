@@ -12,7 +12,7 @@ namespace RPG
 
         public override GameObject Begin(Transform t, RPGSettings.Tint tint, bool autoStop = true, bool autoDestroy = true)
         {
-            GameObject go = Instantiate(prefab, t);
+            GameObject go = ObjectFactory.GetObject(prefab, t);
             go.transform.localPosition = prefab.transform.position;
             go.gameObject.name = prefab.name;
 

@@ -31,7 +31,7 @@ namespace RPG
         {
             transform.position += velocity * Time.deltaTime;
             if (Vector3.Distance(startPos, transform.position) > parentPower.range)
-                Destroy(gameObject);
+                ObjectFactory.Recycle(gameObject);
             transform.forward = velocity;
         }
 
@@ -90,7 +90,7 @@ namespace RPG
                     }
                 }
                 if (finished)
-                    Destroy(gameObject);
+                    ObjectFactory.Recycle(gameObject);
             }
         }
     }

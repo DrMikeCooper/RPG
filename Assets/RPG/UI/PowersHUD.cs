@@ -32,7 +32,7 @@ namespace RPG
             if (items != null)
             {
                 for (int i = 0; i < items.Length; i++)
-                    Destroy(items[i].gameObject);
+                    ObjectFactory.Recycle(items[i].gameObject);
             }
 
             RectTransform iconRect = icon.GetComponent<RectTransform>();
@@ -40,7 +40,7 @@ namespace RPG
             items = new MenuItem[character.powers.Length];
             for (int i = 0; i < character.powers.Length; i++)
             {
-                GameObject obj = Instantiate(icon);
+                GameObject obj = ObjectFactory.GetObject(icon);
                 obj.SetActive(true);
                 obj.transform.parent = transform;
                 obj.name = "Icon_" + character.powers[i].name;

@@ -122,7 +122,7 @@ namespace RPG
             // delete old gameobjects and clear the list
             foreach (KeyValuePair<string, GameObject> pair in icons)
             {
-                Destroy(pair.Value);
+                ObjectFactory.Recycle(pair.Value);
             }
             icons.Clear();
 
@@ -136,7 +136,7 @@ namespace RPG
                     Status s = pair.Value;
                     if (s.icon != null)
                     {
-                        GameObject ike = Instantiate(icon);
+                        GameObject ike = ObjectFactory.GetObject(icon);
                         ike.SetActive(true);
                         ike.transform.SetParent(transform);
                         RectTransform rect = ike.GetComponent<RectTransform>();

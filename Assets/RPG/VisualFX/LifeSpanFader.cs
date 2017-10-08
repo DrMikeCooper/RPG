@@ -61,7 +61,7 @@ namespace RPG
                 if (glow)
                     glow.Restore();
                 if (autoDestroy)
-                    Destroy(gameObject);
+                    ObjectFactory.Recycle(gameObject);
                 else
                     gameObject.SetActive(false);
             }

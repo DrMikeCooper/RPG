@@ -19,7 +19,7 @@ namespace RPG
             int y = 0;
             foreach (Power p in powers)
             {
-                GameObject go = Instantiate(prefab);
+                GameObject go = ObjectFactory.GetObject(prefab);
                 UIPowerEntry pe = go.GetComponent<UIPowerEntry>();
                 pe.power = p;
                 go.transform.parent = par;
