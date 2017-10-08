@@ -43,7 +43,7 @@ public class RPGPowersMenuItems : MonoBehaviour
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
         RPG.PowerDirect power = CreateAsset<RPG.PowerDirect>(s.name + "Beam");
-        power.range = 1;
+        power.range = 20;
         power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Energy);
         power.targetType = RPG.Power.TargetType.Enemies;
         power.mode = RPG.Power.Mode.Instant;
