@@ -133,7 +133,7 @@ namespace RPG
                 return;
 
             // copy the HUD template and make it this
-            GameObject hud = Instantiate(overheadHUD);
+            GameObject hud = ObjectFactory.GetObject(overheadHUD);
             hud.name = "HUD_" + prop.name;
             hud.transform.SetParent(transform);
             hud.GetComponent<CharacterHUD>().character = prop;

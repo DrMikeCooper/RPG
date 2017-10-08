@@ -7,6 +7,7 @@ namespace RPG
     public class Projectile : MonoBehaviour
     {
         Power parentPower;
+        bool doStatus = true;
         Prop caster;
         Vector3 velocity;
         Vector3 startPos;
@@ -16,10 +17,11 @@ namespace RPG
         int chains;
 
         // Use this for initialization
-        public void Init(Power p, Prop c, Vector3 v)
+        public void Init(Power p, Prop c, Vector3 v, bool ds)
         {
             startPos = c.transform.position;
             parentPower = p;
+            doStatus = true;
             caster = c;
             velocity = v;
             charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
@@ -70,7 +72,7 @@ namespace RPG
                         ch.transform.position = pos;
 
                         // if we miss (based on accuracy), set the flag here so we dont destroy the projectile
-                        if (!parentPower.Apply(ch, charge, caster as Character))
+                        if (!parentPower.Apply(ch, charge, caster as Character, doStatus))
                             finished = false;
                     }
 

@@ -19,7 +19,7 @@ namespace RPG
             go.transform.position = caster.GetBodyPart(userBodyPart).position;
             Projectile proj = go.GetComponent<Projectile>();
             Vector3 velocity = caster.transform.forward * speed;
-            proj.Init(this, caster, velocity);
+            proj.Init(this, caster, velocity, doStatus);
 
             // create particles on the projectile
             GameObject pgo = projectileFX.Begin(proj.transform, tint, false, false);

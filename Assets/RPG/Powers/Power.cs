@@ -75,6 +75,8 @@ namespace RPG
         [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
         public float maxStatusDuration = 0;
         [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
+        public float maxSelfStatusDuration = 0;
+        [ShowIf("mode", ShowIfAttribute.Comparison.Greater, (int)Mode.MoveTo)]
         public float maxBuffStrength = 0;
         public PowerSounds sounds;
 
@@ -287,9 +289,9 @@ namespace RPG
             if (doStatus)
             {
                 foreach (Status s in effects)
-                    target.ApplyStatus(s, statusDuration, caster, this);
+                    target.ApplyStatus(s, GetDuration(caster), caster, this);
                 foreach (Status s in selfEffects)
-                    caster.ApplyStatus(s, selfStatusDuration, caster, this);
+                    caster.ApplyStatus(s, GetSelfDuration(caster), caster, this);
 
                 // add to a global list of DoT's if not a character?
                 if (target as Character == null)
@@ -788,6 +790,17 @@ namespace RPG
             {
                 float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
                 d *= charge * maxStatusDuration + (1 - charge) * statusDuration;
+            }
+            return d;
+        }
+
+        public float GetSelfDuration(Character caster)
+        {
+            float d = statusDuration;
+            if (maxSelfStatusDuration != 0 && caster)
+            {
+                float charge = caster.stats[RPGSettings.StatName.Charge.ToString()].currentValue * 0.01f;
+                d *= charge * maxSelfStatusDuration + (1 - charge) * selfStatusDuration;
             }
             return d;
         }
