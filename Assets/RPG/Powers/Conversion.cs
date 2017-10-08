@@ -32,7 +32,8 @@ namespace RPG
                 if (stacksScaleDuration)
                     duration *= numStacks;
                 float power = stacksScalePower ? numStacks : 1.0f;
-                target.ApplyStatus(resultStatus, duration, caster, null, power);
+                if (AINode.IsCondition(resultStatus.condition, target, null))
+                    target.ApplyStatus(resultStatus, duration, caster, null, power);
             }
 
         }

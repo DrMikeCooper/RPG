@@ -43,6 +43,8 @@ namespace RPG
             }
         }
 
+        public float GetHealthPct() { return health / maxHealth; }
+
         [HideInInspector]
         public List<Status> statusEffects = new List<Status>();
         [HideInInspector]

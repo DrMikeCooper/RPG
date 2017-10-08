@@ -49,7 +49,8 @@ namespace RPG
             {
                 PlayEffect(prop);
                 foreach(Status absorbEffect in absorbEffects)
-                    prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
+                    if (AINode.IsCondition(absorbEffect.condition, prop, null))
+                        prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
             }
         }
 

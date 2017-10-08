@@ -12,7 +12,7 @@ namespace RPG
         public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
         public RPGSettings.Tint tint;
-        public int maxStacks = 1;
+        public int maxStacks = 0;
         [ShowIf("maxStacks", ShowIfAttribute.Comparison.Not, 0)]
         [Tooltip("Untick this if you want this buff to stack from all sources. Tick it and each character/power source will maintain a different stack")]
         public bool sourceSelectiveStacks = true;
@@ -27,6 +27,10 @@ namespace RPG
         public float timer = 0;
         [HideInInspector]
         public int count = 0;
+
+        // the condition to check against the caster before using
+        [Tooltip("Condition that must be met to apply this status")]
+        public AINode.AICondition condition;
 
         public void End()
         {

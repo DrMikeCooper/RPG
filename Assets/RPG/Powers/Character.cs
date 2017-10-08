@@ -299,7 +299,6 @@ namespace RPG
             }
         }
 
-        public float GetHealthPct() { return health / maxHealth; }
         public float GetEnergyPct() { return energy / maxEnergy; }
 
         public override Transform GetBodyPart(BodyPart part)
