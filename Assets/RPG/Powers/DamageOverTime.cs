@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "DoT", menuName = "RPG/DoT", order = 1)]
+    [CreateAssetMenu(fileName = "DoT", menuName = "RPG/Status/DoT", order = 1)]
     public class DamageOverTime : Status
     {
         public RPGSettings.DamageType damageType;

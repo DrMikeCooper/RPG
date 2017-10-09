@@ -7,7 +7,7 @@ namespace RPG
     // contains a list of behaviours. 
     // it evaluates them all and picks the most suitable one each time
 
-    [CreateAssetMenu(fileName = "AINodeEvaluate", menuName = "RPG/AINodeEvaluate", order = 4)]
+    [CreateAssetMenu(fileName = "AINodeEvaluate", menuName = "RPG/AI/AINodeEvaluate", order = 1)]
     public class AINodeEvaluate : AINode
     {
         public AIAction[] behaviours;

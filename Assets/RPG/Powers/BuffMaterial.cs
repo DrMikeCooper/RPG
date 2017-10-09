@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "BuffMaterial", menuName = "RPG/BuffMaterial", order = 1)]
+    [CreateAssetMenu(fileName = "BuffMaterial", menuName = "RPG/Status/BuffMaterial", order = 2)]
     public class BuffMaterial : Status
     {
         // these match the enumeration RPGSettings.DamageTypes

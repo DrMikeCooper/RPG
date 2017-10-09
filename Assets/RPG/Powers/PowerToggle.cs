@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerToggle", menuName = "RPG/PowerToggle", order = 2)]
+    [CreateAssetMenu(fileName = "PowerToggle", menuName = "RPG/Powers/PowerToggle", order = 2)]
     public class PowerToggle : Power
     {
         bool on = false; // move to character

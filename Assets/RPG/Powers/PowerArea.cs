@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerArea", menuName = "RPG/PowerArea", order = 2)]
+    [CreateAssetMenu(fileName = "PowerArea", menuName = "RPG/Powers/PowerArea", order = 1)]
     public class PowerArea : Power
     {
         [Header("Power Area Settings")]

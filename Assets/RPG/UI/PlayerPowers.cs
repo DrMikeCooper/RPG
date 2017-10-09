@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace RPG
 {
+    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(CharacterParticles))]
+    [RequireComponent(typeof(ThirdPersonUserControl))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class PlayerPowers : MonoBehaviour, IMenuItemResponder
     {
         Character character;

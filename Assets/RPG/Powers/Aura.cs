@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "Aura", menuName = "RPG/Aura", order = 1)]
+    [CreateAssetMenu(fileName = "Aura", menuName = "RPG/Status/Aura", order = 2)]
     public class Aura : Status
     {
         const float interval = 1;

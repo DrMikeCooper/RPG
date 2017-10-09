@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerMelee", menuName = "RPG/PowerMelee", order = 2)]
+    [CreateAssetMenu(fileName = "PowerMelee", menuName = "RPG/Powers/PowerMelee", order = 1)]
     public class PowerMelee : PowerDirect
     {
         PowerMelee()

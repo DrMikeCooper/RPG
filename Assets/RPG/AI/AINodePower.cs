@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "AINodePower", menuName = "RPG/AINodePower", order = 4)]
+    [CreateAssetMenu(fileName = "AINodePower", menuName = "RPG/AI/AINodePower", order = 1)]
     public class AINodePower : AINode
     {
         // use this to add a condition to a power, otherwise use the power directly

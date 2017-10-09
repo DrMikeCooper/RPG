@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/PowerDirect", order = 2)]
+    [CreateAssetMenu(fileName = "PowerDirect", menuName = "RPG/Powers/PowerDirect", order = 1)]
     public class PowerDirect : Power
     {
         [Header("Power Direct Settings")]

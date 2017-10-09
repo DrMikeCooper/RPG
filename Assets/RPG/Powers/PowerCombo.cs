@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerCombo", menuName = "RPG/PowerCombo", order = 2)]
+    [CreateAssetMenu(fileName = "PowerCombo", menuName = "RPG/Powers/PowerCombo", order = 2)]
     public class PowerCombo : Power
     {
         public float window = 3;

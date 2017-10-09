@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "AINodeBranch", menuName = "RPG/AINodeBranch", order = 4)]
+    [CreateAssetMenu(fileName = "AINodeBranch", menuName = "RPG/AI/AINodeBranch", order = 1)]
     public class AINodeBranch : AINode
     {
         public AIAction nodeTrue;

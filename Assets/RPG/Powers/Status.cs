@@ -7,11 +7,12 @@ namespace RPG
     {
         [HideInInspector]
         public float duration;
-
+        [Header("Visual FX")]
         public VisualEffect fx;
         public Character.BodyPart bodyPart = Character.BodyPart.Root;
         public Sprite icon;
         public RPGSettings.Tint tint;
+        [Header("Stacking Rules")]
         public int maxStacks = 0;
         [ShowIf("maxStacks", ShowIfAttribute.Comparison.Not, 0)]
         [Tooltip("Untick this if you want this buff to stack from all sources. Tick it and each character/power source will maintain a different stack")]

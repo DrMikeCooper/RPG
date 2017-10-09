@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "Explosion", menuName = "RPG/Explosion", order = 1)]
+    [CreateAssetMenu(fileName = "Explosion", menuName = "RPG/Status/Explosion", order = 1)]
     public class Explosion : Status
     {
         public PowerArea explosion;

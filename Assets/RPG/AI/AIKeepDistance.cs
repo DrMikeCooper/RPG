@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "AIKeepDistance", menuName = "RPG/AIKeepDistance", order = 4)]
+    [CreateAssetMenu(fileName = "AIKeepDistance", menuName = "RPG/AI/AIKeepDistance", order = 1)]
     public class AIKeepDistance : AIAction
     {
         public float distance = 5;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerSounds", menuName = "RPG/PowerSounds", order = 1)]
+    [CreateAssetMenu(fileName = "PowerSounds", menuName = "RPG/Sound/PowerSounds", order = 1)]
     public class PowerSounds : ScriptableObject
     {
         public AudioClip[] startFX;

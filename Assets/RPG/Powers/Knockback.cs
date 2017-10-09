@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "Knockback", menuName = "RPG/Knockback", order = 1)]
+    [CreateAssetMenu(fileName = "Knockback", menuName = "RPG/Status/Knockback", order = 1)]
     public class Knockback : Status
     {
         [Range(1,5)]

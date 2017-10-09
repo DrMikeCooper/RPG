@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace RPG
 {
+    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(CharacterParticles))]
+    [RequireComponent(typeof(AIBrain))]
+    [RequireComponent(typeof(AICharacterControl))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class SquadMember : MonoBehaviour
     {
         public int index;

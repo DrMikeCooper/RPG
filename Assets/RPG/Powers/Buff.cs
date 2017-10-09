@@ -4,7 +4,7 @@ using System;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "Buff", menuName = "RPG/Buff", order = 1)]
+    [CreateAssetMenu(fileName = "Buff", menuName = "RPG/Status/Buff", order = 1)]
     public class Buff : Status
     {
         [Serializable]

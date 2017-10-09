@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "Conversion", menuName = "RPG/Conversion", order = 1)]
+    [CreateAssetMenu(fileName = "Conversion", menuName = "RPG/Status/Conversion", order = 2)]
     public class Conversion : Status
     {
         [Tooltip("The status that feees this conversion")]

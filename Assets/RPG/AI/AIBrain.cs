@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 namespace RPG
 {
+    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(CharacterParticles))]
+    [RequireComponent(typeof(AICharacterControl))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class AIBrain : MonoBehaviour, IMenuItemResponder
     {
         public AIAction[] behaviours;

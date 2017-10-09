@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "BeamParticles", menuName = "RPG/BeamParticles", order = 3)]
+    [CreateAssetMenu(fileName = "BeamParticles", menuName = "RPG/Visual FX/BeamParticles", order = 2)]
     public class BeamParticles : ScriptableObject
     {
         public enum ScalingType

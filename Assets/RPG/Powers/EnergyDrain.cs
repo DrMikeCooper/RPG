@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "EnergyDrain", menuName = "RPG/EnergyDrain", order = 1)]
+    [CreateAssetMenu(fileName = "EnergyDrain", menuName = "RPG/Status/EnergyDrain", order = 1)]
     public class EnergyDrain : Status
     {
         public float drain;

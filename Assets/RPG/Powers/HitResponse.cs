@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "HitResponse", menuName = "RPG/HitResponse", order = 2)]
+    [CreateAssetMenu(fileName = "HitResponse", menuName = "RPG/Status/HitResponse", order = 1)]
     public class HitResponse : Status
     {
         [Tooltip("Type of damage this applies to")]

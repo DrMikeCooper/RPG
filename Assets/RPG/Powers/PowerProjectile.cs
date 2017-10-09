@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerProjectile", menuName = "RPG/PowerProjectile", order = 2)]
+    [CreateAssetMenu(fileName = "PowerProjectile", menuName = "RPG/Powers/PowerProjectile", order = 1)]
     public class PowerProjectile : Power
     {
         [Header("Power Projectile Settings")]

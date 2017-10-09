@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "EffectParticles", menuName = "RPG/EffectParticles", order = 3)]
+    [CreateAssetMenu(fileName = "EffectParticles", menuName = "RPG/Visual FX/EffectParticles", order = 1)]
     public class EffectParticles : VisualEffect
     {
         public GameObject prefab; // reference to the prefab set up in editor
