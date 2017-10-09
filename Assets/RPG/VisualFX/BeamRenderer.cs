@@ -16,6 +16,7 @@ namespace RPG
         Vector3[] pts = new Vector3[2];
         public float uvSpeed = 1.0f;
         public BeamParticles beamParticles;
+        float texLength = 1.0f;
 
         // Use this for initialization
         void Start()
@@ -27,7 +28,7 @@ namespace RPG
             }
         }
 
-        public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, Color col, BeamParticles bp = null)
+        public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, float beamLength, Color col, BeamParticles bp = null)
         {
             // make the particles a child of this
             if (bp != null && beamParticles == null)
@@ -35,6 +36,8 @@ namespace RPG
                 beamParticles = Instantiate(bp);
                 beamParticles.Init(src);
             }
+
+            texLength = beamLength;
 
             gameObject.SetActive(true);
             if (lineRenderer == null)
@@ -53,7 +56,7 @@ namespace RPG
 
                 // set UV tiling to match distance
                 float distance = Vector3.Distance(src.position, tgt.position);
-                lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+                lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance/texLength, 1));
             }
         }
 
@@ -80,7 +83,7 @@ namespace RPG
 
                 if (lineRenderer.enabled)
                 {
-                    lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
+                    lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance / texLength, 1));
 
                     lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(timer * uvSpeed, 0));
 

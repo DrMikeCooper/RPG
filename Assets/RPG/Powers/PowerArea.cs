@@ -22,6 +22,8 @@ namespace RPG
         [ShowIf("beamMaterial")]
         public float beamWidth = 0.5f;
         [ShowIf("beamMaterial")]
+        public float beamLength = 1.0f;
+        [ShowIf("beamMaterial")]
         public float beamUVSpeed = 1.0f;
 
         public BeamParticles beamParticles;
@@ -74,7 +76,7 @@ namespace RPG
                 // add a beam to each one
                 if (beamMaterial != null || beamParticles != null)
                 {
-                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamUVSpeed, beamParticles);
+                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamLength, beamUVSpeed, beamParticles);
                 }
             }
         }

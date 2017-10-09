@@ -12,9 +12,12 @@ namespace RPG
         [ShowIf("beamMaterial")]
         public float beamWidth = 0.5f;
         [ShowIf("beamMaterial")]
+        public float beamLength = 1.0f;
+        [ShowIf("beamMaterial")]
         public float beamUVSpeed = 1.0f;
         public BeamParticles beamParticles;
         public float beamDuration = 2;
+        
         public int maxChains = 0;
 
         PowerBeam()
@@ -83,7 +86,7 @@ namespace RPG
         {
             if (beamMaterial || beamParticles)
             {
-                caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), beamDuration, beamMaterial, beamWidth, tint.GetColor(), beamParticles);
+                caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), beamDuration, beamMaterial, beamWidth, beamLength, tint.GetColor(), beamParticles);
                 caster.beam.uvSpeed = beamUVSpeed;
             }
         }
@@ -114,7 +117,7 @@ namespace RPG
             }
         }
 
-        Character Arc(Character lastTarget, List<Character> targets, float charge)
+        public Character Arc(Character lastTarget, List<Character> targets, float charge)
         {
             List<Character> subTargets = new List<Character>();
             foreach (Character t in targets)
@@ -127,7 +130,7 @@ namespace RPG
                 Character newTarget = subTargets[Random.Range(0, subTargets.Count)];
 
                 // create the visible beam
-                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamUVSpeed, beamParticles);
+                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamLength, beamUVSpeed, beamParticles);
 
                 // Apply the game effects to the next target and alert them
                 Apply(newTarget, charge, lastTarget);
