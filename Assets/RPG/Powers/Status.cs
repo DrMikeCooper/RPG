@@ -30,6 +30,7 @@ namespace RPG
         public int count = 0;
 
         // the condition to check against the caster before using
+        [Header("Activation condition")]
         [Tooltip("Condition that must be met to apply this status")]
         public AINode.AICondition condition;
 

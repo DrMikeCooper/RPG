@@ -8,6 +8,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "HitResponse", menuName = "RPG/Status/HitResponse", order = 1)]
     public class HitResponse : Status
     {
+        [Header("Hit Response Settings")]
         [Tooltip("Type of damage this applies to")]
         public RPGSettings.DamageType damageType = RPGSettings.DamageType.All;
 

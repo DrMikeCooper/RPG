@@ -51,7 +51,7 @@ namespace RPG
                 lineRenderer.startColor = lineRenderer.endColor = col;
                 lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
 
-                // set UV titling to match distance
+                // set UV tiling to match distance
                 float distance = Vector3.Distance(src.position, tgt.position);
                 lineRenderer.material.SetTextureScale("_MainTex", new Vector2(2 * distance, 1));
             }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RPG
 {
@@ -12,10 +13,10 @@ namespace RPG
 
         public RPGSettings.StatName stat;
         public float maximum;
+        public Image.FillMethod fillMethod = Image.FillMethod.Horizontal;
 
-        RectTransform meter;
-        Rect initialRect;
-
+        Image image;
+        
         // Use this for initialization
         void Start()
         {
@@ -31,8 +32,10 @@ namespace RPG
             if (hud == null)
                 Debug.Log("CharacterHUDMeter " + gameObject.name + "should sit in a CharacterHUD");
 
-            meter = GetComponent<RectTransform>();
-            initialRect = meter.rect;
+            image = GetComponent<Image>();
+            image.type = Image.Type.Filled;
+            image.fillMethod = fillMethod;
+
         }
 
         // Update is called once per frame
@@ -52,10 +55,7 @@ namespace RPG
 
 
                 float pct = hud.character.stats.ContainsKey(stat.ToString()) ? hud.character.stats[stat.ToString()].currentValue / maximum :  0;
-                meter.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pct * initialRect.width);
-                Vector3 pos = meter.localPosition;
-                pos.x = 0.5f * (pct - 1.0f) * initialRect.width;
-                meter.localPosition = pos;
+                image.fillAmount = pct;
             }
         }
     }

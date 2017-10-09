@@ -8,6 +8,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "EnergyDrain", menuName = "RPG/Status/EnergyDrain", order = 1)]
     public class EnergyDrain : Status
     {
+        [Header("Energy Drain Settings")]
         public float drain;
 
         public override void Apply(Prop ch, Character caster = null)

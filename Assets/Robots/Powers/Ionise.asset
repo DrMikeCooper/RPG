@@ -8,14 +8,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10add980029c3424b876d12d46b3927d, type: 3}
+  m_Script: {fileID: 11500000, guid: 090a203e14bb1624f9c1262ee8d2a788, type: 3}
   m_Name: Ionise
   m_EditorClassIdentifier: 
-  energyCost: 0
+  energyCost: 20
   coolDown: 0
-  range: 10
+  range: 20
   lineOfSight: 1
-  type: 64
+  type: 32
   targetType: 3
   mode: 0
   duration: 0
@@ -32,17 +32,17 @@ MonoBehaviour:
   tint:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 3
+  animation: 2
   releaseAnimation: 10
-  userFX: {fileID: 0}
-  userBodyPart: 4
-  targetFX: {fileID: 0}
+  userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
+  userBodyPart: 3
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
   targetBodyPart: 2
-  accuracy: 1
-  minDamage: 0
-  maxDamage: 0
+  accuracy: 1.2
+  minDamage: 5
+  maxDamage: 10
   effects:
-  - {fileID: 11400000, guid: 962427bce6499fa498682d152a6236b7, type: 2}
+  - {fileID: 11400000, guid: 32d6585fe06d1444fbfd66f538e9677b, type: 2}
   - {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
   statusDuration: 10
   selfEffects: []
@@ -50,8 +50,9 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 2100000, guid: 448bbc63884559444904a23057f1190b, type: 2}
+  beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
   beamWidth: 0.5
-  beamUVSpeed: 1
+  beamUVSpeed: 10
+  beamParticles: {fileID: 0}
+  beamDuration: 1
   maxChains: 0
-  beamParticles: {fileID: 11400000, guid: d24f984d4fcc04548a3cf06ce74a5fed, type: 2}

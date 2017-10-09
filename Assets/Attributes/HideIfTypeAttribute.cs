@@ -6,9 +6,11 @@ public class HideIfTypeAttribute : PropertyAttribute {
 
     public string varName;
     public System.Type hideType;
-    
-    public HideIfTypeAttribute(System.Type _type)
+    public bool reverse;
+
+    public HideIfTypeAttribute(System.Type _type, bool rev = false)
     {
         hideType = _type;
+        reverse = rev;
     }
 }

@@ -29,6 +29,6 @@ public class HideIfTypeDrawer : PropertyDrawer
         HideIfTypeAttribute hi = attribute as HideIfTypeAttribute;
 
         System.Type oType = property.serializedObject.targetObject.GetType();
-        return hi.hideType != oType;
+        return (hi.hideType == oType) == hi.reverse;
     }
 }

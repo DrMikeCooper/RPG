@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a304030c492b144bd4043f438f08ba, type: 3}
   m_Name: EnergyFlashEx
   m_EditorClassIdentifier: 
-  duration: 0
+  duration: 10
   fx: {fileID: 0}
   bodyPart: 0
   icon: {fileID: 0}
@@ -25,4 +25,9 @@ MonoBehaviour:
   sourcePower: {fileID: 0}
   timer: 0
   count: 0
+  condition:
+    type: 0
+    threshold: 0
+    reverse: 0
+    status: {fileID: 0}
   explosion: {fileID: 11400000, guid: d301e696b3dce30408d36fc99b777545, type: 2}

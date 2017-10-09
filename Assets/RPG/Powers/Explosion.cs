@@ -8,6 +8,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "Explosion", menuName = "RPG/Status/Explosion", order = 1)]
     public class Explosion : Status
     {
+        [Header("Explosion Settings")]
         public PowerArea explosion;
 
         // data to stop the same character exploding too regularly

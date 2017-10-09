@@ -21,6 +21,7 @@ namespace RPG
                 return desc;
             }
         }
+        [Header("Buff Settings")]
         public Modifier[] modifiers;
 
         [Tooltip("Used only for Defence and Resistance debuffs")]

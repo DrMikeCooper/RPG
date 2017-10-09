@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stat: 8
   maximum: 0
+  fillMethod: 0
 --- !u!114 &114327507122394834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -229,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stat: 9
   maximum: 0
+  fillMethod: 0
 --- !u!114 &114393477261842096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,6 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   myTarget: {fileID: 0}
+  iconOffset: {x: 18, y: 0, z: 0}
 --- !u!114 &114456904576295336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugPanel: {fileID: 1242278779969510}
   debugText: {fileID: 0}
+  screenPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114457246740436252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,7 +338,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: df36b6ad905f3824299f9f7a734903c3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -361,7 +365,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: df36b6ad905f3824299f9f7a734903c3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

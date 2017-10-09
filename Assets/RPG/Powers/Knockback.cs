@@ -7,6 +7,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "Knockback", menuName = "RPG/Status/Knockback", order = 1)]
     public class Knockback : Status
     {
+        [Header("Knockback Settings")]
         [Range(1,5)]
         public float strength;
         public bool knockUp;

@@ -394,8 +394,8 @@ namespace RPG
 
         void ProcessAnimations()
         {
-            string[] names = AnimationUtilities.GetEnumNames<Power.Animations>();
-            AnimationUtilities.ProcessAnimations(animator, names, (AnimationClip a)=> AnimationUtilities.AddEventAtEnd(a, "EndPowerAnim"));
+            //string[] names = AnimationUtilities.GetEnumNames<Power.Animations>();
+            //AnimationUtilities.ProcessAnimations(animator, names, (AnimationClip a) => AnimationUtilities.AddEventAtEnd(a, "EndPowerAnim"));
         }
 
         // death things

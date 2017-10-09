@@ -8,6 +8,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "Conversion", menuName = "RPG/Status/Conversion", order = 2)]
     public class Conversion : Status
     {
+        [Header("Conversion Settings")]
         [Tooltip("The status that feees this conversion")]
         public Status source;
         [Tooltip("Does it remove the source status from the target?")]

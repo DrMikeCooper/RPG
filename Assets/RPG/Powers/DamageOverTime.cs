@@ -7,6 +7,7 @@ namespace RPG
     [CreateAssetMenu(fileName = "DoT", menuName = "RPG/Status/DoT", order = 1)]
     public class DamageOverTime : Status
     {
+        [Header("Damage over Time Settings")]
         public RPGSettings.DamageType damageType;
         public float damagePerTick;
         public float interval;
