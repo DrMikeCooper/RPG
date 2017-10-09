@@ -6,6 +6,13 @@ using System.IO;
 
 public class RPGPowersMenuItems : MonoBehaviour
 {
+    [MenuItem("RPG/Make Copy")]
+    static void MakeCopy()
+    {
+        ScriptableObject obj = Selection.activeObject as ScriptableObject;
+        ScriptableObject power = CreateClone<ScriptableObject>(obj);
+    }
+
     [MenuItem("RPG/Make Melee Power")]
     static void MakeMeleePower()
     {
@@ -117,6 +124,12 @@ public class RPGPowersMenuItems : MonoBehaviour
     }
 
     // validations
+    [MenuItem("RPG/Make Copy", true)]
+    static bool ValidateMakeCopy()
+    {
+        return (Selection.activeObject as ScriptableObject) != null;
+    }
+
     [MenuItem("RPG/Make Melee Power", true)]
     static bool ValidateMakeMeleePower()
     {
@@ -189,6 +202,32 @@ public class RPGPowersMenuItems : MonoBehaviour
         }
 
         string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/" + assetName + ".asset");
+
+        AssetDatabase.CreateAsset(asset, assetPathAndName);
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        EditorUtility.FocusProjectWindow();
+        Selection.activeObject = asset;
+
+        return asset;
+    }
+
+    public static T CreateClone<T>(T original) where T : ScriptableObject
+    {
+        T asset = Instantiate(original);
+
+        string path = AssetDatabase.GetAssetPath(Selection.activeObject);
+        if (path == "")
+        {
+            path = "Assets";
+        }
+        else if (Path.GetExtension(path) != "")
+        {
+            path = path.Replace(Path.GetFileName(AssetDatabase.GetAssetPath(Selection.activeObject)), "");
+        }
+
+        string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + "/" + original.name + "Copy.asset");
 
         AssetDatabase.CreateAsset(asset, assetPathAndName);
 
