@@ -16,7 +16,26 @@ namespace RPG
             public bool on;
             public Status[] buffs;
         }
-    
+
+        PowerToggle()
+        {
+            range = 0;
+            type = RPG.RPGSettings.DamageType.Magic;
+            targetType = RPG.Power.TargetType.SelfOnly;
+            mode = RPG.Power.Mode.Instant;
+            tint.code = RPG.RPGSettings.ColorCode.Magic;
+        }
+
+        void OnEnable()
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                if (icon == null)
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerToggle Icon.png");
+            }
+#endif
+        }
         public override void OnActivate(Character caster, bool doStatus = true)
         {
             // create a new toggle data when we require one

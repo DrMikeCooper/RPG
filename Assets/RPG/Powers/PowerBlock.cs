@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace RPG
 {
-    [CreateAssetMenu(fileName = "PowerMelee", menuName = "RPG/Powers/PowerMelee", order = 1)]
-    public class PowerMelee : PowerDirect
+    [CreateAssetMenu(fileName = "PowerBlock", menuName = "RPG/Powers/PowerBlock", order = 2)]
+    public class PowerBlock : PowerDirect
     {
-        PowerMelee()
+        PowerBlock()
         {
-            range = 1;
-            targetType = TargetType.Enemies;
+            range = 0;
+            targetType = TargetType.SelfOnly;
             type = RPGSettings.DamageType.Crushing;
-            mode = RPG.Power.Mode.Instant;
+            mode = RPG.Power.Mode.Block;
             tint.code = RPG.RPGSettings.ColorCode.Crushing;
         }
 
@@ -22,7 +22,7 @@ namespace RPG
             if (Application.isEditor)
             {
                 if (icon == null)
-                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerMelee Icon.png");
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerBlock Icon.png");
             }
 #endif
         }

@@ -12,6 +12,29 @@ namespace RPG
         public VisualEffect projectileFX;
         public int maxChains = 0;
 
+        PowerProjectile()
+        {
+            range = 20;
+            speed = 1;
+            type = RPG.RPGSettings.DamageType.Piercing;
+            targetType = RPG.Power.TargetType.Enemies;
+            mode = RPG.Power.Mode.Instant;
+            tint.code = RPG.RPGSettings.ColorCode.Piercing;
+        }
+
+        void OnEnable()
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                if (icon == null)
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerProjectile Icon.png");
+                if (projectileFX == null)
+                    projectileFX = UnityEditor.AssetDatabase.LoadAssetAtPath<RPG.VisualEffect>("Assets/Example Particles/Trail.asset");
+            }
+#endif
+        }
+
         public override void OnActivate(Character caster, bool doStatus = true)
         {
             // spawn a projectile and set it going in the right direction

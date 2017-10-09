@@ -19,6 +19,26 @@ namespace RPG
         public int maxChains = 0;
         public BeamParticles beamParticles;
 
+        protected PowerDirect()
+        {
+            range = 20;
+            type = RPG.RPGSettings.DamageType.Magic;
+            targetType = RPG.Power.TargetType.Enemies;
+            mode = RPG.Power.Mode.Instant;
+            tint.code = RPG.RPGSettings.ColorCode.Magic;
+        }
+
+        void OnEnable()
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                if (icon == null)
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerDirect Icon.png");
+            }
+#endif
+        }
+
         // useable on a single target with no to-hit roll
         public override void OnActivate(Character caster, bool doStatus = true)
         {

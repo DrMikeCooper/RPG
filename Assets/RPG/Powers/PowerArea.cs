@@ -26,6 +26,27 @@ namespace RPG
 
         public BeamParticles beamParticles;
 
+        PowerArea()
+        {
+            range = 0;
+            radius = 5;
+            type = RPG.RPGSettings.DamageType.Fire;
+            targetType = RPG.Power.TargetType.Enemies;
+            mode = RPG.Power.Mode.Instant;
+            tint.code = RPG.RPGSettings.ColorCode.Fire;
+        }
+
+        void OnEnable()
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                if (icon == null)
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerArea Icon.png");
+            }
+#endif
+        }
+
         public override void OnActivate(Character caster, bool doStatus = true)
         {
             if (angle < 360 && caster.target)

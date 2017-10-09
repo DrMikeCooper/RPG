@@ -17,12 +17,7 @@ public class RPGPowersMenuItems : MonoBehaviour
     static void MakeMeleePower()
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
-        RPG.PowerDirect power = CreateAsset<RPG.PowerDirect>(s.name + "Melee");
-        power.range = 1;
-        power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Crushing);
-        power.targetType = RPG.Power.TargetType.Enemies;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Crushing;
+        RPG.PowerDirect power = CreateAsset<RPG.PowerMelee>(s.name + "Melee");
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
         power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerMelee Icon.png");
@@ -33,33 +28,18 @@ public class RPGPowersMenuItems : MonoBehaviour
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
         RPG.PowerProjectile power = CreateAsset<RPG.PowerProjectile>(s.name + "Projectile");
-        power.range = 20;
-        power.speed = 1;
         power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Piercing);
-        power.targetType = RPG.Power.TargetType.Enemies;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Piercing;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerProjectile Icon.png");
-        power.projectileFX = AssetDatabase.LoadAssetAtPath<RPG.VisualEffect>("Assets/Example Particles/Trail.asset");
     }
 
     [MenuItem("RPG/Make Beam Power")]
     static void MakeBeamPower()
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
-        RPG.PowerDirect power = CreateAsset<RPG.PowerDirect>(s.name + "Beam");
-        power.range = 20;
-        power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Energy);
-        power.targetType = RPG.Power.TargetType.Enemies;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Energy;
+        RPG.PowerDirect power = CreateAsset<RPG.PowerBeam>(s.name + "Beam");
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.beamMaterial = AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/RadialBeam.mat");
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerBeam Icon.png");
-
     }
 
     [MenuItem("RPG/Make Direct Power")]
@@ -67,14 +47,8 @@ public class RPGPowersMenuItems : MonoBehaviour
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
         RPG.PowerDirect power = CreateAsset<RPG.PowerDirect>(s.name + "Direct");
-        power.range = 10;
-        power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Magic);
-        power.targetType = RPG.Power.TargetType.Enemies;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Magic;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerDirect Icon.png");
     }
 
     [MenuItem("RPG/Make Area Power")]
@@ -82,30 +56,29 @@ public class RPGPowersMenuItems : MonoBehaviour
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
         RPG.PowerArea power = CreateAsset<RPG.PowerArea>(s.name + "Area");
-        power.range = 0;
-        power.radius = 5;
         power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Fire);
-        power.targetType = RPG.Power.TargetType.Enemies;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Fire;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerArea Icon.png");
+    }
+
+    [MenuItem("RPG/Make MoveTo Power")]
+    static void MakeMoveToPower()
+    {
+        RPG.Status s = Selection.activeObject as RPG.Status;
+        RPG.PowerDirect power = CreateAsset<RPG.PowerMoveTo>(s.name + "MoveTo");
+        power.effects = new RPG.Status[1];
+        power.effects[0] = s;
+        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerMoveTo Icon.png");
     }
 
     [MenuItem("RPG/Make Block Power")]
     static void MakeBlockPower()
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
-        RPG.PowerDirect power = CreateAsset<RPG.PowerDirect>(s.name + "Block");
-        power.range = 0;
+        RPG.PowerDirect power = CreateAsset<RPG.PowerBlock>(s.name + "Block");
         power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Crushing);
-        power.targetType = RPG.Power.TargetType.SelfOnly;
-        power.mode = RPG.Power.Mode.Block;
-        power.tint.code = RPG.RPGSettings.ColorCode.Crushing;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerShield Icon.png");
     }
 
     [MenuItem("RPG/Make Toggle Power")]
@@ -113,14 +86,9 @@ public class RPGPowersMenuItems : MonoBehaviour
     {
         RPG.Status s = Selection.activeObject as RPG.Status;
         RPG.PowerToggle power = CreateAsset<RPG.PowerToggle>(s.name + "Toggle");
-        power.range = 0;
         power.type = GetDamageType(s, RPG.RPGSettings.DamageType.Magic);
-        power.targetType = RPG.Power.TargetType.SelfOnly;
-        power.mode = RPG.Power.Mode.Instant;
-        power.tint.code = RPG.RPGSettings.ColorCode.Magic;
         power.effects = new RPG.Status[1];
         power.effects[0] = s;
-        power.icon = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerToggle Icon.png");
     }
 
     // validations
@@ -156,6 +124,12 @@ public class RPGPowersMenuItems : MonoBehaviour
 
     [MenuItem("RPG/Make Area Power", true)]
     static bool ValidateMakeAreaPower()
+    {
+        return IsStatus();
+    }
+
+    [MenuItem("RPG/Make MoveTo Power", true)]
+    static bool ValidateMakeMoveToPower()
     {
         return IsStatus();
     }
