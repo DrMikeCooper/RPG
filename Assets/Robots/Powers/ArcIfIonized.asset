@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c983cc3699842e3429a60d1b12e4da7a, type: 3}
   m_Name: ArcIfIonized
   m_EditorClassIdentifier: 
-  duration: 0
+  duration: 10
   fx: {fileID: 0}
   bodyPart: 0
   icon: {fileID: 0}
@@ -26,7 +26,8 @@ MonoBehaviour:
   timer: 0
   count: 0
   condition:
-    type: 0
+    type: 8
     threshold: 0
     reverse: 0
-    status: {fileID: 0}
+    status: {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
+  beam: {fileID: 11400000, guid: e4195db963c8d0f49ab6d3678ead3798, type: 2}

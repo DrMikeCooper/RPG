@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 090a203e14bb1624f9c1262ee8d2a788, type: 3}
-  m_Name: LightningArc
+  m_Name: Beam
   m_EditorClassIdentifier: 
   energyCost: 0
   coolDown: 0
   range: 20
   lineOfSight: 1
-  type: 32
+  type: 64
   targetType: 3
   mode: 0
   duration: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   sounds: {fileID: 0}
   icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
   tint:
-    code: 7
+    code: 8
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
@@ -39,8 +39,8 @@ MonoBehaviour:
   targetFX: {fileID: 0}
   targetBodyPart: 2
   accuracy: 1
-  minDamage: 10
-  maxDamage: 20
+  minDamage: 0
+  maxDamage: 0
   effects: []
   statusDuration: 10
   selfEffects: []
@@ -48,10 +48,8 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
+  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
   beamWidth: 0.5
-  beamLength: 10
-  beamUVSpeed: 10
-  beamParticles: {fileID: 0}
-  beamDuration: 1
+  beamUVSpeed: 1
   maxChains: 0
+  beamParticles: {fileID: 0}

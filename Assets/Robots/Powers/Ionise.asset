@@ -43,6 +43,7 @@ MonoBehaviour:
   maxDamage: 10
   effects:
   - {fileID: 11400000, guid: 32d6585fe06d1444fbfd66f538e9677b, type: 2}
+  - {fileID: 11400000, guid: 91ea40a50f461c3479f99c71f86ab5e4, type: 2}
   - {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
   statusDuration: 10
   selfEffects: []
@@ -52,6 +53,7 @@ MonoBehaviour:
   npcTarget: {fileID: 0}
   beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
   beamWidth: 0.5
+  beamLength: 10
   beamUVSpeed: 10
   beamParticles: {fileID: 0}
   beamDuration: 1

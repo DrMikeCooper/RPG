@@ -28,31 +28,32 @@ namespace RPG
             }
         }
 
-        public void Activate(Transform src, Transform tgt, float duration, Material mat, float beamWidth, float beamLength, Color col, BeamParticles bp = null)
+        public void Activate(Transform src, Transform tgt, PowerBeam.BeamSettings settings, Color col)
         {
             // make the particles a child of this
-            if (bp != null && beamParticles == null)
+            if (settings.beamParticles != null && beamParticles == null)
             {
-                beamParticles = Instantiate(bp);
+                beamParticles = Instantiate(settings.beamParticles);
                 beamParticles.Init(src);
             }
 
-            texLength = beamLength;
+            texLength = settings.beamLength;
 
             gameObject.SetActive(true);
             if (lineRenderer == null)
                 lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.enabled = (mat != null);
-            timer = duration;
+            lineRenderer.enabled = (settings.beamMaterial != null);
+            timer = settings.beamDuration;
             source = src;
             target = tgt.gameObject;
+            uvSpeed = settings.beamUVSpeed;
 
-            if (mat != null)
+            if (settings.beamMaterial != null)
             {
-                lineRenderer.material = mat;
+                lineRenderer.material = settings.beamMaterial;
 
                 lineRenderer.startColor = lineRenderer.endColor = col;
-                lineRenderer.startWidth = lineRenderer.endWidth = beamWidth;
+                lineRenderer.startWidth = lineRenderer.endWidth = settings.beamWidth;
 
                 // set UV tiling to match distance
                 float distance = Vector3.Distance(src.position, tgt.position);

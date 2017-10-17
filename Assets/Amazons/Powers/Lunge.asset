@@ -8,16 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090a203e14bb1624f9c1262ee8d2a788, type: 3}
-  m_Name: LightningArc
+  m_Script: {fileID: 11500000, guid: 94c8287b64411bc4aabf607a07856709, type: 3}
+  m_Name: Lunge
   m_EditorClassIdentifier: 
   energyCost: 0
   coolDown: 0
-  range: 20
+  range: 10
   lineOfSight: 1
-  type: 32
+  type: 1
   targetType: 3
-  mode: 0
+  mode: 1
   duration: 0
   extraEnergyCost: 0
   interruptable: 0
@@ -28,9 +28,9 @@ MonoBehaviour:
   maxSelfStatusDuration: 0
   maxBuffStrength: 0
   sounds: {fileID: 0}
-  icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
+  icon: {fileID: 21300000, guid: 0267c78585760534db0036f293eeb8c5, type: 3}
   tint:
-    code: 7
+    code: 2
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
@@ -39,19 +39,12 @@ MonoBehaviour:
   targetFX: {fileID: 0}
   targetBodyPart: 2
   accuracy: 1
-  minDamage: 10
-  maxDamage: 20
+  minDamage: 0
+  maxDamage: 0
   effects: []
   statusDuration: 10
   selfEffects: []
   selfStatusDuration: 10
-  closeToTargetSpeed: 10
+  closeToTargetSpeed: 20
   lunge: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
-  beamWidth: 0.5
-  beamLength: 10
-  beamUVSpeed: 10
-  beamParticles: {fileID: 0}
-  beamDuration: 1
-  maxChains: 0

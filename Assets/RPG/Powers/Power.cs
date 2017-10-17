@@ -772,14 +772,13 @@ namespace RPG
             return mode == Mode.Instant || mode == Mode.MoveTo;
         }
 
-        protected void AddBeamBetween(Character source, Character dest, Character.BodyPart sourceBodyPart, Material beamMaterial, float beamWidth, float beamLength, float beamUVSpeed, BeamParticles bp)
+        protected void AddBeamBetween(Character source, Character dest, Character.BodyPart sourceBodyPart, PowerBeam.BeamSettings settings)
         {
             GameObject beamObj = RPGSettings.instance.beamPool.GetObject();
             if (beamObj)
             {
                 BeamRenderer beam = beamObj.GetComponent<BeamRenderer>();
-                beam.Activate(source.GetBodyPart(sourceBodyPart), dest.GetBodyPart(targetBodyPart), 1.0f, beamMaterial, beamWidth, beamLength, tint.GetColor(), bp);
-                beam.uvSpeed = beamUVSpeed;
+                beam.Activate(source.GetBodyPart(sourceBodyPart), dest.GetBodyPart(targetBodyPart), settings, tint.GetColor());
             }
             else
                 Debug.Log("Running out of beams! Increase the pool size in RPGSettings");

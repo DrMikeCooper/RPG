@@ -17,16 +17,9 @@ namespace RPG
         public VisualEffect explodeFX;
         public Character.BodyPart explodeBodyPart = Character.BodyPart.Root;
 
+        [Header("Beam Settings")]
         [Tooltip("Optional beam to track from the user to each target")]
-        public Material beamMaterial;
-        [ShowIf("beamMaterial")]
-        public float beamWidth = 0.5f;
-        [ShowIf("beamMaterial")]
-        public float beamLength = 1.0f;
-        [ShowIf("beamMaterial")]
-        public float beamUVSpeed = 1.0f;
-
-        public BeamParticles beamParticles;
+        public PowerBeam.BeamSettings settings = new PowerBeam.BeamSettings(null);
 
         PowerArea()
         {
@@ -74,9 +67,9 @@ namespace RPG
                 Apply(ch, charge, caster, doStatus);
 
                 // add a beam to each one
-                if (beamMaterial != null || beamParticles != null)
+                if (settings.beamMaterial != null || settings.beamParticles != null)
                 {
-                    AddBeamBetween(caster, ch, userBodyPart, beamMaterial, beamWidth, beamLength, beamUVSpeed, beamParticles);
+                    AddBeamBetween(caster, ch, userBodyPart, settings);
                 }
             }
         }

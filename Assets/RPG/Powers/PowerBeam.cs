@@ -7,17 +7,33 @@ namespace RPG
     [CreateAssetMenu(fileName = "PowerBeam", menuName = "RPG/Powers/PowerBeam", order = 1)]
     public class PowerBeam : PowerDirect
     {
-        [Header("Power Beam Settings")]
-        public Material beamMaterial;
-        [ShowIf("beamMaterial")]
-        public float beamWidth = 0.5f;
-        [ShowIf("beamMaterial")]
-        public float beamLength = 1.0f;
-        [ShowIf("beamMaterial")]
-        public float beamUVSpeed = 1.0f;
-        public BeamParticles beamParticles;
-        public float beamDuration = 2;
-        
+        [System.Serializable]
+        public struct BeamSettings
+        {
+            public BeamSettings(Material mat)
+            {
+                beamMaterial = mat;
+                beamWidth = 0.5f;
+                beamLength = 1.0f;
+                beamUVSpeed = 1.0f;
+                beamParticles = null;
+                beamDuration = 2;
+            }
+
+            public Material beamMaterial;
+            [ShowIf("beamMaterial")]
+            public float beamWidth;
+            [ShowIf("beamMaterial")]
+            public float beamLength;
+            [ShowIf("beamMaterial")]
+            public float beamUVSpeed;
+            public BeamParticles beamParticles;
+            public float beamDuration;
+        }
+
+        [Header("Beam Settings")]
+        public BeamSettings beamSettings = new BeamSettings(null);
+
         public int maxChains = 0;
 
         PowerBeam()
@@ -36,8 +52,8 @@ namespace RPG
             {
                 if (icon == null)
                     icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerBeam Icon.png");
-                if (beamMaterial == null)
-                    beamMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/RadialBeam.mat");
+                if (beamSettings.beamMaterial == null)
+                    beamSettings.beamMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>("Assets/Materials/RadialBeam.mat");
             }
 #endif
         }
@@ -84,17 +100,16 @@ namespace RPG
 
         void DrawBeam(Character caster, Prop target)
         {
-            if (beamMaterial || beamParticles)
+            if (beamSettings.beamMaterial || beamSettings.beamParticles)
             {
-                caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), beamDuration, beamMaterial, beamWidth, beamLength, tint.GetColor(), beamParticles);
-                caster.beam.uvSpeed = beamUVSpeed;
+                caster.beam.Activate(caster.GetBodyPart(userBodyPart), target.GetBodyPart(targetBodyPart), beamSettings, tint.GetColor());
             }
         }
 
         void CheckChaining(Character ctarget, float charge)
         {
             // if we're a beam, check for chaining
-            if (beamMaterial || beamParticles)
+            if (beamSettings.beamMaterial || beamSettings.beamParticles)
             {
                 // chained beams
                 if (maxChains > 0)
@@ -130,7 +145,7 @@ namespace RPG
                 Character newTarget = subTargets[Random.Range(0, subTargets.Count)];
 
                 // create the visible beam
-                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamMaterial, beamWidth, beamLength, beamUVSpeed, beamParticles);
+                AddBeamBetween(newTarget, lastTarget, targetBodyPart, beamSettings);
 
                 // Apply the game effects to the next target and alert them
                 Apply(newTarget, charge, lastTarget);

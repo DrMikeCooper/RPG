@@ -34,9 +34,9 @@ MonoBehaviour:
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 1
   releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
+  userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
   userBodyPart: 2
-  targetFX: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
+  targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
   targetBodyPart: 2
   accuracy: 1
   minDamage: 2
@@ -54,7 +54,8 @@ MonoBehaviour:
   angle: 360
   explodeFX: {fileID: 0}
   explodeBodyPart: 0
-  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
+  beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
   beamWidth: 0.5
+  beamLength: 10
   beamUVSpeed: 20
   beamParticles: {fileID: 0}

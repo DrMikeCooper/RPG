@@ -16,8 +16,10 @@ MonoBehaviour:
     type: 0
     threshold: 0
     reverse: 0
+    status: {fileID: 0}
   power: {fileID: 11400000, guid: bf5e6d046e52637498adec17fd201eb5, type: 2}
   targetCondition:
     type: 6
     threshold: 0
     reverse: 0
+    status: {fileID: 11400000, guid: 0280fb9390eaa35409a0adbf2081c313, type: 2}
