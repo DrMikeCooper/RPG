@@ -817,5 +817,55 @@ namespace RPG
             return p;
         }
 
+        #region Editor Utilities
+
+        protected void SetIcon(string iconName)
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                if (icon == null)
+                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/" + iconName);
+            }
+#endif
+        }
+
+        protected T LoadAsset<T>(string assetName) where T : ScriptableObject
+        {
+#if UNITY_EDITOR
+            if (Application.isEditor)
+            {
+                return UnityEditor.AssetDatabase.LoadAssetAtPath<T>("Assets/" + assetName);
+            }
+#endif
+            return null;
+        }
+
+        // adds this status to our list if it isnt already in there
+        protected void AddStatus(Status s)
+        {
+            if (s == null)
+                return;
+
+            for (int i = 0; i < effects.Length; i++)
+                if (effects[i] == s)
+                    return;
+            Status[] newEffects = new Status[effects.Length + 1];
+            for (int i = 0; i < effects.Length; i++)
+                newEffects[i] = effects[i];
+            newEffects[effects.Length] = s;
+            effects = newEffects;
+        }
+
+        [ContextMenu("Fire Settings")]
+        protected void MakeFire()
+        {
+            tint.code = RPGSettings.ColorCode.Fire;
+            type = RPGSettings.DamageType.Fire;
+            AddStatus(LoadAsset<Status>("Sample Powers/Flames.asset"));
+        }
+
+        #endregion
+
     }
 }

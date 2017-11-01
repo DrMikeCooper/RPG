@@ -278,6 +278,11 @@ namespace RPG
                         buff.modifiers[i].modifier = originalBuff.modifiers[i].modifier * buffPower;
                     }
                 }
+
+                // set the direction of Repel here
+                if (returnVal as Repel)
+                    returnVal.Apply(this, caster);
+
                 return returnVal;
             }
             else

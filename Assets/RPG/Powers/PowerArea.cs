@@ -33,13 +33,7 @@ namespace RPG
 
         void OnEnable()
         {
-#if UNITY_EDITOR
-            if (Application.isEditor)
-            {
-                if (icon == null)
-                    icon = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Gizmos/PowerArea Icon.png");
-            }
-#endif
+            SetIcon("Gizmos/PowerArea Icon.png");
         }
 
         public override void OnActivate(Character caster, bool doStatus = true)
