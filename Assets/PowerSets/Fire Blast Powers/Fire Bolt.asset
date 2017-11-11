@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c8198c71c0c05c4a9c149a9fd368472, type: 3}
+  m_Name: Fire Bolt
+  m_EditorClassIdentifier: 
+  energyCost: 5
+  coolDown: 0
+  range: 20
+  lineOfSight: 1
+  type: 8
+  targetType: 3
+  mode: 0
+  duration: 0
+  extraEnergyCost: 0
+  interruptable: 0
+  tick: 0.5
+  applyStatusWhen: 0
+  maxRadius: 0
+  maxStatusDuration: 0
+  maxSelfStatusDuration: 0
+  maxBuffStrength: 0
+  sounds: {fileID: 0}
+  icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
+  tint:
+    code: 5
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  animation: 3
+  releaseAnimation: 10
+  userFX: {fileID: 11400000, guid: 7cac3d9a8f41f8c48be39098ec2eee5a, type: 2}
+  userBodyPart: 4
+  targetFX: {fileID: 11400000, guid: 7cac3d9a8f41f8c48be39098ec2eee5a, type: 2}
+  targetBodyPart: 2
+  accuracy: 1
+  minDamage: 8
+  maxDamage: 12
+  effects:
+  - {fileID: 11400000, guid: f897491c8b1f63b4c8283a7b9b5c9266, type: 2}
+  statusDuration: 4
+  selfEffects: []
+  selfStatusDuration: 10
+  closeToTargetSpeed: 10
+  lunge: 0
+  npcTarget: {fileID: 0}
+  speed: 10
+  projectileFX: {fileID: 11400000, guid: 62d1596c9043d4d4c831f89af2244d09, type: 2}
+  maxChains: 0

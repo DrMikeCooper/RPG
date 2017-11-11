@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d8ad68e1fd80e41b75b70fec31882a, type: 3}
+  m_Name: HeatSink
+  m_EditorClassIdentifier: 
+  duration: 0
+  fx: {fileID: 0}
+  bodyPart: 0
+  icon: {fileID: 21300000, guid: a014db030ee72d74b80c76b480eaa5b1, type: 3}
+  tint:
+    code: 5
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  maxStacks: 0
+  sourceSelectiveStacks: 1
+  stacks: 0
+  sourceCharacter: {fileID: 0}
+  sourcePower: {fileID: 0}
+  timer: 0
+  count: 0
+  condition:
+    type: 0
+    threshold: 0
+    reverse: 0
+    status: {fileID: 0}
+  radius: 10
+  allies: 0
+  buff: {fileID: 11400000, guid: 03f536e67c6cd2d46bf878aa592e32d0, type: 2}

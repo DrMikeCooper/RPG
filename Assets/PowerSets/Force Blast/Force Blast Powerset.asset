@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f3534169720954e8c02c951e7b14bb, type: 3}
+  m_Name: Force Blast Powerset
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: c79803b861ea9f24a80d851baef2bd45, type: 3}
+  tint:
+    code: 2
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  powers:
+  - {fileID: 11400000, guid: be7c665dc0d29dd418ed137f6814703a, type: 2}
+  - {fileID: 11400000, guid: c632c265372ea2b4a9509fbc68a5ec8e, type: 2}
+  - {fileID: 11400000, guid: e19becfe73d5e794f8cf401426718772, type: 2}
+  - {fileID: 11400000, guid: 63ed37d93af693d44a3ef63fa9ded3be, type: 2}
