@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace RPG
 {
-    public class UIPowerList : MonoBehaviour
+    public class UIPowerList : MonoBehaviour, IDragAndDropContainer
     {
         public GameObject prefab;
         public PowerSet powerSet;
@@ -50,6 +51,21 @@ namespace RPG
         void Update()
         {
 
+        }
+
+        public bool CanDrag(IDraggable obj)
+        {
+            return true;
+        }
+
+        public bool CanDrop(IDraggable dragged, IDraggable drop)
+        {
+            return true;
+        }
+
+        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex)
+        {
+            
         }
     }
 }

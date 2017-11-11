@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace RPG
 {
-    public class PowersHUD : MonoBehaviour
+    public class PowersHUD : MonoBehaviour, IDragAndDropContainer
     {
         public Character character;
         public GameObject icon;
@@ -48,6 +49,9 @@ namespace RPG
                 rt.position = iconRect.position + 48 * i * Vector3.right;
                 items[i] = obj.GetComponent<MenuItem>();
                 items[i].Init(character, null, character.powers[i], i);
+                IDraggable draggable = items[i].GetComponentInChildren<IDraggable>();
+                if (draggable)
+                    draggable.index = i;
             }
         }
 
@@ -62,6 +66,31 @@ namespace RPG
                     items[i].SetPower(subP);
                 items[i].SetTarget(character.target);
             }
+        }
+
+        public bool CanDrag(IDraggable obj)
+        {
+            return true;
+        }
+
+        public bool CanDrop(IDraggable dragged, IDraggable drop)
+        {
+            return dragged.GetContainer() == drop.GetContainer();
+        }
+
+        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex)
+        {
+            // swap powers within our own character's list
+            Power p = character.powers[replacedIndex];
+            character.powers[replacedIndex] = character.powers[dragged.index];
+            character.powers[dragged.index] = p;
+
+            MenuItem it = items[replacedIndex];
+            items[replacedIndex] = items[dragged.index];
+            items[dragged.index] = it;
+
+            items[replacedIndex].Init(character, null, character.powers[replacedIndex], replacedIndex);
+            items[dragged.index].Init(character, null, character.powers[dragged.index], dragged.index);
         }
     }
 }
