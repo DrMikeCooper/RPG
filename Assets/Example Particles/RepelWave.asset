@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifespan: 5
   scalingType: 0
-  prefab: {fileID: 0}
+  prefab: {fileID: 1038322627640282, guid: dffc481214c63a545bfb7454e6bb0602, type: 2}

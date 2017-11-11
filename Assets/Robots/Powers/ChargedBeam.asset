@@ -17,11 +17,16 @@ MonoBehaviour:
   lineOfSight: 1
   type: 512
   targetType: 3
-  mode: 3
+  mode: 2
   duration: 2
   extraEnergyCost: 20
   interruptable: 0
   tick: 0.5
+  applyStatusWhen: 0
+  maxRadius: 0
+  maxStatusDuration: 0
+  maxSelfStatusDuration: 0
+  maxBuffStrength: 0
   sounds: {fileID: 0}
   icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
   tint:
@@ -44,7 +49,3 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 2100000, guid: 03bca7671ab9abe4a8943b748fb65062, type: 2}
-  beamWidth: 0.5
-  beamUVSpeed: 10
-  maxChains: 0

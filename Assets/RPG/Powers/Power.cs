@@ -12,7 +12,9 @@ namespace RPG
             SelfAndAllies,
             AlliesOnly,
             Enemies,
-            All
+            All,
+            DeadAllies,
+            DeadEnemies,
         };
 
         public enum Mode
