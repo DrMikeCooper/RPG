@@ -52,7 +52,7 @@ namespace RPG
 
         public override string GetDescription(bool brief = false)
         {
-            return name + "\n " + damagePerTick + " " + damageType.ToString() + "damage\n " + "per " + interval + "seconds";
+            return name + "\n " + damagePerTick + " " + damageType.ToString() + " damage\n " + "per " + interval + " seconds";
         }
     }
 }
