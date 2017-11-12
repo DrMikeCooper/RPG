@@ -49,9 +49,12 @@ namespace RPG
                 rt.position = iconRect.position + 48 * i * Vector3.right;
                 items[i] = obj.GetComponent<MenuItem>();
                 items[i].Init(character, null, character.powers[i], i);
-                IDraggable draggable = items[i].GetComponentInChildren<IDraggable>();
-                if (draggable)
-                    draggable.index = i;
+                UIPowerIcon ic = items[i].GetComponentInChildren<UIPowerIcon>();
+                if (ic)
+                {
+                    ic.index = i;
+                    ic.SetPower(character.powers[i]);
+                }
             }
         }
 
@@ -75,22 +78,27 @@ namespace RPG
 
         public bool CanDrop(IDraggable dragged, IDraggable drop)
         {
-            return dragged.GetContainer() == drop.GetContainer();
+            UIPowerIcon pi = drop as UIPowerIcon;
+            return pi != null;
         }
 
-        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex)
+        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex, bool final)
         {
             // swap powers within our own character's list
-            Power p = character.powers[replacedIndex];
-            character.powers[replacedIndex] = character.powers[dragged.index];
-            character.powers[dragged.index] = p;
+            UIPowerIcon pi = dragged as UIPowerIcon;
 
-            MenuItem it = items[replacedIndex];
-            items[replacedIndex] = items[dragged.index];
-            items[dragged.index] = it;
+            character.powers[replacedIndex] = pi.GetPower();
 
             items[replacedIndex].Init(character, null, character.powers[replacedIndex], replacedIndex);
-            items[dragged.index].Init(character, null, character.powers[dragged.index], dragged.index);
+
+            (drop as UIPowerIcon).SetPower(character.powers[replacedIndex]);
+
+            Debug.Log("Dropping " + character.powers[replacedIndex].name + " into slot " + replacedIndex);
+        }
+
+        public bool DoesSwap()
+        {
+            return false;
         }
     }
 }

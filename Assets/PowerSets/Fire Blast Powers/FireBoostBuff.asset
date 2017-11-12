@@ -34,5 +34,5 @@ MonoBehaviour:
   - modifier: 100
     stat: 1
   - modifier: 50
-    stat: 13
+    stat: 14
   damageType: 120

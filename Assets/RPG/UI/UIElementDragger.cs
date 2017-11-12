@@ -42,7 +42,7 @@ namespace RPG
                     dragging = true;
 
                     // do this so the dragged object appears on top of other sibling containers
-                    objectToDrag.transform.parent.SetAsLastSibling();
+                    //objectToDrag.transform.parent.SetAsLastSibling();
 
                     originalPosition = objectToDrag.transform.position;
                     originalParent = objectToDrag.transform.parent;
@@ -92,23 +92,36 @@ namespace RPG
 
                     if (objectToReplace != null)
                     {
-                        // swap positions
-                        objectToDrag.transform.position = objectToReplace.transform.position;
-                        objectToReplace.transform.position = originalPosition;
-
                         // store the indexes of where these objects came from to pass through, they may get changed in Drop() calls
                         int dragIndex = objectToDrag.index;
                         int replaceIndex = objectToReplace.index;
 
+                        IDraggable replacement = Instantiate(objectToReplace);
+                        IDraggable current = Instantiate(objectToDrag);
+
                         // game logic - let both containers know about the update
                         if (containerReplace != null)
-                            containerReplace.Drop(objectToDrag, objectToReplace, replaceIndex);
-                        if (containerDrag != null && containerDrag != containerReplace)
-                            containerDrag.Drop(objectToReplace, objectToDrag, dragIndex);
+                            containerReplace.Drop(current, objectToReplace, replaceIndex, containerReplace != containerDrag);
+                        if (containerDrag != null)
+                            containerDrag.Drop(replacement, objectToDrag, dragIndex, true);
 
-                        // swap parents
-                        objectToDrag.transform.parent = objectToReplace.transform.parent;
-                        objectToReplace.transform.parent = originalParent;
+                        if (objectToDrag.GetContainer().DoesSwap())
+                        {
+                            // swap positions
+                            objectToDrag.transform.position = objectToReplace.transform.position;
+                            objectToReplace.transform.position = originalPosition;
+
+                            // swap parents
+                            objectToDrag.transform.parent = objectToReplace.transform.parent;
+                            objectToReplace.transform.parent = originalParent;
+                        }
+                        else
+                        {
+                            // return to point of origin and nothing happens
+                            objectToDrag.transform.position = originalPosition;
+                            objectToDrag.transform.parent = originalParent;
+                        }
+
                     }
                     else
                     {

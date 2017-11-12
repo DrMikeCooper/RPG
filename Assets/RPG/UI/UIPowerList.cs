@@ -38,6 +38,9 @@ namespace RPG
                 go.transform.parent = par;
                 go.transform.localPosition = new Vector3(100, -16+y, 0);
                 y -= 33;
+                UIPowerIcon icon = go.GetComponentInChildren<UIPowerIcon>();
+                if (icon)
+                    icon.SetPower(p);
             }
             if (sr)
             {
@@ -60,12 +63,18 @@ namespace RPG
 
         public bool CanDrop(IDraggable dragged, IDraggable drop)
         {
+            // can never drop into this type of container
             return true;
         }
 
-        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex)
+        public void Drop(IDraggable dragged, IDraggable drop, int replacedIndex, bool final)
         {
-            
+            // do nothing
+        }
+
+        public bool DoesSwap()
+        {
+            return false;
         }
     }
 }

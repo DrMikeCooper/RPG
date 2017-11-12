@@ -153,7 +153,7 @@ namespace RPG
                     if (p.stats.ContainsKey(mod.stat.ToString()))
                     {
                         float val = p.stats[mod.stat.ToString()].getCurrentValue();
-                        Debug.Log("ActiveCheck: " + mod.stat.ToString() + " = " + val);
+                        //Debug.Log("ActiveCheck: " + mod.stat.ToString() + " = " + val);
                         if (val <= 0)
                             return false;
                     }

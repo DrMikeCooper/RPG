@@ -28,9 +28,9 @@ MonoBehaviour:
   maxSelfStatusDuration: 0
   maxBuffStrength: 0
   sounds: {fileID: 0}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a014db030ee72d74b80c76b480eaa5b1, type: 3}
   tint:
-    code: 0
+    code: 5
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 3
   releaseAnimation: 10
@@ -41,7 +41,8 @@ MonoBehaviour:
   accuracy: 1
   minDamage: 0
   maxDamage: 0
-  effects: []
+  effects:
+  - {fileID: 11400000, guid: f6a28b6b3bd88a448b87d4d196e9a5fd, type: 2}
   statusDuration: 10
   selfEffects: []
   selfStatusDuration: 10

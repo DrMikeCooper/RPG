@@ -261,18 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1760115799826644, guid: 3ee4fea3dd6614145afc9dd0c1eaf1c3, type: 2}
-  powers:
-  - {fileID: 11400000, guid: 577c1dd73143f2647a53046e9272faa6, type: 2}
-  - {fileID: 11400000, guid: 1880daed59082434092366f136193b26, type: 2}
-  - {fileID: 11400000, guid: d301e696b3dce30408d36fc99b777545, type: 2}
-  - {fileID: 11400000, guid: fbe3a9f92aa24f841abdfeb761da41c0, type: 2}
-  - {fileID: 11400000, guid: 5a384a111e1264c45a2cba429772a572, type: 2}
-  - {fileID: 11400000, guid: 9dc338c8450eeed429a5aedcd81fdb8b, type: 2}
-  - {fileID: 11400000, guid: ac78ee9b7658c2e469b85296aae524a7, type: 2}
-  - {fileID: 11400000, guid: f95b222012833b549a8336a980987168, type: 2}
-  - {fileID: 11400000, guid: d693d40cf89f38c4786ca95d9cb54b07, type: 2}
-  - {fileID: 11400000, guid: ecfe5e61d3e7026429950a58b61c7f67, type: 2}
-  - {fileID: 11400000, guid: 579ec9f1f26343549b729c709af3c4f1, type: 2}
+  powerSet: {fileID: 11400000, guid: 594cdd65f5828404688ba98370baa4e7, type: 2}
 --- !u!114 &114410121005130524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -434,9 +423,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 224561423634998866}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -586,7 +575,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272061851744368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -616,7 +605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.00078319345, y: 0.00033950806}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224719802234022638

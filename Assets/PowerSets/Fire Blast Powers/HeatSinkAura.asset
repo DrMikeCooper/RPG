@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29d8ad68e1fd80e41b75b70fec31882a, type: 3}
-  m_Name: HeatSink
+  m_Name: HeatSinkAura
   m_EditorClassIdentifier: 
   duration: 0
   fx: {fileID: 0}

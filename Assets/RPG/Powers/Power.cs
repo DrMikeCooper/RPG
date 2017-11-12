@@ -453,7 +453,7 @@ namespace RPG
         {
             if (IsInstant())
             {
-                Debug.Log("OnEnd: index = " + caster.currentComboStage);
+                //Debug.Log("OnEnd: index = " + caster.currentComboStage);
                 GetPower(caster).StartPower(caster);
 
                 // set off a coroutine to advance combos
@@ -745,6 +745,13 @@ namespace RPG
                     desc += minDamage + " " + type.ToString() + " damage\n ";
                 else
                     desc += minDamage + "-" + maxDamage + " " + type.ToString() + " damage\n ";
+            }
+            else if (minDamage + maxDamage < 0)
+            {
+                if (minDamage == maxDamage)
+                    desc += (-minDamage) + " heal\n ";
+                else
+                    desc += (-minDamage) + "-" + (-maxDamage) + " heal\n ";
             }
             for (int k = 0; k < effects.Length; k++)
             {
