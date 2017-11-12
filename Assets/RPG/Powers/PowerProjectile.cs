@@ -37,6 +37,8 @@ namespace RPG
 
         public override void OnActivate(Character caster, bool doStatus = true)
         {
+            caster.FaceTarget();
+
             // spawn a projectile and set it going in the right direction
             GameObject go = ObjectFactory.GetObject(RPGSettings.instance.projectile);
             go.transform.position = caster.GetBodyPart(userBodyPart).position;

@@ -28,7 +28,7 @@ MonoBehaviour:
   maxSelfStatusDuration: 0
   maxBuffStrength: 0
   sounds: {fileID: 0}
-  icon: {fileID: 21300000, guid: 254c39e12d2d364489dd36b4c98900aa, type: 3}
+  icon: {fileID: 21300000, guid: 07b04773c77051b4ab5d8d3a53c73126, type: 3}
   tint:
     code: 5
     customColor: {r: 0, g: 0, b: 0, a: 0}
