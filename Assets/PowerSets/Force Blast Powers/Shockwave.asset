@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: Shockwave
   m_EditorClassIdentifier: 
   lifespan: 3
+  scalingType: 0
   prefab: {fileID: 1901758175203228, guid: b07dfa706b35a4342b371ac21e4015fd, type: 2}

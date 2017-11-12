@@ -100,5 +100,15 @@ namespace RPG
         {
             return false;
         }
+
+        public void ApplyPowerSet(PowerSet powerSet)
+        {
+            for (int i = 0; i < powerSet.powers.Length && i < items.Length; i++)
+            {
+                character.powers[i] = powerSet.powers[i];
+                items[i].Init(character, null, character.powers[i], i);
+                items[i].GetComponentInChildren<UIPowerIcon>().SetPower(character.powers[i]); 
+            }
+        }
     }
 }

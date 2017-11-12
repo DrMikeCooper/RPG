@@ -7,11 +7,13 @@ namespace RPG
 {
     public class PowerSetButton : MonoBehaviour {
 
+        public UIPowerSetTabs parent;
         public PowerSet powerSet;
         public UIPowerList list;
 
-        void Start()
+        public void SetPowerSet(PowerSet ps)
         {
+            powerSet = ps;
             Image image = GetComponent<Image>();
             if (image)
             {
@@ -23,6 +25,7 @@ namespace RPG
         public void OnClick()
         {
             list.SetPowerSet(powerSet);
+            parent.currentPowerSet = powerSet;
         }
     }
 }

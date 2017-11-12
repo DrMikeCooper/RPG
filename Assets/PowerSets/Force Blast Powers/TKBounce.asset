@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d610a6bbf3fd2c458facbfe2a39b12c, type: 3}
+  m_Name: TKBounce
+  m_EditorClassIdentifier: 
+  duration: 0
+  fx: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
+  bodyPart: 2
+  icon: {fileID: 21300000, guid: 7bd6cabe874f7c042a5eb2df0d0cbd36, type: 3}
+  tint:
+    code: 12
+    customColor: {r: 0, g: 0, b: 0, a: 0}
+  maxStacks: 1
+  sourceSelectiveStacks: 1
+  stacks: 0
+  sourceCharacter: {fileID: 0}
+  sourcePower: {fileID: 0}
+  timer: 0
+  count: 0
+  condition:
+    type: 0
+    threshold: 0
+    reverse: 0
+    status: {fileID: 0}
+  damageType: 7
+  percentage: 50
+  reflection: 2
+  absorbFactor: 0
+  absorbEffects: []
+  responseFX: {fileID: 11400000, guid: c637498dcb7313e418638fc67eda2123, type: 2}
+  responseBodyPart: 2
