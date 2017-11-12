@@ -329,8 +329,11 @@ namespace RPG
 
         public void FaceTarget()
         {
-            transform.LookAt(target.transform.position);
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            if (target)
+            {
+                transform.LookAt(target.transform.position);
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+            }
         }
 
         // Animation functions
@@ -457,6 +460,36 @@ namespace RPG
             currentCombo = combo;
             currentComboStage = (index + 1) % combo.powers.Length;
             currentComboTimer = combo.window;
+        }
+
+        // recreate the list of passives based on current powers
+        public void UpdatePassives()
+        {
+            List<Status> pass = new List<Status>();
+            foreach (Power p in powers)
+            {
+                PowerSetPassive passive = p as PowerSetPassive;
+                if (passive)
+                {
+                    foreach (Status s in passive.effects)
+                        pass.Add(s);
+                }
+            }
+
+            passives = new Status[pass.Count];
+            for (int i = 0; i < pass.Count; i++)
+                passives[i] = pass[i];
+
+            // expire all existing passives - they have massive timers on them, so this will cause them to go out of date
+            foreach (Status s in statusEffects)
+            {
+                if (s.duration > 9000000)
+                    s.duration = 0.1f;
+            }
+            // and apply the new ones
+            ApplyPassives();
+
+            statusDirty = true;
         }
     }
 }

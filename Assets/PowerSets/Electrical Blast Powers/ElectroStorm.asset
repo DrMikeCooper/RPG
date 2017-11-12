@@ -8,18 +8,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 090a203e14bb1624f9c1262ee8d2a788, type: 3}
-  m_Name: Ionise
+  m_Script: {fileID: 11500000, guid: 558353b6810369d42b81b5fafdaaea93, type: 3}
+  m_Name: ElectroStorm
   m_EditorClassIdentifier: 
-  energyCost: 20
+  energyCost: 10
   coolDown: 0
-  range: 20
+  range: 0
   lineOfSight: 1
   type: 32
   targetType: 3
-  mode: 0
-  duration: 0
-  extraEnergyCost: 0
+  mode: 2
+  duration: 3
+  extraEnergyCost: 60
   interruptable: 0
   tick: 0.5
   applyStatusWhen: 0
@@ -28,22 +28,21 @@ MonoBehaviour:
   maxSelfStatusDuration: 0
   maxBuffStrength: 0
   sounds: {fileID: 0}
-  icon: {fileID: 21300000, guid: dccc786201be5804e9f509c5e8fd7cc4, type: 3}
+  icon: {fileID: 21300000, guid: 24b46870513983848813311e60dcb8f7, type: 3}
   tint:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  animation: 2
+  animation: 1
   releaseAnimation: 10
   userFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
-  userBodyPart: 3
+  userBodyPart: 2
   targetFX: {fileID: 11400000, guid: 4c84695e9e11b8c4a9ff10023cdefe1f, type: 2}
   targetBodyPart: 2
-  accuracy: 1.2
-  minDamage: 5
-  maxDamage: 10
+  accuracy: 1
+  minDamage: 2
+  maxDamage: 8
   effects:
-  - {fileID: 11400000, guid: 32d6585fe06d1444fbfd66f538e9677b, type: 2}
-  - {fileID: 11400000, guid: 91ea40a50f461c3479f99c71f86ab5e4, type: 2}
+  - {fileID: 11400000, guid: a3ad6dd4dceb90546a4c6b891e7fb99c, type: 2}
   - {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
   statusDuration: 10
   selfEffects: []
@@ -51,10 +50,14 @@ MonoBehaviour:
   closeToTargetSpeed: 10
   lunge: 0
   npcTarget: {fileID: 0}
-  beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
-  beamWidth: 0.5
-  beamLength: 10
-  beamUVSpeed: 10
-  beamParticles: {fileID: 0}
-  beamDuration: 1
-  maxChains: 0
+  radius: 8
+  angle: 360
+  explodeFX: {fileID: 0}
+  explodeBodyPart: 0
+  settings:
+    beamMaterial: {fileID: 2100000, guid: b4fd37b3b72cbd147b66fd50da6a598a, type: 2}
+    beamWidth: 0.5
+    beamLength: 10
+    beamUVSpeed: 1
+    beamParticles: {fileID: 0}
+    beamDuration: 2

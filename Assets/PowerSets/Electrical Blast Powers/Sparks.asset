@@ -8,6 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03f3534169720954e8c02c951e7b14bb, type: 3}
-  m_Name: Electric Blast
+  m_Script: {fileID: 11500000, guid: b7c4a8ea6962cea47911fb4bea0496ed, type: 3}
+  m_Name: Flash 1
   m_EditorClassIdentifier: 
+  lifespan: 5
+  scalingType: 0
+  prefab: {fileID: 1925259890903204, guid: b2163f19ca907f940be4a9834b49a9be, type: 2}

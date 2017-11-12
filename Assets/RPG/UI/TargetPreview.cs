@@ -70,6 +70,13 @@ namespace RPG
 
         public void StartPreview(Power p)
         {
+            // don't do this for maintains
+            if (p.mode == Power.Mode.Maintain)
+            {
+                previewPower = null;
+                return;
+            }
+
             previewPower = p as PowerArea;
             previewOnTarget = false;
             // is its not an Area power, check for explosive effects and preview them

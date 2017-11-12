@@ -93,6 +93,8 @@ namespace RPG
 
             (drop as UIPowerIcon).SetPower(character.powers[replacedIndex]);
 
+            character.UpdatePassives();
+
             Debug.Log("Dropping " + character.powers[replacedIndex].name + " into slot " + replacedIndex);
         }
 
@@ -109,6 +111,7 @@ namespace RPG
                 items[i].Init(character, null, character.powers[i], i);
                 items[i].GetComponentInChildren<UIPowerIcon>().SetPower(character.powers[i]); 
             }
+            character.UpdatePassives();
         }
     }
 }
