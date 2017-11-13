@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
-  m_Name: Ionized
+  m_Name: Ionized20pc
   m_EditorClassIdentifier: 
   duration: 0
   fx: {fileID: 11400000, guid: 9c2356a64d765c24893fe8635fac953f, type: 2}
@@ -19,15 +19,15 @@ MonoBehaviour:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
   maxStacks: 1
-  sourceSelectiveStacks: 0
+  sourceSelectiveStacks: 1
   stacks: 0
   sourceCharacter: {fileID: 0}
   sourcePower: {fileID: 0}
   timer: 0
   count: 0
   condition:
-    type: 0
-    threshold: 0
+    type: 5
+    threshold: 20
     reverse: 0
     status: {fileID: 0}
   modifiers: []

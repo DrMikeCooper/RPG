@@ -8,18 +8,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
-  m_Name: Ionized
+  m_Script: {fileID: 11500000, guid: 6a3e7d1d1855e204cad30f3b71f0e4e8, type: 3}
+  m_Name: Deionization
   m_EditorClassIdentifier: 
-  duration: 0
-  fx: {fileID: 11400000, guid: 9c2356a64d765c24893fe8635fac953f, type: 2}
-  bodyPart: 2
-  icon: {fileID: 21300000, guid: 030de8df2e920184fb9156ae0f1abccb, type: 3}
+  duration: 1
+  fx: {fileID: 0}
+  bodyPart: 0
+  icon: {fileID: 0}
   tint:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
-  maxStacks: 1
-  sourceSelectiveStacks: 0
+  maxStacks: 0
+  sourceSelectiveStacks: 1
   stacks: 0
   sourceCharacter: {fileID: 0}
   sourcePower: {fileID: 0}
@@ -30,5 +30,10 @@ MonoBehaviour:
     threshold: 0
     reverse: 0
     status: {fileID: 0}
-  modifiers: []
-  damageType: 32
+  source: {fileID: 11400000, guid: 5f36521f36091fe45a789504731607f8, type: 2}
+  consume: 0
+  resultStatus: {fileID: 11400000, guid: 095c7c3f1a381b14d8222dd42aff580e, type: 2}
+  applyFromCaster: 0
+  applyToCaster: 1
+  stacksScaleDuration: 0
+  stacksScalePower: 0

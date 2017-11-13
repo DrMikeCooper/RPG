@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7c4a8ea6962cea47911fb4bea0496ed, type: 3}
-  m_Name: Sparks
+  m_Name: Nova
   m_EditorClassIdentifier: 
   lifespan: 5
   scalingType: 0
-  prefab: {fileID: 1925259890903204, guid: 479069a60cadd6640a476d30d625505a, type: 2}
+  prefab: {fileID: 1717264063990122, guid: b085812f454978443b45e48bf93b7bfa, type: 2}

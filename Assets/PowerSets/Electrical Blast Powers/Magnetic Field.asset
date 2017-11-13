@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acbeb58aedfd5564ab2eb0db224820a4, type: 3}
-  m_Name: Ionized
+  m_Name: Magnetic Field
   m_EditorClassIdentifier: 
   duration: 0
-  fx: {fileID: 11400000, guid: 9c2356a64d765c24893fe8635fac953f, type: 2}
-  bodyPart: 2
-  icon: {fileID: 21300000, guid: 030de8df2e920184fb9156ae0f1abccb, type: 3}
+  fx: {fileID: 11400000, guid: 96a0c6f8890b52b458aff52d8445c02f, type: 2}
+  bodyPart: 0
+  icon: {fileID: 21300000, guid: ce18e2d45ab989042a344457a0b75c67, type: 3}
   tint:
     code: 7
     customColor: {r: 0, g: 0, b: 0, a: 0}
   maxStacks: 1
-  sourceSelectiveStacks: 0
+  sourceSelectiveStacks: 1
   stacks: 0
   sourceCharacter: {fileID: 0}
   sourcePower: {fileID: 0}
@@ -30,5 +30,7 @@ MonoBehaviour:
     threshold: 0
     reverse: 0
     status: {fileID: 0}
-  modifiers: []
-  damageType: 32
+  modifiers:
+  - modifier: 100
+    stat: 0
+  damageType: 1023
