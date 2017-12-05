@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c4a8ea6962cea47911fb4bea0496ed, type: 3}
   m_Name: BuildUpFX
   m_EditorClassIdentifier: 
-  lifespan: 5
+  lifespan: 1
   scalingType: 0
-  prefab: {fileID: 0}
+  prefab: {fileID: 1615603100517358, guid: 764b97d4b07acc146ab657064ab36896, type: 2}

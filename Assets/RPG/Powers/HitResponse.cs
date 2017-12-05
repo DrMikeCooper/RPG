@@ -15,7 +15,6 @@ namespace RPG
         [Tooltip("Chance of this response triggering when hit")]
         public int percentage;
 
-        
         public enum ReflectionType
         {
             None,
@@ -50,8 +49,7 @@ namespace RPG
             {
                 PlayEffect(prop);
                 foreach(Status absorbEffect in absorbEffects)
-                    if (AINode.IsCondition(absorbEffect.condition, prop, null))
-                        prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
+                    prop.ApplyStatus(absorbEffect, damage * absorbFactor, prop as Character, this);
             }
         }
 

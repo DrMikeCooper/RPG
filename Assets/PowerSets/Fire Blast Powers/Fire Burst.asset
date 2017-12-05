@@ -33,8 +33,7 @@ MonoBehaviour:
     code: 5
     customColor: {r: 0, g: 0, b: 0, a: 0}
   animation: 2
-  releaseAnimation: 10
-  userFX: {fileID: 11400000, guid: 7cac3d9a8f41f8c48be39098ec2eee5a, type: 2}
+  userFX: {fileID: 11400000, guid: f017e693d53b1ef459f92e09eafe4d38, type: 2}
   userBodyPart: 3
   targetFX: {fileID: 11400000, guid: 7cac3d9a8f41f8c48be39098ec2eee5a, type: 2}
   targetBodyPart: 2

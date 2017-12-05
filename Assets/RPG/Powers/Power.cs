@@ -290,11 +290,9 @@ namespace RPG
             if (doStatus)
             {
                 foreach (Status s in effects)
-                    if (AINode.IsCondition(s.condition, target, this))
-                        target.ApplyStatus(s, GetDuration(caster), caster, this);
+                    target.ApplyStatus(s, GetDuration(caster), caster, this);
                 foreach (Status s in selfEffects)
-                    if (AINode.IsCondition(s.condition, caster, this))
-                        caster.ApplyStatus(s, GetSelfDuration(caster), caster, this);
+                    caster.ApplyStatus(s, GetSelfDuration(caster), caster, this);
 
                 // add to a global list of DoT's if not a character?
                 if (target as Character == null)
