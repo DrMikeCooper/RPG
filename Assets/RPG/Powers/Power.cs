@@ -88,7 +88,6 @@ namespace RPG
 
         [Header("Animation Settings")]
         public Animations animation = Animations.PunchRight;
-        public Animations releaseAnimation = Animations.None;
 
         public VisualEffect userFX;
         public Character.BodyPart userBodyPart = Character.BodyPart.RightHand;
@@ -479,8 +478,7 @@ namespace RPG
             else
                 caster.activePower = null;
 
-            if (releaseAnimation != Animations.None)
-                caster.PlayAnim(releaseAnimation.ToString());
+            caster.EnableAnimator(2);
 
             if (mode != Mode.MoveTo || lunge == false)
                 EndPower(caster);

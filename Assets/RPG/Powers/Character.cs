@@ -361,6 +361,30 @@ namespace RPG
             powerStarted = true;
         }
 
+        public void Hold()
+        {
+            bool isPowering = (activePower != null && (activePower.mode == Power.Mode.Maintain || activePower.mode == Power.Mode.Charge));
+
+            if (isPowering)
+                EnableAnimator(2, false);
+        }
+
+        int animatorEnableState = 0;
+        public void EnableAnimator(int flag, bool on = true)
+        {
+            if (on)
+            {
+                animatorEnableState &= (~flag);
+                if (animatorEnableState == 0)
+                    animator.enabled = true;
+            }
+            else
+            {
+                animatorEnableState |= flag;
+                animator.enabled = false;
+            }
+        }
+
         public void ReleaseAnim(bool release)
         {
             animator.SetBool("release", release);

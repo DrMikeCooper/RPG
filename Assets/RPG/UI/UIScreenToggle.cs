@@ -10,6 +10,9 @@ public class UIScreenToggle : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(key))
+        {
             screen.SetActive(!screen.activeSelf);
+            Time.timeScale = screen.activeSelf ? 0 : 1;
+        }
 	}
 }
