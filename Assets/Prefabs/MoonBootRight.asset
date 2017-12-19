@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f2dc722116f004b85cd6b5ffa4a21f, type: 3}
+  m_Name: MoonBootRight
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1932717501274414, guid: 6fa4f62e27776994e8f8850ed83b4cb9, type: 2}
+  bodyPart: 14
+  offset: {x: -0.25, y: 0, z: 0}
