@@ -11,9 +11,31 @@ namespace RPG
         // Use this for initialization
         void Start()
         {
+            Apply(false);
+        }
+
+        [ContextMenu("Apply Parts")]
+        void ApplyParts()
+        {
+            Apply(true);
+        }
+
+        [ContextMenu("Remove All")]
+        void RemoveParts()
+        {
+            Transform[] childs = transform.GetComponentsInChildren<Transform>();
+            foreach (Transform child in childs)
+                if (child.gameObject.name.StartsWith(Accessory.prefix))
+                    DestroyImmediate(child.gameObject);
+
+        }
+
+        void Apply(bool replaceParts)
+        {
             Character ch = GetComponent<Character>();
             foreach (Accessory ac in accessories)
-                ac.Apply(ch);
+                if (ac)
+                    ac.Apply(ch, replaceParts);
         }
     }
 }
