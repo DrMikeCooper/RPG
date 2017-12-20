@@ -79,7 +79,22 @@ namespace RPG
             LeftHand,
             RightHand,
             LeftFoot,
-            RightFoot
+            RightFoot,
+
+            LeftForeArm,
+            RightForeArm,
+            LeftBicep,
+            RightBicep,
+
+            LeftThigh,
+            LightThigh,
+            LeftCalf,
+            RightCalf,
+
+            Waist,
+
+            Weapon1,
+            Weapon2,
         }
 
         [Header("Body Parts")]
@@ -89,6 +104,19 @@ namespace RPG
         public Transform rightHand;
         public Transform leftFoot;
         public Transform rightFoot;
+        public Transform leftForeArm;
+        public Transform rightForeArm;
+        public Transform leftBicep;
+        public Transform rightBicep;
+        public Transform leftThigh;
+        public Transform rightThigh;
+        public Transform leftCalf;
+        public Transform rightCalf;
+        public Transform waist;
+        public Transform weapon1;
+        public Transform weapon2;
+
+        public Dictionary<BodyPart, Transform> bodyParts = new Dictionary<BodyPart, Transform>();
 
         [HideInInspector]
         public BeamRenderer beam;
@@ -159,6 +187,25 @@ namespace RPG
             reticle.transform.localPosition = Vector3.zero;
             reticle.name = "reticle";
             reticle.SetActive(false);
+
+            bodyParts[BodyPart.Root] = transform;
+            bodyParts[BodyPart.Head] = head;
+            bodyParts[BodyPart.Chest] = chest;
+            bodyParts[BodyPart.LeftHand] = leftHand;
+            bodyParts[BodyPart.RightHand] = rightHand;
+            bodyParts[BodyPart.LeftFoot] = leftFoot;
+            bodyParts[BodyPart.RightFoot] = rightFoot;
+            bodyParts[BodyPart.LeftForeArm] = leftForeArm;
+            bodyParts[BodyPart.RightForeArm] = rightForeArm;
+            bodyParts[BodyPart.LeftBicep] = leftBicep;
+            bodyParts[BodyPart.RightBicep] = rightBicep;
+            bodyParts[BodyPart.LeftThigh] = leftThigh;
+            bodyParts[BodyPart.LightThigh] = rightThigh;
+            bodyParts[BodyPart.LeftCalf] = leftCalf;
+            bodyParts[BodyPart.RightCalf] = rightCalf;
+            bodyParts[BodyPart.Waist] = waist;
+            bodyParts[BodyPart.Weapon1] = weapon1;
+            bodyParts[BodyPart.Weapon2] = weapon2;
         }
 
         public void ResetCombos()
@@ -303,16 +350,81 @@ namespace RPG
 
         public override Transform GetBodyPart(BodyPart part)
         {
-            switch (part)
+            bodyParts[BodyPart.Root] = transform;
+            bodyParts[BodyPart.Head] = head;
+            bodyParts[BodyPart.Chest] = chest;
+            bodyParts[BodyPart.LeftHand] = leftHand;
+            bodyParts[BodyPart.RightHand] = rightHand;
+            bodyParts[BodyPart.LeftFoot] = leftFoot;
+            bodyParts[BodyPart.RightFoot] = rightFoot;
+            bodyParts[BodyPart.LeftForeArm] = leftForeArm;
+            bodyParts[BodyPart.RightForeArm] = rightForeArm;
+            bodyParts[BodyPart.LeftBicep] = leftBicep;
+            bodyParts[BodyPart.RightBicep] = rightBicep;
+            bodyParts[BodyPart.LeftThigh] = leftThigh;
+            bodyParts[BodyPart.LightThigh] = rightThigh;
+            bodyParts[BodyPart.LeftCalf] = leftCalf;
+            bodyParts[BodyPart.RightCalf] = rightCalf;
+            bodyParts[BodyPart.Waist] = waist;
+            bodyParts[BodyPart.Weapon1] = weapon1;
+            bodyParts[BodyPart.Weapon2] = weapon2;
+
+            Transform bp = null;
+            if (bodyParts.ContainsKey(part))
+                bp =bodyParts[part];
+
+            // default to root node if we cant find it or havent set it
+            if (bp == null)
+                bp = transform;
+
+            return bp;
+        }
+
+        [ContextMenu("Find Body Parts")]
+        public void FindBodyParts()
+        {
+            Dictionary<BodyPart, string> nodes = new Dictionary<BodyPart, string>();
+
+            nodes[BodyPart.Head] = "head_jnt";
+            nodes[BodyPart.Chest] = "chest_jnt";
+            nodes[BodyPart.LeftHand] = "l_hand_jnt";
+            nodes[BodyPart.RightHand] = "r_hand_jnt";
+            nodes[BodyPart.LeftFoot] = "l_foot_jnt";
+            nodes[BodyPart.RightFoot] = "r_foot_jnt";
+            nodes[BodyPart.LeftForeArm] = "l_forearm_jnt";
+            nodes[BodyPart.RightForeArm] = "r_forearm_jnt";
+            nodes[BodyPart.LeftBicep] = "l_elbow_jnt";
+            nodes[BodyPart.RightBicep] = "r_elbow_jnt";
+            nodes[BodyPart.LeftThigh] = "l_upleg_jnt";
+            nodes[BodyPart.LightThigh] = "r_upleg_jnt";
+            nodes[BodyPart.LeftCalf] = "l_leg_jnt";
+            nodes[BodyPart.RightCalf] = "r_leg_jnt";
+            nodes[BodyPart.Waist] = "hips_jnt";
+
+            Transform[] children = GetComponentsInChildren<Transform>();
+            foreach (Transform t in children)
             {
-                case BodyPart.Head: return head; 
-                case BodyPart.Chest: return chest; 
-                case BodyPart.LeftHand: return leftHand;
-                case BodyPart.RightHand: return rightHand;
-                case BodyPart.LeftFoot: return leftFoot;
-                case BodyPart.RightFoot: return rightFoot;
-                default: return transform;
+                string lc = t.name.ToLower();
+                for (BodyPart i = BodyPart.Head; i <= BodyPart.Waist; i++)
+                    if (lc == nodes[i])
+                        bodyParts[i] = t;
             }
+
+            head = bodyParts[BodyPart.Head];
+            chest = bodyParts[BodyPart.Chest];
+            leftHand = bodyParts[BodyPart.LeftHand];
+            rightHand = bodyParts[BodyPart.RightHand];
+            leftFoot = bodyParts[BodyPart.LeftFoot];
+            rightFoot = bodyParts[BodyPart.RightFoot];
+            leftForeArm = bodyParts[BodyPart.LeftForeArm];
+            rightForeArm = bodyParts[BodyPart.RightForeArm];
+            leftBicep = bodyParts[BodyPart.LeftBicep];
+            rightBicep = bodyParts[BodyPart.RightBicep];
+            leftThigh = bodyParts[BodyPart.LeftThigh];
+            rightThigh = bodyParts[BodyPart.LightThigh];
+            leftCalf = bodyParts[BodyPart.LeftCalf];
+            rightCalf = bodyParts[BodyPart.RightCalf];
+            waist = bodyParts[BodyPart.Waist];
         }
 
         // stun and hold stop you from using powers
