@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace RPG
 {
+    [CreateAssetMenu(fileName = "ConditionalStatus", menuName = "RPG/Status/ConditionalStatus", order = 2)]
     public class ConditionalStatus : Status
     {
         // the condition to check against the caster before using
